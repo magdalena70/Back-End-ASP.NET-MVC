@@ -1,0 +1,26 @@
+﻿@model Twitter.Web.ViewModels.UserViewModel
+
+@{
+    ViewBag.Title = "User Profile";
+}
+
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-sm-6">
+            <img src="@Model.AvatarUrl" alt="@Model.UserName avatar" width="200" />
+        </div>
+        <div class="col-sm-6">
+            <h1>@Html.DisplayFor(x => x.UserName)</h1>
+            <p>@Html.DisplayNameFor(x => x.Email): @Html.DisplayFor(x => x.Email)</p>
+            <p>@Html.DisplayNameFor(x => x.FullName): @Html.DisplayFor(x => x.FullName)</p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <p>@Html.DisplayNameFor(x => x.ContactInfo.Facebook): <a href="https://facebook.com/"@Html.DisplayFor(x => x.ContactInfo.Facebook)>Facebook</a></p>
+    </div>
+    <div class="col-sm-6">
+        <h2>All Tweets</h2>
+    </div>
+</div>
