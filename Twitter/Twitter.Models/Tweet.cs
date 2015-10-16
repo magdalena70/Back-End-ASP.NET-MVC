@@ -7,6 +7,13 @@ namespace Twitter.Models
 
     public class Tweet
     {
+        private ICollection<UserTweet> fans;
+
+        public Tweet()
+        {
+            this.fans = new HashSet<UserTweet>();
+        }
+
         public int Id { get; set; }
 
         [Required]
@@ -17,13 +24,16 @@ namespace Twitter.Models
 
         public DateTime SentToDate { get; set; }
 
+        public string ImageUrl { get; set; }
+
         public int CategoryId { get; set; }
 
         public virtual Category Category { get; set; }
 
-        [Required]
-        public string AuthorId { get; set; }
-
-        public virtual User Author { get; set; }
+        public virtual ICollection<UserTweet> Fans
+        {
+            get { return this.fans; }
+            set { this.fans = value; }
+        }
     }
 }

@@ -2,8 +2,10 @@
 namespace Twitter.Web.Controllers
 {
     using System.Web.Mvc;
+    using System.Linq;
     using Twitter.Data;
-    using System.Web.Mvc.Expressions; // https://github.com/ivaylokenov/ASP.NET-MVC-Lambda-Expression-Helpers - ASP.NET.MVC 5.2.3
+    using System.Web.Mvc.Expressions;
+    using Twitter.Web.ViewModels; // https://github.com/ivaylokenov/ASP.NET-MVC-Lambda-Expression-Helpers - ASP.NET.MVC 5.2.3
 
     public class HomeController : BaseController // must install Ninject.MVC5 (to use constructor with parametеrs)
     {
@@ -15,6 +17,7 @@ namespace Twitter.Web.Controllers
         public ActionResult Index()
         {
             //this.ViewBag.UserName = this.UserProfile.UserName;
+
             return this.View();
         }
 

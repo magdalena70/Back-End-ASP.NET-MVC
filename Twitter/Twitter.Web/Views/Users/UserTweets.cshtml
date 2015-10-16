@@ -20,11 +20,7 @@
     <h2>Categories:</h2>
 </div>
 <div class="row">
-    <h2>All Tweets:</h2>
-    <!-- get All Tweets from folder Shared/DisplayTemplates/TweetViewModel.cshtml -->
-    @Html.DisplayFor(x => x.Tweets)
-
-    @section scripts{
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+    <h2>My Tweets:</h2>
+    <!-- get User's Tweets -->
+    @Html.DisplayFor(x => x.UserTweets)
 </div>

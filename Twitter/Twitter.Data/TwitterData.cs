@@ -23,10 +23,6 @@ namespace Twitter.Data
             {
                 return this.GetRepository<User>();
             }
-            /*set
-            {
-                throw new NotImplementedException();
-            }*/
         }
 
         public IRepository<AdministrationLog> AdministrationLogs
@@ -35,10 +31,6 @@ namespace Twitter.Data
             {
                 return this.GetRepository<AdministrationLog>();
             }
-           /* set
-            {
-                throw new NotImplementedException();
-            }*/
         }
 
         public IRepository<Group> Groups
@@ -47,10 +39,6 @@ namespace Twitter.Data
             {
                 return this.GetRepository<Group>();
             }
-            /*set
-            {
-                throw new NotImplementedException();
-            }*/
         }
 
         public IRepository<Tweet> Tweets
@@ -59,22 +47,14 @@ namespace Twitter.Data
             {
                 return this.GetRepository<Tweet>();
             }
-            /*set
-            {
-                throw new NotImplementedException();
-            }*/
         }
 
-        public IRepository<UserFavouriteTweet> FavoriteTweets
+        public IRepository<Favorite> Favorites
         {
             get
             {
-                return this.GetRepository<UserFavouriteTweet>();
+                return this.GetRepository<Favorite>();
             }
-            /*set
-            {
-                throw new NotImplementedException();
-            }*/
         }
 
         public IRepository<Message> Messages
@@ -83,10 +63,6 @@ namespace Twitter.Data
             {
                 return this.GetRepository<Message>();
             }
-            /*set
-            {
-                throw new NotImplementedException();
-            }*/
         }
 
         public IRepository<Notification> Notifications
@@ -95,10 +71,6 @@ namespace Twitter.Data
             {
                 return this.GetRepository<Notification>();
             }
-            /*set
-            {
-                throw new NotImplementedException();
-            }*/
         }
 
         public int SaveChanges()

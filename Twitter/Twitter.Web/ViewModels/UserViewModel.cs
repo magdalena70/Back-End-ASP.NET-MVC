@@ -23,5 +23,9 @@ namespace Twitter.Web.ViewModels
         public ContactInfo ContactInfo { get; set; }
 
         public IEnumerable<TweetViewModel> Tweets { get; set; }
+
+        public IEnumerable<UserTweetViewModel> UserTweets { get; set; }
+
+        public static object Create { get; set; }
     }
 }

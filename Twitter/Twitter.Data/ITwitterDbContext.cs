@@ -16,7 +16,7 @@ namespace Twitter.Data
 
         IDbSet<AdministrationLog> AdministrationLogs { get; set; }
 
-        IDbSet<UserFavouriteTweet> FavoriteTweets { get; set; }
+        IDbSet<Favorite> Favorites { get; set; }
 
         int SaveChanges();
     }

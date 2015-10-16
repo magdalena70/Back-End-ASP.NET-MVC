@@ -11,16 +11,14 @@ namespace Twitter.Models
     public class User : IdentityUser
     {
         private ICollection<Group> groups;
-        private ICollection<Tweet> tweets;
-        private ICollection<UserFavouriteTweet> favoriteTweets;
+        private ICollection<UserTweet> tweets;
         private ICollection<UserNotification> notifications;
         private ICollection<Message> messages;
 
         public User()
         {
             this.groups = new HashSet<Group>();
-            this.tweets = new HashSet<Tweet>();
-            this.favoriteTweets = new HashSet<UserFavouriteTweet>();
+            this.tweets = new HashSet<UserTweet>();
             this.notifications = new HashSet<UserNotification>();
             this.messages = new HashSet<Message>();
             this.ContactInfo = new ContactInfo();
@@ -48,16 +46,10 @@ namespace Twitter.Models
             set { this.groups = value; }
         }
 
-        public virtual ICollection<Tweet> Tweets
+        public virtual ICollection<UserTweet> Tweets
         {
             get { return this.tweets; }
             set { this.tweets = value; }
-        }
-
-        public virtual ICollection<UserFavouriteTweet> FavoriteTweets
-        {
-            get { return this.favoriteTweets; }
-            set { this.favoriteTweets = value; }
         }
 
         public virtual ICollection<UserNotification> Notifications

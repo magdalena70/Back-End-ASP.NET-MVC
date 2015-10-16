@@ -1,0 +1,25 @@
+﻿@model Twitter.Web.ViewModels.TweetViewModel
+
+<div class="col-sm-4">
+    <h4>@Model.Title</h4>
+    <p>@Model.Details</p>
+    <em>@Model.SentToDate by @Model.Author</em>
+    <img src="@Model.ImageUrl" alt="@Model.Title img" width="260" height="200" />
+    <p>Category: @Model.CategoryName</p>
+    <div id="likes-@Model.Id" class="well">
+        <span>Count: @Html.DisplayFor(f => f.FavoriteCount)</span>
+        <span>Fans: @Html.DisplayFor(f => f.Fans)</span>
+    </div>
+
+    @using (Ajax.BeginForm("Likes", "Users", new { Model.Id }, new AjaxOptions()
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = string.Format("likes-{0}", Model.Id)
+    }))
+    {
+        @Html.AntiForgeryToken()
+
+        <input type="submit" value="+" />
+    }
+</div>

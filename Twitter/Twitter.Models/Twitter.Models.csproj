@@ -59,7 +59,8 @@
     <Compile Include="AdministrationLog.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="ContactInfo.cs" />
-    <Compile Include="UserFavouriteTweet.cs" />
+    <Compile Include="Favorite.cs" />
+    <Compile Include="UserTweet.cs" />
     <Compile Include="GroupType.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="Notification.cs" />
