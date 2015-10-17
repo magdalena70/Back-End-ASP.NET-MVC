@@ -20,6 +20,8 @@ namespace Twitter.Web.ViewModels
 
         public string AvatarUrl { get; set; }
 
+        public int TweetCount { get; set; }
+
         public ContactInfo ContactInfo { get; set; }
 
         public IEnumerable<TweetViewModel> Tweets { get; set; }

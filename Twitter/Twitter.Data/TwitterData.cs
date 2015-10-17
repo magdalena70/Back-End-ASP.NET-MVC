@@ -73,6 +73,14 @@ namespace Twitter.Data
             }
         }
 
+        public IRepository<Category> Categories
+        {
+            get
+            {
+                return this.GetRepository<Category>();
+            }
+        }
+
         public int SaveChanges()
         {
             return this.context.SaveChanges();

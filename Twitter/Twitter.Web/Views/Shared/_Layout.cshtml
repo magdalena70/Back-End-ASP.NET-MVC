@@ -26,9 +26,10 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("All Users", "AllUsers", "Users")</li>
+                    <li>@Html.ActionLink("Categories", "Index", "Categories/")</li>
                     <li>@Html.ActionLink("Profile", "Index", "User/" + User.Identity.GetUserName())</li>
+                    <li>@Html.ActionLink("My Favorite Tweets", "UserFavoriteTweets", User.Identity.GetUserName())</li>
                     <li>@Html.ActionLink("My Tweets", "UserTweets", User.Identity.GetUserName())</li>
                 </ul>
                 @Html.Partial("_LoginPartial")

@@ -10,7 +10,6 @@ namespace Twitter.Web.Controllers
     using Twitter.Web.ViewModels;
     using Twitter.Models;
 
-    [Authorize]
     public class UsersController : BaseController
     {
         public UsersController(ITwitterData data)
@@ -18,6 +17,7 @@ namespace Twitter.Web.Controllers
         {
         }
 
+        [Authorize]
         public ActionResult Index(string username)
         {
             var user = this.Data.Users.All()
@@ -36,7 +36,8 @@ namespace Twitter.Web.Controllers
                     FullName = u.FullName,
                     Email = u.Email,
                     ContactInfo = u.ContactInfo,
-                    AvatarUrl = u.AvatarUrl,
+                    AvatarUrl = u.AvatarUrl != null ? u.AvatarUrl : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJNGKxDl-q0wRp-eKqFc1jzuKeGA_tldmvO71crqFQ8ptsqIjk",
+                    TweetCount = u.Tweets.Count(),
                     Tweets = u.Tweets.AsQueryable()
                         .OrderByDescending(t => t.Tweet.SentToDate)
                         .ThenByDescending(t => t.Tweet.Id)
@@ -51,6 +52,7 @@ namespace Twitter.Web.Controllers
             return this.View(user);
         }
 
+        [Authorize]
         public ActionResult UserTweets(string username)
         {
             var user = this.Data.Users.All()
@@ -60,7 +62,6 @@ namespace Twitter.Web.Controllers
                 .Include("Favorites.UserFavoriteTweets")
                 .Include("Favorites.UserFavoriteTweets.Tweet")
                 .Include("Favorites.UserFavoriteTweets.User")
-                .Include(u => u.Groups)
                 .Where(u => u.UserName == username)
                 .Select(u => new UserViewModel
                 {
@@ -69,7 +70,8 @@ namespace Twitter.Web.Controllers
                     FullName = u.FullName,
                     Email = u.Email,
                     ContactInfo = u.ContactInfo,
-                    AvatarUrl = u.AvatarUrl,
+                    AvatarUrl = u.AvatarUrl != null ? u.AvatarUrl : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJNGKxDl-q0wRp-eKqFc1jzuKeGA_tldmvO71crqFQ8ptsqIjk",
+                    TweetCount = u.Tweets.Count(),
                     UserTweets = u.Tweets.AsQueryable()
                         .OrderByDescending(t => t.Tweet.SentToDate)
                         .ThenByDescending(t => t.TweetId)
@@ -86,6 +88,7 @@ namespace Twitter.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Likes(int id)
         {
             var hasExistingLike = this.Data.Favorites.All()
@@ -105,6 +108,24 @@ namespace Twitter.Web.Controllers
             var fans = likes.Select(f => f.Fan.UserName).ToList();
 
             return this.Content(string.Format("{0} ({1})", likesCount, string.Join(", ", fans)));
+        }
+
+        [Authorize]
+        public ActionResult UserFavoriteTweets(string username)
+        {
+            var favorites = this.Data.Favorites.All().Where(f => f.Fan.UserName == username);
+            var names = favorites.Select(f => f.UserTweet.Tweet.Title).ToList();
+
+            return this.Content(string.Format("{0}", string.Join(", ", names)));
+        }
+
+        public ActionResult AllUsers()
+        {
+            var users = this.Data.Users.All();
+            var names = users.Select(u => u.UserName).ToList();
+
+            return this.Content(string.Format("{0}", string.Join(", ", names)));
+            
         }
     }
 }
