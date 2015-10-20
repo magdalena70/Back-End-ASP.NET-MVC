@@ -2,9 +2,10 @@
 
 @foreach (var category in Model)
 {
-    <div class="col-sm-3">
+    <div class="col-sm-4">
         <p>
-            <a href="Categories/@category.Name" class="btn btn-primary btn-lg">@category.Name &raquo;</a>
+            <a href="Categories/@category.Name" class="btn btn-primary btn-lg">@category.Name &raquo;</a>      
+            @Html.ActionLink("Add Tweet", "AddTweetInCategory", "Categories", new { id = category.Id }, new { @class = "btn btn-success" })
             <em>Tweets: @category.TweetsCount</em>
         </p>
     </div>

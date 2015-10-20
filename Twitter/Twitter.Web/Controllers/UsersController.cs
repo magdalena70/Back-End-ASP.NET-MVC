@@ -9,6 +9,8 @@ namespace Twitter.Web.Controllers
     using Twitter.Data;
     using Twitter.Web.ViewModels;
     using Twitter.Models;
+    using Twitter.Web.BindingModels;
+    using System;
 
     public class UsersController : BaseController
     {
@@ -119,6 +121,29 @@ namespace Twitter.Web.Controllers
             }
 
             return this.View(allUsers);      
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public ActionResult AddTweet(Tweet tweet)
+        {
+            if (ModelState.IsValid)
+            {
+                this.Data.Tweets.Add(new Tweet
+                {
+                    Title = tweet.Title,
+                    Details = tweet.Details,
+                    ImageUrl = tweet.ImageUrl,
+                    SentToDate = DateTime.Now,
+                    CategoryId = 1,
+                    AuthorId = this.UserProfile.Id
+                });
+                this.Data.SaveChanges();
+                return RedirectToAction("NewTweet");
+            }
+
+            return this.View();
         }
     }
 }

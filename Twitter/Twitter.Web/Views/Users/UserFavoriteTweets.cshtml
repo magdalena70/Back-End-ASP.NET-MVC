@@ -1,5 +1,13 @@
 ﻿@model IEnumerable<Twitter.Web.ViewModels.FavoritesViewModel>
 
+@{
+    ViewBag.Title = "UserFavoriteTweets";
+}
+
+<div class="well">
+    <h2>My Favorite Tweets</h2>
+</div>
+
 @foreach(var favorite in Model)
 { 
     <div class="col-sm-4">

@@ -9,7 +9,9 @@ namespace Twitter.Web.Controllers
     using Twitter.Data;
     using Twitter.Web.ViewModels;
     using Twitter.Models;
+    using System;
 
+    [Authorize]
     public class CategoriesController : BaseController
     {
         public CategoriesController(ITwitterData data)
@@ -32,9 +34,33 @@ namespace Twitter.Web.Controllers
             return this.View(categories);
         }
 
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        public ActionResult AddTweetInCategory(Tweet tweet, int id)
+        {
+            if (ModelState.IsValid)
+            {
+                this.Data.Tweets.Add(new Tweet
+                {
+                    Title = tweet.Title,
+                    Details = tweet.Details,
+                    ImageUrl = tweet.ImageUrl,
+                    SentToDate = DateTime.Now,
+                    CategoryId = id,
+                    AuthorId = this.UserProfile.Id
+                });
+                this.Data.SaveChanges();
+                //return RedirectToAction("NewTweet");
+            }
+
+            return this.View();
+        }
+
         public ActionResult TweetsByCategory(string name)
         {
             var tweetsByCategory = this.Data.AllTweets.All()
+                .Include(t => t.Tweet)
+                .Include("Tweet.Category")
                 .Where(t => t.Tweet.Category.Name == name)
                 .OrderByDescending(t => t.Tweet.SentToDate)
                 .ThenByDescending(t => t.Tweet.Id)
@@ -49,7 +75,6 @@ namespace Twitter.Web.Controllers
 
             return this.View(tweetsByCategory);
         }
-
 
     }
 }

@@ -20,6 +20,12 @@ namespace Twitter.Web
             );
 
             routes.MapRoute(
+                name: "AddTweetInCategory",
+                url: "Categories/AddTweetInCategory/{id}",
+                defaults: new { controller = "Categories", action = "AddTweetInCategory" }
+            );
+
+            routes.MapRoute(
                 name: "CategoryTweets",
                 url: "Categories/{name}",
                 defaults: new { controller = "Categories", action = "TweetsByCategory" }
