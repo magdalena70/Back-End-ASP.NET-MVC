@@ -206,6 +206,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TweetsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Filters\LogAttribute.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -213,6 +214,7 @@
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="ViewModels\CategoryTweetsViewModel.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\FavoritesViewModel.cs" />
     <Compile Include="ViewModels\TweetViewModel.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -281,10 +283,14 @@
     <Content Include="Views\Shared\DisplayTemplates\TweetViewModel.cshtml" />
     <Content Include="Views\Users\UserTweets.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\UserTweetViewModel.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\CategoryViewModel.cshtml" />
-    <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Categories\TweetsByCategory.cshtml" />
     <Content Include="Views\Users\UserFavoriteTweets.cshtml" />
-    <Content Include="Views\Tweets\Index.cshtml" />
+    <Content Include="Views\Shared\_AllTweetsPartial.cshtml" />
+    <Content Include="Views\Shared\_TweetsByCategoryPartial.cshtml" />
+    <Content Include="Views\Shared\_AllCategoriesPartial.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Users\AllUsers.cshtml" />
+    <Content Include="Views\Shared\_AllUsersPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

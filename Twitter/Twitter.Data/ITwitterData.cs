@@ -14,6 +14,8 @@ namespace Twitter.Data
 
         IRepository<Tweet> Tweets { get; }
 
+        IRepository<UserTweet> AllTweets { get; }
+
         IRepository<Favorite> Favorites { get; }
 
         IRepository<Message> Messages { get; }

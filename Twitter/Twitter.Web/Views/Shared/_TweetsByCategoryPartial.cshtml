@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Twitter.Web.ViewModels.TweetViewModel>
+
+@foreach (var tweet in Model)
+{
+    <div class="col-sm-4">
+        <h5>@tweet.Title</h5>
+        <em>Posted on @tweet.SentToDate by @tweet.Author</em>
+        <p>@tweet.Details</p>
+        <img src="@tweet.ImageUrl" alt="@tweet.Id-img" width="240" height="200" />
+        <p>Favorites: @tweet.FavoriteCount</p>
+        <span>Fans: </span>
+        @foreach (var fan in tweet.Fans)
+        {
+            <span>@fan </span>
+        }
+    </div>
+}

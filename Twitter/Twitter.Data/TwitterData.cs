@@ -49,6 +49,14 @@ namespace Twitter.Data
             }
         }
 
+        public IRepository<UserTweet> AllTweets
+        {
+            get
+            {
+                return this.GetRepository<UserTweet>();
+            }
+        }
+
         public IRepository<Favorite> Favorites
         {
             get

@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Twitter.Web.ViewModels.UserViewModel>
+
+@foreach (var user in Model)
+{
+    <div class="col-sm-4">
+        <h4>@user.UserName</h4>
+        <img src="@user.AvatarUrl" alt="@user.UserName-img" width="200" height="160"/>
+        <p>Full Name: @user.FullName</p>
+        <p>Email: @user.Email</p>
+    </div>
+}

@@ -25,6 +25,8 @@ namespace Twitter.Data
 
         public IDbSet<Tweet> Tweets { get; set; }
 
+        public IDbSet<UserTweet> AllTweets { get; set; }
+
         public IDbSet<Favorite> Favorites { get; set; }
 
         public IDbSet<Message> Messages { get; set; }

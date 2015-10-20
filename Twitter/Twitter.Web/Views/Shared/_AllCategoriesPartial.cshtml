@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Twitter.Web.ViewModels.CategoryViewModel>
+
+@foreach (var category in Model)
+{
+    <div class="col-sm-3">
+        <p>
+            <a href="Categories/@category.Name" class="btn btn-primary btn-lg">@category.Name &raquo;</a>
+            <em>Tweets: @category.TweetsCount</em>
+        </p>
+    </div>
+}

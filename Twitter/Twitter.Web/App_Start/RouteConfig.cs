@@ -14,9 +14,15 @@ namespace Twitter.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Categories",
+                url: "Categories",
+                defaults: new { controller = "Categories", action = "Index" }
+            );
+
+            routes.MapRoute(
                 name: "CategoryTweets",
                 url: "Categories/{name}",
-                defaults: new { controller = "Categories", action = "Index" }
+                defaults: new { controller = "Categories", action = "TweetsByCategory" }
             );
 
             routes.MapRoute(

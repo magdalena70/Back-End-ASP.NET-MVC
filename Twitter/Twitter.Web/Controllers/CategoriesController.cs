@@ -17,12 +17,39 @@ namespace Twitter.Web.Controllers
         {
         }
 
-        public ActionResult Index(string name)
+        public ActionResult Index()
         {
-            var categories = this.Data.Categories.All();
-            var names = categories.Select(c => c.Name).ToList();
+            var categories = this.Data.Categories.All()
+                .OrderBy(c => c.Name)
+                .ThenBy(c => c.Id)
+                .Select(CategoryViewModel.Create);
 
-            return this.Content(string.Format("{0}", string.Join(", ", names)));
+            if (categories == null)
+            {
+                return this.HttpNotFound("non existing categories");
+            }
+
+            return this.View(categories);
         }
+
+        public ActionResult TweetsByCategory(string name)
+        {
+            var tweetsByCategory = this.Data.AllTweets.All()
+                .Where(t => t.Tweet.Category.Name == name)
+                .OrderByDescending(t => t.Tweet.SentToDate)
+                .ThenByDescending(t => t.Tweet.Id)
+                .Select(TweetViewModel.Create);
+            var startPage = RouteData.Values["id"] ?? 0;
+            tweetsByCategory = tweetsByCategory.Skip((int)startPage).Take(9);
+
+            if (tweetsByCategory == null)
+            {
+                return this.Content("non existing tweets in this categories");
+            }
+
+            return this.View(tweetsByCategory);
+        }
+
+
     }
 }

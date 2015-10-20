@@ -1,8 +1,12 @@
 ﻿
 @{
-    ViewBag.Title = "Tweets in this category:";
+    ViewBag.Title = "All Categories";
 }
-<h2>@ViewBag.Title</h2>
+
+<div class="well">
+    <h2>@ViewBag.Title</h2>
+</div>
+
 <div class="row">
-    
+    @Html.Partial("_AllCategoriesPartial")
 </div>

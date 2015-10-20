@@ -10,6 +10,8 @@ namespace Twitter.Data
 
         IDbSet<Tweet> Tweets { get; set; }
 
+        IDbSet<UserTweet> AllTweets { get; set; }
+
         IDbSet<Message> Messages { get; set; }
 
         IDbSet<Notification> Notifications { get; set; }

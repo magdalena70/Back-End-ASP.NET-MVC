@@ -2,7 +2,12 @@
 
 <div class="col-sm-4">
     <h4>@Model.Title</h4>
-    <p>@Model.Details</p>  
-    <img src="@Model.ImageUrl" alt="@Model.Title img" width="260" height="200"/>
+    <p>@Model.Details</p>
+    <img src="@Model.ImageUrl" alt="@Model.Title img" width="260" height="200" />
     <p>Category: @Model.CategoryName</p>
+    <p>Favorites: @Model.FavoriteCount fans:</p>
+    @foreach (var fan in Model.Fans)
+    {
+        @fan 
+    }
 </div>

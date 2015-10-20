@@ -1,14 +1,34 @@
 ﻿
 namespace Twitter.Web.ViewModels
 {
-    using Antlr.Runtime.Misc;
+    using System;
+    using System.Linq;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     using System.Linq.Expressions;
+    using System.ComponentModel.DataAnnotations;
     using Twitter.Models;
 
     public class UserViewModel
     {
+        public static Expression<Func<User, UserViewModel>> CreateUser
+        {
+            get
+            {
+                return u => new UserViewModel
+                {
+                    Id = u.Id,
+                    UserName = u.UserName,
+                    FullName = u.FullName,
+                    Email = u.Email,
+                    ContactInfo = u.ContactInfo,
+                    AvatarUrl = u.AvatarUrl != null ?
+                        u.AvatarUrl : 
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJNGKxDl-q0wRp-eKqFc1jzuKeGA_tldmvO71crqFQ8ptsqIjk",
+                    TweetCount = u.Tweets.Count
+                };
+            }
+        }
+
         public string Id { get; set; }
 
         public string UserName { get; set; }
@@ -29,5 +49,7 @@ namespace Twitter.Web.ViewModels
         public IEnumerable<UserTweetViewModel> UserTweets { get; set; }
 
         public static object Create { get; set; }
+
+        public IQueryable<int> FavoriteTweetsCount { get; set; }
     }
 }

@@ -22,27 +22,9 @@ namespace Twitter.Web.Controllers
         {
             var user = this.Data.Users.All()
                 .Include(u => u.Tweets)
-                .Include("Tweets.Categories")
-                .Include("Tweets.Tweet")
-                .Include("Favorites.UserFavoriteTweets")
-                .Include("Favorites.UserFavoriteTweets.Tweet")
-                .Include("Favorites.UserFavoriteTweets.User")
                 .Include(u => u.Groups)
                 .Where(u => u.UserName == username)
-                .Select(u => new UserViewModel
-                {
-                    Id = u.Id,
-                    UserName = u.UserName,
-                    FullName = u.FullName,
-                    Email = u.Email,
-                    ContactInfo = u.ContactInfo,
-                    AvatarUrl = u.AvatarUrl != null ? u.AvatarUrl : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJNGKxDl-q0wRp-eKqFc1jzuKeGA_tldmvO71crqFQ8ptsqIjk",
-                    TweetCount = u.Tweets.Count(),
-                    Tweets = u.Tweets.AsQueryable()
-                        .OrderByDescending(t => t.Tweet.SentToDate)
-                        .ThenByDescending(t => t.Tweet.Id)
-                        .Select(TweetViewModel.Create)
-                })
+                .Select(UserViewModel.CreateUser)
                 .FirstOrDefault();
             if (user == null)
             {
@@ -57,25 +39,19 @@ namespace Twitter.Web.Controllers
         {
             var user = this.Data.Users.All()
                 .Include(u => u.Tweets)
-                .Include("Tweets.Categories")
                 .Include("Tweets.Tweet")
-                .Include("Favorites.UserFavoriteTweets")
-                .Include("Favorites.UserFavoriteTweets.Tweet")
-                .Include("Favorites.UserFavoriteTweets.User")
+                .Include("Tweets.Tweet.Category")
+                .Include("Tweets.Favorites")
+                .Include("Favorites.UserTweets.Tweet")
+                .Include("Favorites.UserTweets.User")
                 .Where(u => u.UserName == username)
                 .Select(u => new UserViewModel
                 {
-                    Id = u.Id,
                     UserName = u.UserName,
-                    FullName = u.FullName,
-                    Email = u.Email,
-                    ContactInfo = u.ContactInfo,
-                    AvatarUrl = u.AvatarUrl != null ? u.AvatarUrl : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJNGKxDl-q0wRp-eKqFc1jzuKeGA_tldmvO71crqFQ8ptsqIjk",
-                    TweetCount = u.Tweets.Count(),
-                    UserTweets = u.Tweets.AsQueryable()
-                        .OrderByDescending(t => t.Tweet.SentToDate)
-                        .ThenByDescending(t => t.TweetId)
-                        .Select(UserTweetViewModel.Create)
+                    AvatarUrl = u.AvatarUrl != null ?
+                        u.AvatarUrl : 
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJNGKxDl-q0wRp-eKqFc1jzuKeGA_tldmvO71crqFQ8ptsqIjk",
+                    UserTweets = u.Tweets.AsQueryable().Select(UserTweetViewModel.CreateTweet)
                 })
                 .FirstOrDefault();
             if (user == null)
@@ -113,19 +89,36 @@ namespace Twitter.Web.Controllers
         [Authorize]
         public ActionResult UserFavoriteTweets(string username)
         {
-            var favorites = this.Data.Favorites.All().Where(f => f.Fan.UserName == username);
-            var names = favorites.Select(f => f.UserTweet.Tweet.Title).ToList();
+            var favorites = this.Data.Favorites.All()
+                .Include(f => f.UserTweet)
+                .Include("UserTweet.Tweet")
+                .Include("UserTweet.Tweet.Category")
+                .Where(f => f.Fan.UserName == username)
+                .OrderByDescending(f => f.UserTweet.Tweet.SentToDate)
+                .ThenByDescending(f => f.UserTweet.Tweet.Id)
+                .Select(FavoritesViewModel.Create);
 
-            return this.Content(string.Format("{0}", string.Join(", ", names)));
+            if (favorites == null)
+            {
+                return this.HttpNotFound("non existing favorite tweets");
+            }
+
+            return this.View(favorites);
         }
 
         public ActionResult AllUsers()
         {
-            var users = this.Data.Users.All();
-            var names = users.Select(u => u.UserName).ToList();
+            var allUsers = this.Data.Users.All()
+                .Include(u => u.Tweets)
+                .OrderBy(u => u.UserName)
+                .Select(UserViewModel.CreateUser);
 
-            return this.Content(string.Format("{0}", string.Join(", ", names)));
-            
+            if (allUsers == null)
+            {
+                return this.HttpNotFound("non existing users");
+            }
+
+            return this.View(allUsers);      
         }
     }
 }

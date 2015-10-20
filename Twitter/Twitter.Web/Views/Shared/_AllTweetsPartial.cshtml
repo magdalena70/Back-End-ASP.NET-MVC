@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Twitter.Web.ViewModels.TweetViewModel>
+
+@foreach (var tweet in Model)
+{
+    <div class="col-sm-4">
+        <h5>@tweet.Title</h5>
+        <p>Category: <a href="Categories/@tweet.CategoryName">@tweet.CategoryName</a></p>
+        <em>Posted on @tweet.SentToDate by @tweet.Author</em>
+        <p>@tweet.Details</p>
+        <img src="@tweet.ImageUrl" alt="@tweet.Id-img" width="240" height="200" />
+        <div id="likes-@tweet.Id" class="well">
+            <p><span>Favorites: @tweet.FavoriteCount Fans:</span></p>
+            @foreach (var fan in tweet.Fans)
+            {
+                <a href="User/@fan" class="btn btn-primary btn-lg">@fan &raquo;</a>
+            }
+        </div>
+            @using (Ajax.BeginForm("Likes", "Users", new { tweet.Id }, new AjaxOptions()
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = string.Format("likes-{0}", tweet.Id)
+    }))
+        {
+                @Html.AntiForgeryToken()
+
+                <input type="submit" value="+" />
+        }
+        </div>
+}
+

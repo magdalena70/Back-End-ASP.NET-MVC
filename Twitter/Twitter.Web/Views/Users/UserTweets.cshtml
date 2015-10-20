@@ -1,18 +1,12 @@
 ﻿@model Twitter.Web.ViewModels.UserViewModel
 
-<div class="jumbotron">
+<div class="well">
     <div class="row">
         <div class="col-sm-6">
             <img src="@Model.AvatarUrl" alt="@Model.UserName avatar" width="200" />
         </div>
         <div class="col-sm-6">
-            <h2>@Html.DisplayFor(x => x.UserName)</h2>
-            <p>@Html.DisplayNameFor(x => x.Email): @Html.DisplayFor(x => x.Email)</p>
-            <p>@Html.DisplayNameFor(x => x.FullName): @Html.DisplayFor(x => x.FullName)</p>
-            <p>
-                @Html.DisplayNameFor(x => x.ContactInfo.Facebook):
-                <a href="https://facebook.com/" @Html.DisplayFor(x => x.ContactInfo.Facebook)>Facebook</a>
-            </p>
+            <h2>@Html.DisplayFor(x => x.UserName)</h2> 
         </div>
     </div>
 </div>
