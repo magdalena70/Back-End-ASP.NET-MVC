@@ -20,7 +20,9 @@ namespace Twitter.Web.ViewModels
                     Title = t.Tweet.Title,
                     Details = t.Tweet.Details,
                     SentToDate = t.Tweet.SentToDate,
-                    ImageUrl = t.Tweet.ImageUrl != null ? t.Tweet.ImageUrl : "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSocvbAzvI7P8li5WO4jQC2YfgC2q2sL6W7Bws8VTrWN4veLKBFug",
+                    ImageUrl = t.Tweet.ImageUrl != null ?
+                        t.Tweet.ImageUrl :
+                        "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSocvbAzvI7P8li5WO4jQC2YfgC2q2sL6W7Bws8VTrWN4veLKBFug",
                     CategoryName = t.Tweet.Category.Name,
                     Author = t.Author.UserName,
                     AuthorId = t.AuthorId,

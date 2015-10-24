@@ -19,8 +19,6 @@ using System.ComponentModel.DataAnnotations;
         [Required]
         public string Content { get; set; }
 
-        public DateTime SentToDate { get; set; }
-
         [Required]
         public NotificationType Type { get; set; }
 

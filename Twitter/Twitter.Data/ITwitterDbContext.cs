@@ -16,6 +16,8 @@ namespace Twitter.Data
 
         IDbSet<Notification> Notifications { get; set; }
 
+        IDbSet<UserNotification> UserNotifications { get; set; }
+
         IDbSet<Category> Categories { get; set; }
 
         IDbSet<AdministrationLog> AdministrationLogs { get; set; }

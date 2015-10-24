@@ -6,12 +6,12 @@
             <img src="@Model.AvatarUrl" alt="@Model.UserName avatar" width="200" />
         </div>
         <div class="col-sm-6">
-            <h2>@Html.DisplayFor(x => x.UserName)</h2> 
+            <h2>@Html.DisplayFor(model => model.UserName)</h2> 
         </div>
     </div>
 </div>
 <div class="row">
     <h2>My Tweets:</h2>
     <!-- get User's Tweets -->
-    @Html.DisplayFor(x => x.UserTweets)
+    @Html.DisplayFor(model => model.UserTweets)
 </div>

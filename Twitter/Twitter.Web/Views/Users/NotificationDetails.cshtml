@@ -1,0 +1,32 @@
+﻿@model Twitter.Web.ViewModels.NotificationViewModel
+@{
+    ViewBag.Title = "NotificationDetails";
+}
+
+<div class="row">
+    <h2>Notification Details</h2>
+</div>
+
+<div class="row">
+    <table class="table table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>About</th>
+                <th>Content</th>
+                <th>SentToDate</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.Type</td>
+                <td>@Model.Content</td>
+                <td>@Model.SentToDate</td>
+                <td>       
+                    @Html.ActionLink("X", "DeleteNotificationFromUser" , new { id = Model.UserNotificationId }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    @Html.ActionLink("Back to notifications", "UserNotifications", "", new { @class = "btn btn-default btn-lg" })
+</div>

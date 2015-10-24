@@ -81,6 +81,14 @@ namespace Twitter.Data
             }
         }
 
+        public IRepository<UserNotification> UserNotifications
+        {
+            get
+            {
+                return this.GetRepository<UserNotification>();
+            }
+        }
+
         public IRepository<Category> Categories
         {
             get

@@ -26,8 +26,20 @@ namespace Twitter.Web
             );
 
             routes.MapRoute(
+                name: "EditNewTweet",
+                url: "Categories/EditNewTweet/{id}",
+                defaults: new { controller = "Categories", action = "EditNewTweet" }
+            );
+
+            routes.MapRoute(
+                name: "NewTweet",
+                url: "Categories/NewTweet/{id}",
+                defaults: new { controller = "Categories", action = "NewTweet" }
+            );
+
+            routes.MapRoute(
                 name: "CategoryTweets",
-                url: "Categories/{name}",
+                url: "Categories/TweetsByCategory/{name}",
                 defaults: new { controller = "Categories", action = "TweetsByCategory" }
             );
 
@@ -53,6 +65,18 @@ namespace Twitter.Web
                 name: "User",
                 url: "User/{username}",
                 defaults: new { controller = "Users", action = "Index" }
+            );
+
+            routes.MapRoute(
+                name: "UserNotifications",
+                url: "Users/UserNotifications",
+                defaults: new { controller = "Users", action = "UserNotifications" }
+            );
+
+            routes.MapRoute(
+                name: "DeleteUserNotification",
+                url: "Users/DeleteNotificationFromUser/{id}",
+                defaults: new { controller = "Users", action = "DeleteNotificationFromUser" }
             );
 
             routes.MapRoute(

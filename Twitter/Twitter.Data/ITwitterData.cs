@@ -22,6 +22,8 @@ namespace Twitter.Data
 
         IRepository<Notification> Notifications { get; }
 
+        IRepository<UserNotification> UserNotifications { get; }
+
         IRepository<Category> Categories { get; }
 
         int SaveChanges();

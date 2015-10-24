@@ -24,7 +24,11 @@ namespace Twitter.Web.ViewModels
                     AvatarUrl = u.AvatarUrl != null ?
                         u.AvatarUrl : 
                         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJNGKxDl-q0wRp-eKqFc1jzuKeGA_tldmvO71crqFQ8ptsqIjk",
-                    TweetCount = u.Tweets.Count
+                    TweetCount = u.Tweets.Count,
+                    NotificationCount = u.Notifications.Count,
+                    UserNotifications = u.Notifications.AsQueryable()
+                        .Select(NotificationViewModel.Create),
+                    MessagesCount = u.Messages.Count
                 };
             }
         }
@@ -48,8 +52,12 @@ namespace Twitter.Web.ViewModels
 
         public IEnumerable<UserTweetViewModel> UserTweets { get; set; }
 
-        public static object Create { get; set; }
+        public IEnumerable<NotificationViewModel> UserNotifications { get; set; }
 
-        public IQueryable<int> FavoriteTweetsCount { get; set; }
+        public int FavoriteTweetsCount { get; set; }
+
+        public int NotificationCount { get; set; }
+
+        public int MessagesCount { get; set; }
     }
 }

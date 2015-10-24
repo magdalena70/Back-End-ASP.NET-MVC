@@ -1,0 +1,32 @@
+﻿@model Twitter.Web.ViewModels.NewTweetViewModel
+
+@{
+    ViewBag.Title = "NewTweet";
+}
+
+<h2>New Tweet</h2>
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Title)</th>
+        <th>@Html.DisplayNameFor(model => model.Details)</th>
+        <th>@Html.DisplayNameFor(model => model.ImageUrl)</th>
+        <th>@Html.DisplayNameFor(model => model.SentToDate)</th>
+        <th>@Html.DisplayNameFor(model => model.Category)</th>
+        <th>Action</th>
+    </tr>  
+    <tr>
+        <td>@Model.Title</td>
+        <td>@Model.Details</td>
+        <td>
+            <img src="@Model.ImageUrl" alt="@Model.Title-img" width="250" height="200"/>
+        </td>
+        <td>@Model.SentToDate</td>
+        <td>@Model.Category</td>
+        <td>
+            @Html.ActionLink("Edit", "EditNewTweet", new { id = Model.Id }, new { @class = "btn btn-success" })
+            @Html.ActionLink("Delete", "DeleteNewTweet", new { id = Model.Id }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>   
+</table>
+@Html.ActionLink("Add this tweet", "AddTweetInAllTweets", new {  id = @Model.Id}, new { @class = "btn btn-default" })

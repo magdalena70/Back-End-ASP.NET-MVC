@@ -7,7 +7,7 @@
     <img src="@Model.ImageUrl" alt="@Model.Title img" width="250" height="200" />
     <p>Category: @Model.CategoryName</p>
     <div id="likes-@Model.Id" class="well">
-        <span>Count: @Html.DisplayFor(f => f.FavoriteCount)</span>
-        <span>Fans: @Html.DisplayFor(f => f.Fans)</span>
+        <span>Count: @Html.DisplayFor(model => model.FavoriteCount)</span>
+        <span>Fans: @Html.DisplayFor(model => model.Fans)</span>
     </div>
 </div>

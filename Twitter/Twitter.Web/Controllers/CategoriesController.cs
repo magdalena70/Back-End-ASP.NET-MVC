@@ -1,6 +1,8 @@
 ﻿
 namespace Twitter.Web.Controllers
 {
+    using System;
+    using System.Net;
     using System.Web.Mvc;
     using System.Linq;
     using System.Linq.Expressions;
@@ -9,7 +11,6 @@ namespace Twitter.Web.Controllers
     using Twitter.Data;
     using Twitter.Web.ViewModels;
     using Twitter.Models;
-    using System;
 
     [Authorize]
     public class CategoriesController : BaseController
@@ -34,8 +35,18 @@ namespace Twitter.Web.Controllers
             return this.View(categories);
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
+        public ActionResult NewTweet()
+        {
+            var thisTweet = this.Data.Tweets.All()
+                    .Include(t => t.Category)
+                    .Where(t => t.AuthorId == this.UserProfile.Id)
+                    .OrderByDescending(t => t.SentToDate)
+                    .Select(NewTweetViewModel.Create)
+                    .FirstOrDefault();
+
+            return this.View(thisTweet);
+        }
+
         public ActionResult AddTweetInCategory(Tweet tweet, int id)
         {
             if (ModelState.IsValid)
@@ -50,14 +61,66 @@ namespace Twitter.Web.Controllers
                     AuthorId = this.UserProfile.Id
                 });
                 this.Data.SaveChanges();
-                //return RedirectToAction("NewTweet");
+
+                return this.RedirectToAction("NewTweet");
             }
 
             return this.View();
         }
 
+        public ActionResult AddTweetInAllTweets(int id)
+        {
+            this.Data.AllTweets.Add(new UserTweet
+                {
+                    TweetId = id,
+                    AuthorId = this.UserProfile.Id
+                });
+            this.Data.SaveChanges();
+
+            return this.RedirectToAction("Index");
+        }
+
+        public ActionResult EditNewTweet(int id, Tweet newTweet)
+        {
+            var currentTweet = this.Data.Tweets.Find(id);
+            if (currentTweet == null)
+            {
+                return this.HttpNotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                currentTweet.Title = newTweet.Title;
+                currentTweet.Details = newTweet.Details;
+                currentTweet.ImageUrl = newTweet.ImageUrl;
+                this.Data.SaveChanges();
+                return RedirectToAction("NewTweet");
+            }
+
+            return this.View(currentTweet);
+        }
+
+        public ActionResult DeleteNewTweet(int id)
+        {
+            var tweet = this.Data.Tweets.Find(id);
+            if(tweet == null)
+            {
+                return this.HttpNotFound();
+            }
+
+            this.Data.Tweets.Delete(tweet);
+            this.Data.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
         public ActionResult TweetsByCategory(string name)
         {
+            if (name == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             var tweetsByCategory = this.Data.AllTweets.All()
                 .Include(t => t.Tweet)
                 .Include("Tweet.Category")

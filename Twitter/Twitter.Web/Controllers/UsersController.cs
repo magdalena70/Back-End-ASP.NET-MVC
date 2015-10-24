@@ -9,7 +9,6 @@ namespace Twitter.Web.Controllers
     using Twitter.Data;
     using Twitter.Web.ViewModels;
     using Twitter.Models;
-    using Twitter.Web.BindingModels;
     using System;
 
     public class UsersController : BaseController
@@ -24,6 +23,14 @@ namespace Twitter.Web.Controllers
         {
             var user = this.Data.Users.All()
                 .Include(u => u.Tweets)
+                .Include("Tweets.Tweet")
+                .Include("Tweets.Tweet.Category")
+                .Include("Tweets.Favorites")
+                .Include("Favorites.UserTweets.Tweet")
+                .Include("Favorites.UserTweets.User")
+                .Include(u => u.Notifications)
+                .Include("Notifications.Notification")
+                .Include(u => u.Messages)
                 .Include(u => u.Groups)
                 .Where(u => u.UserName == username)
                 .Select(UserViewModel.CreateUser)
@@ -46,7 +53,6 @@ namespace Twitter.Web.Controllers
                 .Include("Tweets.Favorites")
                 .Include("Favorites.UserTweets.Tweet")
                 .Include("Favorites.UserTweets.User")
-                .Where(u => u.UserName == username)
                 .Select(u => new UserViewModel
                 {
                     UserName = u.UserName,
@@ -112,6 +118,15 @@ namespace Twitter.Web.Controllers
         {
             var allUsers = this.Data.Users.All()
                 .Include(u => u.Tweets)
+                .Include("Tweets.Tweet")
+                .Include("Tweets.Tweet.Category")
+                .Include("Tweets.Favorites")
+                .Include("Favorites.UserTweets.Tweet")
+                .Include("Favorites.UserTweets.User")
+                .Include(u => u.Notifications)
+                .Include("Notifications.Notification")
+                .Include(u => u.Messages)
+                .Include(u => u.Groups)
                 .OrderBy(u => u.UserName)
                 .Select(UserViewModel.CreateUser);
 
@@ -123,25 +138,60 @@ namespace Twitter.Web.Controllers
             return this.View(allUsers);      
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult AddTweet(Tweet tweet)
+        public ActionResult UserNotifications()
         {
-            if (ModelState.IsValid)
+            var allNotifications = this.Data.Users.All()
+                .Include(u => u.Tweets)
+                .Include("Tweets.Tweet")
+                .Include("Tweets.Tweet.Category")
+                .Include("Tweets.Favorites")
+                .Include("Favorites.UserTweets.Tweet")
+                .Include("Favorites.UserTweets.User")
+                .Include(u => u.Notifications)
+                .Include("Notifications.Notification")
+                .Include(u => u.Messages)
+                .Include(u => u.Groups)
+                .Where(u => u.UserName == this.UserProfile.UserName)
+                .Select(UserViewModel.CreateUser)
+                .FirstOrDefault();
+
+            return this.View(allNotifications);
+        }
+
+        [Authorize]
+        public ActionResult NotificationDetails(int id)
+        {
+            var user = this.Data.Users.Find(this.UserProfile.Id);
+            if (user == null)
             {
-                this.Data.Tweets.Add(new Tweet
-                {
-                    Title = tweet.Title,
-                    Details = tweet.Details,
-                    ImageUrl = tweet.ImageUrl,
-                    SentToDate = DateTime.Now,
-                    CategoryId = 1,
-                    AuthorId = this.UserProfile.Id
-                });
-                this.Data.SaveChanges();
-                return RedirectToAction("NewTweet");
+                return this.HttpNotFound("non existing user");
             }
+
+            var userNotification = user.Notifications.AsQueryable()
+                    .Include(un => un.Notification)
+                    .Where(un => un.Notification.Id == id)
+                    .Select(NotificationViewModel.Create)
+                    .FirstOrDefault();
+            if (userNotification == null)
+            {
+                return this.HttpNotFound();
+            }
+
+            return this.View(userNotification);
+        }
+
+        [Authorize]
+        public ActionResult DeleteNotificationFromUser(int id)
+        {
+            var userNotification = this.Data.UserNotifications.All().Where(un => un.Id == id).FirstOrDefault();
+            if (userNotification == null)
+            {
+                return this.HttpNotFound();
+            }
+
+            userNotification.UserId = null;
+            this.Data.SaveChanges();
 
             return this.View();
         }

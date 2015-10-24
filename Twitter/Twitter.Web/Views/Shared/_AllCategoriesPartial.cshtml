@@ -4,9 +4,17 @@
 {
     <div class="col-sm-4">
         <p>
-            <a href="Categories/@category.Name" class="btn btn-primary btn-lg">@category.Name &raquo;</a>      
-            @Html.ActionLink("Add Tweet", "AddTweetInCategory", "Categories", new { id = category.Id }, new { @class = "btn btn-success" })
-            <em>Tweets: @category.TweetsCount</em>
+            @Html.ActionLink(@category.Name + " >>",
+                "TweetsByCategory",
+                "Categories",
+                new { id = category.Name },
+             new { @class = "btn btn-primary btn-lg" })
+            @Html.ActionLink("Add Tweet",
+                "AddTweetInCategory",
+                "Categories",
+                new { id = category.Id },
+                new { @class = "btn btn-success" })
+            <p><em>Tweets: @category.TweetsCount</em></p>
         </p>
     </div>
 }

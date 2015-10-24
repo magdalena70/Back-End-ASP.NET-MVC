@@ -33,6 +33,8 @@ namespace Twitter.Data
 
         public IDbSet<Notification> Notifications { get; set; }
 
+        public IDbSet<UserNotification> UserNotifications { get; set; }
+
         public IDbSet<Category> Categories { get; set; }
 
 

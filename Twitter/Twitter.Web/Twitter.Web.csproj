@@ -203,12 +203,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\ViewEngineConfig.cs" />
-    <Compile Include="BindingModels\TweetBindingModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\TweetsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Filters\LogAttribute.cs" />
@@ -217,9 +217,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AccountViewModels.cs" />
+    <Compile Include="ViewModels\NotificationViewModel.cs" />
     <Compile Include="ViewModels\CategoryTweetsViewModel.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\FavoritesViewModel.cs" />
+    <Compile Include="ViewModels\NewTweetViewModel.cs" />
     <Compile Include="ViewModels\TweetViewModel.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -296,13 +298,20 @@
     <Content Include="Views\Categories\Index.cshtml" />
     <Content Include="Views\Users\AllUsers.cshtml" />
     <Content Include="Views\Shared\_AllUsersPartial.cshtml" />
-    <Content Include="Views\Tweets\Index.cshtml" />
     <Content Include="Views\Categories\AddTweetInCategory.cshtml" />
     <Content Include="Views\Shared\_AddTweetInCategoryPartial.cshtml" />
+    <Content Include="Views\Categories\NewTweet.cshtml" />
+    <Content Include="Views\Categories\EditNewTweet.cshtml" />
+    <Content Include="Views\Shared\_EditNewTweetPartial.cshtml" />
+    <Content Include="Views\Users\UserNotifications.cshtml" />
+    <Content Include="Views\Users\NotificationDetails.cshtml" />
+    <Content Include="Views\Users\DeleteNotificationFromUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\Notifications\" />
+    <Folder Include="Views\Tweets\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
