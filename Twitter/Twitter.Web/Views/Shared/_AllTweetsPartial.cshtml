@@ -2,30 +2,59 @@
 
 @foreach (var tweet in Model)
 {
-    <div class="col-sm-4">
+    <div class="col-sm-6 well">
+        <img src="@tweet.AuthorAvatar" alt="@tweet.Author-img" width="50" height="50" /> by <b>@tweet.Author</b>
         <h5>@tweet.Title</h5>
-        <p>Category: <a href="Categories/@tweet.CategoryName">@tweet.CategoryName</a></p>
-        <em>Posted on @tweet.SentToDate by @tweet.Author</em>
+        <p>Category: <a href="Categories/TweetsByCategory/@tweet.CategoryName">@tweet.CategoryName</a></p>
+        <em>Posted on <b>@tweet.SentToDate</b></em>
         <p>@tweet.Details</p>
         <img src="@tweet.ImageUrl" alt="@tweet.Id-img" width="240" height="200" />
-        <div id="likes-@tweet.Id" class="well">
-            <p><span>Favorites: @tweet.FavoriteCount Fans:</span></p>
-            @foreach (var fan in tweet.Fans)
-            {
-                <a href="User/@fan" class="btn btn-primary btn-lg">@fan &raquo;</a>
-            }
-        </div>
-            @using (Ajax.BeginForm("Likes", "Users", new { tweet.Id }, new AjaxOptions()
-    {
-        HttpMethod = "POST",
-        InsertionMode = InsertionMode.Replace,
-        UpdateTargetId = string.Format("likes-{0}", tweet.Id)
-    }))
-        {
-                @Html.AntiForgeryToken()
+        <div class="row">
+            <div id="likes-@tweet.Id" class="col-sm-6">
+                @foreach (var fan in tweet.Fans)
+                {
+                    <a href="User/@fan" class="btn btn-primary btn-sm">@fan &raquo;</a>
+                }
 
-                <input type="submit" value="+" />
-        }
+                @using (Ajax.BeginForm("Likes", "Users", new { tweet.Id }, new AjaxOptions()
+            {
+                HttpMethod = "POST",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = string.Format("likes-{0}", tweet.Id)
+            }))
+                {
+                    @Html.AntiForgeryToken()
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                    <input type="submit" value="@tweet.FavoriteCount" />
+                }
+            </div>
+
+            <div id="retweet-@tweet.Id" class="col-sm-6">
+                @foreach (var item in tweet.Retweets)
+                {
+                    <p>
+                        <img src="@item.RetweeterAvatar" alt="@item.Retweeter-img" width="25" height="25" />
+                        <span>by <b>@item.Retweeter</b></span>
+                    </p>
+                    <p>@item.Title <em>posted on <b>@item.SentToDate</b></em></p>
+                    <p>@item.Details</p>
+                    <img src="@item.ImageUrl" alt="@item.Title-img" width="150" height="100" />
+                    }
+
+                    @using (Ajax.BeginForm("Retweet", "Users", new { tweet.Id }, new AjaxOptions()
+            {
+                HttpMethod = "POST",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = string.Format("retweet-{0}", tweet.Id)
+            }))
+                {
+                        @Html.AntiForgeryToken()
+
+                        <span class="glyphicon glyphicon-retweet"></span>
+                        <input type="submit" value="@tweet.RetweetsCount"/>
+                }
+                </div>
+            </div>
         </div>
 }
 

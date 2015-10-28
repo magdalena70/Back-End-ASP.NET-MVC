@@ -27,7 +27,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("All Users", "AllUsers", "Users")</li>
-                    <li>@Html.ActionLink("Categories", "Index", "Categories")</li>
+                    <li>@Html.ActionLink("Search User", "SearchUser", "Users")</li>
                     <li>@Html.ActionLink("Profile", "Index", "User/" + User.Identity.GetUserName())</li>
                     <li>@Html.ActionLink("My Favorite Tweets", "UserFavoriteTweets", User.Identity.GetUserName())</li>
                     <li>@Html.ActionLink("My Tweets", "UserTweets", User.Identity.GetUserName())</li>
@@ -40,7 +40,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Twitter - ASP.NET Application</p>
         </footer>
     </div>
 

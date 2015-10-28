@@ -1,0 +1,34 @@
+﻿@model Twitter.Web.ViewModels.UserViewModel
+@{
+    ViewBag.Title = "UserDetails";
+}
+
+<h2>User Details</h2>
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.UserName)</th>
+        <th>@Html.DisplayNameFor(model => model.FullName)</th>
+        <th>@Html.DisplayNameFor(model => model.Email)</th>
+        <th>@Html.DisplayNameFor(model => model.ContactInfo.Facebook)</th>
+        <th>@Html.DisplayNameFor(model => model.AvatarUrl)</th>
+        <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+        <th>@Html.DisplayNameFor(model => model.TweetCount)</th>
+        <th>@Html.DisplayNameFor(model => model.FavoriteTweetsCount)</th>
+        <th>@Html.DisplayNameFor(model => model.MessagesCount)</th>
+    </tr>
+    <tr>
+        <td>@Model.UserName</td>
+        <td>@Model.FullName</td>
+        <td>@Model.Email</td>
+        <td>@Model.ContactInfo.Facebook</td>
+        <td>
+            <img src="@Model.AvatarUrl" alt="@Model.UserName-img" width="50" />
+        </td>
+        <td>@Model.PhoneNumber</td>
+        <td>@Model.TweetCount</td>
+        <td>@Model.FavoriteTweetsCount</td>
+        <td>@Model.MessagesCount</td>
+    </tr>
+</table>
+
+

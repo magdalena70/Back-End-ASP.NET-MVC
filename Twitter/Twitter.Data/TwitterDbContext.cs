@@ -27,6 +27,8 @@ namespace Twitter.Data
 
         public IDbSet<UserTweet> AllTweets { get; set; }
 
+        public IDbSet<Retweet> Retweets { get; set; }
+
         public IDbSet<Favorite> Favorites { get; set; }
 
         public IDbSet<Message> Messages { get; set; }
@@ -63,6 +65,11 @@ namespace Twitter.Data
             modelBuilder.Entity<Favorite>()
                 .HasRequired(x => x.UserTweet)
                 .WithMany(x => x.Favorites)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Retweet>()
+                .HasRequired(x => x.UserTweet)
+                .WithMany(x => x.Retweets)
                 .WillCascadeOnDelete(false);
 
             base.OnModelCreating(modelBuilder);

@@ -28,6 +28,8 @@ namespace Twitter.Web.Controllers
                 .Include("Tweets.Favorites")
                 .Include("Favorites.UserTweets.Tweet")
                 .Include("Favorites.UserTweets.User")
+                .Include("Tweets.Retweets")
+                .Include("Retweets.UserTweets.Tweet")
                 .Include(u => u.Notifications)
                 .Include("Notifications.Notification")
                 .Include(u => u.Messages)
@@ -41,6 +43,72 @@ namespace Twitter.Web.Controllers
             }
 
             return this.View(user);
+        }
+
+        [Authorize]
+        public ActionResult UserDetails(string username)
+        {
+            var userDetails = this.Data.Users.All()
+                .Include(u => u.Tweets)
+                .Include("Tweets.Tweet")
+                .Include("Tweets.Tweet.Category")
+                .Include("Tweets.Favorites")
+                .Include("Favorites.UserTweets.Tweet")
+                .Include("Favorites.UserTweets.User")
+                .Include("Tweets.Retweets")
+                .Include("Retweets.UserTweets.Tweet")
+                .Include(u => u.Notifications)
+                .Include("Notifications.Notification")
+                .Include(u => u.Messages)
+                .Include(u => u.Groups)
+                .Where(u => u.UserName == username)
+                .Select(UserViewModel.CreateUser)
+                .FirstOrDefault();
+            if (userDetails == null)
+            {
+                return this.HttpNotFound("non existing user");
+            }
+
+            return this.View(userDetails);
+        }
+
+        [Authorize]
+        public ActionResult EditDetails(string username, User userData)
+        {
+            var currentUserData = this.Data.Users.All()
+                .Where(u => u.UserName == username)
+                .FirstOrDefault();
+            if (currentUserData == null)
+            {
+                return this.HttpNotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                currentUserData.FullName = userData.FullName != null ? userData.FullName : currentUserData.FullName;
+                currentUserData.Email = userData.Email != null ? userData.Email : currentUserData.Email;
+                currentUserData.AvatarUrl = userData.AvatarUrl != null ? userData.AvatarUrl : currentUserData.AvatarUrl;
+                currentUserData.PhoneNumber = userData.PhoneNumber != null ? userData.PhoneNumber : currentUserData.PhoneNumber;
+                currentUserData.ContactInfo = userData.ContactInfo != null ? userData.ContactInfo : currentUserData.ContactInfo;
+                this.Data.SaveChanges();
+            }
+
+            return this.View(currentUserData);
+        }
+
+        public ActionResult SearchUser(string searchString)
+        {
+
+            var users = from u in this.Data.Users.All().AsQueryable()
+                         select u;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                users = users.Where(s => s.UserName.Contains(searchString));
+            } 
+
+            return this.View(users);
+
         }
 
         [Authorize]
@@ -89,9 +157,37 @@ namespace Twitter.Web.Controllers
 
             var likes = this.Data.Favorites.All().Where(f => f.userTweetId == id);
             var likesCount = likes.Count();
-            var fans = likes.Select(f => f.Fan.UserName).ToList();
+            var fans = likes.Select(f => f.Fan.UserName)
+                .ToList();
 
             return this.Content(string.Format("{0} ({1})", likesCount, string.Join(", ", fans)));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public ActionResult Retweet(int id)
+        {
+            
+                this.Data.Retweets.Add(new Retweet
+                {
+                    RetweeterId = this.UserProfile.Id,
+                    userTweetId = id,
+                    Title = "one more retweet",
+                    Details = "asdfghj lkjhg lkjhg",
+                    SentToDate = DateTime.Now
+                });
+                this.Data.SaveChanges();
+
+                // to do
+                var retweets = this.Data.Retweets.All()
+                    .Where(r => r.userTweetId == id);
+                //.Select(RetweetViewModel.Create);
+            var retweetsCount = retweets.Count();
+            var retweetDetails = retweets.Select(r => r.Details).ToList();
+
+            return this.Content(string.Format("{0} ({1})", retweetsCount, string.Join(", ", retweetDetails)));
+            //return this.View(retweets);
         }
 
         [Authorize]

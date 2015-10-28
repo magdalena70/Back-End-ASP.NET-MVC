@@ -19,13 +19,18 @@ namespace Twitter.Web.ViewModels
                     Id = t.Id,
                     Title = t.Tweet.Title,
                     Details = t.Tweet.Details,
-                    SentToDate = t.Tweet.SentToDate,
+                    SentToDate = t.Tweet.SentToDate.ToString(),
                     ImageUrl = t.Tweet.ImageUrl != null ?
                         t.Tweet.ImageUrl :
-                        "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSocvbAzvI7P8li5WO4jQC2YfgC2q2sL6W7Bws8VTrWN4veLKBFug",
+                        "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQbfedSLb3yJtD5bvTAtHzEYno3GrsA4sqE-Sijy9a66swuK2pYXA",
                     CategoryName = t.Tweet.Category.Name,
                     Author = t.Author.UserName,
+                    AuthorAvatar = t.Author.AvatarUrl != null ?
+                        t.Author.AvatarUrl :
+                        "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcR_N1xlcGHULtzO3ylNBd0MPc65_e4_L2OcKH_okfIm9HUN3R8i",
                     AuthorId = t.AuthorId,
+                    RetweetsCount = t.Retweets.Count,
+                    Retweets = t.Retweets.AsQueryable().Select(RetweetViewModel.Create),
                     FavoriteCount = t.Favorites.Count,
                     Fans = t.Favorites.Select(f => f.Fan.UserName)
                 };
@@ -38,7 +43,7 @@ namespace Twitter.Web.ViewModels
 
         public string Details { get; set; }
 
-        public DateTime SentToDate { get; set; }
+        public string SentToDate { get; set; }
 
         public string ImageUrl { get; set; }
 
@@ -51,5 +56,11 @@ namespace Twitter.Web.ViewModels
         public int FavoriteCount { get; set; }
 
         public IEnumerable<string> Fans { get; set; }
+
+        public int RetweetsCount { get; set; }
+
+        public IEnumerable<RetweetViewModel> Retweets { get; set; }
+
+        public string AuthorAvatar { get; set; }
     }
 }

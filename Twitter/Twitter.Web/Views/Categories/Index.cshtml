@@ -1,11 +1,15 @@
 ﻿
 @{
-    ViewBag.Title = "All Categories";
+    Layout = "";
+    ViewBag.Title = "Categories:";
+
 }
 
-<div class="well">
-    <h2>@ViewBag.Title</h2>
+<div class="row">
+    @Html.ActionLink("Add Category", "AddCategory", "Categories", "", new { @class = "btn btn-default btn-lg" })
 </div>
+
+<h2>@ViewBag.Title</h2>
 
 <div class="row">
     @Html.Partial("_AllCategoriesPartial")

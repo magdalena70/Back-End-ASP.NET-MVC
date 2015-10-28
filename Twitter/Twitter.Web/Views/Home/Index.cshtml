@@ -4,14 +4,17 @@
 }
 
 <div class="well">
-    <h1>Twitter</h1>
-    <p class="lead">ASP.NET MVC Web Application</p>
+    <h1>
+        Twitter -
+        <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSTJCHorwmYQ1hhnRlbKm3-cOITsSaEu4NglwgKZZCIp7LdOwQb" alt="logo" width="300" height="200" />
+         - Join us!
+    </h1>
 </div>
 <div class="row">
-    <h2>All Tweets</h2>
     @Html.Partial("_AllTweetsPartial")
-
-    @section scripts{
-        @Scripts.Render("~/bundles/jqueryval")
-    }
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

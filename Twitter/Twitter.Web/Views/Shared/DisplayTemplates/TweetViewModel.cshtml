@@ -1,13 +1,51 @@
 ﻿@model Twitter.Web.ViewModels.TweetViewModel
 
-<div class="col-sm-4">
+<div class="col-sm-6 well">
+    <img src="@Model.AuthorAvatar" alt="@Model.Author-img" width="50" height="50" /> by <b>@Model.Author</b>
     <h4>@Model.Title</h4>
     <p>@Model.Details</p>
-    <em>@Model.SentToDate by @Model.Author</em>
+    <em><b>@Model.SentToDate</b></em>
     <img src="@Model.ImageUrl" alt="@Model.Title img" width="250" height="200" />
     <p>Category: @Model.CategoryName</p>
-    <div id="likes-@Model.Id" class="well">
-        <span>Count: @Html.DisplayFor(model => model.FavoriteCount)</span>
-        <span>Fans: @Html.DisplayFor(model => model.Fans)</span>
+    <div class="row">
+        <div id="likes-@Model.Id" class="col-sm-6">
+            @foreach (var fan in Model.Fans)
+            {
+                <a href="User/@fan" class="btn btn-primary btn-sm">@fan &raquo;</a>
+            }
+
+            @using (Ajax.BeginForm("Likes", "Users", new { Model.Id }, new AjaxOptions()
+            {
+                HttpMethod = "POST",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = string.Format("likes-{0}", Model.Id)
+            }))
+            {
+                @Html.AntiForgeryToken()
+
+                <input type="submit" value="Favorite: @Model.FavoriteCount" />
+            }
+        </div>
+
+        <div id="retweet-@Model.Id" class="col-sm-6">
+            @foreach (var item in Model.Retweets)
+            {
+                <p>@item.Title <em>from <b>@item.Retweeter</b> at <b>@item.SentToDate</b></em></p>
+                <p>@item.Details</p>
+                @*<img srs="@item.ImageUrl" alt="@item.Title-img" width="150" height="100" />*@
+            }
+
+            @using (Ajax.BeginForm("Retweet", "Users", new { Model.Id }, new AjaxOptions()
+            {
+                HttpMethod = "POST",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = string.Format("retweet-{0}", Model.Id)
+            }))
+            {
+                @Html.AntiForgeryToken()
+
+                <input type="submit" value="Retweet: @Model.RetweetsCount" />
+            }
+        </div>
     </div>
 </div>

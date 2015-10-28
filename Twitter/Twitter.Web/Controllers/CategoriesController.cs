@@ -33,6 +33,43 @@ namespace Twitter.Web.Controllers
             }
 
             return this.View(categories);
+            
+        }
+
+        [Authorize]
+        public ActionResult AddCategory(Category category)
+        {
+            if (ModelState.IsValid)
+            {
+                this.Data.Categories.Add(new Category
+                {
+                    Name = category.Name
+                });
+                this.Data.SaveChanges();
+
+                return this.RedirectToAction("Index", "Home");
+            }
+
+            return this.View();
+        }
+
+        [Authorize]
+        public ActionResult EditCategory(int id, Category category)
+        {
+            var currentCategory = this.Data.Categories.Find(id);
+            if (currentCategory == null)
+            {
+                return this.HttpNotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                currentCategory.Name = category.Name;
+                this.Data.SaveChanges();
+                //return RedirectToAction("Index", "Home");
+            }
+
+            return this.View();
         }
 
         public ActionResult NewTweet()
@@ -47,6 +84,7 @@ namespace Twitter.Web.Controllers
             return this.View(thisTweet);
         }
 
+        [Authorize]
         public ActionResult AddTweetInCategory(Tweet tweet, int id)
         {
             if (ModelState.IsValid)
@@ -68,6 +106,7 @@ namespace Twitter.Web.Controllers
             return this.View();
         }
 
+        [Authorize]
         public ActionResult AddTweetInAllTweets(int id)
         {
             this.Data.AllTweets.Add(new UserTweet
@@ -77,9 +116,10 @@ namespace Twitter.Web.Controllers
                 });
             this.Data.SaveChanges();
 
-            return this.RedirectToAction("Index");
+            return this.RedirectToAction("Index", "Home");
         }
 
+        [Authorize]
         public ActionResult EditNewTweet(int id, Tweet newTweet)
         {
             var currentTweet = this.Data.Tweets.Find(id);
@@ -100,6 +140,7 @@ namespace Twitter.Web.Controllers
             return this.View(currentTweet);
         }
 
+        [Authorize]
         public ActionResult DeleteNewTweet(int id)
         {
             var tweet = this.Data.Tweets.Find(id);

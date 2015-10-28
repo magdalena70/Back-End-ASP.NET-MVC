@@ -44,15 +44,15 @@ namespace Twitter.Web
             );
 
             routes.MapRoute(
-                name: "All Users",
-                url: "Users",
-                defaults: new { controller = "Users", action = "AllUsers" }
-            );
-
-            routes.MapRoute(
                 name: "UserTweets",
                 url: "{username}/UserTweets",
                 defaults: new { controller = "Users", action = "UserTweets" }
+            );
+
+            routes.MapRoute(
+                name: "All Users",
+                url: "Users",
+                defaults: new { controller = "Users", action = "AllUsers" }
             );
 
             routes.MapRoute(
@@ -65,6 +65,24 @@ namespace Twitter.Web
                 name: "User",
                 url: "User/{username}",
                 defaults: new { controller = "Users", action = "Index" }
+            );
+
+            routes.MapRoute(
+                name: "SearchUser",
+                url: "Users/SearchUser/{SearchString}",
+                defaults: new { controller = "Users", action = "SearchUser", SearchString = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "UserDetails",
+                url: "User/UserDetails/{username}",
+                defaults: new { controller = "Users", action = "UserDetails" }
+            );
+
+            routes.MapRoute(
+                name: "EditDetails",
+                url: "User/EditDetails/{username}",
+                defaults: new { controller = "Users", action = "EditDetails" }
             );
 
             routes.MapRoute(

@@ -222,6 +222,7 @@
     <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\FavoritesViewModel.cs" />
     <Compile Include="ViewModels\NewTweetViewModel.cs" />
+    <Compile Include="ViewModels\RetweetViewModel.cs" />
     <Compile Include="ViewModels\TweetViewModel.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -306,6 +307,11 @@
     <Content Include="Views\Users\UserNotifications.cshtml" />
     <Content Include="Views\Users\NotificationDetails.cshtml" />
     <Content Include="Views\Users\DeleteNotificationFromUser.cshtml" />
+    <Content Include="Views\Users\EditDetails.cshtml" />
+    <Content Include="Views\Shared\_EditDetailsPartial.cshtml" />
+    <Content Include="Views\Users\UserDetails.cshtml" />
+    <Content Include="Views\Users\SearchUser.cshtml" />
+    <Content Include="Views\Categories\AddCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

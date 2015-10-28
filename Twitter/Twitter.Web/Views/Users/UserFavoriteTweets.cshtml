@@ -8,14 +8,24 @@
     <h2>My Favorite Tweets</h2>
 </div>
 
-@foreach(var favorite in Model)
-{ 
-    <div class="col-sm-4">
-        <h4>@favorite.Title</h4>
-        <p>Category: @favorite.Category</p>
-        <em>@favorite.SentToDate by @favorite.Author</em>
-        <p>@favorite.Details</p>
-        <img src="@favorite.ImageUrl" alt="@favorite.Title img" width="260" height="200" />
-        <p>Favorite: @favorite.FavoriteCount</p>
-    </div>
-}
+<div class="row">
+    @foreach (var favorite in Model)
+    {
+        <div class="col-sm-6 well">
+            <img src="@favorite.AuthorAvatar" alt="@favorite.Author-img" width="50" height="50" /> by <b>@favorite.Author</b>
+            <h4>@favorite.Title</h4>
+            <p>Category: @favorite.Category</p>
+            <em>@favorite.SentToDate by @favorite.Author</em>
+            <p>@favorite.Details</p>
+            <img src="@favorite.ImageUrl" alt="@favorite.Title img" width="260" height="200" />
+            <div class="row">
+                <div class="col-sm-6">
+                    <p><span class="glyphicon glyphicon-retweet"></span> @favorite.RetweetsCount</p>
+                </div>
+                <div class="col-sm-6">
+                    <p><span class="glyphicon glyphicon-star-empty"></span> @favorite.FavoriteCount</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

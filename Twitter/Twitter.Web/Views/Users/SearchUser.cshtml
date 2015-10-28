@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Twitter.Models.User>
+@{
+    ViewBag.Title = "SearchUser";
+}
+
+<h2>Search User</h2>
+<div class="row">
+    @*@Html.ActionLink("Create New", "Create")*@
+    @using (Html.BeginForm("SearchUser", "Users", FormMethod.Get))
+    {
+        <p>
+            UserName: @Html.TextBox("SearchString") <br />
+            <input type="submit" value="Filter" />
+        </p>
+    }
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.UserName)</th>
+                <th>@Html.DisplayNameFor(model => model.FullName)</th>
+                <th>@Html.DisplayNameFor(model => model.Email)</th>
+                <th>@Html.DisplayNameFor(model => model.ContactInfo.Facebook)</th>
+                <th>@Html.DisplayNameFor(model => model.AvatarUrl)</th>
+                <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.UserName</td>
+                    <td>@user.FullName</td>
+                    <td>@user.Email</td>
+                    <td>@user.ContactInfo.Facebook</td>
+                    <td>@user.AvatarUrl</td>
+                    <td>@user.PhoneNumber</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+

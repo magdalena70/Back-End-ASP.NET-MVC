@@ -2,20 +2,41 @@
 
 <div class="jumbotron">
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <img src="@Model.AvatarUrl" alt="@Model.UserName avatar" width="200" height="160"/>
             <h2>@Html.DisplayFor(model => model.UserName)</h2>
         </div>
-        <div class="col-sm-6">
-            <p>@Html.DisplayNameFor(model => model.Email): @Html.DisplayFor(x => x.Email)</p>
-            <p>@Html.DisplayNameFor(model => model.FullName): @Html.DisplayFor(x => x.FullName)</p>
+        <div class="col-sm-4">
+            <p>@Html.DisplayNameFor(model => model.Email): @Model.Email</p>
+            <p>@Html.DisplayNameFor(model => model.FullName): @Model.FullName</p>
             <p>
-                @Html.DisplayNameFor(model => model.ContactInfo.Facebook):
-                <a href="https://facebook.com/" @Html.DisplayFor(model => model.ContactInfo.Facebook)>Facebook</a>
+                Contact Info:
+                <a href="@Model.ContactInfo.Facebook" target="_blank">Facebook</a>
             </p>
+            <p>@Html.DisplayNameFor(model => model.PhoneNumber): @Model.PhoneNumber</p>
             <p>
                 <span>Tweets: @Model.TweetCount</span>
             </p>
+        </div>
+        <div class="col-sm-4">
+            <div class="row">
+                <p>
+                    <a href="" class="btn btn-default">
+                        <span class="glyphicon glyphicon-cog"></span>
+                    </a>
+                    <a href="UserDetails/@Model.UserName" class="btn btn-default">
+                        User Details
+                    </a>
+                    <a href="EditDetails/@Model.UserName" class="btn btn-default">
+                        Edit Profile
+                    </a>
+                </p>
+            </div>
+            <div class="row">
+                <a href="SendMessage/@Model.UserName" class="btn btn-default">
+                    Send Message
+                </a>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -23,13 +44,29 @@
             @Html.ActionLink("Notifications: " + @Model.NotificationCount, "UserNotifications", "", new { @class = "btn btn-danger" })
         </div>
         <div class="col-sm-3">
-            @Html.ActionLink("Messages: " + @Model.MessagesCount, "UserMessages", "", new { @class = "btn btn-warning" })
+            @Html.ActionLink("Messages: " + @Model.MessagesCount, "UserMessages", "", new { @class = "btn btn-danger" })
         </div>
         <div class="col-sm-3">
-            @Html.ActionLink("Followers: ", "UserFans", "", new { @class = "btn btn-success" })
+            @Html.ActionLink("Followers: ", "UserFans", "", new { @class = "btn btn-danger" })
         </div>
         <div class="col-sm-3">
-            @Html.ActionLink("Following: ", "UserFollowing", "", new { @class = "btn btn-primary" })
+            @Html.ActionLink("Following: ", "UserFollowing", "", new { @class = "btn btn-danger" })
         </div>
     </div>
 </div>
+<div id="allCategoriesDiv" class="row well"></div>
+
+@section scripts{
+    <script>
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/Categories", true);
+        xhr.onreadystatechange = function () {
+            var allCategoriesDiv = document.getElementById("allCategoriesDiv");
+            allCategoriesDiv.innerHTML = '';
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                allCategoriesDiv.innerHTML = xhr.responseText;
+            }
+        }
+        xhr.send();
+    </script>
+}

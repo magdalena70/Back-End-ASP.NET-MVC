@@ -18,5 +18,7 @@ namespace Twitter.Models
         public virtual Tweet Tweet { get; set; }
 
         public virtual ICollection<Favorite> Favorites { get; set; }
+
+        public virtual ICollection<Retweet> Retweets { get; set; }
     }
 }

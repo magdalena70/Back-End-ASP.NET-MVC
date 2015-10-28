@@ -21,6 +21,7 @@ namespace Twitter.Web.ViewModels
                     FullName = u.FullName,
                     Email = u.Email,
                     ContactInfo = u.ContactInfo,
+                    PhoneNumber = u.PhoneNumber,
                     AvatarUrl = u.AvatarUrl != null ?
                         u.AvatarUrl : 
                         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJNGKxDl-q0wRp-eKqFc1jzuKeGA_tldmvO71crqFQ8ptsqIjk",
@@ -59,5 +60,7 @@ namespace Twitter.Web.ViewModels
         public int NotificationCount { get; set; }
 
         public int MessagesCount { get; set; }
+
+        public string PhoneNumber { get; set; }
     }
 }

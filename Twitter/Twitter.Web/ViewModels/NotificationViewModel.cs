@@ -18,7 +18,7 @@ namespace Twitter.Web.ViewModels
                     Id = un.Notification.Id,
                     Type = un.Notification.Type,
                     Content = un.Notification.Content,
-                    SentToDate = un.SentToDate,
+                    SentToDate = un.SentToDate.ToString(),
                     UserNotificationId = un.Id
                 };
             }
@@ -30,7 +30,7 @@ namespace Twitter.Web.ViewModels
 
         public string Content { get; set; }
 
-        public DateTime SentToDate { get; set; }
+        public string SentToDate { get; set; }
 
         public int UserNotificationId { get; set; }
     }

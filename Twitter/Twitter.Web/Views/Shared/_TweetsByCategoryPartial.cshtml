@@ -2,17 +2,35 @@
 
 @foreach (var tweet in Model)
 {
-    <div class="col-sm-4">
+    <div class="col-sm-6 well">
+        <img src="@tweet.AuthorAvatar" alt="@tweet.Author-img" width="50" height="50" /> by <b>@tweet.Author</b>
         <h5>@tweet.Title</h5>
-        <em>Posted on @tweet.SentToDate by @tweet.Author</em>
+        <em>Posted on <b>@tweet.SentToDate</b></em>
         <p>@tweet.Details</p>
         <img src="@tweet.ImageUrl" alt="@tweet.Id-img" width="240" height="200" />
-        <p>Favorites: @tweet.FavoriteCount</p>
-        <span>Fans: </span>
-        @foreach (var fan in tweet.Fans)
-        {
-            <span>@fan </span>
-        }
+        <div class="row">
+            <div class="col-sm-6">
+                <p><span class="glyphicon glyphicon-star-empty"></span> @tweet.FavoriteCount</p>
+                <span>Fans: </span>
+                @foreach (var fan in tweet.Fans)
+                {
+                    <span>@fan </span>
+                }
+            </div>
+            <div class="col-sm-6">
+                <p><span class="glyphicon glyphicon-retweet"></span> @tweet.RetweetsCount</p>
+                @foreach (var item in tweet.Retweets)
+                {
+                    <p>
+                        <img src="@item.RetweeterAvatar" alt="@item.Retweeter-img" width="25" height="25" />
+                        <span>by <b>@item.Retweeter</b></span>
+                    </p>
+                    <p>@item.Title <em>posted on <b>@item.SentToDate</b></em></p>
+                    <p>@item.Details</p>
+                    <img src="@item.ImageUrl" alt="@item.Title-img" width="150" height="100" />
+                }
+            </div>
+        </div>
     </div>
 }
 

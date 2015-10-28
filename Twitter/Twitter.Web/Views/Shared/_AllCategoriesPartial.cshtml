@@ -1,20 +1,23 @@
 ﻿@model IEnumerable<Twitter.Web.ViewModels.CategoryViewModel>
 
-@foreach (var category in Model)
-{
-    <div class="col-sm-4">
-        <p>
-            @Html.ActionLink(@category.Name + " >>",
+
+    @foreach (var category in Model)
+    {
+        <div class="col-sm-3">
+            <p>
+                @Html.ActionLink(@category.Name + " >>",
                 "TweetsByCategory",
                 "Categories",
                 new { id = category.Name },
              new { @class = "btn btn-primary btn-lg" })
-            @Html.ActionLink("Add Tweet",
+
+                @Html.ActionLink("Add Tweet",
                 "AddTweetInCategory",
                 "Categories",
                 new { id = category.Id },
-                new { @class = "btn btn-success" })
+                new { @class = "btn btn-default" })
+            </p>
             <p><em>Tweets: @category.TweetsCount</em></p>
-        </p>
-    </div>
-}
+        </div>
+    }
+
