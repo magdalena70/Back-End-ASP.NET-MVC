@@ -21,8 +21,6 @@ namespace Twitter.Data
 
         public IDbSet<AdministrationLog> AdministrationLogs { get; set; }
 
-        public IDbSet<Group> Groups { get; set; }
-
         public IDbSet<Tweet> Tweets { get; set; }
 
         public IDbSet<UserTweet> AllTweets { get; set; }
@@ -42,20 +40,25 @@ namespace Twitter.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Group>()
-                .HasRequired(x => x.Owner)
-                .WithOptional()
-                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<User>()
+                .HasMany(x => x.Followers)
+                .WithMany()
+                .Map(x =>
+                {
+                    x.ToTable("FollowerUsers");
+                    x.MapLeftKey("UserId");
+                    x.MapRightKey("FollowerUserId");
+                });
 
-            modelBuilder.Entity<Message>()
-                .HasRequired(x => x.Recipient)
-                .WithOptional()
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Message>()
-                .HasRequired(x => x.Sender)
-                .WithOptional()
-                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<User>()
+                .HasMany(x => x.Followings)
+                .WithMany()
+                .Map(x =>
+                {
+                    x.ToTable("FollowingUsers");
+                    x.MapLeftKey("UserId");
+                    x.MapRightKey("FollowingUserId");
+                });
 
             modelBuilder.Entity<Tweet>()
                 .HasRequired(x => x.Category)

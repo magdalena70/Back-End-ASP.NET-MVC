@@ -10,17 +10,19 @@ namespace Twitter.Models
 
     public class User : IdentityUser
     {
-        private ICollection<Group> groups;
         private ICollection<UserTweet> tweets;
         private ICollection<UserNotification> notifications;
         private ICollection<Message> messages;
+        private ICollection<User> followers;
+        private ICollection<User> followings;
 
         public User()
         {
-            this.groups = new HashSet<Group>();
             this.tweets = new HashSet<UserTweet>();
             this.notifications = new HashSet<UserNotification>();
             this.messages = new HashSet<Message>();
+            this.followers = new HashSet<User>();
+            this.followings = new HashSet<User>();
             this.ContactInfo = new ContactInfo();
         }
 
@@ -39,13 +41,6 @@ namespace Twitter.Models
 
         public ContactInfo ContactInfo { get; set; }
 
-        [InverseProperty("Members")]
-        public virtual ICollection<Group> Groups
-        {
-            get { return this.groups; }
-            set { this.groups = value; }
-        }
-
         public virtual ICollection<UserTweet> Tweets
         {
             get { return this.tweets; }
@@ -62,6 +57,18 @@ namespace Twitter.Models
         {
             get { return this.messages; }
             set { this.messages = value; }
+        }
+
+        public virtual ICollection<User> Followers
+        {
+            get { return this.followers; }
+            set { this.followers = value; }
+        }
+
+        public virtual ICollection<User> Followings
+        {
+            get { return this.followings; }
+            set { this.followings = value; }
         }
     }
 }

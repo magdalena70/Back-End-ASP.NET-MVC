@@ -5,7 +5,6 @@
 
 <h2>Search User</h2>
 <div class="row">
-    @*@Html.ActionLink("Create New", "Create")*@
     @using (Html.BeginForm("SearchUser", "Users", FormMethod.Get))
     {
         <p>
@@ -16,24 +15,45 @@
     <table class="table table-bordered table-hover">
         <thead>
             <tr>
+                <th>
+                    <span class="glyphicon glyphicon-user"></span>
+                </th>
                 <th>@Html.DisplayNameFor(model => model.UserName)</th>
                 <th>@Html.DisplayNameFor(model => model.FullName)</th>
                 <th>@Html.DisplayNameFor(model => model.Email)</th>
                 <th>@Html.DisplayNameFor(model => model.ContactInfo.Facebook)</th>
-                <th>@Html.DisplayNameFor(model => model.AvatarUrl)</th>
                 <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+                <th>
+                    <span class="glyphicon glyphicon-envelope"></span>
+                </th>
             </tr>
         </thead>
         <tbody>
             @foreach (var user in Model)
             {
                 <tr>
+                    @if (user.AvatarUrl == null)
+                    {
+                        user.AvatarUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJNGKxDl-q0wRp-eKqFc1jzuKeGA_tldmvO71crqFQ8ptsqIjk";
+                    }
+                    else
+                    {
+                        user.AvatarUrl = user.AvatarUrl;
+                    }
+
+                    <td>
+                        <img src="@user.AvatarUrl"
+                             alt="@user.UserName-img"
+                             width="50" />
+                    </td>
                     <td>@user.UserName</td>
                     <td>@user.FullName</td>
                     <td>@user.Email</td>
                     <td>@user.ContactInfo.Facebook</td>
-                    <td>@user.AvatarUrl</td>
                     <td>@user.PhoneNumber</td>
+                    <td>
+                        @Html.ActionLink("Send Message", "SendMessage", "Messages", new { id = @user.Id}, new { @class = "btn btn-default btn-sm" })
+                    </td>
                 </tr>
             }
         </tbody>

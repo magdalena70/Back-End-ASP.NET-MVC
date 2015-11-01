@@ -33,9 +33,7 @@
                 </p>
             </div>
             <div class="row">
-                <a href="SendMessage/@Model.UserName" class="btn btn-default">
-                    Send Message
-                </a>
+                @Html.ActionLink("Send Message", "SearchUser", "Users", "", new { @class = "btn btn-default" })
             </div>
         </div>
     </div>
@@ -47,7 +45,7 @@
             @Html.ActionLink("Messages: " + @Model.MessagesCount, "UserMessages", "", new { @class = "btn btn-danger" })
         </div>
         <div class="col-sm-3">
-            @Html.ActionLink("Followers: ", "UserFans", "", new { @class = "btn btn-danger" })
+            @Html.ActionLink("Followers: ", "UserFollowers", "", new { @class = "btn btn-danger" })
         </div>
         <div class="col-sm-3">
             @Html.ActionLink("Following: ", "UserFollowing", "", new { @class = "btn btn-danger" })

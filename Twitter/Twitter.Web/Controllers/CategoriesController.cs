@@ -116,7 +116,7 @@ namespace Twitter.Web.Controllers
                 });
             this.Data.SaveChanges();
 
-            return this.RedirectToAction("Index", "Home");
+            return this.RedirectToAction("UserTweets", "Users");
         }
 
         [Authorize]
@@ -152,7 +152,7 @@ namespace Twitter.Web.Controllers
             this.Data.Tweets.Delete(tweet);
             this.Data.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("UserTweets", "Users");
         }
 
         public ActionResult TweetsByCategory(string name)

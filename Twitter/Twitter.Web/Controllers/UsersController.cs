@@ -1,22 +1,24 @@
 ﻿
 namespace Twitter.Web.Controllers
 {
+    using System;
     using System.Web.Mvc;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Data.Entity;
     using System.Collections.Generic;
+    using Microsoft.AspNet.Identity;
     using Twitter.Data;
-    using Twitter.Web.ViewModels;
     using Twitter.Models;
-    using System;
-
+    using Twitter.Web.ViewModels;
+    
     public class UsersController : BaseController
     {
         public UsersController(ITwitterData data)
             :base(data)
         {
         }
+
 
         [Authorize]
         public ActionResult Index(string username)
@@ -33,7 +35,6 @@ namespace Twitter.Web.Controllers
                 .Include(u => u.Notifications)
                 .Include("Notifications.Notification")
                 .Include(u => u.Messages)
-                .Include(u => u.Groups)
                 .Where(u => u.UserName == username)
                 .Select(UserViewModel.CreateUser)
                 .FirstOrDefault();
@@ -60,7 +61,6 @@ namespace Twitter.Web.Controllers
                 .Include(u => u.Notifications)
                 .Include("Notifications.Notification")
                 .Include(u => u.Messages)
-                .Include(u => u.Groups)
                 .Where(u => u.UserName == username)
                 .Select(UserViewModel.CreateUser)
                 .FirstOrDefault();
@@ -182,7 +182,6 @@ namespace Twitter.Web.Controllers
                 // to do
                 var retweets = this.Data.Retweets.All()
                     .Where(r => r.userTweetId == id);
-                //.Select(RetweetViewModel.Create);
             var retweetsCount = retweets.Count();
             var retweetDetails = retweets.Select(r => r.Details).ToList();
 
@@ -222,7 +221,6 @@ namespace Twitter.Web.Controllers
                 .Include(u => u.Notifications)
                 .Include("Notifications.Notification")
                 .Include(u => u.Messages)
-                .Include(u => u.Groups)
                 .OrderBy(u => u.UserName)
                 .Select(UserViewModel.CreateUser);
 
@@ -247,7 +245,6 @@ namespace Twitter.Web.Controllers
                 .Include(u => u.Notifications)
                 .Include("Notifications.Notification")
                 .Include(u => u.Messages)
-                .Include(u => u.Groups)
                 .Where(u => u.UserName == this.UserProfile.UserName)
                 .Select(UserViewModel.CreateUser)
                 .FirstOrDefault();

@@ -2,6 +2,7 @@
 namespace Twitter.Models
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
      public class Message
@@ -16,10 +17,10 @@ namespace Twitter.Models
 
         public DateTime SentToDate { get; set; }
 
-        public string SenderId { get; set; }
+        [Required]
+        public string SenderName { get; set; }
 
-        public virtual User Sender { get; set; }
-
+        [Required]
         public string RecipientId { get; set; }
 
         public virtual User Recipient { get; set; }

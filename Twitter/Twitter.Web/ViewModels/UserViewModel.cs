@@ -29,7 +29,14 @@ namespace Twitter.Web.ViewModels
                     NotificationCount = u.Notifications.Count,
                     UserNotifications = u.Notifications.AsQueryable()
                         .Select(NotificationViewModel.Create),
-                    MessagesCount = u.Messages.Count
+                    MessagesCount = u.Messages.Count,
+                    ReceivedMessages = u.Messages.AsQueryable().Select(rm => new ReceivedMessagesViewModel
+                    {
+                        Id = rm.Id,
+                        SentToDate = rm.SentToDate.ToString(),
+                        Title = rm.Title,
+                        Content = rm.Content
+                    })
                 };
             }
         }
@@ -62,5 +69,7 @@ namespace Twitter.Web.ViewModels
         public int MessagesCount { get; set; }
 
         public string PhoneNumber { get; set; }
+
+        public IEnumerable<ReceivedMessagesViewModel> ReceivedMessages { get; set; }
     }
 }

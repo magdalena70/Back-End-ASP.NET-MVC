@@ -208,6 +208,7 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\TweetsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -222,6 +223,7 @@
     <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\FavoritesViewModel.cs" />
     <Compile Include="ViewModels\NewTweetViewModel.cs" />
+    <Compile Include="ViewModels\ReceivedMessagesViewModel.cs" />
     <Compile Include="ViewModels\RetweetViewModel.cs" />
     <Compile Include="ViewModels\TweetViewModel.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
@@ -312,6 +314,9 @@
     <Content Include="Views\Users\UserDetails.cshtml" />
     <Content Include="Views\Users\SearchUser.cshtml" />
     <Content Include="Views\Categories\AddCategory.cshtml" />
+    <Content Include="Views\Messages\SendMessage.cshtml" />
+    <Content Include="Views\Messages\NewMessageDetails.cshtml" />
+    <Content Include="Views\Messages\DeleteMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

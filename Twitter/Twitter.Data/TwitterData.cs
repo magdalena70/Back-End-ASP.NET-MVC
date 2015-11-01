@@ -33,14 +33,6 @@ namespace Twitter.Data
             }
         }
 
-        public IRepository<Group> Groups
-        {
-            get
-            {
-                return this.GetRepository<Group>();
-            }
-        }
-
         public IRepository<Tweet> Tweets
         {
             get

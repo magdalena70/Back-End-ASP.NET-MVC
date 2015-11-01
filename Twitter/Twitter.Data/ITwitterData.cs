@@ -10,8 +10,6 @@ namespace Twitter.Data
 
         IRepository<AdministrationLog> AdministrationLogs { get; }
 
-        IRepository<Group> Groups { get; }
-
         IRepository<Tweet> Tweets { get; }
 
         IRepository<UserTweet> AllTweets { get; }

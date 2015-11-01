@@ -6,8 +6,6 @@ namespace Twitter.Data
 
     public interface ITwitterDbContext
     {
-        IDbSet<Group> Groups { get; set; }
-
         IDbSet<Tweet> Tweets { get; set; }
 
         IDbSet<UserTweet> AllTweets { get; set; }
