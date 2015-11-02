@@ -11,6 +11,10 @@ namespace Twitter.Web.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using Twitter.Data;
+    using Microsoft.AspNet.Identity;
+    using Twitter.Models;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Microsoft.Owin.Security;
 
     public static class NinjectWebCommon 
     {
@@ -63,8 +67,20 @@ namespace Twitter.Web.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             // map the interfaces to the implementations
-            kernel.Bind<ITwitterData>().To<TwitterData>();
-            kernel.Bind<ITwitterDbContext>().To<TwitterDbContext>();
+            kernel.Bind<ITwitterData>().To<TwitterData>()
+                .InRequestScope();
+
+            kernel.Bind<ITwitterDbContext>().To<TwitterDbContext>()
+                .InRequestScope();
+
+            // about AccountController and ManageController ->
+            kernel.Bind<IUserStore<User>>().To<UserStore<User>>()
+                .InRequestScope()
+                .WithConstructorArgument("context", kernel.Get<TwitterDbContext>());
+
+            kernel.Bind<IAuthenticationManager>()
+                .ToMethod<IAuthenticationManager>(context => HttpContext.Current.GetOwinContext().Authentication)
+                .InRequestScope();
         }        
     }
 }

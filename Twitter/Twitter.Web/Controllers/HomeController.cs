@@ -23,7 +23,7 @@ namespace Twitter.Web.Controllers
                 .ThenByDescending(t => t.Id)
                 .Select(TweetViewModel.Create);
             var startPage = RouteData.Values["id"] ?? 0;
-            allTweets = allTweets.Skip((int)startPage).Take(9);
+            allTweets = allTweets.Skip((int)startPage).Take(6);
 
             if (allTweets == null)
             {
@@ -33,10 +33,26 @@ namespace Twitter.Web.Controllers
             return this.View(allTweets);
         }
 
-        public ActionResult About()
+       /* public ActionResult Index(int page = 1)
+        {
+            const int PageSize = 1;
+            var allTweets = this.Data.AllTweets.All()
+                .OrderByDescending(t => t.Tweet.SentToDate)
+                .ThenByDescending(t => t.Id)
+                .Select(TweetViewModel.Create);
+            var tweetsCount = allTweets.Count();
+            var pageCount = (tweetsCount + PageSize - 1) / PageSize;
+
+            ViewData["page"] = page;
+            ViewData["count"] = pageCount;
+
+            return this.View(this.Data.AllTweets.All().Skip((page - 1) * PageSize).Take(PageSize));
+        }*/
+
+       /* public ActionResult About()
         {
 
             return this.RedirectToAction(x => x.Index());
-        }
+        }*/
     }
 }

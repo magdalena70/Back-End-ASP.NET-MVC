@@ -19,7 +19,7 @@ namespace Twitter.Web.ViewModels
                     Id = t.Id,
                     Title = t.Tweet.Title,
                     Details = t.Tweet.Details,
-                    SentToDate = t.Tweet.SentToDate.ToString(),
+                    SentToDate = t.Tweet.SentToDate,
                     ImageUrl = t.Tweet.ImageUrl != null ?
                         t.Tweet.ImageUrl :
                         "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQbfedSLb3yJtD5bvTAtHzEYno3GrsA4sqE-Sijy9a66swuK2pYXA",
@@ -43,7 +43,7 @@ namespace Twitter.Web.ViewModels
 
         public string Details { get; set; }
 
-        public string SentToDate { get; set; }
+        public DateTime SentToDate { get; set; }
 
         public string ImageUrl { get; set; }
 

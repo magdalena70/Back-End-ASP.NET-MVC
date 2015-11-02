@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Twitter.Web.ViewModels.TweetViewModel>
+﻿@using System.Globalization;
+@model IEnumerable<Twitter.Web.ViewModels.TweetViewModel>
 
 @foreach (var tweet in Model)
 {
@@ -8,60 +9,65 @@
         <p>
             Category:
             <a href="Categories/TweetsByCategory/@tweet.CategoryName">@tweet.CategoryName</a>
-            <em> Posted on <b>@tweet.SentToDate</b></em>
+            <em> Posted on <b>@tweet.SentToDate.ToString("MMM dd yyyy", CultureInfo.InvariantCulture)</b></em>
         </p>
         <div class="col-sm-6"><p>@tweet.Details</p></div>
         <div class="col-sm-6">
             <img src="@tweet.ImageUrl" alt="@tweet.Id-img" width="200" height="200" />
         </div>
-            <div class="row">
-                <div id="likes-@tweet.Id" class="col-sm-4">
-                    @foreach (var fan in tweet.Fans)
+        <div class="row">
+            <div id="likes-@tweet.Id" class="col-sm-4">
+                @foreach (var fan in tweet.Fans)
                 {
-                        <a href="User/@fan" class="btn btn-primary btn-sm">@fan &raquo;</a>
+                    <a href="User/@fan" class="btn btn-primary btn-sm">@fan &raquo;</a>
                 }
 
-                    @using (Ajax.BeginForm("Likes", "Users", new { tweet.Id }, new AjaxOptions()
+                @using (Ajax.BeginForm("Likes", "Users", new { tweet.Id }, new AjaxOptions()
             {
                 HttpMethod = "POST",
                 InsertionMode = InsertionMode.Replace,
                 UpdateTargetId = string.Format("likes-{0}", tweet.Id)
             }))
                 {
-                        @Html.AntiForgeryToken()
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                        <input type="submit" value="@tweet.FavoriteCount" />
+                    @Html.AntiForgeryToken()
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                    <input type="submit" value="@tweet.FavoriteCount" />
                 }
-                </div>
+            </div>
 
-                <div id="retweet-@tweet.Id" class="col-sm-8 well">
-                    @foreach (var item in tweet.Retweets)
+            <div id="retweet-@tweet.Id" class="col-sm-8 well">
+                @foreach (var item in tweet.Retweets)
                 {
-                        <p>
-                            <img src="@item.RetweeterAvatar" alt="@item.Retweeter-img" width="25" height="25" />
-                            <span>by <b>@item.Retweeter</b></span>
-                        </p>
-                        <p><b>@item.Title</b> <em>posted on <b>@item.SentToDate</b></em></p>
-                        <div class="col-sm-6"><p>@item.Details</p></div>
-                        <div class="col-sm-6">
-                            <img src="@item.ImageUrl" alt="@item.Title-img" width="150" height="100" />
-                        </div>
-        }
+                    <p>
+                        <img src="@item.RetweeterAvatar" alt="@item.Retweeter-img" width="25" height="25" />
+                        <span>by <b>@item.Retweeter</b></span>
+                    </p>
+                    <p><b>@item.Title</b> <em>posted on <b>@item.SentToDate</b></em></p>
+                    <div class="col-sm-6"><p>@item.Details</p></div>
+                    <div class="col-sm-6">
+                        <img src="@item.ImageUrl" alt="@item.Title-img" width="150" height="100" />
+                    </div>
+                }
 
-        @using (Ajax.BeginForm("Retweet", "Users", new { tweet.Id }, new AjaxOptions()
+                @using (Ajax.BeginForm("Retweet", "Users", new { tweet.Id }, new AjaxOptions()
             {
                 HttpMethod = "POST",
                 InsertionMode = InsertionMode.Replace,
                 UpdateTargetId = string.Format("retweet-{0}", tweet.Id)
             }))
                 {
-            @Html.AntiForgeryToken()
+                    @Html.AntiForgeryToken()
 
-            <span class="glyphicon glyphicon-retweet"></span>
-            <input type="submit" value="@tweet.RetweetsCount" />
+                    <span class="glyphicon glyphicon-retweet"></span>
+                    <input type="submit" value="@tweet.RetweetsCount" />
                 }
-    </div>
             </div>
         </div>
+    </div>
 }
 
+@*@(Html.Awe().Pager()
+           .Url(Url.Action("Index")) // url to go to
+           .Count((int)ViewData["count"]) // page count
+           .Page((int)ViewData["page"]) /* current page*/
+)*@

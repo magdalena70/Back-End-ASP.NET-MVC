@@ -62,8 +62,6 @@ namespace Twitter.Web.ViewModels
 
         public IEnumerable<NotificationViewModel> UserNotifications { get; set; }
 
-        public int FavoriteTweetsCount { get; set; }
-
         public int NotificationCount { get; set; }
 
         public int MessagesCount { get; set; }
