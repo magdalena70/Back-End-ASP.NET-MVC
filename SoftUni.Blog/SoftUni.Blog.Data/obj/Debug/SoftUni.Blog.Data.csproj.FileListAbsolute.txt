@@ -1,0 +1,16 @@
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SoftUni.Blog\SoftUni.Blog.Data\bin\Debug\SoftUni.Blog.Data.dll.config
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SoftUni.Blog\SoftUni.Blog.Data\bin\Debug\SoftUni.Blog.Data.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SoftUni.Blog\SoftUni.Blog.Data\bin\Debug\SoftUni.Blog.Data.pdb
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SoftUni.Blog\SoftUni.Blog.Data\bin\Debug\EntityFramework.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SoftUni.Blog\SoftUni.Blog.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SoftUni.Blog\SoftUni.Blog.Data\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SoftUni.Blog\SoftUni.Blog.Data\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SoftUni.Blog\SoftUni.Blog.Data\bin\Debug\SoftUni.Blog.Models.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SoftUni.Blog\SoftUni.Blog.Data\bin\Debug\SoftUni.Blog.Models.pdb
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SoftUni.Blog\SoftUni.Blog.Data\bin\Debug\EntityFramework.xml
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SoftUni.Blog\SoftUni.Blog.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SoftUni.Blog\SoftUni.Blog.Data\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SoftUni.Blog\SoftUni.Blog.Data\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SoftUni.Blog\SoftUni.Blog.Data\obj\Debug\SoftUni.Blog.Data.csprojResolveAssemblyReference.cache
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SoftUni.Blog\SoftUni.Blog.Data\obj\Debug\SoftUni.Blog.Data.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SoftUni.Blog\SoftUni.Blog.Data\obj\Debug\SoftUni.Blog.Data.pdb

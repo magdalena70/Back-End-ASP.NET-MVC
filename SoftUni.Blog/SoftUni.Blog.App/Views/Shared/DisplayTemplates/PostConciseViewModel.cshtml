@@ -1,0 +1,16 @@
+﻿@using System.Globalization;
+@model SoftUni.Blog.App.Models.ViewModels.PostConciseViewModel
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>
+            @Html.ActionLink(
+            Model.Title,
+            "Details",
+            "Posts",
+            routeValues: new { id = Model.Id },
+            htmlAttributes: null)
+        </h2>
+        <em>by @(Model.Author) on @Model.SentToDate.ToString("dd-MMM-yyyy", CultureInfo.InvariantCulture)</em>
+    </div>
+</div>
