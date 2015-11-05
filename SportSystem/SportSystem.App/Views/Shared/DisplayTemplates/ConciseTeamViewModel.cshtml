@@ -1,0 +1,9 @@
+﻿@model SportSystem.App.Models.ViewModels.ConciseTeamViewModel
+
+<div class="panel panel-danger">
+    <div class="panel-body">
+        <a href="/Teams/Details/@Model.Id"><h3>@Model.Name</h3></a>
+        <a href="@Model.Website">@Model.Website</a>
+        <div class="pull-right">Votes: @Model.VotesCount</div>
+    </div>
+</div>

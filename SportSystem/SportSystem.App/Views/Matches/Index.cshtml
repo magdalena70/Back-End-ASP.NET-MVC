@@ -1,0 +1,25 @@
+﻿@model IEnumerable<SportSystem.App.Models.ViewModels.ConciseMatchViewModel>
+@{
+    ViewBag.Title = "All Matches";
+}
+
+<div class="row">
+    <h2>@ViewBag.Title</h2>
+</div>
+
+@Html.DisplayForModel()
+
+<ul class="pagination">
+    @for (int page = 1; page <= ViewBag.TotalPages; page++)
+    {
+        string listItemClass = string.Empty;
+        if (page == ViewBag.CurrentPage)
+        {
+            listItemClass = "active";
+        }
+
+        <li class="@listItemClass">
+            @Html.ActionLink(page.ToString(), "Index", "Matches", routeValues: new { page = page, count = 3 }, htmlAttributes: null)
+        </li>
+    }
+</ul>

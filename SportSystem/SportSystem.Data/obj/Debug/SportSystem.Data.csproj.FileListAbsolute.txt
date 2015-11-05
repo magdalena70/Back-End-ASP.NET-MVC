@@ -1,0 +1,16 @@
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SportSystem\SportSystem.Data\bin\Debug\SportSystem.Data.dll.config
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SportSystem\SportSystem.Data\bin\Debug\SportSystem.Data.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SportSystem\SportSystem.Data\bin\Debug\SportSystem.Data.pdb
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SportSystem\SportSystem.Data\bin\Debug\EntityFramework.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SportSystem\SportSystem.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SportSystem\SportSystem.Data\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SportSystem\SportSystem.Data\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SportSystem\SportSystem.Data\bin\Debug\EntityFramework.xml
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SportSystem\SportSystem.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SportSystem\SportSystem.Data\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SportSystem\SportSystem.Data\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SportSystem\SportSystem.Data\obj\Debug\SportSystem.Data.csprojResolveAssemblyReference.cache
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SportSystem\SportSystem.Data\obj\Debug\SportSystem.Data.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SportSystem\SportSystem.Data\obj\Debug\SportSystem.Data.pdb
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SportSystem\SportSystem.Data\bin\Debug\SportSystem.Models.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\SportSystem\SportSystem.Data\bin\Debug\SportSystem.Models.pdb

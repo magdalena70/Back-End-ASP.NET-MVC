@@ -1,0 +1,9 @@
+﻿@using System.Globalization
+@model SportSystem.App.Models.ViewModels.ConciseMatchViewModel
+
+<div class="panel panel-primary">
+    <div class="panel-body">
+        <a href="/Matches/Details/@Model.Id"><h3>@Model.HomeTeamName vs. @Model.AwayTeamName</h3></a>
+        Start: @Model.DateAndTime.ToString("dd-MMM-yyyy hh:mm:ss", CultureInfo.InvariantCulture)
+    </div>
+</div>
