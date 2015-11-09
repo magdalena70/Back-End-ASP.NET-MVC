@@ -1,0 +1,7 @@
+﻿@model Snippy.App.Models.ViewModels.UserViewModel
+
+<h3>
+    @Html.ActionLink(@Model.UserName, "UserDetails", "Users", new {username = @Model.UserName }, null)
+</h3>
+
+<p>Snippets Count: <span class="badge">@Model.SnippetCount</span></p>

@@ -1,0 +1,13 @@
+﻿@model Snippy.App.Models.ViewModels.LabelPageViewModel
+@{
+    ViewBag.Title = "SnippetsByLabel";
+}
+
+<h2>Snippets By Label</h2>
+<div class="row">
+    @Html.DisplayFor(l => l.Label)
+</div>
+<div class="row">
+    @Html.DisplayFor(l => l.Snippets)
+</div>
+

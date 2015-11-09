@@ -1,0 +1,14 @@
+﻿@using System.Globalization
+@model Snippy.App.Models.ViewModels.CommentViewModel
+
+<div class="row well">
+    <p>@Model.Content</p>
+    <p>
+        <em>
+            by <strong>@Model.Author</strong>
+            on @Model.CreationTime.ToString("dd-MMM-yyyy hh:mm:ss", CultureInfo.InvariantCulture)
+        </em>
+    </p>
+    <p>on snippet <strong>@Model.SnippetTitle</strong></p>
+</div>
+

@@ -1,0 +1,22 @@
+﻿@model Snippy.App.Models.ViewModels.LabelSnippetViewModel
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <p>Label <strong>@Model.Text</strong> - snippets count: <span class="badge">@Model.SnippetCount</span></p>
+    </div>
+</div>
+<div>
+    <ul class="pagination">
+        @for (int page = 1; page <= ViewBag.TotalPages; page++)
+        {
+            string listItemClass = "disabled";
+            if (page == ViewBag.CurrentPage)
+            {
+                listItemClass = "active";
+            }
+
+            <li class="@listItemClass">
+                @Html.ActionLink(page.ToString(), "SnippetsByLabel", "Labels", routeValues: new { id = @Model.Id, page = page, count = 3 }, htmlAttributes: null)
+            </li>
+        }
+    </ul>
+</div>

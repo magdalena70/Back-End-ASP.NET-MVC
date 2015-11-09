@@ -1,0 +1,29 @@
+﻿@model Snippy.App.Models.ViewModels.UserDetailsViewModel
+
+<div class="col-sm-6">
+    <h1>@Model.UserName</h1>
+    <p>@Model.Email</p>
+    <p>@Model.PhoneNumber</p>
+</div>
+<div class="col-sm-6">
+    <a href="Users/EditProile/@Model.UserName"><h4>Edit Profile</h4></a>
+    <a href="Users/Search"><h4>Search User</h4></a>
+    <a href="Snippets/Search"><h4>Search Snippet</h4></a>
+</div>
+<div class="panel">
+    <h3>My Snippets - <span class="badge">@Model.SnippetCount</span></h3>
+    <ul class="pagination">
+        @for (int page = 1; page <= ViewBag.TotalPages; page++)
+        {
+            string listItemClass = "";
+            if (page == ViewBag.CurrentPage)
+            {
+                listItemClass = "active";
+            }
+
+            <li class="@listItemClass">
+                @Html.ActionLink(page.ToString(), "UserDetails", "Users", routeValues: new { username = @Model.UserName, page = page, count = 3 }, htmlAttributes: null)
+            </li>
+        }
+    </ul>
+</div>

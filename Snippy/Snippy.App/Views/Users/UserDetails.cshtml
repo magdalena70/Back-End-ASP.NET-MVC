@@ -1,0 +1,17 @@
+﻿@model Snippy.App.Models.ViewModels.UserPageViewModel
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Profile</h2>
+<div>
+    <div>
+        @Html.DisplayFor(u => u.UserDetails)
+    </div>
+    <div class="panel-body">
+        @Html.DisplayFor(u => u.UserSnippets)
+    </div>
+</div>
+
+
+

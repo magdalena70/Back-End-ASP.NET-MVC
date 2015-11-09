@@ -1,0 +1,52 @@
+﻿@using System.Globalization
+@model IEnumerable<Snippy.Models.Snippet>
+@{
+    ViewBag.Title = "SearchSnippet";
+}
+
+<h2>Search Snippet</h2>
+<div class="row">
+<div class="col-sm-9">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            @using (Html.BeginForm("SearchSnippet", "Snippets", FormMethod.Get, null))
+            {
+                <p>
+                    <label>By Title:</label>
+                    @Html.TextBox("SearchString", null, null, new { @class = "form-control", placeholder = "input string" })
+                    <input type="submit" value="Filter" class="btn btn-default" />
+                </p>
+            }
+        </div>
+        <div class="panel-body">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Title)</th>
+                    <th>@Html.DisplayNameFor(model => model.Description)</th>
+                    <th>@Html.DisplayNameFor(model => model.CreationTime)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var snippet in Model)
+                {
+                    <tr>
+                        <td>@snippet.Title</td>
+                        <td>@snippet.Description</td>
+                        <td>@snippet.CreationTime.ToString("dd-MMM-yyyy hh:mm:ss", CultureInfo.InvariantCulture)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>
+    <div class="col-sm-3">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <h3>Search Snippet by Language</h3>
+                <h3>Search Snippet by Label</h3>
+            </div>
+        </div>
+    </div>
+</div>

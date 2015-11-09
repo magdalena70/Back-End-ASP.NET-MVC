@@ -1,0 +1,32 @@
+﻿@using System.Globalization
+@model Snippy.App.Models.ViewModels.SnippetDetailsViewModel
+@{
+    ViewBag.Title = "Snippet Details";
+}
+
+<h2>Details</h2>
+<div class="panel panel-primary">
+    <div class="panel-body">
+        <h3>
+            <a href="Languages/Snippets/@Model.Language">@Model.Language</a> @Model.Title
+        </h3>
+        <p>
+            by <span class="glyphicon glyphicon-user"></span> <strong>@Model.Author</strong>
+            on @Model.CreationTime.ToString("dd-MMM-yyyy hh:mm:ss", CultureInfo.InvariantCulture)
+        </p>
+        <p>@Model.Description</p>
+        <div class="well">@Model.Code</div>
+            @foreach (var label in Model.Labels)
+            {
+                @Html.ActionLink(@label.Text, "SnippetsByLabel", "Labels", new { id = @label.Id }, new { @class = "btn btn-default" })
+            }
+        <div class="panel panel-info">
+            <div class="panel-body">
+                <p>Comments:</p>
+                @Html.DisplayFor(s => s.Comments)
+            </div>
+        </div>
+    </div>
+</div>
+
+

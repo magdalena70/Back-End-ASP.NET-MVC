@@ -1,0 +1,16 @@
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Snippy\Snippy.Data\bin\Debug\Snippy.Data.dll.config
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Snippy\Snippy.Data\bin\Debug\Snippy.Data.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Snippy\Snippy.Data\bin\Debug\Snippy.Data.pdb
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Snippy\Snippy.Data\bin\Debug\EntityFramework.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Snippy\Snippy.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Snippy\Snippy.Data\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Snippy\Snippy.Data\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Snippy\Snippy.Data\bin\Debug\Snippy.Models.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Snippy\Snippy.Data\bin\Debug\Snippy.Models.pdb
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Snippy\Snippy.Data\bin\Debug\EntityFramework.xml
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Snippy\Snippy.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Snippy\Snippy.Data\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Snippy\Snippy.Data\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Snippy\Snippy.Data\obj\Debug\Snippy.Data.csprojResolveAssemblyReference.cache
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Snippy\Snippy.Data\obj\Debug\Snippy.Data.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Snippy\Snippy.Data\obj\Debug\Snippy.Data.pdb

@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>All Snippets</h2>
+
+<ul class="pagination">
+    @for (int page = 1; page <= ViewBag.TotalPages; page++)
+    {
+        string listItemClass = "";
+        if (page == ViewBag.CurrentPage)
+        {
+            listItemClass = "active";
+        }
+
+        <li class="@listItemClass">
+            @Html.ActionLink(page.ToString(), "Index", "Snippets", routeValues: new { page = page, count = 3 }, htmlAttributes: null)
+        </li>
+    }
+</ul>
+@Html.DisplayForModel()
+
