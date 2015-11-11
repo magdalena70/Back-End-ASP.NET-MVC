@@ -205,6 +205,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LabelsController.cs" />
+    <Compile Include="Controllers\LanguagesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SnippetsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -219,8 +220,11 @@
     <Compile Include="Models\ViewModels\LabelPageViewModel.cs" />
     <Compile Include="Models\ViewModels\LabelSnippetViewModel.cs" />
     <Compile Include="Models\ViewModels\LabelViewModel.cs" />
+    <Compile Include="Models\ViewModels\LanguagePageViewModel.cs" />
+    <Compile Include="Models\ViewModels\LanguageSnippetViewModel.cs" />
     <Compile Include="Models\ViewModels\SnippetDetailsViewModel.cs" />
     <Compile Include="Models\ViewModels\SnippetsByLabelViewModel.cs" />
+    <Compile Include="Models\ViewModels\SnippetsByLanguageViewModel.cs" />
     <Compile Include="Models\ViewModels\SnippetViewModel.cs" />
     <Compile Include="Models\ViewModels\UserDetailsViewModel.cs" />
     <Compile Include="Models\ViewModels\UserPageViewModel.cs" />
@@ -308,6 +312,11 @@
     <Content Include="Views\Shared\DisplayTemplates\SnippetsByLabelViewModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\LabelSnippetViewModel.cshtml" />
     <Content Include="Views\Snippets\SearchSnippet.cshtml" />
+    <Content Include="Views\Labels\SearchByLabel.cshtml" />
+    <Content Include="Views\Languages\SearchByLanguage.cshtml" />
+    <Content Include="Views\Languages\SnippetsByLanguage.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\LanguageSnippetViewModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SnippetsByLanguageViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

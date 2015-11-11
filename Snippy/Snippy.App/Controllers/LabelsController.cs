@@ -8,6 +8,7 @@ namespace Snippy.App.Controllers
     using AutoMapper;
     using System.Collections;
     using System.Collections.Generic;
+    using System;
 
     public class LabelsController : BaseController
     {
@@ -16,7 +17,6 @@ namespace Snippy.App.Controllers
         {
         }
 
-        // GET: Labels
         public ActionResult SnippetsByLabel(int id, int page = 1, int count = 3)
         {
             var label = this.Data.Labels.Find(id);
@@ -35,6 +35,27 @@ namespace Snippy.App.Controllers
             };
 
             return View(model);
+        }
+
+        public ActionResult SearchByLabel(string searchString)
+        {
+            var labels = from l in this.Data.Labels.All()
+                           select l;
+            if (labels == null)
+            {
+                return this.HttpNotFound("No labels");
+            }
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                labels = labels.Where(l => l.Text.Contains(searchString));
+            }
+            else
+            {
+                labels = labels.OrderBy(l => l.Id).Take(5);
+            }
+
+            return this.View(labels);
         }
     }
 }

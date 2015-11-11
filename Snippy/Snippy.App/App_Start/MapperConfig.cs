@@ -18,8 +18,11 @@ namespace Snippy.App.App_Start
                 .ForMember(vm => vm.Author, options => options.MapFrom(s => s.Author.UserName))
                 .ForMember(vm => vm.Language, options => options.MapFrom(s => s.Language.Name));
 
-            Mapper.CreateMap<Snippet, UserSnippetViewModel>()
+            Mapper.CreateMap<Snippet, SnippetsByLanguageViewModel>()
                 .ForMember(vm => vm.Author, options => options.MapFrom(s => s.Author.UserName));
+
+            Mapper.CreateMap<Snippet, UserSnippetViewModel>()
+                .ForMember(vm => vm.Language, options => options.MapFrom(s => s.Language.Name));
 
             Mapper.CreateMap<Snippet, SnippetDetailsViewModel>()
                 .ForMember(vm => vm.Author, options => options.MapFrom(s => s.Author.UserName))
@@ -33,7 +36,10 @@ namespace Snippy.App.App_Start
                 .ForMember(vm => vm.SnippetCount, options => options.MapFrom(l => l.Snippets.Count));
 
             Mapper.CreateMap<Label, LabelSnippetViewModel>()
-               .ForMember(vm => vm.SnippetCount, options => options.MapFrom(l => l.Snippets.Count));
+                .ForMember(vm => vm.SnippetCount, options => options.MapFrom(l => l.Snippets.Count));
+
+            Mapper.CreateMap<ProgrammingLanguage, LanguageSnippetViewModel>()
+               .ForMember(vm => vm.SnippetCount, options => options.MapFrom(pl => pl.Snippets.Count));
 
             Mapper.CreateMap<User, UserViewModel>()
                 .ForMember(vm => vm.SnippetCount, options => options.MapFrom(u => u.Snippets.Count));

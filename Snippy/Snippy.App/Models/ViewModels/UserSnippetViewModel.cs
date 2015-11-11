@@ -11,7 +11,9 @@ namespace Snippy.App.Models.ViewModels
 
         public string Code { get; set; }
 
-        public string Author { get; set; }
+        public string Description { get; set; }
+
+        public string Language { get; set; }
 
         public IEnumerable<LabelViewModel> Labels { get; set; }
 

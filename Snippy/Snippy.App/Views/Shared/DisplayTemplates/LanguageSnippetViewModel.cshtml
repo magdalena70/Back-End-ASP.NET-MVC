@@ -1,8 +1,8 @@
-﻿@model Snippy.App.Models.ViewModels.LabelSnippetViewModel
+﻿@model Snippy.App.Models.ViewModels.LanguageSnippetViewModel
 
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <p>Label <strong>@Model.Text</strong> - snippets count: <span class="badge">@Model.SnippetCount</span></p>
+        <p>Programming Language <strong>@Model.Name</strong> - snippets count: <span class="badge">@Model.SnippetCount</span></p>
     </div>
 </div>
 <div>
@@ -16,7 +16,7 @@
             }
 
             <li class="@listItemClass">
-                @Html.ActionLink(page.ToString(), "SnippetsByLabel", "Labels", routeValues: new { id = @Model.Id, page = page, count = 3 }, htmlAttributes: null)
+                @Html.ActionLink(page.ToString(), "SnippetsByLanguage", "Languages", routeValues: new { id = @Model.Id, page = page, count = 3 }, htmlAttributes: null)
             </li>
         }
     </ul>

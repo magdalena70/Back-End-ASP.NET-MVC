@@ -50,12 +50,20 @@ namespace Snippy.App.Controllers
 
         public ActionResult SearchSnippet(string searchString)
         {
-            var snippets = from s in this.Data.Snippets.All().AsQueryable()
+            var snippets = from s in this.Data.Snippets.All()
                         select s;
+            if (snippets == null)
+            {
+                return this.HttpNotFound("No snippets");
+            }
 
             if (!String.IsNullOrEmpty(searchString))
             {
                 snippets = snippets.Where(s => s.Title.Contains(searchString));
+            }
+            else
+            {
+                snippets = snippets.OrderBy(l => l.Id).Take(5);
             }
 
             return this.View(snippets);

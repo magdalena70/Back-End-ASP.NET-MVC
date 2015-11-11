@@ -1,18 +1,33 @@
 ﻿@model Snippy.App.Models.ViewModels.UserSnippetViewModel
 
-<a href="Snippets/Details/@Model.Id"><h3>@Model.Title</h3></a>
-    <div class="well">@Model.Code</div>
-<p>
-    @foreach (var label in Model.Labels)
-    {
-        <a href="Labels/Snippets/@label.Text">@label.Text</a>
-    }
-</p>
-<div class="col-sm-12">
-    @if (this.User.Identity.IsAuthenticated)
-    {
-        <p>Comments:</p>
-        @Html.DisplayFor(s => s.Comments)
-    }
+<div class="row">
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <h3>
+                @Html.ActionLink(@Model.Language, "SnippetsByLanguage", "Languages", new { text = @Model.Language }, null)
+                @Model.Title
+            </h3>
+            <h4>@Model.Description</h4>
+            <div class="well col-sm-10 col-sm-offset-1">
+                <pre style="width:400px; margin: auto;">
+                <code>@Model.Code</code>
+    </pre>
+
+                @foreach (var label in Model.Labels)
+                {
+                    @Html.ActionLink(@label.Text, "SnippetsByLabel", "Labels", new { id = @label.Id }, new { @class = "btn btn-default" })
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="panel panel-info">
+                <div class="panel-body">
+                    <p>Comments:</p>
+                    @Html.DisplayFor(s => s.Comments)                   
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
 

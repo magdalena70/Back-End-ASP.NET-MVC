@@ -1,0 +1,16 @@
+﻿@model Snippy.App.Models.ViewModels.SnippetsByLanguageViewModel
+
+<div class="panel panel-primary">
+    <div class="panel-body">
+        <h4>
+            @Html.ActionLink(@Model.Title, "SnippetDetails", "Snippets", new { id = @Model.Id }, null)
+        </h4>
+        <p>by <strong>@Model.Author</strong></p>
+        <p>Labels:
+            @foreach (var label in Model.Labels)
+            {
+                @Html.ActionLink(@label.Text, "SnippetsByLabel", "Labels", new { id = @label.Id }, new { @class = "btn btn-default" })
+            }
+        </p>
+    </div>
+</div>
