@@ -1,14 +1,16 @@
 ﻿
 namespace Snippy.App.Controllers
 {
-    using System.Linq;
-    using System.Web.Mvc;
-    using Snippy.Data.UnitOfWork;
-    using Snippy.App.Models.ViewModels;
-    using AutoMapper;
+    using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System;
+    using System.Linq;
+    using System.Web.Mvc;
+    using Microsoft.AspNet.Identity;
+    using Snippy.Data.UnitOfWork;
+    using Snippy.App.Models.ViewModels;
+    using Snippy.Models;
+    using AutoMapper;
 
     [Authorize]
     public class SnippetsController : BaseController
@@ -36,13 +38,14 @@ namespace Snippy.App.Controllers
 
         }
 
-        public ActionResult SnippetDetails(int id)
+        public ActionResult SnippetDetails(int snippetId)
         {
-            var snippet = this.Data.Snippets.Find(id);
+            var snippet = this.Data.Snippets.Find(snippetId);
             if (snippet == null)
             {
                 return this.HttpNotFound("Snippet is not found.");
             }
+
             var model = Mapper.Map<SnippetDetailsViewModel>(snippet);
 
             return this.View(model);

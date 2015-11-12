@@ -4,7 +4,7 @@
     <div class="panel-body">
         <h4>
             @Model.Language
-            @Html.ActionLink(@Model.Title, "SnippetDetails", "Snippets", new {id = @Model.Id }, null)
+            @Html.ActionLink(@Model.Title, "SnippetDetails", "Snippets", new { snippetId = @Model.Id }, null)
         </h4>
         <p>by <strong>@Model.Author</strong></p>
     </div>

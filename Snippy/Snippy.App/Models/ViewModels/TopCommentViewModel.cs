@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Snippy.App.Models.ViewModels
 {
-    public class CommentViewModel
+    public class TopCommentViewModel
     {
         public int Id { get; set; }
 
@@ -14,6 +14,8 @@ namespace Snippy.App.Models.ViewModels
         public DateTime CreationTime { get; set; }
 
         public string Author { get; set; }
+
+        public string SnippetTitle { get; set; }
 
         public int SnippetId { get; set; }
     }

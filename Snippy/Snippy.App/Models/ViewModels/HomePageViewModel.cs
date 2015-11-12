@@ -7,7 +7,7 @@ namespace Snippy.App.Models.ViewModels
     {
         public IEnumerable<SnippetViewModel> FiveLatestSnippets { get; set; }
 
-        public IEnumerable<CommentViewModel> FiveLatestComments { get; set; }
+        public IEnumerable<TopCommentViewModel> FiveLatestComments { get; set; }
 
         public IEnumerable<LabelViewModel> FiveBestLabels { get; set; }
     }

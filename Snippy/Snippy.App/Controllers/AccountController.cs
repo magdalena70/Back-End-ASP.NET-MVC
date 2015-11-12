@@ -80,7 +80,7 @@ namespace Snippy.App.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    this.TempData["Message"] = "User logged in successfuly. ";
+                    this.TempData["Message"] = "User logged in successfully.";
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -165,7 +165,7 @@ namespace Snippy.App.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
                     
-                    this.TempData["Message"] = "User registered successfuly.";
+                    this.TempData["Message"] = "User registered successfully.";
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);

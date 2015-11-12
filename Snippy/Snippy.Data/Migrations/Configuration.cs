@@ -306,23 +306,6 @@ namespace Snippy.Data.Migrations
 
             context.Snippets.Add(new Snippet()
             {
-                Title = "Reverse a String",
-                Description = "Almost not worth having a function for...",
-                Author = context.Users.FirstOrDefault(u => u.UserName == "admin"),
-                Code = "def reverseString(s):                                                       "+
-                       "     \"\"\"Reverses a string given to it.\"\"\"                             "+
-                       "     return s[::-1]                                                         ",
-                CreationTime = DateTime.Parse("26.10.2015 09:35:13"),
-                Language = context.ProgrammingLanguages.FirstOrDefault(l => l.Name == "Python"),
-                Labels = new List<Label>()
-                {
-                     context.Labels.FirstOrDefault(l=>l.Text=="useful"),
-                   
-                }
-            });
-
-            context.Snippets.Add(new Snippet()
-            {
                 Title = "Pure CSS Text Gradients",
                 Description = "code describes how to create text gradients using only pure CSS",
                 Author = context.Users.FirstOrDefault(u => u.UserName == "someUser"),

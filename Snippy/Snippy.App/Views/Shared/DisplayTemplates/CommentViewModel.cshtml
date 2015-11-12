@@ -1,7 +1,18 @@
 ﻿@using System.Globalization
+@using Microsoft.AspNet.Identity
 @model Snippy.App.Models.ViewModels.CommentViewModel
 
 <div class="row well">
+    @if(Model.Author == this.User.Identity.GetUserName())
+    {
+        <div class="pull-right">
+            @Html.ActionLink("X", "CommentDetails", "Comments", new { id = @Model.Id }, new { @class = "btn btn-danger", id = "delete"})
+        </div>
+    <div class="pull-right">
+        @Html.ActionLink("Edit", "EditCommentDetails", "Comments", new { id = @Model.Id }, new { @class = "btn btn-warning", id = "edit" })
+    </div>
+    }
+    
     <p>@Model.Content</p>
     <p>
         <em>
@@ -9,6 +20,6 @@
             on @Model.CreationTime.ToString("dd-MMM-yyyy hh:mm:ss", CultureInfo.InvariantCulture)
         </em>
     </p>
-    <p>on snippet <strong>@Model.SnippetTitle</strong></p>
 </div>
+
 

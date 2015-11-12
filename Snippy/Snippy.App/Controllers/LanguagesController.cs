@@ -9,6 +9,7 @@ namespace Snippy.App.Controllers
     using System.Collections;
     using System.Collections.Generic;
     using System;
+using Snippy.Models;
 
     public class LanguagesController : BaseController
     {
@@ -52,10 +53,15 @@ namespace Snippy.App.Controllers
             }
             else
             {
-                languages = languages.OrderBy(l => l.Id).Take(5);
+                languages = languages.OrderBy(l => l.Name).Take(5);
             }
 
             return this.View(languages);
+        }
+
+        public ActionResult CreateLanguage(ProgrammingLanguage languageModel)
+        {
+            return this.View();
         }
     }
 }

@@ -26,11 +26,17 @@ namespace Snippy.App.App_Start
 
             Mapper.CreateMap<Snippet, SnippetDetailsViewModel>()
                 .ForMember(vm => vm.Author, options => options.MapFrom(s => s.Author.UserName))
-                .ForMember(vm => vm.Language, options => options.MapFrom(s => s.Language.Name));
+                .ForMember(vm => vm.Language, options => options.MapFrom(s => s.Language.Name))
+                .ForMember(vm => vm.LanguageId, options => options.MapFrom(s => s.Language.Id));
+
+            Mapper.CreateMap<Comment, TopCommentViewModel>()
+                .ForMember(vm => vm.Author, options => options.MapFrom(c => c.Author.UserName))
+                .ForMember(vm => vm.SnippetTitle, options => options.MapFrom(c => c.Snippet.Title))
+                .ForMember(vm => vm.SnippetId, options => options.MapFrom(c => c.Snippet.Id));
 
             Mapper.CreateMap<Comment, CommentViewModel>()
-                .ForMember(vm => vm.Author, options => options.MapFrom(c => c.Author.UserName))
-                .ForMember(vm => vm.SnippetTitle, options => options.MapFrom(c => c.Snippet.Title));
+               .ForMember(vm => vm.Author, options => options.MapFrom(c => c.Author.UserName))
+               .ForMember(vm => vm.SnippetId, options => options.MapFrom(c => c.Snippet.Id));
 
             Mapper.CreateMap<Label, LabelViewModel>()
                 .ForMember(vm => vm.SnippetCount, options => options.MapFrom(l => l.Snippets.Count));

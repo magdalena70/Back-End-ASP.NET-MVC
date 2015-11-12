@@ -1,0 +1,25 @@
+﻿@using System.Globalization
+@model Snippy.App.Models.ViewModels.TopCommentViewModel
+
+@{
+    ViewBag.Title = "CommentDetails";
+}
+
+<h1 style="color: red;">Do you whont to remove this comment:</h1>
+
+<div class="row well">
+    <h2>Comment details</h2>
+    <p>@Model.Content</p>
+    <p>
+        <em>
+            by <strong>@Model.Author</strong>
+            on @Model.CreationTime.ToString("dd-MMM-yyyy hh:mm:ss", CultureInfo.InvariantCulture)
+        </em>
+    </p>
+    <p>on snippet <strong>@Model.SnippetTitle</strong></p>
+</div>
+
+<div class="row">
+    @Html.ActionLink("Delete", "DeleteComment", "Comments", new { id = @Model.Id, snippetId = @Model.SnippetId }, new { @class = "btn btn-danger" })
+    @Html.ActionLink("Cancel", "SnippetDetails", "Snippets", new { id = @Model.SnippetId }, new { @class = "btn btn-default" })
+</div>

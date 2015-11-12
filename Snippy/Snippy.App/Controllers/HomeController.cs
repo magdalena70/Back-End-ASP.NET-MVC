@@ -36,7 +36,7 @@ namespace Snippy.App.Controllers
             var model = new HomePageViewModel()
             {
                 FiveLatestSnippets = Mapper.Map<IEnumerable<SnippetViewModel>>(fiveLatestSnippets),
-                FiveLatestComments = Mapper.Map<IEnumerable<CommentViewModel>>(fiveLatestComments),
+                FiveLatestComments = Mapper.Map<IEnumerable<TopCommentViewModel>>(fiveLatestComments),
                 FiveBestLabels = Mapper.Map<IEnumerable<LabelViewModel>>(fiveBestLabels)
             };
 

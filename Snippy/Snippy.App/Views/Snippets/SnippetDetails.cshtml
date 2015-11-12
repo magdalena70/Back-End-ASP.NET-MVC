@@ -10,7 +10,8 @@
         <div class="panel panel-primary">
             <div class="panel-body">
                 <h3>
-                    <a href="Languages/Snippets/@Model.Language">@Model.Language</a> @Model.Title
+                    @Html.ActionLink(@Model.Language, "SnippetsByLanguage", "Languages", new { id = Model.LanguageId }, null)
+                    @Model.Title
                 </h3>
                 <p>
                     by <span class="glyphicon glyphicon-user"></span> <strong>@Model.Author</strong>
@@ -21,21 +22,52 @@
                     <pre style="width:400px; margin: auto;">
                     <code>@Model.Code</code>
                     </pre>
-
-                    @foreach (var label in Model.Labels)
-                    {
-                        @Html.ActionLink(@label.Text, "SnippetsByLabel", "Labels", new { id = @label.Id }, new { @class = "btn btn-default" })
-                    }
+                    <p>
+                        Labels:
+                        @foreach (var label in Model.Labels)
+                        {
+                            @Html.ActionLink(@label.Text, "SnippetsByLabel", "Labels", new { id = @label.Id }, new { @class = "btn btn-default" })
+                        }
+                    </p>
                 </div>
                 <div class="panel panel-info">
-                    <div class="panel-body">
-                        <p>Comments:</p>
-                        @Html.DisplayFor(s => s.Comments)
+                    <div class=" panel-body">
+                        <p><strong>Comments:</strong></p>
+                        <div id="comments"></div>
+                        <div>
+                            <h4>Add Comment</h4>
+
+                            @using (Ajax.BeginForm("AddComment", "Comments", new { snippetId = Model.Id }, new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                InsertionMode = InsertionMode.InsertAfter,
+                                UpdateTargetId = "comments",
+                                OnSuccess = "onSuccess"
+                            }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input type="text" id="content" name="content" value="" class="form-control" />
+                                <input type="submit" value="Add" class="btn btn-default" />
+                            }
+                        </div>
+
+                        <div>
+                            @Html.DisplayFor(s => s.Comments)             
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+@section scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        function onSuccess() {
+            document.getElementById("content").value = '';
+        }
+    </script>
+}
 
 

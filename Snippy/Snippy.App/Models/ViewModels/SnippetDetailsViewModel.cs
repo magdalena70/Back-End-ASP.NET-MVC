@@ -20,6 +20,8 @@ namespace Snippy.App.Models.ViewModels
 
         public string Language { get; set; }
 
+        public int LanguageId { get; set; }
+
         public IEnumerable<LabelViewModel> Labels { get; set; }
 
         public IEnumerable<CommentViewModel> Comments { get; set; }

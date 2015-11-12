@@ -52,7 +52,7 @@ namespace Snippy.App.Controllers
             }
             else
             {
-                labels = labels.OrderBy(l => l.Id).Take(5);
+                labels = labels.OrderBy(l => l.Text).Take(5);
             }
 
             return this.View(labels);
