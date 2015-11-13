@@ -2,7 +2,7 @@
 
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <p>Programming Language <strong>@Model.Name</strong> - snippets count: <span class="badge">@Model.SnippetCount</span></p>
+        <p>Programming Language <strong>@WebUtility.HtmlDecode(@Model.Name)</strong> - snippets count: <span class="badge">@Model.SnippetCount</span></p>
     </div>
 </div>
 <div>

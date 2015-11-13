@@ -1,0 +1,7 @@
+﻿@model Snippy.App.Models.ViewModels.ProgrammingLanguageViewModel
+
+<div>
+    <p style="color: red;">You added new Programmin Language:</p>
+    <h3>@WebUtility.HtmlDecode(@Model.Name)</h3>
+    @Html.ActionLink("Add Snippet in " + @WebUtility.HtmlDecode(@Model.Name), "SnippetsByLanguage", "Languages", new { id = @Model.Id }, new { @class = "btn btn-default" })
+</div>

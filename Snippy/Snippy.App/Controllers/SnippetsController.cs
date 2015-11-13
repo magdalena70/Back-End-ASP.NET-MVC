@@ -11,6 +11,7 @@ namespace Snippy.App.Controllers
     using Snippy.App.Models.ViewModels;
     using Snippy.Models;
     using AutoMapper;
+    using System.Web;
 
     [Authorize]
     public class SnippetsController : BaseController
@@ -51,6 +52,7 @@ namespace Snippy.App.Controllers
             return this.View(model);
         }
 
+        [ValidateInput(false)]
         public ActionResult SearchSnippet(string searchString)
         {
             var snippets = from s in this.Data.Snippets.All()
@@ -62,6 +64,7 @@ namespace Snippy.App.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
+                searchString = HttpUtility.HtmlEncode(searchString);
                 snippets = snippets.Where(s => s.Title.Contains(searchString));
             }
             else

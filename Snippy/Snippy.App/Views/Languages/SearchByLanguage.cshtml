@@ -42,6 +42,27 @@
         </div>
     </div>
     <div class="col-sm-4">
+
+        <div class="panel panel-primary">
+            <div id="newLanguages" class="panel-body"></div>
+            <div class="panel-footer">
+                <h4>Add Programming Language</h4>
+
+                @using (Ajax.BeginForm("AddLanguage", "Languages", null, new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                InsertionMode = InsertionMode.InsertAfter,
+                                UpdateTargetId = "newLanguages",
+                                OnSuccess = "onSuccess"
+                            }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="text" id="name" name="name" value="" class="form-control" />
+                    <input type="submit" value="Add" class="btn btn-default" />
+                }
+            </div>
+        </div>
+        
         <div class="panel panel-primary">
             <div class="panel-body">
                 @Html.ActionLink("Search Snippet by Label", "SearchByLabel", "Labels", null, new { @class = "btn btn-default btn-lg" })
@@ -51,3 +72,12 @@
         </div>
     </div>
 </div>
+
+@section scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        function onSuccess() {
+            document.getElementById("name").value = '';
+        }
+    </script>
+}

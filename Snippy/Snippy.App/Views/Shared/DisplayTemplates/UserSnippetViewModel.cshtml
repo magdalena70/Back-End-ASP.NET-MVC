@@ -5,13 +5,13 @@
         <div class="panel-body">
             <h3>
                 @Html.ActionLink(@Model.Language, "SnippetsByLanguage", "Languages", new { text = @Model.Language }, null)
-                @Model.Title
+                @WebUtility.HtmlDecode(Model.Title)
             </h3>
-            <h4>@Model.Description</h4>
+            <h4>@WebUtility.HtmlDecode(@Model.Description)</h4>
             <div class="well col-sm-10 col-sm-offset-1">
                 <pre style="width:400px; margin: auto;">
-                <code>@Model.Code</code>
-    </pre>
+                    <code>@WebUtility.HtmlDecode(@Model.Code)</code>
+                </pre>
 
                 @foreach (var label in Model.Labels)
                 {

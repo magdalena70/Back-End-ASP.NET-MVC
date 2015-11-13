@@ -4,23 +4,23 @@
     ViewBag.Title = "Snippet Details";
 }
 
-<h2>Details</h2>
+<h2>Snippet Details</h2>
 <div class="row">
     <div class="col-sm-10 col-sm-offset-1">
         <div class="panel panel-primary">
             <div class="panel-body">
                 <h3>
                     @Html.ActionLink(@Model.Language, "SnippetsByLanguage", "Languages", new { id = Model.LanguageId }, null)
-                    @Model.Title
+                    @WebUtility.HtmlDecode(@Model.Title)
                 </h3>
                 <p>
                     by <span class="glyphicon glyphicon-user"></span> <strong>@Model.Author</strong>
                     on @Model.CreationTime.ToString("dd-MMM-yyyy hh:mm:ss", CultureInfo.InvariantCulture)
                 </p>
-                <h4>@Model.Description</h4>
+                <h4>@WebUtility.HtmlDecode(@Model.Description)</h4>
                 <div class="well col-sm-10 col-sm-offset-1">
                     <pre style="width:400px; margin: auto;">
-                    <code>@Model.Code</code>
+                    <code>@WebUtility.HtmlDecode(Model.Code)</code>
                     </pre>
                     <p>
                         Labels:

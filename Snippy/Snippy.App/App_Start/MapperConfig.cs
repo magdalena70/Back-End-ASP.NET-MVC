@@ -44,6 +44,8 @@ namespace Snippy.App.App_Start
             Mapper.CreateMap<Label, LabelSnippetViewModel>()
                 .ForMember(vm => vm.SnippetCount, options => options.MapFrom(l => l.Snippets.Count));
 
+            Mapper.CreateMap<ProgrammingLanguage, ProgrammingLanguageViewModel>();
+
             Mapper.CreateMap<ProgrammingLanguage, LanguageSnippetViewModel>()
                .ForMember(vm => vm.SnippetCount, options => options.MapFrom(pl => pl.Snippets.Count));
 

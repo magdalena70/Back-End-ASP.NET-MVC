@@ -1,18 +1,13 @@
 ﻿
-namespace Snippy.Models
+namespace Snippy.App.Models.BindingModels
 {
+    using Snippy.Models;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    public class Snippet
-    {
-        public Snippet()
-        {
-            this.Comments = new HashSet<Comment>();
-            this.Labels = new HashSet<Label>();
-        }
 
-        [Key]
+    public class SnippetBindingModel
+    {
         public int Id { get; set; }
 
         [Required]
@@ -32,10 +27,10 @@ namespace Snippy.Models
         [Required]
         public virtual ProgrammingLanguage Language { get; set; }
 
-        public virtual ICollection<Comment> Comments { get; set; }
+        //public virtual ICollection<Comment> Comments { get; set; }
 
         public virtual ICollection<Label> Labels { get; set; }
 
-        public virtual string LabelText { get; set; }
+        public string LabelText { get; set; }
     }
 }

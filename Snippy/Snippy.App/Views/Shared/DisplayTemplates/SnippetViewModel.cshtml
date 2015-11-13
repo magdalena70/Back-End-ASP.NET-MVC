@@ -1,7 +1,7 @@
 ﻿@model Snippy.App.Models.ViewModels.SnippetViewModel
 
 <h3>
-    @Html.ActionLink(@Model.Title, "SnippetDetails", "Snippets", new { snippetId = @Model.Id }, null)
+    @Html.ActionLink(@WebUtility.HtmlDecode(@Model.Title), "SnippetDetails", "Snippets", new { snippetId = @Model.Id }, null)
 </h3>
 <p>Labels:
     @foreach (var label in Model.Labels)

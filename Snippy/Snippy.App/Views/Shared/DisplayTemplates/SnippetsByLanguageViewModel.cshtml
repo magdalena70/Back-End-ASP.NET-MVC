@@ -3,7 +3,7 @@
 <div class="panel panel-primary">
     <div class="panel-body">
         <h4>
-            @Html.ActionLink(@Model.Title, "SnippetDetails", "Snippets", new { snippetId = @Model.Id }, null)
+            @Html.ActionLink(@WebUtility.HtmlDecode(@Model.Title), "SnippetDetails", "Snippets", new { snippetId = @Model.Id }, null)
         </h4>
         <p>by <strong>@Model.Author</strong></p>
         <p>Labels:
