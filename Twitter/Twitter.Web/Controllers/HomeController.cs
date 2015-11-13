@@ -18,41 +18,14 @@ namespace Twitter.Web.Controllers
 
         public ActionResult Index()
         {
-            var allTweets = this.Data.AllTweets.All().AsQueryable()
-                .OrderByDescending(t => t.Tweet.SentToDate)
-                .ThenByDescending(t => t.Id)
-                .Select(TweetViewModel.Create);
-            var startPage = RouteData.Values["id"] ?? 0;
-            allTweets = allTweets.Skip((int)startPage).Take(6);
-
-            if (allTweets == null)
-            {
-                return this.HttpNotFound("non existing tweets");
-            }
+            var allTweets = this.Data.AllTweets.All()
+            .AsQueryable()
+            .OrderByDescending(t => t.Favorites.Count())
+            .ThenByDescending(t => t.Tweet.SentToDate)
+            //.Take(5)
+            .Select(TweetViewModel.Create);
 
             return this.View(allTweets);
         }
-
-       /* public ActionResult Index(int page = 1)
-        {
-            const int PageSize = 1;
-            var allTweets = this.Data.AllTweets.All()
-                .OrderByDescending(t => t.Tweet.SentToDate)
-                .ThenByDescending(t => t.Id)
-                .Select(TweetViewModel.Create);
-            var tweetsCount = allTweets.Count();
-            var pageCount = (tweetsCount + PageSize - 1) / PageSize;
-
-            ViewData["page"] = page;
-            ViewData["count"] = pageCount;
-
-            return this.View(this.Data.AllTweets.All().Skip((page - 1) * PageSize).Take(PageSize));
-        }*/
-
-       /* public ActionResult About()
-        {
-
-            return this.RedirectToAction(x => x.Index());
-        }*/
     }
 }
