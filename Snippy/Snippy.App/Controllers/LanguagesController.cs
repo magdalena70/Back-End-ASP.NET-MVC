@@ -130,7 +130,7 @@ namespace Snippy.App.Controllers
 
                 var model = Mapper.Map<Snippet, SnippetsByLanguageViewModel>(snippetDb);
 
-                //this.TempData["Message"] = "You added new snippet successfully.";
+                this.TempData["Message"] = "You added new snippet " + HttpUtility.HtmlEncode(snippetDb.Title) + " successfully.";
                 return this.PartialView("DisplayTemplates/SnippetsByLanguageViewModel", model);
             }
 

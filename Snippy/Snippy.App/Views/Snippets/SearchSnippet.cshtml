@@ -31,7 +31,9 @@
                         @foreach (var snippet in Model)
                         {
                             <tr>
-                                <td>@WebUtility.HtmlDecode(@snippet.Title)</td>
+                                <td>
+                                    @Html.ActionLink(@WebUtility.HtmlDecode(@snippet.Title), "SnippetDetails", "Snippets", new { snippetId = @snippet.Id }, null)
+                                </td>
                                 <td>@WebUtility.HtmlDecode(@snippet.Description)</td>
                                 <td>@snippet.CreationTime.ToString("dd-MMM-yyyy hh:mm:ss", CultureInfo.InvariantCulture)</td>
                             </tr>

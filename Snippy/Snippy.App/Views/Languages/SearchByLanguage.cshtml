@@ -12,7 +12,7 @@
                 @using (Html.BeginForm("SearchByLanguage", "Languages", FormMethod.Get, null))
                 {
                     <p>
-                        <label>By Programming Language:</label>
+                        <label>Search Programming Language:</label>
                         @Html.TextBox("SearchString", null, null, new { @class = "form-control", placeholder = "input string" })
                         <input type="submit" value="Filter" class="btn btn-default" />
                     </p>
@@ -32,7 +32,11 @@
                             <tr>
                                 <td>@language.Name</td>
                                 <td>
-                                    @Html.ActionLink("Search Snippet", "SnippetsByLanguage", "Languages", new { id = @language.Id }, new { @class = "btn btn-default" })
+                                    @Html.ActionLink("Search Snippet or Add New Snippet in this language",
+                                        "SnippetsByLanguage",
+                                        "Languages",
+                                        new { id = @language.Id },
+                                        new { @class = "btn btn-default" })
                                 </td>
                             </tr>
                         }

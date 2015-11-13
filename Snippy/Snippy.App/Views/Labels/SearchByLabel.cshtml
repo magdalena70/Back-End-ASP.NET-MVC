@@ -12,7 +12,7 @@
                 @using (Html.BeginForm("SearchByLabel", "Labels", FormMethod.Get, null))
                 {
                     <p>
-                        <label>By Label:</label>
+                        <label>Search Label:</label>
                         @Html.TextBox("SearchString", null, null, new { @class = "form-control", placeholder = "input string" })
                         <input type="submit" value="Filter" class="btn btn-default" />
                     </p>
