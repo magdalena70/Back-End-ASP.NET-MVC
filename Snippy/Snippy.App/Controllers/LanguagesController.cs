@@ -13,7 +13,6 @@ namespace Snippy.App.Controllers
     using AutoMapper;
     using System.Net;
     using System.Web;
-    using Snippy.App.Models.BindingModels;
 
     [Authorize]
     public class LanguagesController : BaseController

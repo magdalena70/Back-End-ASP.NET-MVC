@@ -32,7 +32,7 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.ActionLink(@WebUtility.HtmlDecode(@snippet.Title), "SnippetDetails", "Snippets", new { snippetId = @snippet.Id }, null)
+                                    @Html.ActionLink(@WebUtility.HtmlDecode(@snippet.Title), "SnippetDetails", "Snippets", new { snippetId = @snippet.Id }, new { id = "details"})
                                 </td>
                                 <td>@WebUtility.HtmlDecode(@snippet.Description)</td>
                                 <td>@snippet.CreationTime.ToString("dd-MMM-yyyy hh:mm:ss", CultureInfo.InvariantCulture)</td>

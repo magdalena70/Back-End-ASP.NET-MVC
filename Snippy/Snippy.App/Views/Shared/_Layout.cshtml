@@ -4,11 +4,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
     <title>@ViewBag.Title - Snippy</title>
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @*@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")*@
 
 </head>
 <body>
@@ -41,6 +46,7 @@
             </div>
                     <div class="container body-content">
                         @Html.Partial("_MessagesPartial")
+
                         @RenderBody()
                         <hr />
                         <footer>
@@ -49,7 +55,6 @@
                     </div>
 
     <script>
-
         $(document).ready(function () {
         $('#delete').tooltip(
             {
@@ -63,6 +68,12 @@
             placement: "left"
         });
 
+        $('#details').tooltip(
+        {
+            title: "See details",
+            placement: "bottom"
+        });
+
 
         /*$('[data-toggle="tooltip"]').tooltip(
             {
@@ -71,8 +82,7 @@
                 placement: "bottom",
                 //trigger: 'click'
             });*/
-    });
-
+        });
     </script>
 
                     @Scripts.Render("~/bundles/jquery")

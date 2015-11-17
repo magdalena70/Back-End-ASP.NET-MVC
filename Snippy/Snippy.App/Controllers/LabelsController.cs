@@ -9,6 +9,7 @@ namespace Snippy.App.Controllers
     using System.Collections;
     using System.Collections.Generic;
     using System;
+using Snippy.Models;
 
     public class LabelsController : BaseController
     {
@@ -56,6 +57,32 @@ namespace Snippy.App.Controllers
             }
 
             return this.View(labels);
+        }
+
+        public ActionResult SelectLabel()
+        {
+            var allLabels = this.Data.Labels.All();
+            List<SelectListItem> items = new List<SelectListItem>();
+            var count = 0;
+            foreach (var label in allLabels)
+            {
+                items.Add(new SelectListItem { Text = label.Text, Value = label.Id.ToString() });
+                count++;
+            }
+
+            ViewBag.SnippetLabels = items;
+            return this.View();
+        }
+
+        [HttpPost]
+        public ActionResult SelectLabel(int id, string SnippetLabels)
+        {
+            var snippet = this.Data.Snippets.Find(id);
+            snippet.Labels.Add(this.Data.Labels.Find(int.Parse(SnippetLabels)));
+            this.Data.SaveChanges();
+
+            //var selectedLabel = this.Data.Labels.Find(int.Parse(SnippetLabels));
+            return this.RedirectToAction("SnippetDetails", "Snippets", new { snippetId = id });
         }
     }
 }

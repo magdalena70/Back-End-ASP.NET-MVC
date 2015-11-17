@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Snippy.Models.User>
+
+@{
+    ViewBag.Title = "SearchUser";
+}
+
+<h2>Search User By UserName</h2>
+<div class="row">
+    <div class="col-sm-8">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                @using (Html.BeginForm("SearchUser", "Users", FormMethod.Get, null))
+                {
+                    <p>
+                        <label>Search UserName:</label>
+                        @Html.TextBox("SearchString", null, null, new { @class = "form-control", placeholder = "input string" })
+                        <input type="submit" value="Filter" class="btn btn-default" />
+                    </p>
+                }
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.UserName)</th>
+                            <th>@Html.DisplayNameFor(model => model.Email)</th>
+                            <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+                            <th><span class="glyphicon glyphicon-search"></span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    @user.UserName
+                                </td>
+                                <td>@user.Email</td>
+                                <td>@user.PhoneNumber</td>
+                                <td>
+                                    @Html.ActionLink("User Details",
+                                        "UserDetails",
+                                        "Users",
+                                        new { username = @user.UserName },
+                                        new { @class = "btn btn-default" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                    @Html.ActionLink("Search Snippet by Language", "SearchByLanguage", "Languages", null, new { @class = "btn btn-default btn-lg" })
+                    <p></p>
+                    @Html.ActionLink("Search Snippet by Label", "SearchByLabel", "Labels", null, new { @class = "btn btn-default btn-lg" })
+                    <p></p>
+                    @Html.ActionLink("Search Snippet by Title", "SearchSnippet", "Snippets", null, new { @class = "btn btn-default btn-lg" })
+                </div>
+            </div>
+        </div>
+    </div>
+

@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "SelectLabel";
+}
+
+<h2>Select Label</h2>
+
+@model IEnumerable<SelectListItem>
+
+    @using (Html.BeginForm("SelectLabel", "Labels"))
+    {
+        <div class="form-horizontal">
+            <fieldset>
+                <legend>Existing Labels: </legend>
+                <div class="form-group">
+                    @Html.DropDownList("SnippetLabels", null, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Submit" class="btn btn-default" />
+                </div>
+            </fieldset>
+        </div>
+    }
+
+
+
+
+
+

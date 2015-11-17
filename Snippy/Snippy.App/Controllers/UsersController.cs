@@ -7,6 +7,7 @@ using System.Linq;
 using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
+using Snippy.Models;
 
 namespace Snippy.App.Controllers
 {
@@ -63,9 +64,49 @@ namespace Snippy.App.Controllers
             return this.View(model);
         }
 
-        public ActionResult SearchUser(string text)
+        public ActionResult EditUserDetails(User userModel)
         {
-            return this.View();
+            var currentUserDetails = this.Data.Users.All()
+                .FirstOrDefault(u => u.UserName == this.UserProfile.UserName);
+            if (currentUserDetails == null)
+            {
+                return this.HttpNotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                currentUserDetails.UserName = userModel.UserName != null ? userModel.UserName : currentUserDetails.UserName;
+                currentUserDetails.Email = userModel.Email != null ? userModel.Email : currentUserDetails.Email;
+                currentUserDetails.PhoneNumber = userModel.PhoneNumber != null ? userModel.PhoneNumber : currentUserDetails.PhoneNumber;
+ 
+                this.Data.SaveChanges();
+            }
+
+            return this.View(currentUserDetails);
+        }
+
+        public ActionResult SearchUser(string searchString)
+        {
+            var users = from u in this.Data.Users.All()
+                           select u;
+            if (users == null)
+            {
+                return this.HttpNotFound("No users");
+            }
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                searchString = HttpUtility.HtmlEncode(searchString);
+                users = users.Where(u => u.UserName.Contains(searchString));
+            }
+            else
+            {
+                users = users.OrderBy(u => u.UserName)
+                    .ThenByDescending(u => u.Id)
+                    .Take(5);
+            }
+
+            return this.View(users);
         }
     }
 }

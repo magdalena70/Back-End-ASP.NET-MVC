@@ -69,7 +69,7 @@ namespace Snippy.App.Controllers
             }
             else
             {
-                snippets = snippets.OrderBy(l => l.Id).Take(5);
+                snippets = snippets.OrderBy(s => s.Id).Take(5);
             }
 
             return this.View(snippets);
