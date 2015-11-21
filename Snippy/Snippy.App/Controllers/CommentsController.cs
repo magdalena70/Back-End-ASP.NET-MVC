@@ -30,7 +30,7 @@ namespace Snippy.App.Controllers
 
             var model = Mapper.Map<TopCommentViewModel>(comment);
 
-            return View(model);
+            return this.View(model);
         }
 
         [HttpPost]

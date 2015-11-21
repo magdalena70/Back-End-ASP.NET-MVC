@@ -42,11 +42,5 @@ namespace Snippy.App.Controllers
 
             return this.View(model);
         }
-
-        [HttpGet]
-        public PartialViewResult SomeAction()
-        {
-            return PartialView();
-        }
     }
 }

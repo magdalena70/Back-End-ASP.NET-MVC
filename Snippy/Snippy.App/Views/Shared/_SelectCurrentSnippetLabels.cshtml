@@ -1,0 +1,17 @@
+﻿
+@model IEnumerable<SelectListItem>
+
+@using (Html.BeginForm("SelectCurrentSnippetLabels", "Snippets"))
+{
+    <div class="form-horizontal">
+        <fieldset>
+            <legend>Current snippet Labels: </legend>
+            <div class="form-group">
+                @Html.DropDownList("CurrentSnippetLabels", null, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </fieldset>
+    </div>
+}

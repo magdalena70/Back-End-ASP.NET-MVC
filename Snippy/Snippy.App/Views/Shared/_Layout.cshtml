@@ -11,9 +11,6 @@
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @*@Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/bootstrap")*@
 
 </head>
 <body>
@@ -46,7 +43,6 @@
             </div>
                     <div class="container body-content">
                         @Html.Partial("_MessagesPartial")
-
                         @RenderBody()
                         <hr />
                         <footer>
@@ -58,13 +54,13 @@
         $(document).ready(function () {
         $('#delete').tooltip(
             {
-                title: "Delete Comment",
+                title: "Delete",
                 placement: "right"
             });
 
         $('#edit').tooltip(
         {
-            title: "Edit comment",
+            title: "Edit details",
             placement: "left"
         });
 

@@ -91,17 +91,16 @@ namespace Snippy.App.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ValidateInput(false)]
         public ActionResult AddSnippetInCurrentLanguage(int id, Snippet snippetModel)
         {
-            if (snippetModel != null /*&& !this.ModelState.IsValid*/)
+            if (snippetModel != null && !this.ModelState.IsValid)
             {
 
                 var snippet = new Snippet()
                 {
-                    Title = HttpUtility.HtmlEncode(snippetModel.Title),
-                    Description = HttpUtility.HtmlEncode(snippetModel.Description),
-                    Code = HttpUtility.HtmlEncode(snippetModel.Code),
+                    Title = snippetModel.Title,
+                    Description = snippetModel.Description,
+                    Code = snippetModel.Code,
                     Language = this.Data.ProgrammingLanguages.All().FirstOrDefault(l => l.Id == id),
                     CreationTime = DateTime.Now,
                     Author = this.Data.Users.All().FirstOrDefault(u => u.UserName == this.UserProfile.UserName)
@@ -120,7 +119,7 @@ namespace Snippy.App.Controllers
                     };
                 }else{
                     this.Data.Labels.Add(new Label{
-                                Text = HttpUtility.HtmlEncode(snippetModel.LabelText),
+                                Text = snippetModel.LabelText,
                                 Snippets = new List<Snippet>(){ snippetDb }
                             }); 
                 }
@@ -129,7 +128,7 @@ namespace Snippy.App.Controllers
 
                 var model = Mapper.Map<Snippet, SnippetsByLanguageViewModel>(snippetDb);
 
-                this.TempData["Message"] = "You added new snippet " + HttpUtility.HtmlEncode(snippetDb.Title) + " successfully.";
+                this.TempData["Message"] = "You added new snippet " + HttpUtility.HtmlDecode(snippetDb.Title) + " successfully.";
                 return this.PartialView("DisplayTemplates/SnippetsByLanguageViewModel", model);
             }
 

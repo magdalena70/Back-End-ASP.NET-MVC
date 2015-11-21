@@ -8,9 +8,9 @@
         <div class="pull-right">
             @Html.ActionLink("X", "CommentDetails", "Comments", new { id = @Model.Id }, new { @class = "btn btn-danger", id = "delete"})
         </div>
-    <div class="pull-right">
-        @Html.ActionLink("Edit", "EditCommentDetails", "Comments", new { id = @Model.Id }, new { @class = "btn btn-warning", id = "edit" })
-    </div>
+        <div class="pull-right">
+            @Html.ActionLink("Edit", "EditCommentDetails", "Comments", new { id = @Model.Id }, new { @class = "btn btn-warning", id = "edit" })
+        </div>
     }
     
     <p>@Model.Content</p>

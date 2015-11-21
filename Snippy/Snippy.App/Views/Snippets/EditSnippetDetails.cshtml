@@ -1,0 +1,23 @@
+﻿
+@using Microsoft.AspNet.Identity;
+@model Snippy.App.Models.BindingModels.SnippetBindingModel
+
+@{
+    ViewBag.Title = "Edit snippet";
+}
+
+<h2>Edit snippet: "@Model.Title"</h2>
+<div id="editedSnippet"></div>
+
+@using (Html.BeginForm("EditSnippetDetails", "Snippets", new {snippetId = Model.Id}, FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.EditorForModel()
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <input type="submit" value="Edit" class="btn btn-success" />
+            @Html.ActionLink("Cancel", "UserDetails", "Users", new { username = this.User.Identity.GetUserName() }, new { @class = "btn btn-default" })
+        </div>
+    </div>
+}
+
+   

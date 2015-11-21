@@ -3,27 +3,46 @@
 <div class="row">
     <div class="panel panel-primary">
         <div class="panel-body">
+
+            <div class="pull-right">
+                @Html.ActionLink("X", "SnippetDetailsToDelete", "Snippets", new { snippetId = @Model.Id }, new { @class = "btn btn-danger", id = "delete" })
+            </div>
+            <div class="pull-right">
+                @Html.ActionLink("Edit", "EditSnippetDetails", "Snippets", new { snippetId = @Model.Id }, new { @class = "btn btn-warning", id = "edit" })
+            </div>
+
             <h3>
-                @Html.ActionLink(@Model.Language, "SnippetsByLanguage", "Languages", new { text = @Model.Language }, null)
+                @Html.ActionLink(@Model.Language, "SnippetsByLanguage", "Languages", new { id = Model.LanguageId }, null)
                 @WebUtility.HtmlDecode(Model.Title)
             </h3>
             <h4>@WebUtility.HtmlDecode(@Model.Description)</h4>
             <div class="well col-sm-10 col-sm-offset-1">
                 <pre style="width:400px; margin: auto;">
-                    <code>@WebUtility.HtmlDecode(@Model.Code)</code>
+                <code>@WebUtility.HtmlDecode(@Model.Code)</code>
                 </pre>
-
-                @foreach (var label in Model.Labels)
-                {
-                    @Html.ActionLink(@label.Text, "SnippetsByLabel", "Labels", new { id = @label.Id }, new { @class = "btn btn-default" })
-                }
+                <p>
+                    @foreach (var label in Model.Labels)
+                    {
+                        @Html.ActionLink(@label.Text, "SnippetsByLabel", "Labels", new { id = @label.Id }, new { @class = "btn btn-default" })
+                    }
+                </p>
+                <p>
+                    @Html.ActionLink("Add more labels from existing labels", "SelectLabel/" + @Model.Id, "Labels", null, new { @class = "btn btn-primary" })
+                </p>
             </div>
         </div>
         <div class="row">
             <div class="panel panel-info">
                 <div class="panel-body">
                     <p>Comments:</p>
-                    @Html.DisplayFor(s => s.Comments)                   
+                    @if (Model.Comments.Any(c => c.Content != null))
+                    {
+                        @Html.DisplayFor(s => s.Comments)
+                    }
+                    else
+                    {
+                        <p>No comments</p>
+                    }
                 </div>
             </div>
         </div>

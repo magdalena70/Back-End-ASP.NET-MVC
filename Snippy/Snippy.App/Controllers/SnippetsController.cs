@@ -5,13 +5,16 @@ namespace Snippy.App.Controllers
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Web;
     using System.Web.Mvc;
+    using System.Data.Entity;
     using Microsoft.AspNet.Identity;
     using Snippy.Data.UnitOfWork;
     using Snippy.App.Models.ViewModels;
     using Snippy.Models;
     using AutoMapper;
-    using System.Web;
+    using System.Net;
+    using Snippy.App.Models.BindingModels;
 
     [Authorize]
     public class SnippetsController : BaseController
@@ -52,6 +55,87 @@ namespace Snippy.App.Controllers
             return this.View(model);
         }
 
+        public ActionResult SnippetDetailsToDelete(int snippetId)
+        {
+            var snippet = this.Data.Snippets.Find(snippetId);
+            if (snippet == null)
+            {
+                return this.HttpNotFound();
+            }
+
+            var model = Mapper.Map<SnippetDetailsToDeleteViewModel>(snippet);
+
+            return this.View(model);
+        }
+
+        public ActionResult DeleteSnippet(int snippetId)
+        {
+            var snippet = this.Data.Snippets.Find(snippetId);
+            if (snippet == null)
+            {
+                return this.HttpNotFound();
+            }
+
+            if (snippet.Comments.Count() == 0)
+            {
+                this.Data.Snippets.Remove(snippet);
+            }
+            else
+            {
+                var snippetComments = this.Data.Comments.All()
+                    .Include(c => c.Snippet)
+                    .Where(c => c.Snippet.Id == snippetId)
+                    .ToList();
+                foreach (var comment in snippetComments)
+                {
+                    this.Data.Comments.Remove(comment);
+                }
+
+                this.Data.Snippets.Remove(snippet);
+            }
+            
+            this.Data.SaveChanges();
+
+            this.TempData["Message"] = "The Snippet was removed successfully.";
+            return RedirectToAction("UserDetails", "Users", new { username = this.UserProfile.UserName });
+        }
+
+        public ActionResult SelectCurrentSnippetLabels(int snippetId)
+        {
+            var currentSnippet = this.Data.Snippets.Find(snippetId);
+            List<SelectListItem> items = new List<SelectListItem>();
+            var count = 0;
+            foreach (var label in currentSnippet.Labels.ToList())
+            {
+                items.Add(new SelectListItem { Text = label.Text, Value = label.Id.ToString() });
+                count++;
+            }
+
+            ViewBag.CurrentSnippetLabels = items;
+            return this.PartialView();
+        }
+
+        //to do
+       /* public ActionResult EditSnippetDetails(int snippetId)
+        {
+            var snippet = this.Data.Snippets.Find(snippetId);
+            var model = Mapper.Map<SnippetBindingModel>(snippet);
+
+            return this.View(model);
+        }
+        //to do
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult EditSnippetDetails(int snippetId, SnippetBindingModel snippetModel)
+        {
+            var snippet = this.Data.Snippets.Find(snippetId);
+            snippet.Title = snippetModel.Title;
+            this.Data.SaveChanges();
+
+            return this.RedirectToAction("SnippetDetails", "Snippets", new { snippetId = snippet.Id });
+        }*/
+
         [ValidateInput(false)]
         public ActionResult SearchSnippet(string searchString)
         {
@@ -64,7 +148,7 @@ namespace Snippy.App.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                searchString = HttpUtility.HtmlEncode(searchString);
+                searchString = HttpUtility.HtmlDecode(searchString);
                 snippets = snippets.Where(s => s.Title.Contains(searchString));
             }
             else

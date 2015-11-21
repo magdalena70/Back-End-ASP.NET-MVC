@@ -274,6 +274,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BindingModels\SnippetBindingModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ViewModels\CommentViewModel.cs" />
     <Compile Include="Models\ViewModels\HomePageViewModel.cs" />
@@ -283,6 +284,7 @@
     <Compile Include="Models\ViewModels\LanguagePageViewModel.cs" />
     <Compile Include="Models\ViewModels\LanguageSnippetViewModel.cs" />
     <Compile Include="Models\ViewModels\ProgrammingLanguageViewModel.cs" />
+    <Compile Include="Models\ViewModels\SnippetDetailsToDeleteViewModel.cs" />
     <Compile Include="Models\ViewModels\SnippetDetailsViewModel.cs" />
     <Compile Include="Models\ViewModels\SnippetsByLabelViewModel.cs" />
     <Compile Include="Models\ViewModels\SnippetsByLanguageViewModel.cs" />
@@ -389,7 +391,10 @@
     <Content Include="Views\Users\EditUserDetails.cshtml" />
     <Content Include="Views\Shared\_EditDetailsPartial.cshtml" />
     <Content Include="Views\Labels\SelectLabel.cshtml" />
-    <Content Include="Views\Shared\_SomeAction.cshtml" />
+    <Content Include="Views\Snippets\SnippetDetailsToDelete.cshtml" />
+    <Content Include="Views\Snippets\EditSnippetDetails.cshtml" />
+    <Content Include="Views\Shared\_SelectCurrentSnippetLabels.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SnippetBindingModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

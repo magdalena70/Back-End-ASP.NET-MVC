@@ -1,4 +1,5 @@
 ﻿@using System.Globalization
+@using Microsoft.AspNet.Identity
 @model Snippy.App.Models.ViewModels.SnippetDetailsViewModel
 @{
     ViewBag.Title = "Snippet Details";
@@ -9,6 +10,17 @@
     <div class="col-sm-10 col-sm-offset-1">
         <div class="panel panel-primary">
             <div class="panel-body">
+
+                @if (Model.Author == this.User.Identity.GetUserName())
+                {
+                    <div class="pull-right">
+                        @Html.ActionLink("X", "SnippetDetailsToDelete", "Snippets", new { snippetId = @Model.Id }, new { @class = "btn btn-danger", id = "delete" })
+                    </div>
+                    <div class="pull-right">
+                        @Html.ActionLink("Edit", "EditSnippetDetails", "Snippets", new { snippetId = @Model.Id }, new { @class = "btn btn-warning", id = "edit" })
+                    </div>
+                }
+
                 <h3>
                     @Html.ActionLink(@Model.Language, "SnippetsByLanguage", "Languages", new { id = Model.LanguageId }, null)
                     @WebUtility.HtmlDecode(@Model.Title)
@@ -29,9 +41,11 @@
                             @Html.ActionLink(@label.Text, "SnippetsByLabel", "Labels", new { id = @label.Id }, new { @class = "btn btn-default" })
                         }
                     </p>
-                    @Html.ActionLink("Add more labels from existing labels", "SelectLabel/" + @Model.Id, "Labels", null, new { @class = "btn btn-primary" })
+                    <p>
+                        @Html.ActionLink("Add more labels from existing labels", "SelectLabel/" + @Model.Id, "Labels", null, new { @class = "btn btn-primary" })
+                    </p>
                 </div>
-               
+
                 <div class="panel panel-info">
                     <div class=" panel-body">
                         <p><strong>Comments:</strong></p>
@@ -82,7 +96,7 @@
     <script>
         function onSuccess() {
             document.getElementById("content").value = '';
-        }      
+        }
     </script>
 }
 
