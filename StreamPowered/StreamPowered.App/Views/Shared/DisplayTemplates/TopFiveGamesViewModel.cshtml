@@ -1,0 +1,14 @@
+﻿@model StreamPowered.App.Models.ViewModels.TopFiveGamesViewModel
+
+<h3>
+    @Html.ActionLink(@Model.Title, "GameDetails", "Games", new { id = @Model.Id }, null)
+</h3>
+<p>
+    <span class="badge">avg-rating @String.Format("{0:0.00}", @Model.AverageRating)</span>
+</p>
+<div>
+    @foreach (var image in Model.ImageUrls)
+    {
+        <img src="@image.Url" alt="img-@image.Id" width="450" height="200" />
+    }
+</div>

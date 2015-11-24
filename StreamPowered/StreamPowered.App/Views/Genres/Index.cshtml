@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <h2>All Genres</h2>
+    <ul class="pagination">
+        @for (int page = 1; page <= ViewBag.TotalPages; page++)
+        {
+            string listItemClass = "";
+            if (page == ViewBag.CurrentPage)
+            {
+                listItemClass = "active";
+            }
+
+            <li class="@listItemClass">
+                @Html.ActionLink(page.ToString(), "Index", "Genres", routeValues: new { page = page, count = 8 }, htmlAttributes: null)
+            </li>
+        }
+    </ul>
+</div>
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-1">
+        @Html.DisplayForModel()
+    </div>
+    <div class="col-sm-3">
+        @Html.ActionLink("SearchGenre", "", "", null, new { @class = "btn btn-default"})
+    </div>
+</div>
+

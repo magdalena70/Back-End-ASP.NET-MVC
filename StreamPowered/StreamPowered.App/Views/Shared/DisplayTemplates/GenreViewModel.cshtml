@@ -1,0 +1,14 @@
+﻿@model StreamPowered.App.Models.ViewModels.GenreViewModel
+
+<div class="col-sm-6">
+    <div class="col-sm-6" style="margin-bottom: 5px;">
+        @Html.ActionLink(Model.Name, "GamesByGenre", "Genres", new { id = Model.Id }, new { @class = "btn btn-primary btn-lg" })
+    </div>
+    <div class="col-sm-6" style="margin-bottom: 5px;">
+        <span class="glyphicon glyphicon-arrow-left"></span>
+        <em>Game(s) count: <span class="badge">@Model.GameCount</span></em>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,14 @@
+﻿@{
+    decimal sum = 0;
+    decimal count = Model.Ratings.Count;
+}
+@foreach (var rating in Model.Ratings)
+{
+    sum += rating.Value;
+}
+@{
+    decimal avgRating = sum / count;
+
+    <span class="badge">avg-rating @String.Format("{0:0.00}", avgRating)</span>
+
+}

@@ -1,0 +1,13 @@
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\StreamPowered\StreamPowered.Models\bin\Debug\StreamPowered.Models.dll.config
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\StreamPowered\StreamPowered.Models\bin\Debug\StreamPowered.Models.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\StreamPowered\StreamPowered.Models\bin\Debug\StreamPowered.Models.pdb
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\StreamPowered\StreamPowered.Models\bin\Debug\EntityFramework.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\StreamPowered\StreamPowered.Models\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\StreamPowered\StreamPowered.Models\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\StreamPowered\StreamPowered.Models\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\StreamPowered\StreamPowered.Models\bin\Debug\EntityFramework.xml
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\StreamPowered\StreamPowered.Models\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\StreamPowered\StreamPowered.Models\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\StreamPowered\StreamPowered.Models\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\StreamPowered\StreamPowered.Models\obj\Debug\StreamPowered.Models.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\StreamPowered\StreamPowered.Models\obj\Debug\StreamPowered.Models.pdb

@@ -1,0 +1,76 @@
+﻿@model StreamPowered.App.Models.ViewModels.GameDetailsViewModel
+@{
+    ViewBag.Title = "GameDetails";
+}
+<div class="col-sm-8 col-sm-offset-1">
+    <h2>Game Details</h2>
+    <h3>
+        @Model.Title
+        @Html.Partial("_AverageRatingPartial")
+    </h3>
+    <p>
+        <span class="glyphicon glyphicon-user"></span>
+        @Model.Author
+    </p>
+    <h4>
+        Genre:
+        @Html.ActionLink(Model.Genre, "GamesByGenre", "Genres", new { id = Model.GenreId }, new { @class = "btn btn-default" })
+    </h4>
+    <h4>Description:</h4>
+    <p>@Model.Description</p>
+    <h4>System Requirements:</h4>
+    <p>@Model.SystemRequirements</p>
+</div>
+@Html.Partial("_RatingPartial")
+<div class="row">
+    @foreach (var image in Model.ImageUrls)
+    {
+        <div class="col-sm-4 well" style="margin-bottom: 0;">
+            <img src="@image.Url" alt="img-@image.Id" width="350" height="170" />
+        </div>
+    }
+</div>
+<div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+        @Html.Partial("_AddReviewPartial")
+
+        @if (Model.Reviews.Any(r => r.Content != null))
+        {
+            @Html.DisplayFor(g => g.Reviews)
+        }
+        else
+        {
+            <p>No reviews</p>
+        }
+
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        function onSuccess() {
+            document.getElementById("content").value = '';
+        }
+
+        function onSuccessOne() {
+            $('#one').css('color', 'red');
+        }
+
+        function onSuccessTwo() {
+            $('#two').css('color', 'red');
+        }
+
+        function onSuccessThtee() {
+            $('#three').css('color', 'red');
+        }
+
+        function onSuccessFour() {
+            $('#four').css('color', 'red');
+        }
+
+        function onSuccessFive() {
+            $('#five').css('color', 'red');
+        }
+    </script>
+}

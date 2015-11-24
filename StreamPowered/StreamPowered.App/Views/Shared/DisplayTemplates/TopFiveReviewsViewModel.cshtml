@@ -1,0 +1,22 @@
+﻿@using System.Globalization
+@using Microsoft.AspNet.Identity
+@model StreamPowered.App.Models.ViewModels.TopFiveReviewsViewModel
+
+<div class="row well">
+    @if (Model.Author == this.User.Identity.GetUserName())
+    {
+        <div class="pull-right">
+            @Html.ActionLink("X", "ReviewDetailsToDelete", "Reviews", new { id = @Model.Id }, new { @class = "btn btn-default btn-sm", id = "delete", style = "color: red;" })
+        </div>
+        <div class="pull-right">
+            @Html.ActionLink("Edit", "EditReviewDetails", "Reviews", new { id = @Model.Id }, new { @class = "btn btn-default btn-sm", id = "edit" })
+        </div>
+    }
+    
+    <p>@Model.Content</p>
+    <p>
+        <span class="glyphicon glyphicon-user"></span>
+        <strong>@Model.Author</strong> on @Model.CreationTime.ToString("dd-MMM-yyyy hh:mm:ss", CultureInfo.InvariantCulture)
+    </p>
+    <p>on game @Html.ActionLink(@Model.GameTitle, "GameDetails", "Games", new {id = @Model.GameId }, null)</p>
+</div>

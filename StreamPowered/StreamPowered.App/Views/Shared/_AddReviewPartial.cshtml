@@ -1,0 +1,25 @@
+﻿<p><strong>Reviews:</strong></p>
+<div id="reviews"></div>
+<div>
+    <h4>Add Review</h4>
+
+    @using (Ajax.BeginForm("AddReview", "Reviews", new { id = Model.Id }, new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                InsertionMode = InsertionMode.InsertAfter,
+                                UpdateTargetId = "reviews",
+                                OnSuccess = "onSuccess"
+                            }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <div class="form-group">
+                <input type="text" id="content" name="content" value="" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-default" />
+            </div>
+        </div>
+    }
+</div>
+

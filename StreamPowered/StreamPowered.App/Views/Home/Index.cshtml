@@ -1,0 +1,35 @@
+﻿@model StreamPowered.App.Models.ViewModels.HomePageViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>StreamPowered</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-7">
+        <h2>Top Five Games</h2>
+        @if (Model.TopFiveGames.Any())
+        {
+            @Html.DisplayFor(g => g.TopFiveGames)
+        }
+        else
+        {
+            <p>No games</p>
+        }
+       
+    </div>
+    <div class="col-md-5">
+        <h2>Latest Reviews</h2>
+        @if (Model.TopFiveReviews.Any())
+        {
+            @Html.DisplayFor(g => g.TopFiveReviews)
+        }
+        else
+        {
+            <p>No reviews</p>
+        }
+              
+    </div>
+</div>

@@ -1,0 +1,27 @@
+﻿@*@model StreamPowered.App.Models.ViewModels.TopFiveGamesViewModel*@
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+<h2>All Games</h2>
+<div class="col-sm-7">
+    @Html.DisplayForModel()
+</div>
+<div class="col-sm-5">
+    <ul class="pagination">
+        @for (int page = 1; page <= ViewBag.TotalPages; page++)
+        {
+            string listItemClass = "";
+            if (page == ViewBag.CurrentPage)
+            {
+                listItemClass = "active";
+            }
+
+            <li class="@listItemClass">
+                @Html.ActionLink(page.ToString(), "Index", "Games", routeValues: new { page = page, count = 3 }, htmlAttributes: null)
+            </li>
+        }
+    </ul>
+</div>
+</div>

@@ -1,0 +1,89 @@
+﻿<div class="col-sm-3">
+    <h3>Add Ratting</h3>
+    <div id="rating-@Model.Id"></div>
+    @using (Ajax.BeginForm("AddOne", "Ratings", new { Model.Id }, new AjaxOptions()
+            {
+                HttpMethod = "POST",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = string.Format("rating-{0}", Model.Id),
+                OnSuccess = "onSuccessOne"
+            }))
+    {
+        @Html.AntiForgeryToken()
+
+        <p id="one">
+            <input type="submit" value="1" />
+            <span class="glyphicon glyphicon-star"></span>
+        </p>
+    }
+
+    @using (Ajax.BeginForm("AddTwo", "Ratings", new { Model.Id }, new AjaxOptions()
+            {
+                HttpMethod = "POST",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = string.Format("rating-{0}", Model.Id),
+                OnSuccess = "onSuccessTwo"
+            }))
+    {
+        @Html.AntiForgeryToken()
+        <p id="two">
+            <input type="submit" value="2" />
+            <span class="glyphicon glyphicon-star"></span>
+            <span class="glyphicon glyphicon-star"></span>
+        </p>
+    }
+
+    @using (Ajax.BeginForm("AddThree", "Ratings", new { Model.Id }, new AjaxOptions()
+            {
+                HttpMethod = "POST",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = string.Format("rating-{0}", Model.Id),
+                OnSuccess = "onSuccessThree"
+            }))
+    {
+        @Html.AntiForgeryToken()
+        <p  id="three">
+            <input type="submit" value="3" />
+            <span class="glyphicon glyphicon-star"></span>
+            <span class="glyphicon glyphicon-star"></span>
+            <span class="glyphicon glyphicon-star"></span>
+        </p>
+    }
+
+    @using (Ajax.BeginForm("AddFour", "Ratings", new { Model.Id }, new AjaxOptions()
+            {
+                HttpMethod = "POST",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = string.Format("rating-{0}", Model.Id),
+                OnSuccess = "onSuccessFour"
+            }))
+    {
+        @Html.AntiForgeryToken()
+        <p id="four">
+            <input type="submit" value="4" />
+            <span class="glyphicon glyphicon-star"></span>
+            <span class="glyphicon glyphicon-star"></span>
+            <span class="glyphicon glyphicon-star"></span>
+            <span class="glyphicon glyphicon-star"></span>
+        </p>
+    }
+
+    @using (Ajax.BeginForm("AddFive", "Ratings", new { Model.Id }, new AjaxOptions()
+            {
+                HttpMethod = "POST",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = string.Format("rating-{0}", Model.Id),
+                OnSuccess = "onSuccessFive"
+            }))
+    {
+        @Html.AntiForgeryToken()
+        <p id="five">
+            <input type="submit" value="5" />
+            <span class="glyphicon glyphicon-star"></span>
+            <span class="glyphicon glyphicon-star"></span>
+            <span class="glyphicon glyphicon-star"></span>
+            <span class="glyphicon glyphicon-star"></span>
+            <span class="glyphicon glyphicon-star"></span>
+        </p>
+    }
+</div>
