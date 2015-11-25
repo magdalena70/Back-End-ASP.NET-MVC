@@ -1,7 +1,7 @@
 ﻿<div class="col-sm-3">
     <h3>Add Ratting</h3>
     <div id="rating-@Model.Id"></div>
-    @using (Ajax.BeginForm("AddOne", "Ratings", new { Model.Id }, new AjaxOptions()
+    @using (Ajax.BeginForm("AddRating", "Ratings", new { Model.Id, value = 1 }, new AjaxOptions()
             {
                 HttpMethod = "POST",
                 InsertionMode = InsertionMode.Replace,
@@ -17,7 +17,7 @@
         </p>
     }
 
-    @using (Ajax.BeginForm("AddTwo", "Ratings", new { Model.Id }, new AjaxOptions()
+    @using (Ajax.BeginForm("AddRating", "Ratings", new { Model.Id, value = 2 }, new AjaxOptions()
             {
                 HttpMethod = "POST",
                 InsertionMode = InsertionMode.Replace,
@@ -33,7 +33,7 @@
         </p>
     }
 
-    @using (Ajax.BeginForm("AddThree", "Ratings", new { Model.Id }, new AjaxOptions()
+    @using (Ajax.BeginForm("AddRating", "Ratings", new { Model.Id, value = 3 }, new AjaxOptions()
             {
                 HttpMethod = "POST",
                 InsertionMode = InsertionMode.Replace,
@@ -50,7 +50,7 @@
         </p>
     }
 
-    @using (Ajax.BeginForm("AddFour", "Ratings", new { Model.Id }, new AjaxOptions()
+    @using (Ajax.BeginForm("AddRating", "Ratings", new { Model.Id, value = 4 }, new AjaxOptions()
             {
                 HttpMethod = "POST",
                 InsertionMode = InsertionMode.Replace,
@@ -68,7 +68,7 @@
         </p>
     }
 
-    @using (Ajax.BeginForm("AddFive", "Ratings", new { Model.Id }, new AjaxOptions()
+    @using (Ajax.BeginForm("AddRating", "Ratings", new { Model.Id, value = 5 }, new AjaxOptions()
             {
                 HttpMethod = "POST",
                 InsertionMode = InsertionMode.Replace,

@@ -1,14 +1,10 @@
-﻿@*@model StreamPowered.App.Models.ViewModels.TopFiveGamesViewModel*@
+﻿
 @{
     ViewBag.Title = "Index";
 }
 
 <div class="row">
-<h2>All Games</h2>
-<div class="col-sm-7">
-    @Html.DisplayForModel()
-</div>
-<div class="col-sm-5">
+    <h2>All Games</h2>
     <ul class="pagination">
         @for (int page = 1; page <= ViewBag.TotalPages; page++)
         {
@@ -24,4 +20,11 @@
         }
     </ul>
 </div>
+<div class="row">
+   <div class="col-sm-7 col-sm-offset-2">
+        @Html.DisplayForModel()
+    </div>
+    <div class="col-sm-3">
+        @Html.ActionLink("SearchGame", "", "", null, new { @class = "btn btn-default" })
+    </div>
 </div>

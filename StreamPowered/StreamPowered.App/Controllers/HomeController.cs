@@ -8,6 +8,7 @@ namespace StreamPowered.App.Controllers
     using System.Collections.Generic;
     using System.Data.Entity;
     using AutoMapper;
+    using StreamPowered.Models;
 
     public class HomeController : BaseController
     {
@@ -18,30 +19,7 @@ namespace StreamPowered.App.Controllers
       
         public ActionResult Index()
         {
-            var games = this.Data.Games.All()
-                .Include(g => g.Ratings);
-
-            foreach (var game in games)
-            {
-                decimal sumRatingValue = 0;
-                decimal count = 0;
-                decimal avgRating = 0;
-                if (game.Ratings.Any())
-                {
-                    count = game.Ratings.Count();
-                    foreach (var rating in game.Ratings)
-                    {
-
-                        sumRatingValue += rating.Value;
-
-                    }
-
-                    avgRating = sumRatingValue / count;
-                    game.AverageRating = avgRating;
-                }
-            }
-
-            this.Data.SaveChanges();
+            CalculateAverageRating();
 
             var topFiveGames = this.Data.Games.All()
                 .Include(g => g.Ratings)
@@ -62,6 +40,32 @@ namespace StreamPowered.App.Controllers
             };
 
             return View(model);
+        }
+
+        private void CalculateAverageRating()
+        {
+            var games = this.Data.Games.All()
+                .Include(g => g.Ratings);
+
+            foreach (var game in games)
+            {
+                decimal sumRatingValue = 0;
+                decimal count = 0;
+                decimal avgRating = 0;
+                if (game.Ratings.Any())
+                {
+                    count = game.Ratings.Count();
+                    foreach (var rating in game.Ratings)
+                    {
+                        sumRatingValue += rating.Value;
+                    }
+
+                    avgRating = sumRatingValue / count;
+                    game.AverageRating = avgRating;
+                }
+            }
+
+            this.Data.SaveChanges();
         }
     }
 }

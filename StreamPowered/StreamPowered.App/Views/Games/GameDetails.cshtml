@@ -6,7 +6,7 @@
     <h2>Game Details</h2>
     <h3>
         @Model.Title
-        @Html.Partial("_AverageRatingPartial")
+        <span class="badge">avg-rating @String.Format("{0:0.00}", @Model.AverageRating)</span>
     </h3>
     <p>
         <span class="glyphicon glyphicon-user"></span>
@@ -21,20 +21,30 @@
     <h4>System Requirements:</h4>
     <p>@Model.SystemRequirements</p>
 </div>
-@Html.Partial("_RatingPartial")
+
+    @Html.Partial("_RatingPartial")
 <div class="row">
-    @foreach (var image in Model.ImageUrls)
+    @if (Model.ImageUrls.Any())
+    {
+        foreach (var image in Model.ImageUrls)
+        {
+            <div class="col-sm-4 well" style="margin-bottom: 0;">
+                <img src="@image.Url" alt="img-@image.Id" width="350" height="170" />
+            </div>
+        }
+    }
+    else
     {
         <div class="col-sm-4 well" style="margin-bottom: 0;">
-            <img src="@image.Url" alt="img-@image.Id" width="350" height="170" />
+            <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTcxkzEgyl-zV6_9zmZa6v1MWlxAPMshubXubjUSfCzqhQQ9NWE" alt="img-default" width="350" height="170" />
         </div>
     }
-</div>
+        </div>
 <div class="row">
     <div class="col-sm-10 col-sm-offset-1">
         @Html.Partial("_AddReviewPartial")
 
-        @if (Model.Reviews.Any(r => r.Content != null))
+        @if (Model.Reviews.Any())
         {
             @Html.DisplayFor(g => g.Reviews)
         }

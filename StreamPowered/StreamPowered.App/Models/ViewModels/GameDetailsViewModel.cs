@@ -20,6 +20,8 @@ namespace StreamPowered.App.Models.ViewModels
 
         public string Author { get; set; }
 
+        public decimal AverageRating { get; set; }
+
         public IEnumerable<Image> ImageUrls { get; set; }
 
         public IEnumerable<Rating> Ratings { get; set; }

@@ -1,4 +1,4 @@
-﻿@model StreamPowered.App.Models.ViewModels.GenreViewModel
+﻿@model StreamPowered.App.Models.ViewModels.GamesByGenrePageViewModel
 @{
     ViewBag.Title = "GamesByGenre";
 }
@@ -6,7 +6,7 @@
 <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
         <div class="row">
-            <h2>Games By Genre @Model.Name</h2>
+            <h2>Games by genre <span style="color: red;">@Model.GenreName</span></h2>
             <ul class="pagination">
                 @for (int page = 1; page <= ViewBag.TotalPages; page++)
                 {
@@ -23,7 +23,15 @@
             </ul>
         </div>
         <div class="row">
-            @Html.DisplayFor(g => g.Games)
+            @if (Model.Games.Any())
+            {
+                @Html.DisplayFor(g => g.Games)
+            }
+            else
+            {
+                <p><strong>No games in this genre.</strong></p>
+            }
+
         </div>
     </div>
 </div>

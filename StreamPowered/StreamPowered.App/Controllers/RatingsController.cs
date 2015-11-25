@@ -5,10 +5,10 @@ namespace StreamPowered.App.Controllers
     using StreamPowered.Data.UnitOfWork;
     using System.Web.Mvc;
     using System.Linq;
-    using StreamPowered.App.Models.ViewModels;
     using System.Collections.Generic;
-    using AutoMapper;
     using StreamPowered.Models;
+    using StreamPowered.App.Models.ViewModels;
+    using AutoMapper;
 
     public class RatingsController : BaseController
     {
@@ -20,7 +20,7 @@ namespace StreamPowered.App.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult AddOne(int id)
+        public ActionResult AddRating(int id, int value)
         {
             var game = this.Data.Games.Find(id);
             if (game.Author.Id != this.UserProfile.Id)
@@ -29,10 +29,18 @@ namespace StreamPowered.App.Controllers
                 {
                     Author = this.Data.Users.All().FirstOrDefault(u => u.Id == this.UserProfile.Id),
                     Game = this.Data.Games.All().FirstOrDefault(g => g.Id == id),
-                    Value = 1
+                    Value = value
                 });
 
+                CalculateAverageRating(game);
                 this.Data.SaveChanges();
+            }
+            else
+            {
+                return this.Content(
+                    string.Format(
+                    "<span style='color: red;'>Can not rated your own game!</span>"
+                    ));
             }
 
             var ratings = this.Data.Ratings.All().Where(r => r.Game.Id == id);
@@ -40,7 +48,7 @@ namespace StreamPowered.App.Controllers
             var count = 0;
             foreach(var rating in ratings)
             {
-                if (rating.Value == 1)
+                if (rating.Value == value)
                 {
                     count += 1;
                 }
@@ -48,158 +56,30 @@ namespace StreamPowered.App.Controllers
 
             return this.Content(
                 string.Format(
-                "<span class='badge'>Rated {0} time(s)</span><br/>Rated {1} time(s) with value <span style='color: red;'>1</span>",
+                "<span class='badge'>Rated {0} time(s)</span><br/>Rated {1} time(s) with value <span style='color: red;'>{2}</span>",
                 totalCount,
-                count
+                count, value
                 ));
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
-        public ActionResult AddTwo(int id)
+        private void CalculateAverageRating(Game game)
         {
-            var game = this.Data.Games.Find(id);
-            if (game.Author.Id != this.UserProfile.Id)
+            decimal sumRatingValue = 0;
+            decimal count = 0;
+            decimal avgRating = 0;
+            if (game.Ratings.Any())
             {
-                this.Data.Ratings.Add(new Rating()
+                count = game.Ratings.Count();
+                foreach (var rating in game.Ratings)
                 {
-                    Author = this.Data.Users.All().FirstOrDefault(u => u.Id == this.UserProfile.Id),
-                    Game = this.Data.Games.All().FirstOrDefault(g => g.Id == id),
-                    Value = 2
-                });
-
-                this.Data.SaveChanges();
-            }
-
-            var ratings = this.Data.Ratings.All().Where(r => r.Game.Id == id);
-            var totalCount = ratings.Count();
-            var count = 0;
-            foreach (var rating in ratings)
-            {
-                if (rating.Value == 2)
-                {
-                    count += 1;
+                    sumRatingValue += rating.Value;
                 }
+
+                avgRating = sumRatingValue / count;
+                game.AverageRating = avgRating;
             }
 
-            return this.Content(
-                string.Format(
-                "<span class='badge'>Rated {0} time(s)</span><br/>Rated {1} time(s) with value <span style='color: red;'>2</span>",
-                totalCount,
-                count
-                ));
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
-        public ActionResult AddThree(int id)
-        {
-            var game = this.Data.Games.Find(id);
-            if (game.Author.Id != this.UserProfile.Id)
-            {
-                this.Data.Ratings.Add(new Rating()
-                {
-                    Author = this.Data.Users.All().FirstOrDefault(u => u.Id == this.UserProfile.Id),
-                    Game = this.Data.Games.All().FirstOrDefault(g => g.Id == id),
-                    Value = 3
-                });
-
-                this.Data.SaveChanges();
-            }
-
-            var ratings = this.Data.Ratings.All().Where(r => r.Game.Id == id);
-            var totalCount = ratings.Count();
-            var count = 0;
-            foreach (var rating in ratings)
-            {
-                if (rating.Value == 3)
-                {
-                    count += 1;
-                }
-            }
-
-            return this.Content(
-                string.Format(
-                "<span class='badge'>Rated {0} time(s)</span><br/>Rated {1} time(s) with value <span style='color: red;'>3</span>",
-                totalCount,
-                count
-                ));
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
-        public ActionResult AddFour(int id)
-        {
-            var game = this.Data.Games.Find(id);
-            if (game.Author.Id != this.UserProfile.Id)
-            {
-                this.Data.Ratings.Add(new Rating()
-                {
-                    Author = this.Data.Users.All().FirstOrDefault(u => u.Id == this.UserProfile.Id),
-                    Game = this.Data.Games.All().FirstOrDefault(g => g.Id == id),
-                    Value = 4
-                });
-
-                this.Data.SaveChanges();
-            }
-
-            var ratings = this.Data.Ratings.All().Where(r => r.Game.Id == id);
-            var totalCount = ratings.Count();
-            var count = 0;
-            foreach (var rating in ratings)
-            {
-                if (rating.Value == 4)
-                {
-                    count += 1;
-                }
-            }
-
-            return this.Content(
-                string.Format(
-                "<span class='badge'>Rated {0} time(s)</span><br/>Rated {1} time(s) with value <span style='color: red;'>4</span>",
-                totalCount,
-                count
-                ));
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
-        public ActionResult AddFive(int id)
-        {
-            var game = this.Data.Games.Find(id);
-            if (game.Author.Id != this.UserProfile.Id)
-            {
-                this.Data.Ratings.Add(new Rating()
-                {
-                    Author = this.Data.Users.All().FirstOrDefault(u => u.Id == this.UserProfile.Id),
-                    Game = this.Data.Games.All().FirstOrDefault(g => g.Id == id),
-                    Value = 5
-                });
-
-                this.Data.SaveChanges();
-            }
-
-            var ratings = this.Data.Ratings.All().Where(r => r.Game.Id == id);
-            var totalCount = ratings.Count();
-            var count = 0;
-            foreach (var rating in ratings)
-            {
-                if (rating.Value == 5)
-                {
-                    count += 1;
-                }
-            }
-
-            return this.Content(
-                string.Format(
-                "<span class='badge'>Rated {0} time(s)</span><br/>Rated {1} time(s) with value <span style='color: red;'>5</span>",
-                totalCount,
-                count
-                ));
+            this.Data.SaveChanges();
         }
     }
 }

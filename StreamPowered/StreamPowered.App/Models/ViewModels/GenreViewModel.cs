@@ -10,7 +10,5 @@ namespace StreamPowered.App.Models.ViewModels
         public string Name { get; set; }
 
         public int GameCount { get; set; }
-
-        public IEnumerable<TopFiveGamesViewModel> Games { get; set; }
     }
 }

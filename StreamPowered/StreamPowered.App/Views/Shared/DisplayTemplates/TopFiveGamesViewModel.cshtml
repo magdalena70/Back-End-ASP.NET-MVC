@@ -7,8 +7,15 @@
     <span class="badge">avg-rating @String.Format("{0:0.00}", @Model.AverageRating)</span>
 </p>
 <div>
-    @foreach (var image in Model.ImageUrls)
+    @if (Model.ImageUrls.Any())
     {
-        <img src="@image.Url" alt="img-@image.Id" width="450" height="200" />
+        foreach (var image in Model.ImageUrls)
+        {
+            <img src="@image.Url" alt="img-@image.Id" width="450" height="200" />
+        }
+    }
+    else
+    {
+        <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTcxkzEgyl-zV6_9zmZa6v1MWlxAPMshubXubjUSfCzqhQQ9NWE" alt="img-default" width="450" height="200" />
     }
 </div>

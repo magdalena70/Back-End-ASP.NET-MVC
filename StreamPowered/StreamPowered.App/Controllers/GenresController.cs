@@ -49,12 +49,18 @@ namespace StreamPowered.App.Controllers
             this.ViewBag.TotalPages = (gamesCount + count - 1) / count;
             this.ViewBag.CurrentPage = page;
 
-            var model = new GenreViewModel()
+            var model = new GamesByGenrePageViewModel()
             {
+                GenreName = genre.Name,
                 Games = Mapper.Map<IEnumerable<TopFiveGamesViewModel>>(genreGames)
             };
 
             return this.View(model);
+        }
+
+        public ActionResult SearchGenre()
+        {
+            return this.View();
         }
     }
 }
