@@ -1,0 +1,23 @@
+﻿@model IEnumerable<SelectListItem>
+@{
+    ViewBag.Title = "SelectAuthor";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>SelectAuthor</h2>
+
+@using (Html.BeginForm("SelectAuthor", "Users"))
+{
+    <div class="form-horizontal">
+        <fieldset>
+            <legend>All Users: </legend>
+            <div class="form-group">
+                @Html.DropDownList("SelectAuthor", null, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </fieldset>
+    </div>
+}
+

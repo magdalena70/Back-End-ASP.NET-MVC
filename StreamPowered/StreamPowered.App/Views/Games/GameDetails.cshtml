@@ -17,12 +17,14 @@
         @Html.ActionLink(Model.Genre, "GamesByGenre", "Genres", new { id = Model.GenreId }, new { @class = "btn btn-default" })
     </h4>
     <h4>Description:</h4>
-    <p>@Model.Description</p>
+    <div class="well">@Model.Description</div>
     <h4>System Requirements:</h4>
-    <p>@Model.SystemRequirements</p>
+    <pre>@Model.SystemRequirements</pre>
 </div>
-
+@if (this.User.Identity.IsAuthenticated)
+{
     @Html.Partial("_RatingPartial")
+}
 <div class="row">
     @if (Model.ImageUrls.Any())
     {
@@ -40,21 +42,31 @@
         </div>
     }
         </div>
-<div class="row">
-    <div class="col-sm-10 col-sm-offset-1">
-        @Html.Partial("_AddReviewPartial")
+@if (this.User.Identity.IsAuthenticated)
+{
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+            @Html.Partial("_AddReviewPartial")
 
-        @if (Model.Reviews.Any())
-        {
-            @Html.DisplayFor(g => g.Reviews)
-        }
-        else
-        {
-            <p>No reviews</p>
-        }
+            @if (Model.Reviews.Any())
+            {
+                @Html.DisplayFor(g => g.Reviews)
+            }
+            else
+            {
+                <p>No reviews</p>
+            }
 
+        </div>
     </div>
-</div>
+}
+else
+{
+    <div class="row well">
+        <p>Reviews count: <strong>@Model.Reviews.Count()</strong></p>
+    </div>
+}
+
 
 @section scripts{
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>

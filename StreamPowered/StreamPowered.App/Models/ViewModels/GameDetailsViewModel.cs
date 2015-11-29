@@ -1,6 +1,7 @@
 ﻿
 namespace StreamPowered.App.Models.ViewModels
 {
+    using StreamPowered.App.Areas.Admin.Models.ViewModels;
     using StreamPowered.Models;
     using System.Collections.Generic;
 
@@ -22,7 +23,7 @@ namespace StreamPowered.App.Models.ViewModels
 
         public decimal AverageRating { get; set; }
 
-        public IEnumerable<Image> ImageUrls { get; set; }
+        public IEnumerable<ImageViewModel> ImageUrls { get; set; }
 
         public IEnumerable<Rating> Ratings { get; set; }
 

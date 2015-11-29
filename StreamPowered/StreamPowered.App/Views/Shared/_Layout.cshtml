@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - StreamPowered</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/Scripts/jquery-2.1.4.js")
 
 </head>
 <body>
@@ -20,11 +21,20 @@
                 @Html.ActionLink("StreamPowered", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    @if (this.User.Identity.IsAuthenticated)
+                <ul class="nav navbar-nav">                  
+                    <li>@Html.ActionLink("All Games", "Index", "Games")</li>
+                    <li>@Html.ActionLink("All Genres", "Index", "Genres")</li>
+                    
+                    @if (User.IsInRole("Admin"))
                     {
-                        <li>@Html.ActionLink("All Games", "Index", "Games")</li>
-                        <li>@Html.ActionLink("All Genres", "Index", "Genres")</li>
+                        <li>
+                            @Html.ActionLink(
+                           "Admin panel",
+                           actionName: "Index",
+                           controllerName: "Games",
+                           routeValues: new { area = "Admin" },
+                           htmlAttributes: null)
+                        </li>
                     }
 
                 </ul>
@@ -40,6 +50,22 @@
             <p>&copy; @DateTime.Now.Year - StreamPowered</p>
         </footer>
     </div>
+
+    <script>
+        $(document).ready(function () {
+            $('.delete').tooltip(
+                {
+                    title: "Delete",
+                    placement: "right"
+                });
+
+            $('.edit').tooltip(
+            {
+                title: "Edit details",
+                placement: "left"
+            });
+        });
+    </script>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

@@ -9,6 +9,8 @@ namespace StreamPowered.App.Controllers
     using AutoMapper;
     using StreamPowered.Models;
     using System;
+
+    [Authorize]
     public class ReviewsController : BaseController
     {
         public ReviewsController(IStreamPoweredData data)
@@ -19,7 +21,7 @@ namespace StreamPowered.App.Controllers
         // GET: Reviews
         public ActionResult Index()
         {
-            return View();
+            return this.View();
         }
 
         [HttpPost]
@@ -57,14 +59,23 @@ namespace StreamPowered.App.Controllers
         public ActionResult ReviewDetailsToDelete(int id)
         {
             var review = this.Data.Reviews.Find(id);
-            var model = Mapper.Map<Review, ReviewDetailsViewModel>(review);
+            if (review == null)
+            {
+                return HttpNotFound();
+            }
 
+            var model = Mapper.Map<Review, ReviewDetailsViewModel>(review);
             return this.View(model);
         }
 
         public ActionResult DeleteReview(int id)
         {
             var review = this.Data.Reviews.Find(id);
+            if (review == null)
+            {
+                return HttpNotFound();
+            }
+
             var gameId = review.Game.Id;
             this.Data.Reviews.Remove(review);
             this.Data.SaveChanges();

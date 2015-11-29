@@ -1,0 +1,21 @@
+﻿
+<div class="well">
+    @using (Ajax.BeginForm("AddGenre", "Genres", new { id = Model.Id }, new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                InsertionMode = InsertionMode.InsertAfter,
+                                UpdateTargetId = "genre",
+                                OnSuccess = "onSuccessAddGenre"
+                            }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <div class="form-group">
+                <input type="text" id="name" name="name" value="" class="form-control" placeholder="Name" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-default" />
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,147 @@
+﻿@using System.Globalization
+@model StreamPowered.App.Models.ViewModels.GameDetailsViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+</div>
+<div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+        <h4>Game</h4>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Author)
+            </dt>
+            <dd>
+                <span id="author"></span>
+                @if (Model.Author != null)
+                {
+                    @Html.DisplayFor(model => model.Author)
+                }
+                else
+                {
+                    <div id="addAuthor">
+                        <div class="well">
+                            <p><strong>Select from existing users</strong></p>
+                            @Html.ActionLink("Select author", "SelectAuthor/" + @Model.Id, "Users", null, new { @class = "btn btn-default" })
+                        </div>
+                    </div>
+                }
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd>
+                <div class="well">@Html.DisplayFor(model => model.Description)</div>
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.SystemRequirements)
+            </dt>
+            <dd>
+                <pre>@Html.DisplayFor(model => model.SystemRequirements)</pre>
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.AverageRating)
+            </dt>
+            <dd>
+                <mark>@Html.DisplayFor(model => model.AverageRating)</mark>
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Genre)
+            </dt>
+            <dd>
+                <span id="genre"></span>
+                @if (Model.Genre != null)
+                {
+                    @Html.DisplayFor(model => model.Genre)
+                }
+                else
+                {
+                    <div id="addGenre">
+                        <div class="col-sm-6">
+                            <p><strong>Add new genre</strong></p>
+                            @Html.Partial("_AddGenrePartial")
+                        </div>
+                        <div class="col-sm-6">
+                            <p><strong>Select from existing genres</strong></p>
+                            @Html.ActionLink("Select genre", "SelectGenre/" + @Model.Id, "Genres", null, new { @class = "btn btn-default" })
+                        </div>
+                    </div>
+                }
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ImageUrls)
+            </dt>
+            <dd>
+                @if (Model.ImageUrls.Any())
+                {
+                    @Html.DisplayFor(g => g.ImageUrls)
+                }
+                else
+                {
+                    <p id="noImages">No images</p>
+                }
+
+                <div id="images"></div>
+            </dd>
+            <dt>Add image</dt>
+            <dd>
+                @Html.Partial("_AddImagePartial")
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Reviews)
+            </dt>
+            <dd>
+                @if (Model.Reviews.Any())
+                {
+                    foreach (var review in Model.Reviews)
+                    {
+                        <div class="row well">
+                            <dl>
+                                <dt>Author</dt>
+                                <dd>@review.Author</dd>
+                                <dt>Content</dt>
+                                <dd>@review.Content</dd>
+                                <dt>Created on</dt>
+                                <dd>@review.CreationTime.ToString("dd-MMM-yyyy hh:mm:ss", CultureInfo.InvariantCulture)</dd>
+                            </dl>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>No reviews</p>
+                }
+            </dd>
+        </dl>
+    </div>
+</div>
+<div class="row">
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-default"})
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+</div>
+
+@section scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        function onSuccessAddImage() {
+            document.getElementById("url").value = '';
+            document.getElementById("noImages").innerHTML = "";
+        }
+
+        function onSuccessAddGenre() {
+            document.getElementById("addGenre").innerHTML = "";
+        }
+    </script>
+}

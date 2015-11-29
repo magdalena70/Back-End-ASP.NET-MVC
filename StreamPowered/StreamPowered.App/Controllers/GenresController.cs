@@ -40,6 +40,11 @@ namespace StreamPowered.App.Controllers
         public ActionResult GamesByGenre(int id, int page = 1, int count = 3)
         {
             var genre = this.Data.Genres.Find(id);
+            if (genre == null)
+            {
+                return HttpNotFound();
+            }
+
             int gamesCount = genre.Games.Count();
             var genreGames = genre.Games
                 .OrderByDescending(g => g.AverageRating)
@@ -56,11 +61,6 @@ namespace StreamPowered.App.Controllers
             };
 
             return this.View(model);
-        }
-
-        public ActionResult SearchGenre()
-        {
-            return this.View();
         }
     }
 }

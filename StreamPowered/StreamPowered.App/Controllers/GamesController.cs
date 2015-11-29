@@ -9,7 +9,6 @@ namespace StreamPowered.App.Controllers
     using System.Data.Entity;
     using AutoMapper;
 
-    [Authorize]
     public class GamesController : BaseController
     {
         public GamesController(IStreamPoweredData data)
@@ -39,8 +38,12 @@ namespace StreamPowered.App.Controllers
         public ActionResult GameDetails(int id)
         {
             var game = this.Data.Games.Find(id);
-            var model = Mapper.Map<GameDetailsViewModel>(game);
+            if (game == null)
+            {
+                return HttpNotFound();
+            }
 
+            var model = Mapper.Map<GameDetailsViewModel>(game);
             return this.View(model);
         }
     }

@@ -1,0 +1,22 @@
+﻿@model IEnumerable<SelectListItem>
+@{
+    ViewBag.Title = "SelectGenre";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>SelectGenre</h2>
+
+@using (Html.BeginForm("SelectGenre", "Genres"))
+{
+    <div class="form-horizontal">
+        <fieldset>
+            <legend>Existing Genres: </legend>
+            <div class="form-group">
+                @Html.DropDownList("Genres", null, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </fieldset>
+    </div>
+}

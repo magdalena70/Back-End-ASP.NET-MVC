@@ -10,6 +10,7 @@ namespace StreamPowered.App.Controllers
     using StreamPowered.App.Models.ViewModels;
     using AutoMapper;
 
+    [Authorize]
     public class RatingsController : BaseController
     {
         public RatingsController(IStreamPoweredData data)
@@ -19,11 +20,15 @@ namespace StreamPowered.App.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
         public ActionResult AddRating(int id, int value)
         {
             var game = this.Data.Games.Find(id);
-            if (game.Author.Id != this.UserProfile.Id)
+            if (game == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (game.Author.Id != this.UserProfile.Id || User.IsInRole("Admin"))
             {
                 this.Data.Ratings.Add(new Rating()
                 {

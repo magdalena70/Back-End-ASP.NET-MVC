@@ -1,0 +1,57 @@
+﻿@model IEnumerable<StreamPowered.App.Models.ViewModels.TopFiveGamesViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <h2>All Games</h2>
+    <ul class="pagination">
+        @for (int page = 1; page <= ViewBag.TotalPages; page++)
+        {
+            string listItemClass = "";
+            if (page == ViewBag.CurrentPage)
+            {
+                listItemClass = "active";
+            }
+
+            <li class="@listItemClass">
+                @Html.ActionLink(page.ToString(), "Index", "Games", routeValues: new { page = page, count = 5 }, htmlAttributes: null)
+            </li>
+        }
+    </ul>
+</div>
+<div class="row">
+    <p>
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-default" })
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AverageRating)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AverageRating)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-default" }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-default" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-default" })
+                </td>
+            </tr>
+        }
+    </table>
+</div>

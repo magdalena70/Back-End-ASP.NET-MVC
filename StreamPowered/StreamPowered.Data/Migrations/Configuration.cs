@@ -250,8 +250,50 @@ namespace StreamPowered.Data.Migrations
 
             context.ImageUrls.Add(new Image()
             {
+                Game = context.Games.FirstOrDefault(g => g.Title == "Garry's Mod"),
+                Url = "http://cdn.akamai.steamstatic.com/steam/apps/4000/ss_c13ffded1d71bedfa7ede94c11cbd21fbd21a32c.600x338.jpg?t=1421333577"
+            });
+
+            context.ImageUrls.Add(new Image()
+            {
+                Game = context.Games.FirstOrDefault(g => g.Title == "Garry's Mod"),
+                Url = "http://cdn.akamai.steamstatic.com/steam/apps/4000/0000000827.600x338.jpg?t=1421333577"
+            });
+
+            context.ImageUrls.Add(new Image()
+            {
                 Game = context.Games.FirstOrDefault(g => g.Title == "Verdun"),
                 Url = "http://cdn.akamai.steamstatic.com/steam/apps/242860/ss_e86e8ce863bd67f5fcc5f03b1f4cf75a76f711b6.600x338.jpg?t=1448057367"
+            });
+
+            context.ImageUrls.Add(new Image()
+            {
+                Game = context.Games.FirstOrDefault(g => g.Title == "Verdun"),
+                Url = "http://cdn.akamai.steamstatic.com/steam/apps/242860/ss_47d9116d5268cf8a64c452cb0f26809a9eaec2e5.600x338.jpg?t=1448057367"
+            });
+
+            context.ImageUrls.Add(new Image()
+            {
+                Game = context.Games.FirstOrDefault(g => g.Title == "Verdun"),
+                Url = "http://cdn.akamai.steamstatic.com/steam/apps/242860/ss_d0aea9deb102217936445c11b930b915d974e4e3.600x338.jpg?t=1448057367"
+            });
+
+            context.ImageUrls.Add(new Image()
+            {
+                Game = context.Games.FirstOrDefault(g => g.Title == "Verdun"),
+                Url = "http://cdn.akamai.steamstatic.com/steam/apps/242860/ss_ba7a42fc33abe1b3a616531bbd65aab2e4cb9af4.600x338.jpg?t=1448057367"
+            });
+
+            context.ImageUrls.Add(new Image()
+            {
+                Game = context.Games.FirstOrDefault(g => g.Title == "Verdun"),
+                Url = "http://cdn.akamai.steamstatic.com/steam/apps/242860/ss_bba495d434a53719c0ff80b77f179c09979e8a09.600x338.jpg?t=1448057367"
+            });
+
+            context.ImageUrls.Add(new Image()
+            {
+                Game = context.Games.FirstOrDefault(g => g.Title == "Verdun"),
+                Url = "http://cdn.akamai.steamstatic.com/steam/apps/242860/ss_a70d9b23cbd9a7241bdb2795a678fcc2c39d3df4.600x338.jpg?t=1448057367"
             });
 
             context.SaveChanges();
