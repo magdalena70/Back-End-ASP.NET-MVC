@@ -5,6 +5,7 @@ namespace StreamPowered.App.Areas.Admin.Controllers
     using StreamPowered.Data.UnitOfWork;
     using System.Collections.Generic;
     using System.Linq;
+using StreamPowered.Models;
 
     public class UsersController : BaseAdminController
     {
@@ -27,6 +28,7 @@ namespace StreamPowered.App.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult SelectAuthor(int id, string SelectAuthor)
         {
             var game = this.Data.Games.Find(id);

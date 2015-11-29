@@ -222,7 +222,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Areas\Admin\Models\BindingModels\GameBindingModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ViewModels\GameDetailsViewModel.cs" />
     <Compile Include="Models\ViewModels\GamesByGenrePageViewModel.cs" />
@@ -262,6 +261,7 @@
     <Content Include="Areas\Admin\Views\Shared\_AddGenrePartial.cshtml" />
     <Content Include="Areas\Admin\Views\Genres\SelectGenre.cshtml" />
     <Content Include="Areas\Admin\Views\Users\SelectAuthor.cshtml" />
+    <Content Include="Areas\Admin\Views\Images\Delete.cshtml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -327,7 +327,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Views\Images\" />
     <Folder Include="Views\Ratings\" />
   </ItemGroup>
   <ItemGroup>

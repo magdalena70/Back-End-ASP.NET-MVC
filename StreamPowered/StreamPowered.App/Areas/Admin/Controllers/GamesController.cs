@@ -59,7 +59,7 @@ namespace StreamPowered.App.Areas.Admin.Controllers
         // POST: Admin/Games/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Description,SystemRequirements,AverageRating")] Game game)
+        public ActionResult Create([Bind(Include = "Id,Title,Description,SystemRequirements")] Game game)
         {
             if (ModelState.IsValid)
             {

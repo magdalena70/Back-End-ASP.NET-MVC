@@ -3,6 +3,6 @@
 <div class="col-sm-4 well">
     <img src="@Model.Url" alt="img-@Model.Id" width="210" height="100" />
     <div class="pull-right">
-        @Html.ActionLink("X", "ImageToDelete", "Images", new { id = @Model.Id }, new { @class = "delete btn btn-default btn-sm", style = "color: red;" })
+        @Html.ActionLink("X", "Delete/"+ Model.GameId, "Images", new { imageId = @Model.Id }, new { @class = "delete btn btn-default btn-sm", style = "color: red;" })
     </div>
 </div>

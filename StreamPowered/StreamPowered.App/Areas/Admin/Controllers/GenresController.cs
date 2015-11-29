@@ -71,6 +71,7 @@ namespace StreamPowered.App.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult SelectGenre(int id, string Genres)
         {
             var game = this.Data.Games.Find(id);

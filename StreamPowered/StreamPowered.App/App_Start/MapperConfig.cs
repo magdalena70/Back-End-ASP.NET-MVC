@@ -5,7 +5,6 @@ namespace StreamPowered.App.App_Start
     using AutoMapper;
     using StreamPowered.App.Models.ViewModels;
     using StreamPowered.Models;
-    using StreamPowered.App.Models.BindingModels;
     using StreamPowered.App.Areas.Admin.Models.ViewModels;
     using System.Collections.Generic;
     using System.Web.WebPages.Html;
@@ -26,8 +25,6 @@ namespace StreamPowered.App.App_Start
                 .ForMember(vm => vm.Genre, options => options.MapFrom(g => g.Genre.Name))
                 .ForMember(vm => vm.GenreId, options => options.MapFrom(g => g.Genre.Id));
 
-            //Mapper.CreateMap<Game, GameBindingModel>();
-
             Mapper.CreateMap<Review, TopFiveReviewsViewModel>()
                .ForMember(vm => vm.Author, options => options.MapFrom(r => r.Author.UserName))
                .ForMember(vm => vm.GameTitle, options => options.MapFrom(r => r.Game.Title))
@@ -39,7 +36,8 @@ namespace StreamPowered.App.App_Start
                .ForMember(vm => vm.GameTitle, options => options.MapFrom(r => r.Game.Title))
                .ForMember(vm => vm.GameId, options => options.MapFrom(r => r.Game.Id));
 
-            Mapper.CreateMap<Image, ImageViewModel>();
+            Mapper.CreateMap<Image, ImageViewModel>()
+                .ForMember(vm => vm.GameId, options => options.MapFrom(r => r.Game.Id));
         }
     }
 }

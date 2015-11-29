@@ -4,7 +4,6 @@ namespace StreamPowered.App.Areas.Admin.Controllers
     using AutoMapper;
     using StreamPowered.Data.UnitOfWork;
     using StreamPowered.Models;
-    //using System.Drawing;
     using System.Web.Mvc;
     using System.Linq;
     using StreamPowered.App.Areas.Admin.Models.ViewModels;
@@ -39,6 +38,34 @@ namespace StreamPowered.App.Areas.Admin.Controllers
             }
 
             return this.Json("Error");
+        }
+
+        // GET: Admin/Images/Delete/8?imageId=40
+        public ActionResult Delete(int imageId)
+        {
+            var image = this.Data.ImageUrls.Find(imageId);
+            if (image == null)
+            {
+                return HttpNotFound();
+            }
+
+            return this.View(image);
+        }
+
+        // POST: Admin/Images/Delete/8?imageId=40
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id, int imageId)
+        {
+            var image = this.Data.ImageUrls.Find(imageId);
+            if (image == null)
+            {
+                return HttpNotFound();
+            }
+
+            this.Data.ImageUrls.Remove(image);
+            this.Data.SaveChanges();
+            return RedirectToAction("Details", "Games", new { id = id});
         }
     }
 }

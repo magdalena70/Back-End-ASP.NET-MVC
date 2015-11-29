@@ -6,7 +6,7 @@
 }
 
 <div class="row">
-    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default"})
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info"})
 </div>
 <div class="row">
     <h2>Edit</h2>
@@ -48,7 +48,6 @@
                 @Html.LabelFor(model => model.Author, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.ActionLink(@Model.Author.UserName, "SelectAuthor", "Users", new { id = Model.Id }, new { @class = "edit btn btn-default" })
-                   @* @Html.ValidationMessageFor(model => model.Author, "", new { @class = "text-danger" })*@
                 </div>
             </div>
 
@@ -56,7 +55,6 @@
                 @Html.LabelFor(model => model.Genre, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.ActionLink(@Model.Genre.Name, "SelectGenre", "Genres", new { id = Model.Id }, new { @class = "edit btn btn-default" })
-                    @*@Html.ValidationMessageFor(model => model.Genre, "", new { @class = "text-danger" })*@
                 </div>
             </div>
     
@@ -70,13 +68,14 @@
     
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                    @Html.ActionLink("Cancel", "Details", "Games", new { id = Model.Id }, new { @class = "btn btn-info" })
                 </div>
             </div>
         </div>
     }
 </div>
 <div class="row">
-    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })
 </div>
 

@@ -8,6 +8,7 @@
 
 @using (Html.BeginForm("SelectGenre", "Genres"))
 {
+    @Html.AntiForgeryToken()
     <div class="form-horizontal">
         <fieldset>
             <legend>Existing Genres: </legend>
@@ -15,7 +16,7 @@
                 @Html.DropDownList("Genres", null, new { @class = "form-control" })
             </div>
             <div class="form-group">
-                <input type="submit" value="Submit" class="btn btn-default" />
+                <input type="submit" value="Submit" class="btn btn-primary" />
             </div>
         </fieldset>
     </div>
