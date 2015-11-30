@@ -6,10 +6,7 @@
     @if (Model.Author == this.User.Identity.GetUserName())
     {
         <div class="pull-right">
-            @Html.ActionLink("X", "ReviewDetailsToDelete", "Reviews", new { id = @Model.Id }, new { @class = "delete btn btn-default btn-sm", style = "color: red;" })
-        </div>
-        <div class="pull-right">
-            @Html.ActionLink("Edit", "EditReviewDetails", "Reviews", new { id = @Model.Id }, new { @class = "edit btn btn-default btn-sm" })
+            @Html.ActionLink("X", "ReviewDetailsToDelete", "Reviews", new { id = Model.Id }, new { @class = "delete btn btn-default btn-sm", style = "color: red;" })
         </div>
     }
     

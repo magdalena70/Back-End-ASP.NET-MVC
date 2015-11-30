@@ -51,11 +51,6 @@ namespace StreamPowered.App.Controllers
             return this.Json("Error");
         }
 
-        public ActionResult EditReview(int id)
-        {
-            return this.View();
-        }
-
         public ActionResult ReviewDetailsToDelete(int id)
         {
             var review = this.Data.Reviews.Find(id);

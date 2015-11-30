@@ -92,10 +92,10 @@ namespace StreamPowered.App.Areas.Admin.Controllers
             {
                 this.Data.Games.Update(game);
                 this.Data.SaveChanges();
-                return RedirectToAction("Details", "Games", new { id = game.Id});
+                return this.RedirectToAction("Details", "Games", new { id = game.Id});
             }
 
-            return View(game);
+            return this.View(game);
         }
 
         // GET: Admin/Games/Delete/5
@@ -123,7 +123,7 @@ namespace StreamPowered.App.Areas.Admin.Controllers
 
             this.Data.Games.Remove(game);
             this.Data.SaveChanges();
-            return RedirectToAction("Index");
+            return this.RedirectToAction("Index");
         }
     }
 }

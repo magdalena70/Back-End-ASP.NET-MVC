@@ -207,6 +207,7 @@
     <Compile Include="Areas\Admin\Controllers\GamesController.cs" />
     <Compile Include="Areas\Admin\Controllers\GenresController.cs" />
     <Compile Include="Areas\Admin\Controllers\ImagesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ReviewsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Admin\Models\ViewModels\ImageViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -262,6 +263,10 @@
     <Content Include="Areas\Admin\Views\Genres\SelectGenre.cshtml" />
     <Content Include="Areas\Admin\Views\Users\SelectAuthor.cshtml" />
     <Content Include="Areas\Admin\Views\Images\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Reviews\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Reviews\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Reviews\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_EditReviewPartial.cshtml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -327,7 +332,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Ratings\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

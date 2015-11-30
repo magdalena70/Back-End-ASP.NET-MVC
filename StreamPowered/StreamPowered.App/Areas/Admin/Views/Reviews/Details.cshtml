@@ -1,0 +1,49 @@
+﻿@model StreamPowered.App.Models.ViewModels.TopFiveReviewsViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Review</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Author)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+        <dd>
+            <span id="review">
+                @Html.DisplayFor(model => model.Content)
+            </span>
+            @Html.Partial("_EditReviewPartial")
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreationTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GameTitle)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GameTitle)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index", "Reviews", null, new { @class = "btn btn-info"})
+</p>
+
+@section scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+}
