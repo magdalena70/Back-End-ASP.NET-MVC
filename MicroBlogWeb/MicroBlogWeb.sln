@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroBlogWeb.App", "MicroBlogWeb.App\MicroBlogWeb.App.csproj", "{FDCC5DD2-0C29-476C-9E18-C7B7D05ACF16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroBlogWeb.Data", "MicroBlogWeb.Data\MicroBlogWeb.Data.csproj", "{AA3972F0-B5E0-4403-A897-33F0A5375B66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroBlogWeb.Models", "MicroBlogWeb.Models\MicroBlogWeb.Models.csproj", "{9E28D694-CE1E-4938-9962-E2C2CC72B345}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FDCC5DD2-0C29-476C-9E18-C7B7D05ACF16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDCC5DD2-0C29-476C-9E18-C7B7D05ACF16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDCC5DD2-0C29-476C-9E18-C7B7D05ACF16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDCC5DD2-0C29-476C-9E18-C7B7D05ACF16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA3972F0-B5E0-4403-A897-33F0A5375B66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA3972F0-B5E0-4403-A897-33F0A5375B66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA3972F0-B5E0-4403-A897-33F0A5375B66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA3972F0-B5E0-4403-A897-33F0A5375B66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E28D694-CE1E-4938-9962-E2C2CC72B345}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E28D694-CE1E-4938-9962-E2C2CC72B345}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E28D694-CE1E-4938-9962-E2C2CC72B345}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E28D694-CE1E-4938-9962-E2C2CC72B345}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

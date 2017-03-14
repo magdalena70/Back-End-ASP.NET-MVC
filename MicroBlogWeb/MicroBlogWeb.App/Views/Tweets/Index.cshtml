@@ -1,0 +1,76 @@
+﻿@using Microsoft.AspNet.Identity
+@model IEnumerable<MicroBlogWeb.Models.Tweet>
+
+@{
+    ViewBag.Title = "Tweets Home";
+}
+<div class="jumbotron">
+    <h1>All Tweets</h1>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <span>
+            @Html.ActionLink("Create New Tweet", "Create", "Tweets", "", new { @class = "btn btn-danger btn-block" })
+        </span>
+    }
+</div>
+
+<div class="row lead">
+    @foreach (var tweet in Model)
+    {
+        <ul class="thumbnails list-group text-center col-xs-6 col-sm-4 col-md-3 col-lg-2">
+            <li class="list-group-item">
+                <a href="tweets/Details/@tweet.Id" class="thumbnail">
+                    <img src="@tweet.ImageUrl" alt="tweet" class="img-responsive">
+                </a>
+            </li>
+            <li class="list-group-item">                 
+                    @if (((DateTime.Now - tweet.TimeOfPosting.Value).Days) == 1)
+                    {
+                        <em>Posted on: </em> <strong>yesterday</strong>
+                        <p>@Html.DisplayFor(modelTweet => tweet.TimeOfPosting)</p>
+
+                    }
+                    else
+                    {
+                        <em>Posted on: </em> <strong>@Html.DisplayFor(modelTweet => tweet.TimeOfPosting)</strong>
+                    }
+                <p>   
+                    <em>by </em><strong>@Html.ActionLink(tweet.Author.UserName, "Profile/" + tweet.Author.Id, "Users")</strong>
+                </p>
+            </li>
+            <li class="list-group-item">
+                @if (tweet.Content.Length > 10)
+                {
+                    <span>@tweet.Content.Substring(0, 10)...</span>
+                }
+                else
+                {
+                    <span>@Html.DisplayFor(modelTweet => tweet.Content)</span>
+                }
+
+                @Html.ActionLink("See more >>", "Details/" + tweet.Id, "Tweets", "", new { @class = "btn btn-info" })
+            </li>
+            <li class="list-group-item">
+                <p>
+                    <em>Retweets: </em><span class="badge badge-warning">@tweet.Retweets.Count</span>
+                    @Html.ActionLink("Retweet", "Retweet/" + tweet.Id, "Tweets", "", new { @class = "btn btn-primary" })
+                </p>
+            </li>
+            <li class="list-group-item">
+                @if (tweet.Author.Id == User.Identity.GetUserId())
+                {
+                    <p>
+                        @Html.ActionLink("Edit", "Edit/" + tweet.Id, "Tweets", "", new { @class = "btn btn-warning" })
+                        @Html.ActionLink("Delete", "Delete/" + tweet.Id, "Tweets", "", new { @class = "btn btn-default" })
+                    </p>
+                }
+                else
+                {
+                    <p>
+                        @Html.ActionLink("Add in Favourites", "Details/" + tweet.Id, "Tweets", "", new { @class = "btn btn-success" })
+                    </p>
+                }
+            </li>
+        </ul>
+    }
+</div>

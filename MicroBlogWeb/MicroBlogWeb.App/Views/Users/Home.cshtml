@@ -1,0 +1,61 @@
+﻿@model MicroBlogWeb.Models.User
+
+@{
+    ViewBag.Title = "User's Home";
+}
+
+<div class="jumbotron">
+    <h2>@Model.UserName's Home Page</h2>
+    <p>
+        @Html.ActionLink("Back to User Profile", "Profile", new { id = Model.Id })
+    </p>
+    <p>
+        <span>
+            @Html.ActionLink("Create New Tweet", "Create", "Tweets", "", new { @class = "btn btn-danger btn-block" })
+        </span>
+    </p>
+</div>
+<div class="row well">
+    <h4>Tweets of your Followers</h4>
+
+    @foreach (var follower in Model.Followers)
+    {
+        foreach (var tweet in follower.SentTweets)
+        {
+            <div class="col-sm-6 well">
+                <div class="col-sm-4"><img src="@tweet.ImageUrl" alt="tweet" class="img-thumbnail" /></div>
+                <div class="col-sm-8">
+                    <p><strong>Posted on:</strong> @Html.DisplayFor(modelTweet => tweet.TimeOfPosting)</p>
+                    <p><strong>Author:</strong> @Html.DisplayFor(model => tweet.Author.UserName)</p>
+                    <p>@Html.DisplayFor(modelTweet => tweet.Content)</p>
+                </div>
+                <div class="col-sm-12">
+                    @Html.ActionLink("Details", "Details/" + tweet.Id, "Tweets", "", new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Retweet", "Retweet/" + tweet.Id, "Tweets", "", new { @class = "btn btn-primary" })
+                </div>
+            </div>
+        }
+    }
+</div>
+<div class="row well">
+    <h4>Tweets of your Followings</h4>
+
+    @foreach (var user in Model.Following)
+    {
+        foreach (var tweet in user.SentTweets)
+        {
+            <div class="col-sm-6 well">
+                <div class="col-sm-4"><img src="@tweet.ImageUrl" alt="tweet" class="img-thumbnail" /></div>
+                <div class="col-sm-8">
+                    <p><strong>Posted on:</strong> @Html.DisplayFor(modelTweet => tweet.TimeOfPosting)</p>
+                    <p><strong>Author:</strong> @Html.DisplayFor(model => tweet.Author.UserName)</p>
+                    <p>@Html.DisplayFor(modelTweet => tweet.Content)</p>
+                </div>
+                <div class="col-sm-12">
+                    @Html.ActionLink("Details", "Details/" + tweet.Id, "Tweets", "", new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Retweet", "Retweet/" + tweet.Id, "Tweets", "", new { @class = "btn btn-primary" })
+                </div>
+            </div>
+        }
+    }
+</div>

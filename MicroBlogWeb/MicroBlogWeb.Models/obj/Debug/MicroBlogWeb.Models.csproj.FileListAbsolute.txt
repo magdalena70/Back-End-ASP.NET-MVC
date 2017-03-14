@@ -1,0 +1,17 @@
+C:\Users\acer\Desktop\MicroBlogWeb\MicroBlogWeb.Models\bin\Debug\MicroBlogWeb.Models.dll
+C:\Users\acer\Desktop\MicroBlogWeb\MicroBlogWeb.Models\bin\Debug\MicroBlogWeb.Models.pdb
+C:\Users\acer\Desktop\MicroBlogWeb\MicroBlogWeb.Models\obj\Debug\MicroBlogWeb.Models.dll
+C:\Users\acer\Desktop\MicroBlogWeb\MicroBlogWeb.Models\obj\Debug\MicroBlogWeb.Models.pdb
+C:\Users\acer\Desktop\MicroBlogWeb\MicroBlogWeb.Models\bin\Debug\MicroBlogWeb.Models.dll.config
+C:\Users\acer\Desktop\MicroBlogWeb\MicroBlogWeb.Models\bin\Debug\EntityFramework.dll
+C:\Users\acer\Desktop\MicroBlogWeb\MicroBlogWeb.Models\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\acer\Desktop\MicroBlogWeb\MicroBlogWeb.Models\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\acer\Desktop\MicroBlogWeb\MicroBlogWeb.Models\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\acer\Desktop\MicroBlogWeb\MicroBlogWeb.Models\bin\Debug\Microsoft.IdentityModel.Extensions.dll
+C:\Users\acer\Desktop\MicroBlogWeb\MicroBlogWeb.Models\bin\Debug\Ninject.dll
+C:\Users\acer\Desktop\MicroBlogWeb\MicroBlogWeb.Models\bin\Debug\EntityFramework.xml
+C:\Users\acer\Desktop\MicroBlogWeb\MicroBlogWeb.Models\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\acer\Desktop\MicroBlogWeb\MicroBlogWeb.Models\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\acer\Desktop\MicroBlogWeb\MicroBlogWeb.Models\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\acer\Desktop\MicroBlogWeb\MicroBlogWeb.Models\bin\Debug\Ninject.xml
+C:\Users\acer\Desktop\MicroBlogWeb\MicroBlogWeb.Models\obj\Debug\MicroBlogWeb.Models.csprojResolveAssemblyReference.cache

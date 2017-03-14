@@ -1,0 +1,122 @@
+﻿@using Microsoft.AspNet.Identity
+@model MicroBlogWeb.Models.User
+
+@{
+    ViewBag.Title = "User's Profile";
+}
+<div class="jumbotron">
+    <div class="col-sm-8">
+        <h2>@Model.UserName's Profile Page</h2>
+        <p>
+            @Html.ActionLink("Create New Tweet", "Create", "Tweets", "", new { @class = "btn btn-danger btn-block" })
+        </p>
+    </div>
+    <div class="col-sm-4">
+        @if (Model.Id == User.Identity.GetUserId())
+        {
+            <p>
+                @Html.ActionLink("Received Messages", "ReceivedMessages", "Messages", "", new { @class = "btn btn-default" })
+                @Html.ActionLink("Sent Messages", "SentMessages", "Messages", "", new { @class = "btn btn-default" })
+            </p>
+            <p>
+                @Html.ActionLink("Edit User", "Edit/" + Model.Id, "Users", "", new { @class = "btn btn-default" })
+                @Html.ActionLink("User Home Page", "Home/" + Model.Id, "Users", "", new { @class = "btn btn-default" })
+                @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+            </p>
+        }
+        else
+        {
+            using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-actions no-color">
+                    <input type="submit" value="Follow " + @Model.UserName class="btn btn-success" />
+                </div>
+            }
+
+            <p> @Html.ActionLink("Send Message To " + Model.UserName, "Create/" + Model.Id, "Messages")</p>
+        }
+    </div>
+
+    <table class="table lead">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.PhoneNumber)
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="row well">
+    <h3>Followers: @Model.Followers.Count</h3>
+    @foreach (var follower in Model.Followers)
+    {
+        <div class="col-sm-4 img-thumbnail img-rounded">
+           <p>Follower: @Html.ActionLink(follower.UserName, "Profile/" + follower.Id, "Users")</p>
+           <p> @Html.ActionLink("Send Message To Follower", "Create/" + follower.Id, "Messages")</p>
+        </div>
+    }
+</div>
+<div class="row well">
+    <h3>Followings: @Model.Following.Count</h3>
+    @foreach (var user in Model.Following)
+    {
+        <div class="col-sm-4 img-thumbnail img-rounded">
+            <p>Following: @Html.ActionLink(user.UserName, "Profile/" + user.Id, "Users")</p>
+            <p> @Html.ActionLink("Send Message To Follower", "Create/" + user.Id, "Messages")</p>
+        </div>
+    }
+</div>
+<div class="row well">
+    <h3>Favourite Tweets</h3>
+    @foreach (var favourite in Model.FavouriteTweets)
+    {
+        <div class="col-sm-6 well">
+            <div class="col-sm-4"><img src="@favourite.ImageUrl" alt="tweet" class="img-thumbnail" /></div>
+            <div class="col-sm-8">
+                <p><strong>Posted on:</strong> @Html.DisplayFor(modelTweet => favourite.TimeOfPosting)</p>
+                <p><strong>Author:</strong> @Html.DisplayFor(model => favourite.Author.UserName)</p>
+                <p>@Html.DisplayFor(modelTweet => favourite.Content)</p>
+            </div>
+            <div class="col-sm-12">
+                @Html.ActionLink("Details", "Details/" + favourite.Id, "Tweets", "", new { @class = "btn btn-primary" })
+                @Html.ActionLink("Retweet", "Retweet/" + favourite.Id, "Tweets", "", new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    }
+</div>
+<div class="row well">
+        <h3>My Tweets</h3>
+        @foreach (var tweet in Model.SentTweets)
+        {
+            <div class="col-sm-6 well">
+                <div class="col-sm-4"><img src="@tweet.ImageUrl" alt="tweet" class="img-thumbnail" /></div>
+                <div class="col-sm-8">
+                    <p><strong>Posted on:</strong> @Html.DisplayFor(modelTweet => tweet.TimeOfPosting)</p>
+                    <p><strong>Author:</strong> @Html.DisplayFor(model => tweet.Author.UserName)</p>
+                    <p>@Html.DisplayFor(modelTweet => tweet.Content)</p>
+                </div>
+                <div class="col-sm-12">
+                    @Html.ActionLink("Edit", "Edit/" + tweet.Id, "Tweets", "", new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Details", "Details/" + tweet.Id, "Tweets", "", new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Delete", "Delete/" + tweet.Id, "Tweets", "", new { @class = "btn btn-primary" })
+                </div>
+            </div>
+        }
+</div>

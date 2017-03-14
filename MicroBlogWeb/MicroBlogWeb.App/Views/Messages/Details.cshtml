@@ -1,0 +1,43 @@
+﻿@using Microsoft.AspNet.Identity
+@model MicroBlogWeb.Models.Message
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="row well">
+    <h2>Message Details</h2>
+
+    <div>
+        <dl class="dl-horizontal">
+            <dp>
+                @Html.DisplayNameFor(model => model.Recipient)
+            </dp>
+
+            <dd>
+                @Html.DisplayFor(model => model.Recipient.UserName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Text)
+            </dt>
+
+            <dd class="lead">
+                @Html.DisplayFor(model => model.Text)
+            </dd>
+        </dl>
+    </div>
+</div>
+<div class="row well text-center">
+    @if (Model.Author.Id == User.Identity.GetUserId())
+    {
+        <p>@Html.ActionLink("Edit", "Edit", new { id = Model.Id })</p>
+        <p>@Html.ActionLink("Delete", "Delete", new { id = Model.Id })</p>
+        <p>@Html.ActionLink("Back to Sent Messages", "SentMessages", "Messages")</p>
+
+    }
+
+    @if (Model.Recipient.Id == User.Identity.GetUserId())
+    {
+        @Html.ActionLink("Back to Received Messages", "ReceivedMessages", "Messages")
+    }
+</div>

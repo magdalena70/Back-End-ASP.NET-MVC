@@ -1,0 +1,70 @@
+﻿@using Microsoft.AspNet.Identity
+@model MicroBlogWeb.Models.Tweet
+
+@{
+    ViewBag.Title = "Tweet Details";
+}
+
+<h2>Tweet Details</h2>
+
+<div class="row well">
+    <div class="col-sm-8">
+        <p>
+            <em>Posted on: </em><strong>@Html.DisplayFor(model => model.TimeOfPosting), </strong>
+            <em>by </em><strong>@Model.Author.UserName, </strong>
+            <em>Retweets: </em><span class="badge badge-warning">@Model.Retweets.Count</span>
+        </p>
+        <p class="lead">@Html.DisplayFor(model => model.Content)</p>
+    </div>
+    <div class="col-sm-4">
+        <img src="@Model.ImageUrl" alt="tweet" class="img-thumbnail" />
+    </div>
+</div>
+<div class="row well">
+    <div class="col-sm-4">
+        @Html.ActionLink("<< Back to All Tweets", "Index", "Tweets", "", new { @class = "btn btn-default" })
+    </div>
+    <div class="col-sm-4">
+        @Html.ActionLink("Retweet", "Retweet/" + Model.Id, "Tweets", "", new { @class = "btn btn-primary" })
+    </div>
+    @if(Model.Author.Id == User.Identity.GetUserId())
+    {
+        <div class="col-sm-4">
+            @Html.ActionLink("Edit", "Edit/" + Model.Id, "Tweets", "", new { @class = "btn btn-primary" })
+            @Html.ActionLink("Delete", "Delete/" + Model.Id, "Tweets", "", new { @class = "btn btn-primary" })
+        </div>
+    }
+    else
+    {
+        <div class="col-sm-4">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-actions no-color">
+                    <input type="submit" value="Add In Favourites" class="btn btn-success" />
+                </div>
+            }
+        </div>
+    }
+</div>
+<div class="row well">
+    <h4>Retweets:</h4>
+    @foreach (var retweet in Model.Retweets)
+    {
+    <div class="col-sm-4 well">
+        <div class="col-sm-4"><img src="@retweet.ImageUrl" alt="tweet" class="img-thumbnail" /></div>
+        <div class="col-sm-8">
+            <p><strong>Posted on:</strong> @Html.DisplayFor(modelTweet => retweet.TimeOfPosting)</p>
+            <p>@Html.DisplayFor(modelTweet => retweet.Content)</p>
+        </div>
+        <div>
+            By @Html.ActionLink(Model.Author.UserName, "Profile/" + retweet.Author.Id, "Users")
+        </div>
+        <div class="col-sm-12">
+            @Html.ActionLink("Details", "Details/" + retweet.Id, "Tweets", "", new { @class = "btn btn-primary" })
+            @Html.ActionLink("Add in Favourites", "Details/" + retweet.Id, "Tweets", "", new { @class = "btn btn-primary" })
+            @Html.ActionLink("Retweet", "Retweet/" + retweet.Id, "Tweets", "", new { @class = "btn btn-primary" })
+        </div>
+    </div>
+    }
+</div>
