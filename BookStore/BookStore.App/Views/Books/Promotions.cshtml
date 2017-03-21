@@ -1,0 +1,49 @@
+﻿@using BookStore.Models
+@model IEnumerable<Book>
+
+@{
+    ViewBag.Title = "Promotions";
+}
+<div class="row">
+    <h2 class="text-center">Promotions</h2>
+    @Html.ActionLink("<< New Books", "NewBooks", "Books", null, new { @class = "btn btn-default pull-left" })
+    @Html.ActionLink("BestSellers >>", "BestSellers", "Categories", null, new { @class = "btn btn-default pull-right" })
+</div>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 books-list">
+            <div class="row text-center books-list-title">
+                <h4>@Html.DisplayFor(modelItem => item.Title)</h4>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="/Books/Details/@item.Id"><img src="@item.ImageUrl" alt="tweet" class="img-thumbnail" /></a>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                        <span>by </span>
+                        @foreach (var author in item.Authors)
+                        {
+                            <span class="text-center">
+                                @Html.ActionLink(author.FullName, "BooksByAuthor", "Authors", new { authorName = author.FullName })
+                            </span>
+                        }
+                    </p>
+                    <p>Lang - @Html.DisplayFor(modelItem => item.Language)</p>
+                    <p>Price: @Html.DisplayFor(modelItem => item.Price)lv.</p>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-6">
+                    <a href="Details/@item.Id" class="btn btn-default">Add To Basket</a>
+                </div>
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.Id })*@
+                <div class="col-md-6">
+                    <a href="Details/@item.Id" class="btn btn-default">See more &raquo;</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

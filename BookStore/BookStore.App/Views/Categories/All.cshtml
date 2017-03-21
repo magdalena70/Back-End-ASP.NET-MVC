@@ -1,0 +1,28 @@
+﻿@model IEnumerable<BookStore.Models.Category>
+
+@{
+    ViewBag.Title = "All Categories";
+}
+
+<div class="row">
+    <div class="col-sm-10 col-md-4 text-center">
+        @Html.ActionLink("New Books", "NewBooks", "Books", null, new { @class = "btn btn-default" })<hr />
+    </div>
+    <div class="col-sm-10 col-md-4 text-center">
+        @Html.ActionLink("Best Sellers", "BestSellers", "Categories", null, new { @class = "btn btn-default" })<hr />
+    </div>
+    <div class="col-sm-10 col-md-4 text-center">
+        @Html.ActionLink("Promotions", "Promotions", "Books", null, new { @class = "btn btn-default" })<hr />
+    </div>
+</div>
+<div class="row">
+    <h2 class="text-center">All Categories</h2>
+    <hr />
+    @foreach (var category in Model)
+    {
+        <div class="col-md-4 category-div">
+            <h4>@Html.ActionLink(category.Name, "BooksByCategory", "Categories", new { categoryName = category.Name }, new { @class="categoryName"}) &raquo;</h4>
+            <hr />
+        </div>       
+    }
+</div>

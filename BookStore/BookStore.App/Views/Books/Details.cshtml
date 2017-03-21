@@ -1,0 +1,51 @@
+﻿@model BookStore.Models.Book
+
+@{
+    ViewBag.Title = "Book Details";
+}
+
+<h2>Book Details</h2>
+<div class="row">
+    <div class="col-md-8 col-md-offset-2 book-details-div">
+        <div class="row text-center books-list-title">
+            <h3>@Html.DisplayFor(modelItem => Model.Title)</h3>
+        </div>
+        <div class="row">
+            <div class="col-md-5 img-rounded">
+                <img src="@Model.ImageUrl" alt="tweet" class="img img-responsive" width="100%" />
+            </div>
+            <div class="col-md-7">
+                <h4>
+                    <span>by </span>
+                    @foreach (var author in Model.Authors)
+                    {
+                        <span class="text-center">
+                            @Html.ActionLink(author.FullName, "BooksByAuthor", "Authors", new { authorName = author.FullName })
+                        </span>
+                    }
+                </h4>
+                <p>Lang - @Html.DisplayFor(modelItem => Model.Language)</p>
+                <p>ISBN - @Html.DisplayFor(model => Model.ISBN)</p>
+                <p>Quantity - @Html.DisplayFor(model => Model.Quantity)</p>
+                <p>Number Of Pages - @Html.DisplayFor(model => Model.NumberOfPages)</p>
+                <p>IssueDate - @Html.DisplayFor(model => model.IssueDate)</p>
+                <p class="lead">Price: @Html.DisplayFor(modelItem => Model.Price)lv.</p>
+                <br />
+                <div class="row">
+                    <p>
+                        <span class="lead add-rating">Up Vote - @Html.DisplayFor(model => Model.UpRating)</span>
+                    </p>
+                    <p>
+                        <span class="lead add-rating">Down Vote - @Html.DisplayFor(model => Model.DownRating)</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-lg-offset-1">
+                <p>Description - @Html.DisplayFor(model => model.Description)</p>
+            </div>
+        </div>
+        <hr />
+    </div>
+</div>

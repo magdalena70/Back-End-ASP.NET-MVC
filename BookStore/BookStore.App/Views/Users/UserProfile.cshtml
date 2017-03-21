@@ -1,0 +1,82 @@
+﻿@model BookStore.Models.User
+
+@{
+    ViewBag.Title = "User Profile";
+}
+
+<div class="row">
+    <p class="pull-right lead btn btn-default btn-lg">
+        <span class="glyphicon glyphicon-heart"></span>
+        @Html.ActionLink("Favorite", "FavoriteBooks", "Users", new { id = Model.Basket.Id }, null)
+    </p>
+    <h2 class="text-center">@Html.DisplayFor(user => user.UserName)'s Profile</h2>
+    <p class="pull-left lead btn btn-default">
+        <img src="~/Content/Images/empty-shopping-cart-icon.png" alt="user-basket-img" class="img-rounded" />
+        @Html.ActionLink("My Basket: " + Model.Basket.Books.Count, "Details", "Baskets", new { id = Model.Basket.Id }, null)
+    </p>
+</div>
+<div class="row">
+    @if (Model.Basket != null)
+    {
+        //user-basket view - carousel
+        <div class="row">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+                <div class="carousel-inner text-center" role="listbox">
+                    @if (Model.Basket.Books.Count > 0)
+                    {
+                        <div class="item active">
+                            <div class="img-box">
+                                <h3>@Model.UserName's baket</h3>
+
+                                <p><strong>Total Price: @Model.Basket.TotalPrice BGN</strong></p>
+                                <img src="~/Content/Images/user-basket.png" alt="basket-img" class="img-rounded">
+                                <div class="carousel-caption">
+                                    <p>@Html.ActionLink("Edit Basket", "Details", "Baskets", new { id = Model.Basket.Id }, new { @class = "btn btn-default btn-lg" })</p>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        foreach (var item in Model.Basket.Books)
+                        {
+                            <div class="item">
+                                <div class="img-box">
+                                    <h3>@item.Title</h3>
+                                    <p><strong>@item.Price BGN</strong></p>
+                                    <img src=@item.ImageUrl alt="basket-book-img">
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="img-box">
+                            <h3>@Model.UserName's baket</h3>
+
+                            <p><strong>Books:@Model.Basket.Books.Count / Total Price: @Model.Basket.TotalPrice BGN</strong></p>
+                            <img src="~/Content/Images/user-basket.png" alt="basket-img" class="img-rounded">
+                            <div class="carousel-caption">
+                                <h1>Basket is empty.</h1>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    }
+
+</div>
+<hr />
+<div class="row">
+    <h3>You May Also Like</h3>
+</div>

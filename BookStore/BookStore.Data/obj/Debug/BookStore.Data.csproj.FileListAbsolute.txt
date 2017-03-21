@@ -1,0 +1,16 @@
+C:\Users\acer\Desktop\BookStore\BookStore.Data\bin\Debug\BookStore.Data.dll.config
+C:\Users\acer\Desktop\BookStore\BookStore.Data\bin\Debug\BookStore.Data.dll
+C:\Users\acer\Desktop\BookStore\BookStore.Data\bin\Debug\BookStore.Data.pdb
+C:\Users\acer\Desktop\BookStore\BookStore.Data\bin\Debug\BookStore.Models.dll
+C:\Users\acer\Desktop\BookStore\BookStore.Data\bin\Debug\EntityFramework.dll
+C:\Users\acer\Desktop\BookStore\BookStore.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\acer\Desktop\BookStore\BookStore.Data\bin\Debug\BookStore.Models.pdb
+C:\Users\acer\Desktop\BookStore\BookStore.Data\bin\Debug\EntityFramework.xml
+C:\Users\acer\Desktop\BookStore\BookStore.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\acer\Desktop\BookStore\BookStore.Data\obj\Debug\BookStore.Data.csprojResolveAssemblyReference.cache
+C:\Users\acer\Desktop\BookStore\BookStore.Data\obj\Debug\BookStore.Data.dll
+C:\Users\acer\Desktop\BookStore\BookStore.Data\obj\Debug\BookStore.Data.pdb
+C:\Users\acer\Desktop\BookStore\BookStore.Data\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\acer\Desktop\BookStore\BookStore.Data\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\acer\Desktop\BookStore\BookStore.Data\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\acer\Desktop\BookStore\BookStore.Data\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml

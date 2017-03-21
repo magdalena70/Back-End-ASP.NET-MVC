@@ -1,0 +1,49 @@
+﻿@model BookStore.Models.Category
+
+@{
+    ViewBag.Title = "SearchByName";
+}
+
+@if (@Model != null){
+<div class="row"><h2>@Html.DisplayFor(model => model.Name)</h2><hr /></div>
+<div class="row">
+    @foreach (var book in Model.Books)
+    {
+    <div class="col-md-4 books-list">
+        <div class="row text-center books-list-title">
+            <h3>@Html.DisplayFor(modelItem => book.Title)</h3>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <a href="/Books/Details/@book.Id">
+                    <img src="@book.ImageUrl" alt="tweet" class="img-thumbnail" />
+                </a>
+            </div>
+            <div class="col-md-8">
+                <p>
+                    <span>by </span>
+                    @foreach (var author in book.Authors)
+                    {
+                    <span class="text-center">
+                        @Html.ActionLink(author.FullName, "BooksByAuthor", "Authors", new { authorName = author.FullName })
+                    </span>
+                    }
+                </p>
+                <p>Lang - @Html.DisplayFor(modelItem => book.Language)</p>
+                <p>Price: @Html.DisplayFor(modelItem => book.Price)lv.</p>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                <a href="Details/@book.Id" class="btn btn-default">Add To Basket</a>
+            </div>
+            <div class="col-md-6">
+                <a href="/Books/Details/@book.Id" class="btn btn-default">See more &raquo;</a>
+            </div>
+        </div>
+    </div>
+    }
+</div>
+}
+

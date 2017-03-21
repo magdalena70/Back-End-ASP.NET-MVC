@@ -1,0 +1,141 @@
+﻿@font-face {
+    font-family: Gloss_And_Bloom;
+    src: url("../fonts/Gloss_And_Bloom.ttf");
+}
+
+body {
+    padding-top: 70px;
+    padding-bottom: 20px;
+    background-image: url("Images/anglerfish.jpg");
+    background-size: cover;
+    font-family: 'Times New Roman', Times, sans-serif;
+    font-size: 19px;
+    color: white;
+    font-style: italic;
+}
+
+h1, h2, h3, h4, .lead {
+    font-family: Gloss_And_Bloom, sans-serif !important;
+    text-shadow: 10px 5px 1px #160200;
+    letter-spacing: 4px;
+}
+
+img {
+    box-shadow: 5px 5px 5px #160200;
+}
+
+a, a:hover{
+    text-shadow: 3px 3px 2px #000;
+    letter-spacing: 2px;
+    text-decoration: underline;
+}
+
+a {
+    font-weight: 900;
+    color: white;
+}
+
+a:hover{
+    color: yellow;
+}
+
+.home-div, .category-div, .book-details-div, #login-form, #register-form{
+    background-color: rgba(22, 2, 0, 0.4);
+    padding: 10px;
+}
+
+.categoryName{
+    font-size: 15px;
+    line-height: 25px;
+}
+
+#book-store-title, .add-rating {
+    color: yellow;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding: 20px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+/*input,
+select,
+textarea {
+    max-width: 270px;
+}*/
+
+.jumbotron, .well {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.home h1{
+    letter-spacing: 7px;
+}
+
+.home .lead{
+    letter-spacing: 7px;
+    color: black;
+    font-weight: 900;
+    text-shadow: none;
+}
+
+.btn-default {
+    background-color: rgba(22, 2, 0, 0.4);
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.navbar-inverse, .navbar-brand, .navbar, .nav, .navbar-right {
+    background-color: #160200;
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.navbar-nav li a{
+    text-decoration: none;
+}
+
+.dropdown-menu li a{
+    font-weight: bold;
+    color: #160200;
+    text-shadow: none;
+}
+
+.books-list {
+    background-color: rgba(22, 2, 0, 0.4);
+    border-left: solid 1px white;
+    border-radius: 7px;
+}
+
+.books-list-title {
+    border-bottom: solid 1px white;
+    border-top: solid 1px white;
+}
+
+.carousel-inner{
+    background-color: rgba(22, 2, 0, 0.6);
+}
+
+.carousel-inner > .item > .img-box > img,
+.carousel-inner > .item-active > .img-box > img{
+    height: 300px;
+    margin: auto;
+}
+
+footer {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    font-size: 14px;
+    color: lightblue;
+}
