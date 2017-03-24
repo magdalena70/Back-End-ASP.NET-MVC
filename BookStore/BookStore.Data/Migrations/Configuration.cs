@@ -30,7 +30,7 @@ namespace BookStore.Data.Migrations
                 Title = "The Raqqa Diaries",
                 Price = 29.99m,
                 ISBN = "9781786330536",
-                ImageUrl = "../../Content/Images/theRaqqaDiaries.jpg",
+                ImageUrl = "../../Content/Images/Books/theRaqqaDiaries.jpg",
                 Description = "Since ISIS occupied Raqqa in eastern Syria, it has become one of the most isolated and fear-ridden cities on earth. BBC was able to make contact with a small activist group, Al-Sharqiya 24, and one of their members agreed to write a personal diary about his experiences. This book tells his story.",
                 Language = "BG",
                 IssueDate = new DateTime(2017, 03, 09),
@@ -55,7 +55,7 @@ namespace BookStore.Data.Migrations
                 Title = "Grief Works",
                 Price = 25.99m,
                 ISBN = "9781799930536",
-                ImageUrl = "../../Content/Images/griefWorks.jpg",
+                ImageUrl = "../../Content/Images/Books/griefWorks.jpg",
                 Description = "Death affects us all. Yet it is still the last taboo in our society, " +
                     "and grief is still profoundly misunderstood...In Grief Works we hear stories from" +
                     " those who have experienced great love and great loss - and survived. " +
@@ -92,7 +92,7 @@ namespace BookStore.Data.Migrations
                 Title = "The Rules Do Not Apply",
                 Price = 22.00m,
                 ISBN = "9780349005294",
-                ImageUrl = "../../Content/Images/theRulesDoNotApply.jpg",
+                ImageUrl = "../../Content/Images/Books/theRulesDoNotApply.jpg",
                 Description = "The new book by New Yorker journalist and author " +
                     "of Female Chauvinist Pigs, Ariel Levy.",
                 Language = "BG",
@@ -131,7 +131,7 @@ namespace BookStore.Data.Migrations
                 Title = "Border",
                 Price = 33.00m,
                 ISBN = "9788798005294",
-                ImageUrl = "../../Content/Images/border.jpg",
+                ImageUrl = "../../Content/Images/Books/border.jpg",
                 Description = "The new book by New Yorker journalist and author " +
                     "of Female Chauvinist Pigs, Ariel Levy.",
                 Language = "BG",
@@ -163,7 +163,7 @@ namespace BookStore.Data.Migrations
                 Title = "Inglorious Empire",
                 Price = 45.50m,
                 ISBN = "9788798009994",
-                ImageUrl = "../../Content/Images/ingloriousEmpire.jpg",
+                ImageUrl = "../../Content/Images/Books/ingloriousEmpire.jpg",
                 Description = "Inglorious Empire tells the real story of the British in India - "+
                     "from the arrival of the East India Company to the end of the Raj - revealing "+
                     "how Britain's rise was built upon its plunder of India.",
@@ -192,7 +192,7 @@ namespace BookStore.Data.Migrations
                 Title = "Wed Wabbit",
                 Price = 45.50m,
                 ISBN = "9788798009994",
-                ImageUrl = "../../Content/Images/wedWabbit.jpg",
+                ImageUrl = "../../Content/Images/Books/wedWabbit.jpg",
                 Description = "A hugely funny 'down the rabbit hole' adventure from the author of "+
                 "internationally bestselling 'Small Change for Stuart', which was shortlisted for "+
                 "both the Carnegie Medal and Costa Award.",

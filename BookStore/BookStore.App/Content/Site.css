@@ -4,7 +4,7 @@
 }
 
 body {
-    padding-top: 70px;
+    padding-top: 90px;
     padding-bottom: 20px;
     background-image: url("Images/anglerfish.jpg");
     background-size: cover;
@@ -18,6 +18,10 @@ h1, h2, h3, h4, .lead {
     font-family: Gloss_And_Bloom, sans-serif !important;
     text-shadow: 10px 5px 1px #160200;
     letter-spacing: 4px;
+}
+
+.lead{
+    font-size: 17px;
 }
 
 img {
@@ -65,13 +69,6 @@ a:hover{
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-/*input,
-select,
-textarea {
-    max-width: 270px;
-}*/
-
 .jumbotron, .well {
     background-color: rgba(255, 255, 255, 0.4);
 }
@@ -98,7 +95,7 @@ textarea {
 .navbar-inverse, .navbar-brand, .navbar, .nav, .navbar-right {
     background-color: #160200;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 19px;
     text-decoration: none;
 }
 

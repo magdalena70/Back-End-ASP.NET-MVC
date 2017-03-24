@@ -4,30 +4,40 @@ using System.Net;
 using System.Web.Mvc;
 using BookStore.Data;
 using BookStore.Models;
+using BookStore.Models.ViewModels;
+using System.Collections.Generic;
 
 namespace BookStore.App.Controllers
 {
     public class CategoriesController : Controller
     {
-        private BookStoreContext db = new BookStoreContext();
+        private BookStoreContext context = new BookStoreContext();
+        private CategoryService categoryService;
+
+        public CategoriesController()
+        {
+            this.categoryService = new CategoryService(context);
+        }
 
         // GET: Categories
         public ActionResult All()
         {
-            return View(db.Categories.ToList());
+            List<AllCategoriesViewModel> viewModel = this.categoryService.GetAll();
+            return View(viewModel);
         }
 
         // GET: Categories/BestSellers
         public ActionResult BestSellers()
         {
-            Category category = db.Categories.First(c => c.Name == "Best Sellers");
+            CategoryViewModel viewModel = this.categoryService.GetBestSellers();
 
-            if (category == null)
+            if (viewModel == null)
             {
-                return HttpNotFound();
+                this.TempData["Error"] = "No books in category: 'BestSellers'";
+                return RedirectToAction("Index", "Home");
             }
 
-            return View(category);
+            return View(viewModel);
         }
 
         // GET: Categories/Details/5
@@ -35,16 +45,17 @@ namespace BookStore.App.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                this.TempData["Error"] = "Incorect url";
+                return RedirectToAction("Index", "Home");
             }
 
-            Category category = db.Categories.Find(id);
-            if (category == null)
+            CategoryViewModel viewModel = this.categoryService.GetCategoryDetails(id);
+            if (viewModel == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Index", "Home");
             }
 
-            return View(category);
+            return View(viewModel);
         }
 
         // GET: Categories/BooksByCategory?categoryName=...
@@ -57,15 +68,15 @@ namespace BookStore.App.Controllers
                 return View();
             }
 
-            var category = db.Categories
-                .FirstOrDefault(c => c.Name.Contains(categoryName));
-            if (category == null)
+            CategoryViewModel viewModel = this.categoryService.GetCategoryByName(categoryName);
+           
+            if (viewModel == null)
             {
                 this.TempData["Error"] = $"No books in category: '{categoryName}'";
                 return View();
             }
 
-            return View(category);
+            return View(viewModel);
         }
 
         // GET: Categories/Create
@@ -73,18 +84,16 @@ namespace BookStore.App.Controllers
         {
             return View();
         }
-
+        //--------------------------------------------------to do---------------------------//
         // POST: Categories/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name")] Category category)
         {
             if (ModelState.IsValid)
             {
-                db.Categories.Add(category);
-                db.SaveChanges();
+                context.Categories.Add(category);
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -98,7 +107,7 @@ namespace BookStore.App.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            Category category = context.Categories.Find(id);
             if (category == null)
             {
                 return HttpNotFound();
@@ -107,16 +116,14 @@ namespace BookStore.App.Controllers
         }
 
         // POST: Categories/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name")] Category category)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(category).State = EntityState.Modified;
-                db.SaveChanges();
+                context.Entry(category).State = EntityState.Modified;
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(category);
@@ -129,7 +136,7 @@ namespace BookStore.App.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+            Category category = context.Categories.Find(id);
             if (category == null)
             {
                 return HttpNotFound();
@@ -142,9 +149,9 @@ namespace BookStore.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Category category = db.Categories.Find(id);
-            db.Categories.Remove(category);
-            db.SaveChanges();
+            Category category = context.Categories.Find(id);
+            context.Categories.Remove(category);
+            context.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -152,7 +159,7 @@ namespace BookStore.App.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                context.Dispose();
             }
             base.Dispose(disposing);
         }

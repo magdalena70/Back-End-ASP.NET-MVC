@@ -14,7 +14,7 @@
     {
         <div class="col-md-4 books-list">
             <div class="row text-center books-list-title">
-                <h4>@Html.DisplayFor(modelItem => book.Title)</h4>
+                <h4>@Html.DisplayFor(b => book.Title)</h4>
             </div>
             <div class="row">
                 <div class="col-md-4">
@@ -30,8 +30,8 @@
                             </span>
                         }
                     </p>
-                    <p>Lang - @Html.DisplayFor(modelItem => book.Language)</p>
-                    <p>Price: @Html.DisplayFor(modelItem => book.Price)lv.</p>
+                    <p>Lang - @Html.DisplayFor(b => book.Language)</p>
+                    <p>Price: @Html.DisplayFor(b => book.Price)lv.</p>
 
                     @using (Html.BeginForm("FavoriteBooks", "Users", FormMethod.Post))
                     {
@@ -55,12 +55,15 @@
                         @Html.AntiForgeryToken()
                         @Html.HiddenFor(b => book.Id)
                         <div class="form-actions no-color">
-                            <input type="submit" value="AddToBasket" class="btn btn-default" />
+                            <input type="submit" value="Add To Basket" class="btn btn-default" />
                         </div>
                     }
                 </div>
                 <div class="col-md-6">
-                    <a href="Details/@book.Id" class="btn btn-default">See more &raquo;</a>
+                    <p class="btn btn-default">
+                        @Html.ActionLink("See more", "Details", "Books", new { id = book.Id }, null)
+                        &raquo;
+                    </p>
                 </div>
             </div>
         </div>

@@ -1,8 +1,9 @@
 ﻿<ul class="nav navbar-nav">
     <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            Menu
+        <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown">
+            <img src="~/Content/Images/menu-icon.png"/>
             <b class="caret"></b>
+            <p class="carousel-caption lead">menu</p>
         </a>
 
         <ul class="dropdown-menu">
@@ -15,6 +16,8 @@
 
             <li class="divider"></li>
             <li>@Html.ActionLink("All Authors", "All", "Authors")</li>
+            <li>@Html.ActionLink("Terms and Conditions", "TermsAndConditions", "Home")</li>
+            <li></li>
         </ul>
 
     </li>

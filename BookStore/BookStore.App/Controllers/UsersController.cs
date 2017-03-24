@@ -1,149 +1,163 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
+﻿using System.Data.Entity;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using BookStore.Data;
 using BookStore.Models;
+using BookStore.Models.ViewModels;
 using Microsoft.AspNet.Identity;
+using BookStore.Services;
+using System;
+using BookStore.Data;
+using BookStore.Models.BindingModels;
 
 namespace BookStore.App.Controllers
 {
     public class UsersController : Controller
     {
-        private BookStoreContext db = new BookStoreContext();
+        private BookStoreContext context = new BookStoreContext();
+        private UserService userService;
 
-        // GET: Users
-        public ActionResult Index()
+        public UsersController()
         {
-            var users = db.Users.Include(u => u.Basket);
-            return View(users.ToList());
+            this.userService = new UserService(context);
         }
 
-        // GET: Users/Details/5
+        private User GetCurrentUser()
+        {
+            string currUserId = User.Identity.GetUserId();
+            User currentUser = this.context.Users.Find(currUserId);
+            return currentUser;
+        }
+
+        // GET: Users/UserProfile
         public ActionResult UserProfile()
         {
-            string registeredUserId = User.Identity.GetUserId();
-            User user = db.Users.Find(registeredUserId);
-            if (user == null)
+            User currentUser = GetCurrentUser();
+            if (currentUser == null)
             {
                 this.TempData["Error"] = "Log in, please!";
                 return RedirectToAction("Login", "Account");
             }
 
-            return View(user);
+            UserProfileViewModel viewModel = this.userService.GetUserProfileViewModel(currentUser);
+            return View(viewModel);
         }
 
         // GET: Users/FavoriteBooks
         public ActionResult FavoriteBooks()
         {
-            var user = db.Users.Find(User.Identity.GetUserId());
-            return View(user);
+            var currentUser = GetCurrentUser();
+            UserFavoriteBooksViewModel viewModel = this.userService.GetFavorite(currentUser);
+            return View(viewModel);
         }
 
         // POST: Users/FavoriteBooks
         [HttpPost, ActionName("FavoriteBooks")]
         [ValidateAntiForgeryToken]
-        public ActionResult AddBookToFavoriteBooks([Bind(Include = "Id")] Book book)
+        public ActionResult AddBookToFavoriteBooks([Bind(Include = "Id")] AddFavoriteBookBindingModel book)
         {
-            User currUser = db.Users.Find(User.Identity.GetUserId());
-            Book currBook = db.Books.Find(book.Id);
-
-            currUser.FavoriteBooks.Add(currBook);
-                db.SaveChanges();
-                return RedirectToAction("FavoriteBooks", "Users");
+            User currentUser = GetCurrentUser();
+            this.userService.AddBookToFavoriteBooks(currentUser, book.Id);
+            
+            return RedirectToAction("FavoriteBooks", "Users");
         }
 
-        // GET: Users/Create
-        public ActionResult Create()
+        // POST: Users/RemoveFromFavorite
+        [HttpPost, ActionName("RemoveFromFavorite")]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveBookFromFavoriteBooks([Bind(Include = "Id")] Book book)
         {
-            ViewBag.Id = new SelectList(db.Baskets, "Id", "Id");
-            return View();
+            User currentUser = GetCurrentUser();
+            this.userService.RemoveBookFromFavoriteBooks(currentUser, book.Id);
+
+            this.TempData["Success"] = $"You removed one book from Favorite Books.";
+            return RedirectToAction("FavoriteBooks", "Users");
         }
+
+        //// GET: Users/Create
+        //public ActionResult Create()
+        //{
+        //    ViewBag.Id = new SelectList(db.Baskets, "Id", "Id");
+        //    return View();
+        //}
 
         // POST: Users/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Address,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] User user)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Users.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Address,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] User user)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Users.Add(user);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            ViewBag.Id = new SelectList(db.Baskets, "Id", "Id", user.Id);
-            return View(user);
-        }
+        //    ViewBag.Id = new SelectList(db.Baskets, "Id", "Id", user.Id);
+        //    return View(user);
+        //}
 
-        // GET: Users/Edit/5
-        public ActionResult Edit(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.Id = new SelectList(db.Baskets, "Id", "Id", user.Id);
-            return View(user);
-        }
+        //// GET: Users/Edit/5
+        //public ActionResult Edit(string id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    User user = db.Users.Find(id);
+        //    if (user == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    ViewBag.Id = new SelectList(db.Baskets, "Id", "Id", user.Id);
+        //    return View(user);
+        //}
 
-        // POST: Users/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Address,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] User user)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.Id = new SelectList(db.Baskets, "Id", "Id", user.Id);
-            return View(user);
-        }
+        //// POST: Users/Edit/5
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Address,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] User user)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(user).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewBag.Id = new SelectList(db.Baskets, "Id", "Id", user.Id);
+        //    return View(user);
+        //}
 
-        // GET: Users/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
+        //// GET: Users/Delete/5
+        //public ActionResult Delete(string id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    User user = db.Users.Find(id);
+        //    if (user == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(user);
+        //}
 
-        // POST: Users/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            User user = db.Users.Find(id);
-            db.Users.Remove(user);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //// POST: Users/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(string id)
+        //{
+        //    User user = db.Users.Find(id);
+        //    db.Users.Remove(user);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                context.Dispose();
             }
             base.Dispose(disposing);
         }

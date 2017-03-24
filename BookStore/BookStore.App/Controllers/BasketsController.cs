@@ -8,23 +8,22 @@ using Microsoft.AspNet.Identity;
 
 namespace BookStore.App.Controllers
 {
+    [Authorize]
     public class BasketsController : Controller
     {
         private BookStoreContext db = new BookStoreContext();
 
-        // GET: Baskets/Details/5
-        public ActionResult Details(int? id)
+        // GET: Baskets/Details
+        public ActionResult Details()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            Basket basket = db.Baskets.Find(id);
+            var ownerId = User.Identity.GetUserId();
+            Basket basket = db.Baskets
+                .FirstOrDefault(b => b.Owner.Id == ownerId);
 
             if (basket == null)
             {
-                return HttpNotFound();
+                this.TempData["Error"] = "You have no right to access.";
+                return RedirectToAction("Index", "Home");
             }
 
             return View(basket);
@@ -52,6 +51,8 @@ namespace BookStore.App.Controllers
                 basket.TotalPrice += currBook.Price;
                 db.Baskets.Add(basket);
                 db.SaveChanges();
+
+                this.TempData["Success"] = $"You added book: {currBook.Title} in basket.";
                 return RedirectToAction("UserProfile", "Users");
             }
 
@@ -59,6 +60,7 @@ namespace BookStore.App.Controllers
             currBasket.TotalPrice += currBook.Price;
             db.SaveChanges();
 
+            this.TempData["Success"] = $"You added book: {currBook.Title} in basket.";
             return RedirectToAction("UserProfile", "Users");
         }
 
@@ -75,7 +77,8 @@ namespace BookStore.App.Controllers
             basket.Owner = db.Users.First();
 
             db.SaveChanges();
-            return RedirectToAction("Details", "Baskets", new { id = basket.Id });
+            this.TempData["Success"] = $"You removed one book from your basket.";
+            return RedirectToAction("Details", "Baskets");
         }
 
         // GET: Baskets/Edit/5

@@ -215,15 +215,19 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\anglerfish.jpg" />
-    <Content Include="Content\Images\border.jpg" />
-    <Content Include="Content\Images\empty-basket.jpg" />
+    <Content Include="Content\Images\authentication-key-icon.png" />
+    <Content Include="Content\Images\Books\border.jpg" />
     <Content Include="Content\Images\empty-shopping-cart-icon.png" />
-    <Content Include="Content\Images\griefWorks.jpg" />
-    <Content Include="Content\Images\ingloriousEmpire.jpg" />
-    <Content Include="Content\Images\theRaqqaDiaries.jpg" />
-    <Content Include="Content\Images\theRulesDoNotApply.jpg" />
+    <Content Include="Content\Images\Books\griefWorks.jpg" />
+    <Content Include="Content\Images\Books\ingloriousEmpire.jpg" />
+    <Content Include="Content\Images\Books\theRaqqaDiaries.jpg" />
+    <Content Include="Content\Images\Books\theRulesDoNotApply.jpg" />
+    <Content Include="Content\Images\home-icon.png" />
+    <Content Include="Content\Images\menu-icon.png" />
+    <Content Include="Content\Images\search-icon.png" />
     <Content Include="Content\Images\user-basket.png" />
-    <Content Include="Content\Images\wedWabbit.jpg" />
+    <Content Include="Content\Images\Books\wedWabbit.jpg" />
+    <Content Include="Content\Images\user-icon.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -310,14 +314,11 @@
     <Content Include="Views\Users\Delete.cshtml" />
     <Content Include="Views\Users\UserProfile.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
-    <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Home\TermsAndConditions.cshtml" />
     <Content Include="Views\Users\FavoriteBooks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\BindingModels\" />
-    <Folder Include="Models\ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -335,6 +336,10 @@
     <ProjectReference Include="..\BookStore.Models\BookStore.Models.csproj">
       <Project>{728C2309-9CD2-4FF7-AF8A-0F197DD2480C}</Project>
       <Name>BookStore.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BookStore.Services\BookStore.Services.csproj">
+      <Project>{854B317A-E378-4804-A0C5-39DFDF43FAEB}</Project>
+      <Name>BookStore.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

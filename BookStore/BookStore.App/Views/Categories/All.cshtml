@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BookStore.Models.Category>
+﻿@model IEnumerable<BookStore.Models.ViewModels.AllCategoriesViewModel>
 
 @{
     ViewBag.Title = "All Categories";
@@ -21,7 +21,7 @@
     @foreach (var category in Model)
     {
         <div class="col-md-4 category-div">
-            <h4>@Html.ActionLink(category.Name, "BooksByCategory", "Categories", new { categoryName = category.Name }, new { @class="categoryName"}) &raquo;</h4>
+            <h4>@Html.ActionLink(category.Name, "Details", "Categories", new { id = category.Id }, new { @class="categoryName"}) &raquo;</h4>
             <hr />
         </div>       
     }

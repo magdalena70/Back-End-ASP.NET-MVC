@@ -18,16 +18,20 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <ul class="nav navbar-nav">
+                    <li>
+                        @*@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new{@class = "navbar-brand"})*@
+                        <a href="/Home/Index" class = "navbar-brand btn btn-default">
+                            <img src="~/Content/Images/home-icon.png" class="img-rounded" alt="home-icon"/>
+                            <p class="carousel-caption lead">home</p>
+                        </a>
+                    </li>
+                </ul>
             </div>
 
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="/Home/TermsAndConditions">Terms and Conditions</a></li>
-                </ul>
-                @Html.Partial("_NavbarDropdownMenuPartial")
                 @Html.Partial("_NavbarDropdawnSearchPartial")
-
+                @Html.Partial("_NavbarDropdownMenuPartial")
                 @Html.Partial("_LoginPartial")
             </div>
         </div>

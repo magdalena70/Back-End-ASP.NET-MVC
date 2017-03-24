@@ -81,7 +81,8 @@ namespace BookStore.App.Controllers
             {
                 case SignInStatus.Success:
                     this.TempData["Success"] = "User logged in successfully.";
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("UserProfile", "Users");
+                    //return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:

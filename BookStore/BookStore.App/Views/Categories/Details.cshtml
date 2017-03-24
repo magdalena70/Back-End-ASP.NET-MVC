@@ -1,25 +1,71 @@
-﻿@model BookStore.Models.Category
+﻿@model BookStore.Models.ViewModels.CategoryViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Category Details";
 }
-
-<h2>Details</h2>
-
-<div>
-    <h4>Category</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-    </dl>
+<div class="row">
+    <h2 class="text-center">@Html.DisplayFor(c => Model.Name)</h2>
+    @Html.ActionLink("<< All Categories", "All", "Categories", null, new { @class = "btn btn-default pull-left" })
 </div>
-<p>
-    @Html.ActionLink("Back to List", "All", "Categories")
-</p>
+<div class="row">
+    @foreach (var book in Model.Books)
+    {
+        <div class="col-md-4 books-list">
+            <div class="row text-center books-list-title">
+                <h4>@Html.DisplayFor(b => book.Title)</h4>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="/Books/Details/@book.Id">
+                        <img src="@book.ImageUrl" alt="tweet" class="img-thumbnail" />
+                    </a>
+                </div>
+                <div class="col-md-8">
+                    <p>
+                        <span>by </span>
+                        @foreach (var author in book.Authors)
+                        {
+                            <span class="text-center">
+                                @Html.ActionLink(author.FullName, "BooksByAuthor", "Authors", new { authorName = author.FullName })
+                            </span>
+                        }
+                    </p>
+                    <p>Lang - @Html.DisplayFor(b => book.Language)</p>
+                    <p>Price: @Html.DisplayFor(b => book.Price)lv.</p>
+
+                    @using (Html.BeginForm("FavoriteBooks", "Users", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(b => book.Id)
+                        <div class="form-actions no-color">
+                            <p>
+                                <button type="submit" value="Add to Favorite" class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-heart"></span>
+                                </button>
+                            </p>
+                        </div>
+                    }
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-6">
+                    @using (Html.BeginForm("AddToBasket", "Baskets", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(b => book.Id)
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Add To Basket" class="btn btn-default" />
+                        </div>
+                    }
+                </div>
+                <div class="col-md-6">
+                    <p class="btn btn-default">
+                        @Html.ActionLink("See more", "Details", "Books", new { id = book.Id }, null)
+                        &raquo;
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

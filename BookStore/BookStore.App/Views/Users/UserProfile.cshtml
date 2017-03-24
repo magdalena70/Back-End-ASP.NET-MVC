@@ -1,4 +1,4 @@
-﻿@model BookStore.Models.User
+﻿@model BookStore.Models.ViewModels.UserProfileViewModel
 
 @{
     ViewBag.Title = "User Profile";
@@ -7,12 +7,12 @@
 <div class="row">
     <p class="pull-right lead btn btn-default btn-lg">
         <span class="glyphicon glyphicon-heart"></span>
-        @Html.ActionLink("Favorite", "FavoriteBooks", "Users", new { id = Model.Basket.Id }, null)
+        @Html.ActionLink("Favorite", "FavoriteBooks", "Users")
     </p>
     <h2 class="text-center">@Html.DisplayFor(user => user.UserName)'s Profile</h2>
     <p class="pull-left lead btn btn-default">
         <img src="~/Content/Images/empty-shopping-cart-icon.png" alt="user-basket-img" class="img-rounded" />
-        @Html.ActionLink("My Basket: " + Model.Basket.Books.Count, "Details", "Baskets", new { id = Model.Basket.Id }, null)
+        @Html.ActionLink("My Basket: " + Model.CountBooksInBasket, "Details", "Baskets")
     </p>
 </div>
 <div class="row">
@@ -20,30 +20,30 @@
     {
         //user-basket view - carousel
         <div class="row">
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <div id="myCarousel" class="carousel slide col-md-10 col-md-offset-1" data-ride="carousel">
 
                 <div class="carousel-inner text-center" role="listbox">
-                    @if (Model.Basket.Books.Count > 0)
+                    @if (Model.CountBooksInBasket > 0)
                     {
                         <div class="item active">
                             <div class="img-box">
-                                <h3>@Model.UserName's baket</h3>
+                                <h3>@Model.UserName's basket</h3>
 
-                                <p><strong>Total Price: @Model.Basket.TotalPrice BGN</strong></p>
+                                <p><strong>Total Price: @Model.BasketTotalPrice BGN</strong></p>
                                 <img src="~/Content/Images/user-basket.png" alt="basket-img" class="img-rounded">
                                 <div class="carousel-caption">
-                                    <p>@Html.ActionLink("Edit Basket", "Details", "Baskets", new { id = Model.Basket.Id }, new { @class = "btn btn-default btn-lg" })</p>
+                                    <p>@Html.ActionLink("Edit Basket", "Details", "Baskets", null, new { @class = "btn btn-default btn-lg" })</p>
 
                                 </div>
                             </div>
                         </div>
 
-                        foreach (var item in Model.Basket.Books)
+                        foreach (var item in Model.BooksInBasket)
                         {
                             <div class="item">
                                 <div class="img-box">
                                     <h3>@item.Title</h3>
-                                    <p><strong>@item.Price BGN</strong></p>
+                                    <p><strong>@item.Price BGN / Qnt: ?</strong></p>
                                     <img src=@item.ImageUrl alt="basket-book-img">
                                 </div>
                             </div>
@@ -54,7 +54,7 @@
                         <div class="img-box">
                             <h3>@Model.UserName's baket</h3>
 
-                            <p><strong>Books:@Model.Basket.Books.Count / Total Price: @Model.Basket.TotalPrice BGN</strong></p>
+                            <p><strong>Books:@Model.CountBooksInBasket / Total Price: @Model.BasketTotalPrice BGN</strong></p>
                             <img src="~/Content/Images/user-basket.png" alt="basket-img" class="img-rounded">
                             <div class="carousel-caption">
                                 <h1>Basket is empty.</h1>
@@ -77,6 +77,19 @@
 
 </div>
 <hr />
-<div class="row">
-    <h3>You May Also Like</h3>
+<div class="row category-div">
+    <h2>You may also like some book from the next categories:</h2>
+    <hr />
+    @if (Model.YouMayAlsoLike != null)
+    {
+        foreach (var category in Model.YouMayAlsoLike)
+        {
+            <div class="col-md-3">
+                <p class="lead">
+                    @Html.ActionLink(category.Name, "BooksByCategory", "Categories", new { categoryName= category.Name}, null)
+                    &raquo;
+                </p>
+            </div>
+        }
+    }
 </div>
