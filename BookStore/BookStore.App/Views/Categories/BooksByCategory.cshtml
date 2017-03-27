@@ -5,7 +5,9 @@
 }
 
 @if (@Model != null){
-<div class="row"><h2>@Html.DisplayFor(category => category.Name)</h2><hr /></div>
+<div class="row">
+    <h2>@Html.DisplayFor(category => category.Name)</h2><hr />
+</div>
 <div class="row">
     @foreach (var book in Model.Books)
     {

@@ -5,8 +5,9 @@
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
         @Html.AntiForgeryToken()
-
+        
         <ul class="nav navbar-nav navbar-right">
+            <li><h2>@User.Identity.GetUserName()</h2></li>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown">
                     <img src="~/Content/Images/user-icon.png" class="img-rounded" alt="authentication" />
@@ -16,9 +17,13 @@
 
                 <ul class="dropdown-menu">
                     <li>@Html.ActionLink("Profile", "UserProfile", "Users")</li>
+                    <li>@Html.ActionLink("Edit Profile", "EditProfile", "Users")</li>
+                    <li>@Html.ActionLink("Change Password", "ChangePassword", "Manage")</li>
+
                     <li class="divider"></li>
                     <li>@Html.ActionLink("Favorite Books", "FavoriteBooks", "Users")</li>
                     <li>@Html.ActionLink("My Basket", "Details", "Baskets")</li>
+
                     <li class="divider"></li>
                     <li>@Html.ActionLink("Special Offers", "SpecialOffers", "Books")</li>
 

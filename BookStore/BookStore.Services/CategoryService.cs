@@ -1,9 +1,9 @@
-﻿using System;
-using BookStore.Data;
+﻿using BookStore.Data;
 using BookStore.Models.ViewModels;
 using BookStore.Services;
 using System.Collections.Generic;
 using System.Linq;
+using BookStore.Models.BindingModels;
 
 namespace BookStore.Models
 {
@@ -29,6 +29,7 @@ namespace BookStore.Models
         public CategoryViewModel GetBestSellers()
         {
             var category = this.context.Categories
+                .Include("Books")
                 .FirstOrDefault(c => c.Name == "Best Sellers");
             CategoryViewModel viewModel = new CategoryViewModel()
             {
@@ -42,7 +43,8 @@ namespace BookStore.Models
 
         public CategoryViewModel GetCategoryDetails(int? id)
         {
-            var category = this.context.Categories.Find(id);
+            var category = this.context.Categories
+                .Find(id);
             CategoryViewModel viewModel = new CategoryViewModel()
             {
                 Id = category.Id,
@@ -56,6 +58,7 @@ namespace BookStore.Models
         public CategoryViewModel GetCategoryByName(string categoryName)
         {
             var category = context.Categories
+                .Include("Books")
                .FirstOrDefault(c => c.Name.Contains(categoryName));
             CategoryViewModel viewModel = new CategoryViewModel()
             {
@@ -65,6 +68,34 @@ namespace BookStore.Models
             };
 
             return viewModel;
+        }
+
+        public Category CreateCategory(CategoryBindingModel bindingModel)
+        {
+            Category category = new Category()
+            {
+                Name = bindingModel.Name
+            };
+
+            return category;
+        }
+
+        public Category EditCategory(CategoryBindingModel bindingModel)
+        {
+            Category category = new Category()
+            {
+                Id = bindingModel.Id,
+                Name = bindingModel.Name
+            };
+
+            return category;
+        }
+
+        public void DeleteCategory(int id)
+        {
+            Category category = this.context.Categories.Find(id);
+            this.context.Categories.Remove(category);
+            this.context.SaveChanges();
         }
     }
 }

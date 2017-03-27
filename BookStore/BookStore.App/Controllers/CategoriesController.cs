@@ -1,11 +1,10 @@
 ﻿using System.Data.Entity;
-using System.Linq;
-using System.Net;
 using System.Web.Mvc;
 using BookStore.Data;
 using BookStore.Models;
 using BookStore.Models.ViewModels;
 using System.Collections.Generic;
+using BookStore.Models.BindingModels;
 
 namespace BookStore.App.Controllers
 {
@@ -20,6 +19,7 @@ namespace BookStore.App.Controllers
         }
 
         // GET: Categories
+        [AllowAnonymous]
         public ActionResult All()
         {
             List<AllCategoriesViewModel> viewModel = this.categoryService.GetAll();
@@ -27,6 +27,7 @@ namespace BookStore.App.Controllers
         }
 
         // GET: Categories/BestSellers
+        [AllowAnonymous]
         public ActionResult BestSellers()
         {
             CategoryViewModel viewModel = this.categoryService.GetBestSellers();
@@ -41,6 +42,7 @@ namespace BookStore.App.Controllers
         }
 
         // GET: Categories/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -59,6 +61,7 @@ namespace BookStore.App.Controllers
         }
 
         // GET: Categories/BooksByCategory?categoryName=...
+        [AllowAnonymous]
         [ActionName("BooksByCategory")]
         public ActionResult SearchBooksByCategoryName(string categoryName)
         {
@@ -79,80 +82,108 @@ namespace BookStore.App.Controllers
             return View(viewModel);
         }
 
+        //-----------------for admin---------------------------//
+
+        //for admin
         // GET: Categories/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
         }
-        //--------------------------------------------------to do---------------------------//
+
+        //for admin
         // POST: Categories/Create
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] Category category)
+        public ActionResult Create([Bind(Include = "Id,Name")] CategoryBindingModel bindingModel)
         {
+            Category category = this.categoryService.CreateCategory(bindingModel);
             if (ModelState.IsValid)
             {
                 context.Categories.Add(category);
                 context.SaveChanges();
-                return RedirectToAction("Index");
+
+                this.TempData["Success"] = $"Created category {category.Name} successfully";
+                return RedirectToAction("All", "Categories");
             }
 
             return View(category);
         }
 
+        //for admin
         // GET: Categories/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                this.TempData["Error"] = "Category's id can not be null.";
+                return RedirectToAction("All", "Categories");
             }
+
             Category category = context.Categories.Find(id);
             if (category == null)
             {
-                return HttpNotFound();
+                this.TempData["Error"] = "Тhere is no such category.";
+                return RedirectToAction("All", "Categories");
             }
+
             return View(category);
         }
 
         // POST: Categories/Edit/5
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] Category category)
+        public ActionResult Edit([Bind(Include = "Id,Name")] CategoryBindingModel bindingModel)
         {
+            Category category = this.categoryService.EditCategory(bindingModel);
             if (ModelState.IsValid)
             {
                 context.Entry(category).State = EntityState.Modified;
                 context.SaveChanges();
-                return RedirectToAction("Index");
+
+                this.TempData["Success"] = $"Edited category {category.Name} successfully";
+                return RedirectToAction("Details", "Categories", new { id = category.Id});
             }
+
             return View(category);
         }
 
+        //for admin
         // GET: Categories/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                this.TempData["Error"] = "Category's id can not be null.";
+                return RedirectToAction("All", "Categories");
             }
+
             Category category = context.Categories.Find(id);
             if (category == null)
             {
-                return HttpNotFound();
+                this.TempData["Error"] = "Тhere is no such category.";
+                return RedirectToAction("All", "Categories");
             }
+
             return View(category);
         }
 
+        //for admin
         // POST: Categories/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Category category = context.Categories.Find(id);
-            context.Categories.Remove(category);
-            context.SaveChanges();
-            return RedirectToAction("Index");
+            this.categoryService.DeleteCategory(id);
+            this.TempData["Error"] = "Delited category successfully.";
+
+            return RedirectToAction("All", "Categories");
         }
 
         protected override void Dispose(bool disposing)

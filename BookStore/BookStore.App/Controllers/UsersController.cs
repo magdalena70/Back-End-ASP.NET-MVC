@@ -8,9 +8,11 @@ using BookStore.Services;
 using System;
 using BookStore.Data;
 using BookStore.Models.BindingModels;
+using System.Linq;
 
 namespace BookStore.App.Controllers
 {
+    [Authorize]
     public class UsersController : Controller
     {
         private BookStoreContext context = new BookStoreContext();
@@ -51,9 +53,10 @@ namespace BookStore.App.Controllers
         }
 
         // POST: Users/FavoriteBooks
+        [Authorize]
         [HttpPost, ActionName("FavoriteBooks")]
         [ValidateAntiForgeryToken]
-        public ActionResult AddBookToFavoriteBooks([Bind(Include = "Id")] AddFavoriteBookBindingModel book)
+        public ActionResult AddBookToFavoriteBooks([Bind(Include = "Id")] FavoriteBookBindingModel book)
         {
             User currentUser = GetCurrentUser();
             this.userService.AddBookToFavoriteBooks(currentUser, book.Id);
@@ -62,9 +65,10 @@ namespace BookStore.App.Controllers
         }
 
         // POST: Users/RemoveFromFavorite
+        [Authorize]
         [HttpPost, ActionName("RemoveFromFavorite")]
         [ValidateAntiForgeryToken]
-        public ActionResult RemoveBookFromFavoriteBooks([Bind(Include = "Id")] Book book)
+        public ActionResult RemoveBookFromFavoriteBooks([Bind(Include = "Id")] FavoriteBookBindingModel book)
         {
             User currentUser = GetCurrentUser();
             this.userService.RemoveBookFromFavoriteBooks(currentUser, book.Id);
@@ -72,6 +76,37 @@ namespace BookStore.App.Controllers
             this.TempData["Success"] = $"You removed one book from Favorite Books.";
             return RedirectToAction("FavoriteBooks", "Users");
         }
+
+        // GET: Users/EditProfile
+        [Authorize]
+        public ActionResult EditProfile()
+        {
+            User currentUser = this.GetCurrentUser();
+            if (currentUser == null)
+            {
+                return RedirectToAction("Index", "Home");
+
+            }
+
+            EditUserProfileViewModel viewModel = this.userService.GetEditUserProfileViewModel(currentUser);
+            return View(viewModel);
+        }
+
+        // POST: Users/EditProfile
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditProfile(EditUserProfileBindingModel bindingModel)
+        {
+            User currentUser = this.GetCurrentUser();
+            User editedUser = this.userService.EditUserProfile(currentUser, bindingModel);
+
+            this.context.Entry(editedUser).State = EntityState.Modified;
+            this.context.SaveChanges();
+            return RedirectToAction("UserProfile", "Users");
+        }
+
+        //-------------------to do for admin---------------------------------//
 
         //// GET: Users/Create
         //public ActionResult Create()
@@ -92,37 +127,6 @@ namespace BookStore.App.Controllers
         //        return RedirectToAction("Index");
         //    }
 
-        //    ViewBag.Id = new SelectList(db.Baskets, "Id", "Id", user.Id);
-        //    return View(user);
-        //}
-
-        //// GET: Users/Edit/5
-        //public ActionResult Edit(string id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    User user = db.Users.Find(id);
-        //    if (user == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    ViewBag.Id = new SelectList(db.Baskets, "Id", "Id", user.Id);
-        //    return View(user);
-        //}
-
-        //// POST: Users/Edit/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Address,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] User user)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(user).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
         //    ViewBag.Id = new SelectList(db.Baskets, "Id", "Id", user.Id);
         //    return View(user);
         //}

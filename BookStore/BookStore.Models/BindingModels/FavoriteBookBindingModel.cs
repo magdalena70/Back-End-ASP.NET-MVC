@@ -1,6 +1,6 @@
 ﻿namespace BookStore.Models.BindingModels
 {
-    public class AddFavoriteBookBindingModel
+    public class FavoriteBookBindingModel
     {
         public int Id { get; set; }
     }

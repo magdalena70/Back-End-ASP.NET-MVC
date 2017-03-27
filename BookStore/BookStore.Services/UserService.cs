@@ -3,6 +3,7 @@ using BookStore.Models;
 using BookStore.Models.ViewModels;
 using System.Linq;
 using System.Collections.Generic;
+using BookStore.Models.BindingModels;
 
 namespace BookStore.Services
 {
@@ -70,6 +71,34 @@ namespace BookStore.Services
             currentUser.FavoriteBooks.Remove(currentBook);
 
             this.context.SaveChanges();
+        }
+
+        public EditUserProfileViewModel GetEditUserProfileViewModel(User currentUser)
+        {
+            EditUserProfileViewModel viewModel = new EditUserProfileViewModel()
+            {
+                Id = currentUser.Id,
+                FirstName = currentUser.FirstName,
+                LastName = currentUser.LastName,
+                Address = currentUser.Address,
+                UserName = currentUser.UserName,
+                PhoneNumber = currentUser.PhoneNumber,
+                Email = currentUser.Email
+            };
+
+            return viewModel;
+        }
+
+        public User EditUserProfile(User currentUser, EditUserProfileBindingModel bindingModel)
+        {
+            currentUser.FirstName = bindingModel.FirstName;
+            currentUser.LastName = bindingModel.LastName;
+            currentUser.Address = bindingModel.Address;
+            currentUser.PhoneNumber = bindingModel.PhoneNumber;
+            currentUser.Email = bindingModel.Email;
+            currentUser.UserName = bindingModel.UserName;
+
+            return currentUser;
         }
     }
 }

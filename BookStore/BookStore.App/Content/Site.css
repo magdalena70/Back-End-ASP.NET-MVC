@@ -3,8 +3,7 @@
     src: url("../fonts/Gloss_And_Bloom.ttf");
 }
 
-body {
-    padding-top: 90px;
+body {   
     padding-bottom: 20px;
     background-image: url("Images/anglerfish.jpg");
     background-size: cover;
@@ -12,6 +11,15 @@ body {
     font-size: 19px;
     color: white;
     font-style: italic;
+}
+
+.affix{
+    top: 0;
+    width: 100%;
+}
+
+.affix + .container-fluid{
+    padding-top: 60px;
 }
 
 h1, h2, h3, h4, .lead {
@@ -73,13 +81,18 @@ a:hover{
     background-color: rgba(255, 255, 255, 0.4);
 }
 
+.home{
+    background-color: black;
+    border-bottom: 1px solid white;
+}
+
 .home h1{
     letter-spacing: 7px;
+    text-shadow: 10px 5px 1px gray;
 }
 
 .home .lead{
-    letter-spacing: 7px;
-    color: black;
+    letter-spacing: 7px;   
     font-weight: 900;
     text-shadow: none;
 }
@@ -128,6 +141,11 @@ a:hover{
 .carousel-inner > .item-active > .img-box > img{
     height: 300px;
     margin: auto;
+}
+
+.text-danger{
+    color: yellow;
+    font-weight: bold;
 }
 
 footer {

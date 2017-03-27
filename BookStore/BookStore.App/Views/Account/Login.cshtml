@@ -6,6 +6,7 @@
 <div class="row text-center">
     <h2>@ViewBag.Title</h2>
 </div>
+<hr />
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
         <section id="login-form">
@@ -13,28 +14,27 @@
             {
                 @Html.AntiForgeryToken()
                 <h4>Use a local account to log in.</h4>
-                <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                
                 <div class="form-group">
-                    @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+                    @Html.LabelFor(user => user.UserName, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(user => user.UserName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(user => user.UserName, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                    @Html.LabelFor(user => user.Password, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        @Html.PasswordFor(user => user.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(user => user.Password, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
+                            @Html.CheckBoxFor(user => user.RememberMe)
+                            @Html.LabelFor(user => user.RememberMe)
                         </div>
                     </div>
                 </div>
@@ -54,7 +54,3 @@
         </section>
     </div>
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

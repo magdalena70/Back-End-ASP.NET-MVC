@@ -68,28 +68,29 @@ namespace BookStore.App.Models
         [Display(Name = "UserName")]
         public string UserName { get; set; }
 
-        //[Required]
+        [Required]
         [StringLength(30, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
-        [Display(Name = "FirstName")]
+        [Display(Name = "First-Name")]
         public string FirstName { get; set; }
 
-        //[Required]
+        [Required]
         [StringLength(30, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
-        [Display(Name = "LastName")]
+        [Display(Name = "Last-Name")]
         public string LastName { get; set; }
 
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "Email-Address")]
         public string Email { get; set; }
 
-        //[Required]
+        [Required]
         [Display(Name = "Address")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         public string Address { get; set; }
 
-        //[Required]
-        [Display(Name = "PhoneNumber")]
+        [Required]
+        [Phone]
+        [Display(Name = "Phone-Number")]
         public string PhoneNumber { get; set; }
 
         [Required]
@@ -108,7 +109,7 @@ namespace BookStore.App.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "Email-Address")]
         public string Email { get; set; }
 
         [Required]
@@ -129,7 +130,7 @@ namespace BookStore.App.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "Email-Address")]
         public string Email { get; set; }
     }
 }

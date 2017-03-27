@@ -230,6 +230,7 @@ namespace BookStore.App.Controllers
             {
                 return View(model);
             }
+
             var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
             if (result.Succeeded)
             {
@@ -238,8 +239,11 @@ namespace BookStore.App.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+
+                this.TempData["Success"] = "Your password has been changed successfully.";
+                return RedirectToAction("UserProfile", "Users");
             }
+
             AddErrors(result);
             return View(model);
         }

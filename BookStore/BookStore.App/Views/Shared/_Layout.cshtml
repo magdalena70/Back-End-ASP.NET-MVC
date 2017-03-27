@@ -9,7 +9,14 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="row text-center home">
+            <h1>Book Store <span id="book-store-title">Anglerfish</span></h1>
+            <p class="lead">There is a light in the darkness.</p>
+            <p class="lead">Some creatures glow, while others simply float downstream.</p>
+        </div>
+    </div>
+    <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
         <div class="container">
 
             <div class="navbar-header">
@@ -35,9 +42,9 @@
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
-    </div>
+    </nav>
 
-    <div class="container body-content">
+    <div class="container-fluid body-content">
         @Html.Partial("_MessagesPartial")
         @RenderBody()
         <hr />
@@ -45,6 +52,7 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
