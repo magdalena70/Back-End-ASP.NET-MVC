@@ -4,44 +4,55 @@ using System.Net;
 using System.Web.Mvc;
 using BookStore.Data;
 using BookStore.Models;
+using BookStore.Services;
+using BookStore.Models.ViewModels;
+using System.Collections.Generic;
 using System;
 
 namespace BookStore.App.Controllers
 {
     public class BooksController : Controller
     {
-        private BookStoreContext db = new BookStoreContext();
+        private BookStoreContext context = new BookStoreContext();
+        private BookService bookService;
+
+        public BooksController()
+        {
+            this.bookService = new BookService(context);
+        }
 
         // GET: Books/NewBooks
         public ActionResult NewBooks()
         {
-            var newBooks = db.Books
-                .Where(b => b.IssueDate.Year == DateTime.Now.Year)
-                .ToList();
-
-
-            return View(newBooks);
+            IEnumerable<BooksViewModel> viewModel = this.bookService.GetNewBooks();
+            return View(viewModel);
         }
 
         //Get: Books/Promotions
         public ActionResult Promotions()
         {
-            return View(db.Books.ToList());
+            return View(context.Books.ToList());
         }
 
         // GET: Books/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, string returnUrl)
         {
+            ViewBag.ReturnUrl = returnUrl;
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                this.TempData["Error"] = "Incorrect url. Book id is required.";
+                 return RedirectToLocal(returnUrl);
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Book book = db.Books.Find(id);
-            if (book == null)
+
+            BookDetailsViewModel viewModel = this.bookService.GetDetails(id);
+            if (viewModel == null)
             {
-                return HttpNotFound();
+                this.TempData["Error"] = $"There is no book with id: {id}.";
+                return RedirectToLocal(returnUrl);
             }
-            return View(book);
+
+            return View(viewModel);
         }
 
         // GET: Books/BooksByTitle?bookTitle=...
@@ -50,20 +61,21 @@ namespace BookStore.App.Controllers
         {
             if (string.IsNullOrEmpty(bookTitle))
             {
-                this.TempData["Error"] = "Enter book's title to find books.";
+                this.TempData["Error"] = "Incorrect url.Enter book's title to find books.";
                 return View();
             }
 
-            var books = db.Books
-                .Where(b => b.Title.Contains(bookTitle));
-            if (books.Count() == 0)
+            IEnumerable<BooksViewModel> viewModel = this.bookService.GetBooksByTitle(bookTitle);
+            if (viewModel == null)
             {
                 this.TempData["Error"] = $"No book with title: '{bookTitle}'";
                 return View();
             }
 
-            return View(books);
+            return View(viewModel);
         }
+
+        //to do-----------------for admin------------------------------//
 
         // GET: Books/Create
         public ActionResult Create()
@@ -78,8 +90,8 @@ namespace BookStore.App.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Books.Add(book);
-                db.SaveChanges();
+                context.Books.Add(book);
+                context.SaveChanges();
                 return RedirectToAction("NewBooks", "Books");
             }
 
@@ -93,7 +105,7 @@ namespace BookStore.App.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Book book = db.Books.Find(id);
+            Book book = context.Books.Find(id);
             if (book == null)
             {
                 return HttpNotFound();
@@ -109,8 +121,8 @@ namespace BookStore.App.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(book).State = EntityState.Modified;
-                db.SaveChanges();
+                context.Entry(book).State = EntityState.Modified;
+                context.SaveChanges();
                 return RedirectToAction("Details/" + book.Id, "Books");
             }
 
@@ -125,7 +137,7 @@ namespace BookStore.App.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Book book = db.Books.Find(id);
+            Book book = context.Books.Find(id);
             if (book == null)
             {
                 return HttpNotFound();
@@ -139,17 +151,29 @@ namespace BookStore.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Book book = db.Books.Find(id);
-            db.Books.Remove(book);
-            db.SaveChanges();
+            Book book = context.Books.Find(id);
+            context.Books.Remove(book);
+            context.SaveChanges();
             return RedirectToAction("Index", "Home");
         }
+
+        #region Helpers
+        private ActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+        #endregion
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                context.Dispose();
             }
 
             base.Dispose(disposing);

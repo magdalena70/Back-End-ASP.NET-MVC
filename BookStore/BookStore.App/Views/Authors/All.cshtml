@@ -1,39 +1,53 @@
-﻿@model IEnumerable<BookStore.Models.Author>
+﻿@model IEnumerable<BookStore.Models.ViewModels.AllAuthorsViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "All Authors";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FullName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Bio)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FullName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Bio)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+<div class="row text-center">
+    <div class="col-md-10 col-md-offset-1">
+        <h2>@ViewBag.Title</h2>
+    </div>
+</div>
+<hr />
+@if (@Model != null)
+{
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 author-div">
+            <table id="all-authors-table" class="table table-bordered">
+                <tr>
+                    <th class="text-center lead">
+                        @Html.DisplayNameFor(author => author.FullName)
+                    </th>
+                    <th class="text-center lead">
+                        @Html.DisplayNameFor(author => author.Bio)
+                    </th>
+                    <th class="text-center lead">Books</th>
+                </tr>
+                @foreach (var author in Model)
+                {
+                    <tr>
+                        <td>
+                            <strong>@Html.DisplayFor(a => author.FullName)</strong>
+                        </td>
+                        <td>
+                            @if (author.Bio.Length > 20)
+                            {
+                                @author.Bio.Substring(0, 20)
+                                <span>...</span>
+                                <span class="btn btn-default pull-right">@Html.ActionLink("Learn more", "Details", "Authors", new { id = author.Id }, null)&raquo;</span>
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(a => author.Bio)
+                            }
+                        </td>
+                        <td>
+                            <span class="btn btn-default pull-right">@Html.ActionLink("Books By Author", "BooksByAuthor", "Authors", new { authorName = author.FullName }, null)&raquo;</span>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
 }
-
-</table>

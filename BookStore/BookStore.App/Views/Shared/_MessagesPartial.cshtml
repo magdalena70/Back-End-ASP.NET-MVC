@@ -1,29 +1,35 @@
 ﻿@if (TempData.ContainsKey("Success"))
 {
-    <div class="alert alert-success alert-dismissible text-center" role="alert">
-        <button type="button" class="close btn btn-danger" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        <strong>@TempData["Success"]</strong>
+    <div class="col-md-10 col-md-offset-1">
+        <div class="alert alert-success alert-dismissible text-center" role="alert">
+            <button type="button" class="close btn btn-danger" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>@TempData["Success"]</strong>
+        </div>
     </div>
 }
 
 @if (TempData.ContainsKey("Error"))
 {
-    <div class="alert alert-danger alert-dismissible text-center" role="alert">
-        <button type="button" class="close btn btn-danger" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        <strong>@TempData["Error"]</strong>
+    <div class="col-md-10 col-md-offset-1">
+        <div class="alert alert-danger alert-dismissible text-center" role="alert">
+            <button type="button" class="close btn btn-danger" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>@TempData["Error"]</strong>
+        </div>
     </div>
 }
 
 @if (TempData.ContainsKey("Info"))
 {
-    <div class="alert alert-info alert-dismissible text-center" role="alert">
-        <button type="button" class="close btn btn-danger" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        <strong>@TempData["Info"]</strong>
+    <div class="col-md-10 col-md-offset-1">
+        <div class="alert alert-info alert-dismissible text-center" role="alert">
+            <button type="button" class="close btn btn-danger" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>@TempData["Info"]</strong>
+        </div>
     </div>
 }

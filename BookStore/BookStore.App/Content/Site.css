@@ -3,7 +3,7 @@
     src: url("../fonts/Gloss_And_Bloom.ttf");
 }
 
-body {   
+body {
     padding-bottom: 20px;
     background-image: url("Images/anglerfish.jpg");
     background-size: cover;
@@ -13,22 +13,35 @@ body {
     font-style: italic;
 }
 
-.affix{
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    margin: 1em 0;
+    padding: 0; 
+}
+
+.affix {
     top: 0;
     width: 100%;
 }
 
-.affix + .container-fluid{
-    padding-top: 60px;
-}
+    .affix + .container-fluid {
+        padding-top: 60px;
+    }
 
-h1, h2, h3, h4, .lead {
+h1, h2, h3, h4, h5, .lead {
     font-family: Gloss_And_Bloom, sans-serif !important;
     text-shadow: 10px 5px 1px #160200;
     letter-spacing: 4px;
 }
 
-.lead{
+h3, h4{
+    margin-left: 3%;
+}
+
+.lead {
     font-size: 17px;
 }
 
@@ -36,7 +49,7 @@ img {
     box-shadow: 5px 5px 5px #160200;
 }
 
-a, a:hover{
+a, a:hover {
     text-shadow: 3px 3px 2px #000;
     letter-spacing: 2px;
     text-decoration: underline;
@@ -47,18 +60,31 @@ a {
     color: white;
 }
 
-a:hover{
-    color: yellow;
-}
+    a:hover {
+        color: yellow;
+    }
 
-.home-div, .category-div, .book-details-div, #login-form, #register-form{
+.home-div, .category-div, .book-div, .book-details-div, .author-div,
+ #login-form, #register-form, #all-authors-table {
     background-color: rgba(22, 2, 0, 0.4);
     padding: 10px;
 }
 
-.categoryName{
-    font-size: 15px;
-    line-height: 25px;
+#go-top-btn {
+    position: fixed;
+    right: 1%;
+    top: 42%;
+}
+
+#back-next-btns {
+    position: fixed;
+    left: 1%;
+    top: 37%;
+}
+
+#go-top-btn p, #back-next-btns p{
+    border-top: solid 2px rgba(255, 255, 255, 0.5);
+    border-bottom: solid 2px rgba(255, 255, 255, 0.5);
 }
 
 #book-store-title, .add-rating {
@@ -66,9 +92,9 @@ a:hover{
 }
 
 /* Set padding to keep content from hitting the edges */
-.body-content {
+/*.body-content {
     padding: 20px;
-}
+}*/
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
@@ -81,21 +107,39 @@ a:hover{
     background-color: rgba(255, 255, 255, 0.4);
 }
 
-.home{
+.home {
     background-color: black;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid gray;
 }
 
-.home h1{
-    letter-spacing: 7px;
-    text-shadow: 10px 5px 1px gray;
+    .home h1 {
+        letter-spacing: 7px;
+        text-shadow: 10px 5px 1px gray;
+    }
+
+    .home .lead {
+        letter-spacing: 7px;
+        font-weight: 900;
+        text-shadow: none;
+        color: gray;
+    }
+
+.btn-info {
+    font-size: 25px;
+    font-weight: bold;
+    text-shadow: 3px 3px 2px #000;
+    background-color: rgba(22, 2, 0, 0.8);
+    border: solid 2px rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    text-decoration: none;
+    font-style: normal;
 }
 
-.home .lead{
-    letter-spacing: 7px;   
-    font-weight: 900;
-    text-shadow: none;
-}
+    .btn-info:hover {
+        background-color: transparent;
+        color: yellow;
+        border-color: yellow;
+    }
 
 .btn-default {
     background-color: rgba(22, 2, 0, 0.4);
@@ -112,11 +156,11 @@ a:hover{
     text-decoration: none;
 }
 
-.navbar-nav li a{
+.navbar-nav li a {
     text-decoration: none;
 }
 
-.dropdown-menu li a{
+.dropdown-menu li a {
     font-weight: bold;
     color: #160200;
     text-shadow: none;
@@ -133,17 +177,17 @@ a:hover{
     border-top: solid 1px white;
 }
 
-.carousel-inner{
+.carousel-inner {
     background-color: rgba(22, 2, 0, 0.6);
 }
 
-.carousel-inner > .item > .img-box > img,
-.carousel-inner > .item-active > .img-box > img{
-    height: 300px;
-    margin: auto;
-}
+    .carousel-inner > .item > .img-box > img,
+    .carousel-inner > .item-active > .img-box > img {
+        height: 300px;
+        margin: auto;
+    }
 
-.text-danger{
+.text-danger {
     color: yellow;
     font-weight: bold;
 }

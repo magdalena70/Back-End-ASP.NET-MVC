@@ -1,18 +1,21 @@
-﻿@model BookStore.Models.Book
+﻿@model BookStore.Models.ViewModels.BookDetailsViewModel
 
 @{
-    ViewBag.Title = "Book Details";
+    ViewBag.Title = "Book's Details";
 }
-
-<h2>Book Details</h2>
+<div class="row text-center">
+    <div class="col-md-10 col-md-offset-1">
+        <h2>@ViewBag.Title</h2>
+    </div>
+</div>
 <div class="row">
     <div class="col-md-8 col-md-offset-2 book-details-div">
         <div class="row text-center books-list-title">
-            <h3>@Html.DisplayFor(modelItem => Model.Title)</h3>
+            <h3>@Html.DisplayFor(book => book.Title)</h3>
         </div>
         <div class="row">
             <div class="col-md-5 img-rounded">
-                <img src="@Model.ImageUrl" alt="tweet" class="img img-responsive" width="100%" />
+                <img src="@Model.ImageUrl" alt="book-img" class="img img-responsive" width="100%" />
             </div>
             <div class="col-md-7">
                 <h4>
@@ -20,30 +23,32 @@
                     @foreach (var author in Model.Authors)
                     {
                         <span class="text-center">
-                            @Html.ActionLink(author.FullName, "BooksByAuthor", "Authors", new { authorName = author.FullName })
+                            @Html.ActionLink(author.FullName, "BooksByAuthor", "Authors", new { authorName = author.FullName }, null)
                         </span>
                     }
                 </h4>
-                <p>Lang - @Html.DisplayFor(modelItem => Model.Language)</p>
-                <p>ISBN - @Html.DisplayFor(model => Model.ISBN)</p>
-                <p>Quantity - @Html.DisplayFor(model => Model.Quantity)</p>
-                <p>Number Of Pages - @Html.DisplayFor(model => Model.NumberOfPages)</p>
-                <p>IssueDate - @Html.DisplayFor(model => model.IssueDate)</p>
-                <p class="lead">Price: @Html.DisplayFor(modelItem => Model.Price)lv.</p>
-                <br />
+                <p>Lang - @Html.DisplayFor(book => book.Language)</p>
+                <p>ISBN - @Html.DisplayFor(book => book.ISBN)</p>
+                <p>Quantity - @Html.DisplayFor(book => book.Quantity)</p>
+                <p>Number Of Pages - @Html.DisplayFor(book => book.NumberOfPages)</p>
+                <p>Issue Date - @Model.IssueDate.ToString("dd-MM-yyyy")</p>
+                <p class="lead">Price: @Html.DisplayFor(book => book.Price)lv.</p>
+                <hr />
                 <div class="row">
                     <p>
-                        <span class="lead add-rating">Up Vote - @Html.DisplayFor(model => Model.UpRating)</span>
+                        <span class="lead add-rating">Up Vote - @Html.DisplayFor(book => book.UpRating)</span>
                     </p>
                     <p>
-                        <span class="lead add-rating">Down Vote - @Html.DisplayFor(model => Model.DownRating)</span>
+                        <span class="lead add-rating">Down Vote - @Html.DisplayFor(book => book.DownRating)</span>
                     </p>
                 </div>
             </div>
         </div>
+        <hr />
         <div class="row">
             <div class="col-md-10 col-lg-offset-1">
-                <p>Description - @Html.DisplayFor(model => model.Description)</p>
+                <h4>Description:</h4>
+                <p>@Html.DisplayFor(book => book.Description)</p>
             </div>
         </div>
         <hr />

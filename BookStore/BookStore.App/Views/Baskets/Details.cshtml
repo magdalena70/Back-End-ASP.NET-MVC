@@ -1,62 +1,73 @@
-﻿@model BookStore.Models.Basket
+﻿@model BookStore.Models.ViewModels.BasketViewModel
 
 @{
     ViewBag.Title = "Basket";
 }
 
 <div class="row text-center">
-    <h2>@Model.Owner.UserName's Basket</h2>
-    <h1>Total Price: @Model.TotalPrice BGN</h1>
-    <h1 class="pull-right">@Html.ActionLink("Buy", "Buy", "Baskets", new { id = Model.Id }, new { @class = "btn btn-danger btn-lg" })</h1>
-    <h3>Discount: @Model.Discount</h3>
+    <div class="col-md-10 col-md-offset-1">
+        <h3>@Model.OwnerUserName's Basket</h3>
+        <hr />
+        <h2>Total Price: @Model.TotalPrice BGN</h2>
+        <h4>Discount: @Model.Discount</h4>
+    </div>
 </div>
 <hr />
-
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        @Html.ActionLink("Buy", "Buy", "Baskets", new { id = Model.Id }, new { @class = "btn btn-danger btn-block" })
+    </div>
+</div>
+<hr />
 @if (@Model != null)
 {
     <div class="row">
-        @foreach (var book in Model.Books)
-        {
-            <div class="col-md-4 books-list">
-                <div class="row text-center books-list-title">
-                    <h4>@Html.DisplayFor(b => book.Title)</h4>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <a href="/Books/Details/@book.Id"><img src="@book.ImageUrl" alt="tweet" class="img-thumbnail" /></a>
+        <div class="col-md-10 col-md-offset-1 book-div">
+            @foreach (var book in Model.Books)
+            {
+                <div class="col-md-4 books-list">
+                    <div class="row text-center books-list-title">
+                        <h4>@Html.DisplayFor(b => book.Title)</h4>
                     </div>
-                    <div class="col-md-8">
-                        <p>
-                            <span>by </span>
-                            @foreach (var author in book.Authors)
+                    <div class="row">
+                        <div class="col-md-4">
+                            <a href="/Books/Details/@book.Id"><img src="@book.ImageUrl" alt="tweet" class="img-thumbnail" /></a>
+                        </div>
+                        <div class="col-md-8">
+                            <p>
+                                <span>by </span>
+                                @foreach (var author in book.Authors)
+                                {
+                                    <span class="text-center">
+                                        @Html.ActionLink(author.FullName, "BooksByAuthor", "Authors", new { authorName = author.FullName }, null)
+                                    </span>
+                                }
+                            </p>
+                            <p>Lang - @Html.DisplayFor(b => book.Language)</p>
+                            <p>Price: @Html.DisplayFor(b => book.Price)lv.</p>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-6">
+                            @using (Html.BeginForm("RemoveFromBasket", "Baskets", FormMethod.Post))
                             {
-                                <span class="text-center">
-                                    @Html.ActionLink(author.FullName, "BooksByAuthor", "Authors", new { authorName = author.FullName })
-                                </span>
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(b => book.Id)
+                                <div class="form-actions no-color">
+                                    <input type="submit" value="RemoveFromBasket" class="btn btn-default" />
+                                </div>
                             }
-                        </p>
-                        <p>Lang - @Html.DisplayFor(b => book.Language)</p>
-                        <p>Price: @Html.DisplayFor(b => book.Price)lv.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="btn btn-default">
+                                @Html.ActionLink("See more", "Details", "Books", new { id = book.Id }, null)
+                                &raquo;
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <hr />
-                <div class="row">
-                    <div class="col-md-6">
-                        @using (Html.BeginForm("RemoveFromBasket", "Baskets", FormMethod.Post))
-                        {
-                            @Html.AntiForgeryToken()
-                            @Html.HiddenFor(b => book.Id)
-                            <div class="form-actions no-color">
-                                <input type="submit" value="RemoveFromBasket" class="btn btn-default" />
-                            </div>
-                        }
-                    </div>
-
-                    <div class="col-md-6">
-                        <a href="Details/@book.Id" class="btn btn-default">See more &raquo;</a>
-                    </div>
-                </div>
-            </div>
-        }
+            }
+        </div>
     </div>
 }

@@ -4,9 +4,10 @@
     ViewBag.Title = "Edit Profile";
 }
 <div class="row">
-    <p class="pull-left">
-        <input type="button" value="Back" onclick="window.history.back()" class="btn btn-default"/>
-    </p>
+    <input type="button" onclick="window.history.back()" value="&laquo; Back" class="btn btn-default">
+</div>
+
+<div class="row">
     <p class="pull-right">
         @Html.ActionLink("Change Password", "ChangePassword", "Manage", null, new { @class = "btn btn-default"})
     </p>

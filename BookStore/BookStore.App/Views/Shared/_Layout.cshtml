@@ -9,7 +9,7 @@
 
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid" id="top">
         <div class="row text-center home">
             <h1>Book Store <span id="book-store-title">Anglerfish</span></h1>
             <p class="lead">There is a light in the darkness.</p>
@@ -28,8 +28,8 @@
                 <ul class="nav navbar-nav">
                     <li>
                         @*@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new{@class = "navbar-brand"})*@
-                        <a href="/Home/Index" class = "navbar-brand btn btn-default">
-                            <img src="~/Content/Images/home-icon.png" class="img-rounded" alt="home-icon"/>
+                        <a href="/Home/Index" class="navbar-brand btn btn-default">
+                            <img src="~/Content/Images/home-icon.png" class="img-rounded" alt="home-icon" />
                             <p class="carousel-caption lead">home</p>
                         </a>
                     </li>
@@ -45,6 +45,7 @@
     </nav>
 
     <div class="container-fluid body-content">
+        @Html.Partial("_BackNextTopButtonsPartial")
         @Html.Partial("_MessagesPartial")
         @RenderBody()
         <hr />

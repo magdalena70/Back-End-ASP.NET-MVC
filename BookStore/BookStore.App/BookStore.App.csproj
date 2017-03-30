@@ -304,6 +304,7 @@
     <Content Include="Views\Baskets\Details.cshtml" />
     <Content Include="Views\Baskets\Edit.cshtml" />
     <Content Include="Views\Baskets\Index.cshtml" />
+    <Content Include="Views\Authors\Details.cshtml" />
     <None Include="Views\Categories\All.cshtml" />
     <None Include="Views\Categories\BooksByCategory.cshtml" />
     <Content Include="Views\Categories\BestSellers.cshtml" />
@@ -316,6 +317,7 @@
     <Content Include="Views\Users\EditProfile.cshtml" />
     <Content Include="Views\Home\TermsAndConditions.cshtml" />
     <Content Include="Views\Users\FavoriteBooks.cshtml" />
+    <Content Include="Views\Shared\_BackNextTopButtonsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

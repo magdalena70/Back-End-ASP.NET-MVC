@@ -1,43 +1,79 @@
-﻿@{
+﻿@using System.Globalization;
+@{
     ViewBag.Title = "Home Page";
 }
-
-<hr />
-<div class="row home-div">
-    <div class="col-md-4">
-        <h2>Promotions</h2>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1 home-div">
+        <h3>Top 3 Books of the year 2016</h3>
         <p>
-            Posuere et auctor accumsan porttitor, convallis aptent mi quis luctus,
-            mollis inceptos posuere tristique tempor eget dolor...
+            Ac morbi, augue nec lacus mus justo proin scelerisque, duis id quam mi justo...
+            <span class="btn btn-default">@Html.ActionLink("Learn more", "All", "Categories")&raquo;</span>
         </p>
-        <p><a class="btn btn-default" href="/Books/Promotions">Learn more &raquo;</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>New books</h2>
+    <div class="col-md-10 col-md-offset-1 home-div">
+        <h3>Top 3 Books of the year 2017</h3>
         <p>
-            Nonummy eu, ut arcu iaculis convallis mollis id sollicitudin,
-            habitasse interdum volutpat ut condimentum elit...
+            Ac morbi, augue nec lacus mus justo proin scelerisque, duis id quam mi justo...
+            <span class="btn btn-default">@Html.ActionLink("Learn more", "All", "Categories")&raquo;</span>
         </p>
-        <p><a class="btn btn-default" href="/Books/NewBooks">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Best Sellers</h2>
-        <p>
-            Dolor mauris pede dui pellentesque, pellentesque tempor sed at urna pharetra,
-            wisi phasellus purus suscipit cum wisi...
-        </p>
-        <p><a class="btn btn-default" href="/Categories/BestSellers">Learn more &raquo;</a></p>
     </div>
 </div>
 <hr />
-<div class="row home-div">
-    <div class="col-md-8 col-md-offset-3">
-        <h3>All Categories</h3>
-        <p>
-            Ac morbi,
-            augue nec lacus mus justo proin scelerisque, duis id quam mi justo...
-            <a class="btn btn-default" href="/Categories/All">Learn more &raquo;</a>
-        </p>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1 home-div">
+        <div class="col-md-4">
+            <h3>Promotions</h3>
+            <p>
+                - Special offer prices are available on selected titles and offer prices are available...
+                @*for a duration of 1 months unless otherwise stated. 3 for 2 promotional offers:
+                    discounted prices do not apply to 3 for 2 promotions and full recommended retail
+                    prices will apply. Three different titles within the promotion must be purchased
+                    to qualify for the 3 for 2 promotion. The cheapest item will be discounted in your
+                    shopping basket once the third item has been ‘added to basket’. The cheapest item is free.
+                    This offer cannot be used in conjunction with any other offer.*@
+            </p>
+            <p>
+                - Buy one get one half price promotional offers: discounted prices do not apply to...
+                @*buy one get one half price promotions and full recommended retail prices will apply.
+                    Two different titles from within the selected range must be purchased to qualify for
+                    the buy one get one half price promotion. The half price discount will be applied to the
+                    cheapest item in your shopping basket once the second item has been ‘added to basket’.
+                    The cheapest item is half price. This offer cannot be used in conjunction with any other offer.*@
+            </p>
+            <p class="btn btn-default">@Html.ActionLink("Learn more", "Promotions", "Books")&raquo;</p>
+        </div>
+        <div class="col-md-4">
+            <h3>New books</h3>
+            <p>
+                - Books of the year 2017 @DateTimeFormatInfo.InvariantInfo.GetMonthName(DateTime.Now.Month) convallis mollis id sollicitudin, habitasse interdum volutpat...
+            </p>
+            <p>
+                - Books of the year 2017 @DateTimeFormatInfo.InvariantInfo.GetMonthName((DateTime.Now.Month)-1) nonummy eu, ut arcu iaculis sollicitudin...
+            </p>
+            <p class="btn btn-default">@Html.ActionLink("Learn more", "NewBooks", "Books")&raquo;</p>
+        </div>
+        <div class="col-md-4">
+            <h3>Best Sellers</h3>
+            <p>
+                - Mauris pede dui pellentesque, pellentesque tempor sed at urna pharetra, wisi phasellus...
+            </p>
+            <p>
+                - Dolor mauris pede dui pellentesque, pellentesque tempor sed at urna pharetra...
+            </p>
+            <p class="btn btn-default">@Html.ActionLink("Learn more", "BestSellers", "Categories")&raquo;</p>
+        </div>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-10 col-md-offset-1 home-div">
+        <div class="col-md-8 col-md-offset-3">
+            <h3>All Categories</h3>
+            <p>
+                Ac morbi, augue nec lacus mus justo proin scelerisque, duis id quam mi justo...
+                <span class="btn btn-default">@Html.ActionLink("Learn more", "All", "Categories")&raquo;</span>
+            </p>
+        </div>
     </div>
 </div>
 <hr />

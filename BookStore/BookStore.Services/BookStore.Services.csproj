@@ -57,6 +57,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthorService.cs" />
+    <Compile Include="BasketService.cs" />
+    <Compile Include="BookService.cs" />
     <Compile Include="CategoryService.cs" />
     <Compile Include="Service.cs" />
     <Compile Include="UserService.cs" />

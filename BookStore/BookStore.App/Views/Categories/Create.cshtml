@@ -5,14 +5,14 @@
 }
 
 <div class="row text-center">
-    <p class="pull-left">
-        <input type="button" class="btn btn-default" value="Back" onclick="window.history.back()" />
-    </p>
-    <p class="pull-right">@Html.ActionLink("All Categories", "All", "Categories")</p>
-    <h2>Create Category</h2>
-    <hr />
+    <div class="col-md-10 col-md-offset-1">
+        <p class="pull-right">@Html.ActionLink("All Categories", "All", "Categories")</p>
+        <h2>Create Category</h2>
+        <hr />
+    </div>
 </div>
 <div class="row">
+<div class="col-md-10 col-md-offset-1">
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -35,5 +35,5 @@
         </div>
     }
 </div>
-
+</div>
 

@@ -1,26 +1,54 @@
 ﻿using System.Data.Entity;
-using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using BookStore.Data;
 using BookStore.Models;
+using BookStore.Models.ViewModels;
+using BookStore.Services;
+using System.Collections.Generic;
 
 namespace BookStore.App.Controllers
 {
     public class AuthorsController : Controller
     {
-        private BookStoreContext db = new BookStoreContext();
+        private BookStoreContext context = new BookStoreContext();
+        private AuthorService authorService;
 
-        // GET: Authors
-        public ActionResult All()
+        public AuthorsController()
         {
-            var allAuthors = db.Authors.ToList();
-            return View(allAuthors);
+            this.authorService = new AuthorService(context);
         }
 
-        // GET: Books/BooksByAuthor?authorName=...
+        // GET: Authors
+        [AllowAnonymous]
+        public ActionResult All()
+        {
+            IEnumerable<AllAuthorsViewModel> viewModel = this.authorService.GetAll();
+            return View(viewModel);
+        }
+
+        // GET: Authors/Details/id
+        public ActionResult Details(int? id)
+        {
+            if(id == null)
+            {
+                this.TempData["Error"] = "Invalid url.";
+                return RedirectToAction("All", "Authors");
+            }
+
+            AuthorViewModel viewModel = this.authorService.GetAuthor(id);
+            if (viewModel == null)
+            {
+                this.TempData["Error"] = $"There is no author whit id: {id}";
+                return RedirectToAction("All", "Authors");
+            }
+
+            return View(viewModel);
+        }
+
+        // GET: Authors/BooksByAuthor?authorName=...
         [ActionName("BooksByAuthor")]
-        public ActionResult AuthorDetails(string authorName)
+        public ActionResult BooksByAuthorFullName(string authorName)
         {
             if (string.IsNullOrEmpty(authorName))
             {
@@ -28,15 +56,17 @@ namespace BookStore.App.Controllers
                 return View();
             }
 
-            Author author = db.Authors.First(a => a.FullName.Contains(authorName));
-            if (author == null)
+            AuthorWithBooksViewModel viewModel = this.authorService.GetAuthorWithBooks(authorName);
+            if (viewModel == null)
             {
                 this.TempData["Error"] = $"No author whith name: '{authorName}'";
                 return View();
             }
 
-            return View(author);
+            return View(viewModel);
         }
+
+        //-----------------for admin---------------------------//
 
         // GET: Authors/Create
         public ActionResult Create()
@@ -45,16 +75,14 @@ namespace BookStore.App.Controllers
         }
 
         // POST: Authors/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,FullName,Bio")] Author author)
         {
             if (ModelState.IsValid)
             {
-                db.Authors.Add(author);
-                db.SaveChanges();
+                context.Authors.Add(author);
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -68,7 +96,7 @@ namespace BookStore.App.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Author author = db.Authors.Find(id);
+            Author author = context.Authors.Find(id);
             if (author == null)
             {
                 return HttpNotFound();
@@ -77,16 +105,14 @@ namespace BookStore.App.Controllers
         }
 
         // POST: Authors/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,FullName,Bio")] Author author)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(author).State = EntityState.Modified;
-                db.SaveChanges();
+                context.Entry(author).State = EntityState.Modified;
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(author);
@@ -99,7 +125,7 @@ namespace BookStore.App.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Author author = db.Authors.Find(id);
+            Author author = context.Authors.Find(id);
             if (author == null)
             {
                 return HttpNotFound();
@@ -112,9 +138,9 @@ namespace BookStore.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Author author = db.Authors.Find(id);
-            db.Authors.Remove(author);
-            db.SaveChanges();
+            Author author = context.Authors.Find(id);
+            context.Authors.Remove(author);
+            context.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -122,7 +148,7 @@ namespace BookStore.App.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                context.Dispose();
             }
             base.Dispose(disposing);
         }
