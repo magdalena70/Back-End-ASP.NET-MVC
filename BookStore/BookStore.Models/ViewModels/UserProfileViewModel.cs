@@ -8,11 +8,13 @@ namespace BookStore.Models.ViewModels
 
         public Basket Basket { get; set; }
 
-        public List<Book> BooksInBasket { get; set; }
+        public List<CountBookInBasketViewModel> Books { get; set; }
 
         public int CountBooksInBasket { get; set; }
 
         public decimal BasketTotalPrice { get; set; }
+
+        public int CountBooksInFavorite { get; set; }
 
         public List<Category> YouMayAlsoLike { get; set; }
     }

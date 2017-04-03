@@ -25,6 +25,11 @@ namespace BookStore.App.Controllers
         public ActionResult NewBooks()
         {
             IEnumerable<BooksViewModel> viewModel = this.bookService.GetNewBooks();
+            if (viewModel.Count() == 0)
+            {
+                this.TempData["Info"] = "No books.";
+                //return View();
+            }
             return View(viewModel);
         }
 

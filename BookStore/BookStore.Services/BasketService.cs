@@ -3,6 +3,8 @@ using BookStore.Data;
 using BookStore.Models.ViewModels;
 using System.Linq;
 using BookStore.Models;
+using BookStore.Models.BindingModels;
+using System.Collections.Generic;
 
 namespace BookStore.Services
 {
@@ -27,10 +29,75 @@ namespace BookStore.Services
                 Discount = basket.Discount,
                 TotalPrice = basket.TotalPrice,
                 OwnerUserName = basket.Owner.UserName,
-                Books = basket.Books.ToList()
+                Count = basket.Books
+                    .GroupBy(b => b.Book.Id)
+                    .Select(b => new CountBookInBasketViewModel()
+                    {
+                        Count = b.Count(),
+                        Book = b.First().Book
+                    }).ToList()
             };
 
             return viewModel;
+        }
+
+        public void AddBookToBasket(User currUser, Book currBook)
+        {
+            Basket currBasket = currUser.Basket;
+            if (currBasket == null)
+            {
+                Basket basket = new Basket()
+                {
+                    Owner = currUser,
+                    TotalPrice = currBook.Price,
+                    Discount = this.CheckDiscount(currBook.Price)
+                };
+                
+                    this.context.BasketsBooks.Add(new BasketBook()
+                    {
+                        Basket = basket,
+                        Book = currBook
+                    });
+            }
+            else
+            {
+                 currBasket.TotalPrice += currBook.Price;
+                currBasket.Discount = this.CheckDiscount(currBasket.TotalPrice);
+                    var newBook = new BasketBook()
+                    {
+                        Basket = currBasket,
+                        Book = currBook
+                    };
+                    
+                    this.context.BasketsBooks.Add(newBook);
+            }
+            if (currBook.Quantity > 0)
+            {
+                currBook.Quantity--;
+            }
+            
+            context.SaveChanges();
+        }
+
+        private decimal CheckDiscount(decimal price)
+        {
+            var discount = 0m;
+            if (price > 50)
+            {
+                discount = 5.0m;
+            }
+
+            if (price > 100)
+            {
+                discount = 10.0m;
+            }
+
+            if (price > 200)
+            {
+                discount = 15.0m;
+            }
+
+            return discount;
         }
     }
 }

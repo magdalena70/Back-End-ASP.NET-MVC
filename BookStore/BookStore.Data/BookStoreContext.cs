@@ -21,6 +21,8 @@ namespace BookStore.Data
 
         public virtual DbSet<Basket> Baskets { get; set; }
 
+        public virtual DbSet<BasketBook> BasketsBooks { get; set; }
+
         public static BookStoreContext Create()
         {
             return new BookStoreContext();

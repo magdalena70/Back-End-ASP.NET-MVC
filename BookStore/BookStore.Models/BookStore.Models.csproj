@@ -59,6 +59,8 @@
   <ItemGroup>
     <Compile Include="Author.cs" />
     <Compile Include="Basket.cs" />
+    <Compile Include="BasketBook.cs" />
+    <Compile Include="BindingModels\AddBookToBasketBindingModel.cs" />
     <Compile Include="BindingModels\FavoriteBookBindingModel.cs" />
     <Compile Include="BindingModels\CategoryBindingModel.cs" />
     <Compile Include="BindingModels\EditUserProfileBindingModel.cs" />
@@ -75,6 +77,7 @@
     <Compile Include="ViewModels\BookDetailsViewModel.cs" />
     <Compile Include="ViewModels\BooksViewModel.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\CountBookInBasketViewModel.cs" />
     <Compile Include="ViewModels\EditUserProfileViewModel.cs" />
     <Compile Include="ViewModels\UserFavoriteBooksViewModel.cs" />
     <Compile Include="ViewModels\UserProfileViewModel.cs" />

@@ -22,6 +22,6 @@ C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.Models\b
 C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.Models\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.Models\bin\Debug\Microsoft.AspNet.Identity.Core.xml
 C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.Models\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
-C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.Models\obj\Debug\BookStore.Models.csprojResolveAssemblyReference.cache
 C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.Models\obj\Debug\BookStore.Models.dll
 C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.Models\obj\Debug\BookStore.Models.pdb
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.Models\obj\Debug\BookStore.Models.csprojResolveAssemblyReference.cache

@@ -34,8 +34,8 @@ namespace BookStore.App.Controllers
 
             if (viewModel == null)
             {
-                this.TempData["Error"] = "No books in category: 'BestSellers'";
-                return RedirectToAction("Index", "Home");
+                this.TempData["Info"] = "No books in category: 'BestSellers'";
+                return View();
             }
 
             return View(viewModel);
@@ -54,7 +54,13 @@ namespace BookStore.App.Controllers
             CategoryViewModel viewModel = this.categoryService.GetCategoryDetails(id);
             if (viewModel == null)
             {
-                return RedirectToAction("Index", "Home");
+                this.TempData["Error"] = $"There is no category with id: {id}.";
+                return RedirectToAction("All", "Categories");
+            }
+
+            if (viewModel.Books.Count == 0)
+            {
+                this.TempData["Info"] = $"There are no books in category {viewModel.Name}.";
             }
 
             return View(viewModel);
@@ -67,7 +73,7 @@ namespace BookStore.App.Controllers
         {
             if (string.IsNullOrEmpty(categoryName))
             {
-                this.TempData["Error"] = "Enter category name to find books.";
+                this.TempData["Info"] = "Enter category name to find books.";
                 return View();
             }
 

@@ -7,6 +7,7 @@ using BookStore.Models;
 using Microsoft.AspNet.Identity;
 using BookStore.Services;
 using BookStore.Models.ViewModels;
+using BookStore.Models.BindingModels;
 
 namespace BookStore.App.Controllers
 {
@@ -38,54 +39,56 @@ namespace BookStore.App.Controllers
         // POST: Baskets/AddToBasket
         [HttpPost, ActionName("AddToBasket")]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateBasketAndAddBookInIt([Bind(Include = "Id")] Book book)
+        public ActionResult CreateBasketAndAddBookInIt([Bind(Include = "Id")] AddBookToBasketBindingModel book)
         {
-            User currUser = context.Users.Find(User.Identity.GetUserId());
-            Basket currBasket = currUser.Basket;
             Book currBook = context.Books.Find(book.Id);
-
-            if (currBasket == null)
+            User currUser = context.Users.Find(User.Identity.GetUserId());
+            if (currBook.Quantity == 0)
             {
-                Basket basket = new Basket()
-                {
-                    Owner = currUser,
-                    TotalPrice = 0,
-                    Discount = 0.0m
-                };
-
-                basket.Books.Add(currBook);
-                basket.TotalPrice += currBook.Price;
-                context.Baskets.Add(basket);
-                context.SaveChanges();
-
-                this.TempData["Success"] = $"You added book: {currBook.Title} in basket.";
-                return RedirectToAction("UserProfile", "Users");
+                this.TempData["Info"] = $"You can not add book '{currBook.Title}' in basket. it's not on stock.";
             }
 
-            currBasket.Books.Add(currBook);
-            currBasket.TotalPrice += currBook.Price;
-            context.SaveChanges();
+            if (currBook.Quantity > 0)
+            {
+                this.basketService.AddBookToBasket(currUser, currBook);
+                this.TempData["Success"] = $"You added book: '{currBook.Title}' in basket.";
+            }
 
-            this.TempData["Success"] = $"You added book: {currBook.Title} in basket.";
-            return RedirectToAction("UserProfile", "Users");
-        }
-
-        // POST: Baskets/RemoveFromBasket
-        [HttpPost, ActionName("RemoveFromBasket")]
-        [ValidateAntiForgeryToken]
-        public ActionResult Details([Bind(Include = "Id")] Book book)
-        {
-            var userId = User.Identity.GetUserId();
-            Book currentBook = context.Books.Find(book.Id);
-            Basket basket = context.Baskets.FirstOrDefault(b => b.Owner.Id == userId);
-            basket.TotalPrice -= currentBook.Price;
-            basket.Books.Remove(currentBook);
-            basket.Owner = context.Users.First();
-
-            context.SaveChanges();
-            this.TempData["Success"] = $"You removed one book from your basket.";
             return RedirectToAction("Details", "Baskets");
         }
+
+        //// POST: Baskets/RemoveFromBasket
+        //[HttpPost, ActionName("RemoveFromBasket")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Details([Bind(Include = "Id")] AddBookToBasketBindingModel book)
+        //{
+        //    var userId = User.Identity.GetUserId();
+        //    Book currentBook = context.Books.Find(book.Id);
+        //    Basket basket = context.Baskets.FirstOrDefault(b => b.Owner.Id == userId);
+
+        //    if (currentBook.CountYourSelfInBasket > 1)
+        //    {
+        //        currentBook.CountYourSelfInBasket--;
+        //        basket.TotalPrice -= currentBook.Price;
+        //        basket.Owner = context.Users.Find(userId);
+        //        context.SaveChanges();
+        //        this.TempData["Success"] = $"You removed one book '{currentBook.Title}' from your basket.";
+        //        return RedirectToAction("Details", "Baskets");
+        //    }
+           
+        //    if (currentBook.CountYourSelfInBasket == 1)
+        //    {
+        //        currentBook.CountYourSelfInBasket = 0;
+        //        basket.TotalPrice -= currentBook.Price;
+        //        basket.Books.Remove(currentBook);
+        //        basket.Owner = context.Users.Find(userId);
+        //        context.SaveChanges();
+        //    }
+
+            
+        //    this.TempData["Success"] = $"You removed book '{currentBook.Title}' from your basket.";
+        //    return RedirectToAction("Details", "Baskets");
+        //}
 
         // GET: Baskets/Edit/5
         public ActionResult Edit(int? id)

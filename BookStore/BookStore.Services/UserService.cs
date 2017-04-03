@@ -18,28 +18,39 @@ namespace BookStore.Services
             UserProfileViewModel viewModel = new UserProfileViewModel()
             {
                 UserName = currentUser.UserName,
-                Basket = currentUser.Basket,
-                BasketTotalPrice = currentUser.Basket.TotalPrice,
-                CountBooksInBasket = currentUser.Basket.Books.Count,
-                BooksInBasket = currentUser.Basket.Books.ToList(),
-                YouMayAlsoLike = GetCategories(currentUser)
+                CountBooksInFavorite = currentUser.FavoriteBooks.Count
             };
+
+            if (currentUser.Basket != null)
+            {
+                viewModel.Basket = currentUser.Basket;
+                viewModel.BasketTotalPrice = currentUser.Basket.TotalPrice;
+                viewModel.CountBooksInBasket = currentUser.Basket.Books.Count;
+                viewModel.Books = currentUser.Basket.Books
+                    .GroupBy(b => b.Book.Id)
+                    .Select(b => new CountBookInBasketViewModel()
+                    {
+                        Count = b.Count(),
+                        Book = b.First().Book
+                    }).ToList();
+                viewModel.YouMayAlsoLike = GetCategories(currentUser);
+            }
 
             return viewModel;
         }
 
         private List<Category> GetCategories(User currentUser)
         {
-            List<Book> booksInBasket = currentUser.Basket.Books.ToList();
+            List<BasketBook> booksInBasket = currentUser.Basket.Books.ToList();
             List<Category> categoryInBasket = new List<Category>();
             foreach (var bookInBasket in booksInBasket)
             {
-                foreach (var category in bookInBasket.Categories)
+                foreach (var category in bookInBasket.Book.Categories)
                 {
                     if (!categoryInBasket.Contains(category))
                     {
                         categoryInBasket.Add(category);
-                    }                 
+                    }
                 }
             }
 

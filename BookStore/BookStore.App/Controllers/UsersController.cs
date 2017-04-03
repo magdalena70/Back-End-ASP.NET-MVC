@@ -40,7 +40,7 @@ namespace BookStore.App.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            UserProfileViewModel viewModel = this.userService.GetUserProfileViewModel(currentUser);
+            UserProfileViewModel viewModel = this.userService.GetUserProfileViewModel(currentUser);            
             return View(viewModel);
         }
 

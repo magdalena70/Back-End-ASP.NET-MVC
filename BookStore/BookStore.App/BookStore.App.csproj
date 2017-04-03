@@ -222,6 +222,7 @@
     <Content Include="Content\Images\Books\ingloriousEmpire.jpg" />
     <Content Include="Content\Images\Books\theRaqqaDiaries.jpg" />
     <Content Include="Content\Images\Books\theRulesDoNotApply.jpg" />
+    <Content Include="Content\Images\heart-favorite.jpg" />
     <Content Include="Content\Images\home-icon.png" />
     <Content Include="Content\Images\menu-icon.png" />
     <Content Include="Content\Images\search-icon.png" />

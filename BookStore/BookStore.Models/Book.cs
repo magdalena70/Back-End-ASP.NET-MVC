@@ -11,6 +11,8 @@ namespace BookStore.Models
             this.Authors = new HashSet<Author>();
             this.Reviews = new HashSet<Review>();
             this.Categories = new HashSet<Category>();
+            this.Baskets = new HashSet<BasketBook>();
+            this.Fans = new HashSet<User>();
         }
 
         [Key]
@@ -50,5 +52,9 @@ namespace BookStore.Models
         public virtual ICollection<Author> Authors { get; set; }
 
         public virtual ICollection<Review> Reviews { get; set; }
+
+        public virtual ICollection<BasketBook> Baskets { get; set; }
+
+        public virtual ICollection<User> Fans { get; set; }
     }
 }

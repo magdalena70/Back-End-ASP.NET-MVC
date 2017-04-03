@@ -7,7 +7,7 @@ namespace BookStore.Models
     {
         public Basket()
         {
-            this.Books = new HashSet<Book>();
+            this.Books = new HashSet<BasketBook>();
         }
 
         [Key]
@@ -20,6 +20,6 @@ namespace BookStore.Models
 
         public decimal Discount { get; set; }
 
-        public virtual ICollection<Book> Books { get; set; }
+        public virtual ICollection<BasketBook> Books { get; set; }
     }
 }

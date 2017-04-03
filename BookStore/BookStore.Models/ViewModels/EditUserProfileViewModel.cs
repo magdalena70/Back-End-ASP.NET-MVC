@@ -8,12 +8,12 @@ namespace BookStore.Models.ViewModels
 
         [Required]
         [StringLength(30, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
-        [Display(Name = "First-Name")]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
         [Required]
         [StringLength(30, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
-        [Display(Name = "Last-Name")]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         [Required]
@@ -23,7 +23,7 @@ namespace BookStore.Models.ViewModels
 
         [Required]
         [EmailAddress]
-        [Display(Name = "Email-Address")]
+        [Display(Name = "Email Address")]
         public string Email { get; set; }
 
         [Required]
@@ -33,7 +33,7 @@ namespace BookStore.Models.ViewModels
 
         [Required]
         [Phone]
-        [Display(Name = "Phone-Number")]
+        [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
     }
 }

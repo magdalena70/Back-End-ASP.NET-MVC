@@ -16,9 +16,7 @@ namespace BookStore.Services
         public IEnumerable<BooksViewModel> GetNewBooks()
         {
             var newBooks = context.Books
-                .Where(b => (b.IssueDate.Year == DateTime.Now.Year && b.IssueDate.Month == DateTime.Now.Month) ||
-                            (b.IssueDate.Year == DateTime.Now.Year && (b.IssueDate.Month)-1 == (DateTime.Now.Month)-1) ||
-                            (b.IssueDate.Year == DateTime.Now.Year && (b.IssueDate.Month) - 2 == (DateTime.Now.Month) - 2))
+                .Where(b => b.IssueDate.Year == DateTime.Now.Year && b.IssueDate.Month > DateTime.Now.Month - 3)
                 .OrderByDescending(b => b.IssueDate)
                 .Select(b => new BooksViewModel()
                 {

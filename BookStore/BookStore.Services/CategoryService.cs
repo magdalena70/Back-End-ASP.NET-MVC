@@ -31,11 +31,19 @@ namespace BookStore.Models
             var category = this.context.Categories
                 .Include("Books")
                 .FirstOrDefault(c => c.Name == "Best Sellers");
+            if (category == null)
+            {
+                return null;
+            }
+
             CategoryViewModel viewModel = new CategoryViewModel()
             {
                 Id = category.Id,
                 Name = category.Name,
-                Books = category.Books.ToList()
+                Books = category.Books
+                    .OrderByDescending(b => b.UpRating)
+                    .ThenByDescending(b => b.IssueDate)
+                    .ToList()
             };
                 
             return viewModel;
@@ -43,8 +51,12 @@ namespace BookStore.Models
 
         public CategoryViewModel GetCategoryDetails(int? id)
         {
-            var category = this.context.Categories
-                .Find(id);
+            var category = this.context.Categories.Find(id);
+            if (category == null)
+            {
+                return null;
+            }
+
             CategoryViewModel viewModel = new CategoryViewModel()
             {
                 Id = category.Id,
@@ -60,6 +72,11 @@ namespace BookStore.Models
             var category = context.Categories
                 .Include("Books")
                .FirstOrDefault(c => c.Name.Contains(categoryName));
+            if (category == null)
+            {
+                return null;
+            }
+
             CategoryViewModel viewModel = new CategoryViewModel()
             {
                 Id = category.Id,

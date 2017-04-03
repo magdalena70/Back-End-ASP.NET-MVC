@@ -12,6 +12,6 @@ namespace BookStore.Models.ViewModels
 
         public decimal Discount { get; set; }
 
-        public virtual List<Book> Books { get; set; }
+        public List<CountBookInBasketViewModel> Count { get; set; }
     }
 }

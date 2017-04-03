@@ -6,16 +6,11 @@
 
 <div class="row text-center">
     <div class="col-md-10 col-md-offset-1">
-        <h3>@Model.OwnerUserName's Basket</h3>
+        <h3>My Basket</h3>
         <hr />
         <h2>Total Price: @Model.TotalPrice BGN</h2>
-        <h4>Discount: @Model.Discount</h4>
-    </div>
-</div>
-<hr />
-<div class="row">
-    <div class="col-md-10 col-md-offset-1">
-        @Html.ActionLink("Buy", "Buy", "Baskets", new { id = Model.Id }, new { @class = "btn btn-danger btn-block" })
+        <h4>Discount: @Model.Discount %</h4>
+        <h5>You will safe @((Model.TotalPrice * Model.Discount)/100) </h5>
     </div>
 </div>
 <hr />
@@ -23,28 +18,31 @@
 {
     <div class="row">
         <div class="col-md-10 col-md-offset-1 book-div">
-            @foreach (var book in Model.Books)
-            {
+            @foreach (var book in Model.Count)
+                {
                 <div class="col-md-4 books-list">
                     <div class="row text-center books-list-title">
-                        <h4>@Html.DisplayFor(b => book.Title)</h4>
+                        <h4>@Html.DisplayFor(b => book.Book.Title)</h4>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            <a href="/Books/Details/@book.Id"><img src="@book.ImageUrl" alt="tweet" class="img-thumbnail" /></a>
+                            <a href="/Books/Details/@book.Book.Id" title="See Book's Details">
+                                <img src="@book.Book.ImageUrl" alt="book-img" class="img-thumbnail" />
+                            </a>
                         </div>
                         <div class="col-md-8">
                             <p>
-                                <span>by </span>
-                                @foreach (var author in book.Authors)
+                                <small>by </small>
+                                @foreach (var author in book.Book.Authors)
                                 {
                                     <span class="text-center">
                                         @Html.ActionLink(author.FullName, "BooksByAuthor", "Authors", new { authorName = author.FullName }, null)
                                     </span>
                                 }
                             </p>
-                            <p>Lang - @Html.DisplayFor(b => book.Language)</p>
-                            <p>Price: @Html.DisplayFor(b => book.Price)lv.</p>
+                            <p><small>Lang</small> - <strong>@Html.DisplayFor(b => book.Book.Language)</strong></p>
+                            <p><small>Price</small> - <strong>@Html.DisplayFor(b => book.Book.Price) BGN</strong></p>
+                            <p><small>Quantity In Basket</small> - @book.Count</p>
                         </div>
                     </div>
                     <hr />
@@ -53,7 +51,7 @@
                             @using (Html.BeginForm("RemoveFromBasket", "Baskets", FormMethod.Post))
                             {
                                 @Html.AntiForgeryToken()
-                                @Html.HiddenFor(b => book.Id)
+                                @Html.HiddenFor(b => book.Book.Id)
                                 <div class="form-actions no-color">
                                     <input type="submit" value="RemoveFromBasket" class="btn btn-default" />
                                 </div>
@@ -61,7 +59,7 @@
                         </div>
                         <div class="col-md-6">
                             <p class="btn btn-default">
-                                @Html.ActionLink("See more", "Details", "Books", new { id = book.Id }, null)
+                                @Html.ActionLink("See more", "Details", "Books", new { id = book.Book.Id }, null)
                                 &raquo;
                             </p>
                         </div>
@@ -71,3 +69,9 @@
         </div>
     </div>
 }
+<hr />
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        @Html.ActionLink("Buy", "Buy", "Baskets", new { id = Model.Id }, new { @class = "btn btn-danger btn-block" })
+    </div>
+</div>
