@@ -64,6 +64,7 @@
     <Compile Include="BindingModels\FavoriteBookBindingModel.cs" />
     <Compile Include="BindingModels\CategoryBindingModel.cs" />
     <Compile Include="BindingModels\EditUserProfileBindingModel.cs" />
+    <Compile Include="BindingModels\RemoveBookFromBasketBindingModel.cs" />
     <Compile Include="Book.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

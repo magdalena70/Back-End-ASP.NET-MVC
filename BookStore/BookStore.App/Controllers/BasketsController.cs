@@ -57,38 +57,22 @@ namespace BookStore.App.Controllers
             return RedirectToAction("Details", "Baskets");
         }
 
-        //// POST: Baskets/RemoveFromBasket
-        //[HttpPost, ActionName("RemoveFromBasket")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Details([Bind(Include = "Id")] AddBookToBasketBindingModel book)
-        //{
-        //    var userId = User.Identity.GetUserId();
-        //    Book currentBook = context.Books.Find(book.Id);
-        //    Basket basket = context.Baskets.FirstOrDefault(b => b.Owner.Id == userId);
-
-        //    if (currentBook.CountYourSelfInBasket > 1)
-        //    {
-        //        currentBook.CountYourSelfInBasket--;
-        //        basket.TotalPrice -= currentBook.Price;
-        //        basket.Owner = context.Users.Find(userId);
-        //        context.SaveChanges();
-        //        this.TempData["Success"] = $"You removed one book '{currentBook.Title}' from your basket.";
-        //        return RedirectToAction("Details", "Baskets");
-        //    }
-           
-        //    if (currentBook.CountYourSelfInBasket == 1)
-        //    {
-        //        currentBook.CountYourSelfInBasket = 0;
-        //        basket.TotalPrice -= currentBook.Price;
-        //        basket.Books.Remove(currentBook);
-        //        basket.Owner = context.Users.Find(userId);
-        //        context.SaveChanges();
-        //    }
-
+        // POST: Baskets/RemoveFromBasket
+        [HttpPost, ActionName("RemoveFromBasket")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Details([Bind(Include = "BookId")] RemoveBookFromBasketBindingModel book)
+        {
+            Book currentBook = context.Books.Find(book.BookId);
+            User currUser = context.Users.Find(User.Identity.GetUserId());
+            if (currentBook != null)
+            {
+                this.basketService.RemoveBookFromBasket(currentBook, currUser);
+            }
             
-        //    this.TempData["Success"] = $"You removed book '{currentBook.Title}' from your basket.";
-        //    return RedirectToAction("Details", "Baskets");
-        //}
+
+            this.TempData["Success"] = $"You removed book '{currentBook.Title}' from your basket.";
+            return RedirectToAction("Details", "Baskets");
+        }
 
         // GET: Baskets/Edit/5
         public ActionResult Edit(int? id)

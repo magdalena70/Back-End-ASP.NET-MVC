@@ -34,7 +34,8 @@ namespace BookStore.Services
                     .Select(b => new CountBookInBasketViewModel()
                     {
                         Count = b.Count(),
-                        Book = b.First().Book
+                        Book = b.First().Book,
+                        BookId = b.First().Book.Id
                     }).ToList()
             };
 
@@ -76,6 +77,19 @@ namespace BookStore.Services
                 currBook.Quantity--;
             }
             
+            context.SaveChanges();
+        }
+
+        public void RemoveBookFromBasket(Book currentBook, User currUser)
+        {
+            Basket currBasket = currUser.Basket;
+            currBasket.TotalPrice -= currentBook.Price;
+            currBasket.Discount = this.CheckDiscount(currBasket.TotalPrice);
+            var currBasketBooks = context.BasketsBooks
+                .FirstOrDefault(b => b.Basket.Id == currBasket.Id && b.Book.Id == currentBook.Id);
+            currBasket.Books.Remove(currBasketBooks);
+
+            currentBook.Quantity++;
             context.SaveChanges();
         }
 
