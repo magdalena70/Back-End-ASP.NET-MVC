@@ -10,13 +10,16 @@
         <hr />
         <h2>Current Price: @Model.TotalPrice BGN</h2>
         <h4>Discount: @string.Format("{0:0.00}", Model.Discount) %</h4>
-        <h5 id="you-will-save">You will save @string.Format("{0:0.00}", ((Model.TotalPrice * Model.Discount) / 100)) BGN</h5>
+        <h5 class="you-will-save">You will save @string.Format("{0:0.00}", ((Model.TotalPrice * Model.Discount) / 100)) BGN</h5>
         <h2 id="basket-total-price">Total Price: @string.Format("{0:0.00}", (Model.TotalPrice - ((Model.TotalPrice * Model.Discount) / 100))) BGN</h2>
     </div>
 </div>
 <hr />
 @if (@Model != null)
 {
+    <div class="row">
+        @Html.Partial("_ClearBasketPartial")
+    </div>
     <div class="row">
         <div class="col-md-10 col-md-offset-1 book-div">
             @foreach (var book in Model.Count)
@@ -41,26 +44,75 @@
                                     </span>
                                 }
                             </p>
+                            <p><small>In Stock - more</small> @Html.DisplayFor(b => book.Book.Quantity)</p>
                             <p><small>Lang</small> - <strong>@Html.DisplayFor(b => book.Book.Language)</strong></p>
                             <p><small>Price</small> - <strong>@Html.DisplayFor(b => book.Book.Price) BGN</strong></p>
-                            <p><small>Quantity In Basket</small> - @book.Count</p>
+                            <p><small>Qty In Basket</small> - @book.Count</p>
                         </div>
                     </div>
                     <hr />
                     <div class="row">
-                        <div class="col-md-6">
-                            @using (Html.BeginForm("RemoveFromBasket", "Baskets", FormMethod.Post))
-                            {
-                                @Html.AntiForgeryToken()
-                                @Html.HiddenFor(b => book.BookId)
-                                <div class="form-actions no-color">
-                                    <input type="submit" value="RemoveFromBasket" class="btn btn-default" />
-                                </div>
-                            }
+                        <div class="col-md-4">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                    Remove
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu book-div">
+                                    <li>
+                                        @using (Html.BeginForm("RemoveOneOfThisFromBasket", "Baskets", FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.HiddenFor(b => book.BookId)
+                                            <div class="form-actions no-color">
+                                                <input type="submit" value="Remove One Of This" class="btn btn-default btn-block" />
+                                            </div>
+                                        }
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        @using (Html.BeginForm("RemoveAllOfThisFromBasket", "Baskets", FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.HiddenFor(b => book.BookId)
+                                            @Html.HiddenFor(b => book.Count)
+                                            <div class="form-actions no-color">
+                                                <input type="submit" value="Remove All Of This" class="btn btn-default btn-block" />
+                                            </div>
+                                        }
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                    Edit Qty
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu book-div">     
+                                    <li>
+                                        @using (Html.BeginForm("EditBookQuantityInBasket", "Baskets", FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            <p>Current Qty is @book.Count</p>
+                                            @Html.LabelFor(b => book.NewCount, "Enter new quantity", new { @class = "control-label" })
+                                            @Html.EditorFor(b => book.NewCount, new { @class = "form-control" , @min = "1" , @max = book.Book.Quantity + book.NewCount })
+                                            @Html.ValidationMessageFor(b => book.NewCount, "", new { @class = "text-danger" })
+                                            @Html.HiddenFor(b => book.BookId)
+                                            @Html.HiddenFor(b => book.Count)                                           
+                                            <div class="form-actions no-color">
+                                                <input type="submit" value="Edit Book Quantity" class="btn btn-default btn-block" />
+                                            </div>
+                                        }
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
                             <p class="btn btn-default">
-                                @Html.ActionLink("See more", "Details", "Books", new { id = book.Book.Id }, null)
+                                @Html.ActionLink("More", "Details", "Books", new { id = book.Book.Id }, null)
                                 &raquo;
                             </p>
                         </div>
@@ -72,7 +124,5 @@
 }
 <hr />
 <div class="row">
-    <div class="col-md-10 col-md-offset-1">
-        @Html.ActionLink("Buy", "Buy", "Baskets", new { id = Model.Id }, new { @class = "btn btn-danger btn-block" })
-    </div>
+    @Html.Partial("_BuyPartial")
 </div>

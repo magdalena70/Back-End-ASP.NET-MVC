@@ -306,6 +306,8 @@
     <Content Include="Views\Baskets\Edit.cshtml" />
     <Content Include="Views\Baskets\Index.cshtml" />
     <Content Include="Views\Authors\Details.cshtml" />
+    <Content Include="Views\Baskets\_ClearBasketPartial.cshtml" />
+    <Content Include="Views\Baskets\_BuyPartial.cshtml" />
     <None Include="Views\Categories\All.cshtml" />
     <None Include="Views\Categories\BooksByCategory.cshtml" />
     <Content Include="Views\Categories\BestSellers.cshtml" />

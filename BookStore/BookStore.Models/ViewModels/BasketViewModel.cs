@@ -12,6 +12,10 @@ namespace BookStore.Models.ViewModels
 
         public decimal Discount { get; set; }
 
+        public decimal ShippingPrice { get; set; }
+
         public List<CountBookInBasketViewModel> Count { get; set; }
+
+        public User User { get; set; }
     }
 }

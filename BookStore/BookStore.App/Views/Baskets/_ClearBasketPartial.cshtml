@@ -1,0 +1,31 @@
+﻿@model BookStore.Models.ViewModels.BasketViewModel
+
+<div class="col-md-10 col-md-offset-1">
+    <button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#myModal">Clear Basket</button>
+    <hr />
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center">You will remove all of books in yor basket!</h4>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("ClearBasket", "Baskets", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken() 
+                        <div class="form-actions no-color text-center">
+                            <input type="submit" value="Clear Basket" class="btn btn-danger" />
+                        </div>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

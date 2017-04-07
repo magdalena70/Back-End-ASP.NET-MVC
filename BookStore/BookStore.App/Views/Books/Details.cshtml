@@ -8,6 +8,7 @@
         <h2>@ViewBag.Title</h2>
     </div>
 </div>
+<hr />
 <div class="row">
     <div class="col-md-8 col-md-offset-2 book-details-div">
         <div class="row text-center books-list-title">
@@ -33,6 +34,14 @@
                 <p>Number Of Pages - @Html.DisplayFor(book => book.NumberOfPages)</p>
                 <p>Issue Date - @Model.IssueDate.ToString("dd-MM-yyyy")</p>
                 <p class="lead">Price: @Html.DisplayFor(book => book.Price)lv.</p>
+                <p>
+                    <ul>Categories:
+                        @foreach (var category in Model.Categories)
+                        {
+                            <li>@Html.DisplayFor(c => category.Name)</li>
+                        }
+                    </ul>
+                </p>
                 <hr />
                 <div class="row">
                     <p>
@@ -52,5 +61,29 @@
             </div>
         </div>
         <hr />
+        <div class="row">
+            @*acordion*@
+            Reviews: To Do
+        </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].onclick = function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            }
+        }
+    </script>
+}

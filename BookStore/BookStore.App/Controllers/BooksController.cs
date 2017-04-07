@@ -28,15 +28,31 @@ namespace BookStore.App.Controllers
             if (viewModel.Count() == 0)
             {
                 this.TempData["Info"] = "No books.";
-                //return View();
             }
+
             return View(viewModel);
         }
 
         //Get: Books/Promotions
+        //to do
         public ActionResult Promotions()
         {
-            return View(context.Books.ToList());
+            string categoryName = "Paperback";
+            decimal discount = 10.0m;
+            DateTime startDate = new DateTime(2017, 04, 01);
+            PromotionsViewModel viewModel = this.bookService.GetPromotions(categoryName, discount, startDate);
+            if (viewModel.Books.Count() == 0)
+            {
+                this.TempData["Info"] = "No books.";
+            }
+
+            if (viewModel.EndDate < DateTime.Now)
+            {
+                this.TempData["Info"] = "No Promotions.";
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(viewModel);
         }
 
         // GET: Books/Details/5

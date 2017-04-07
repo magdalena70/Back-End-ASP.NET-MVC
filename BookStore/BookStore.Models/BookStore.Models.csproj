@@ -61,10 +61,12 @@
     <Compile Include="Basket.cs" />
     <Compile Include="BasketBook.cs" />
     <Compile Include="BindingModels\AddBookToBasketBindingModel.cs" />
+    <Compile Include="BindingModels\EditBookQuantityInBasketBindingModel.cs" />
     <Compile Include="BindingModels\FavoriteBookBindingModel.cs" />
     <Compile Include="BindingModels\CategoryBindingModel.cs" />
     <Compile Include="BindingModels\EditUserProfileBindingModel.cs" />
     <Compile Include="BindingModels\RemoveBookFromBasketBindingModel.cs" />
+    <Compile Include="BindingModels\RemoveBooksFromBasketBindingModel.cs" />
     <Compile Include="Book.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,12 +82,17 @@
     <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\CountBookInBasketViewModel.cs" />
     <Compile Include="ViewModels\EditUserProfileViewModel.cs" />
+    <Compile Include="ViewModels\PromotionsViewModel.cs" />
+    <Compile Include="ViewModels\PromotionBookViewModel.cs" />
     <Compile Include="ViewModels\UserFavoriteBooksViewModel.cs" />
     <Compile Include="ViewModels\UserProfileViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Attributes\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

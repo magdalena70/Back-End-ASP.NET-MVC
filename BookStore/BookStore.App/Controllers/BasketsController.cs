@@ -57,20 +57,84 @@ namespace BookStore.App.Controllers
             return RedirectToAction("Details", "Baskets");
         }
 
-        // POST: Baskets/RemoveFromBasket
-        [HttpPost, ActionName("RemoveFromBasket")]
+        // POST: Baskets/RemoveOneOfThisFromBasket
+        [HttpPost, ActionName("RemoveOneOfThisFromBasket")]
         [ValidateAntiForgeryToken]
-        public ActionResult Details([Bind(Include = "BookId")] RemoveBookFromBasketBindingModel book)
+        public ActionResult RemoveOneOfThisBookFromBasket([Bind(Include = "BookId")] RemoveBookFromBasketBindingModel book)
         {
             Book currentBook = context.Books.Find(book.BookId);
             User currUser = context.Users.Find(User.Identity.GetUserId());
             if (currentBook != null)
             {
-                this.basketService.RemoveBookFromBasket(currentBook, currUser);
+                this.basketService.RemoveOneOfThisFromBasket(currentBook, currUser);
             }
-            
+
 
             this.TempData["Success"] = $"You removed book '{currentBook.Title}' from your basket.";
+            return RedirectToAction("Details", "Baskets");
+        }
+
+        // POST: Baskets/RemoveAllOfThisFromBasket
+        [HttpPost, ActionName("RemoveAllOfThisFromBasket")]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveAllOfThisBookFromBasket([Bind(Include = "BookId, Count")] RemoveBooksFromBasketBindingModel book)
+        {
+            Book currentBook = context.Books.Find(book.BookId);
+            User currUser = context.Users.Find(User.Identity.GetUserId());
+            if (currentBook != null)
+            {
+                this.basketService.RemoveAllOfThisFromBasket(currentBook, currUser, book.Count);
+            }
+
+
+            this.TempData["Success"] = $"You removed {book.Count} books '{currentBook.Title}' from your basket.";
+            return RedirectToAction("Details", "Baskets");
+        }
+
+        // POST: Baskets/EditBookQuantityInBasket
+        [HttpPost, ActionName("EditBookQuantityInBasket")]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditBookQuantityInBasket([Bind(Include = "BookId, Count, NewCount")] EditBookQuantityInBasketBindingModel book)
+        {
+            Book currentBook = context.Books.Find(book.BookId);
+            User currUser = context.Users.Find(User.Identity.GetUserId());
+            int currQty = book.Count;
+            if (currentBook != null && book.NewCount > 0 && book.NewCount <= (currentBook.Quantity + currQty))
+            {
+                this.basketService.EditBookQuantityInBasket(currentBook, currUser, currQty, book.NewCount);
+                this.TempData["Success"] = $"You edited Qty of book '{currentBook.Title}' successfully. New Qty: {book.NewCount}";
+            }
+            else
+            {
+
+                this.TempData["Info"] = $"Invalid value. Value must be in range: [1 - {currentBook.Quantity + book.Count}]";
+
+            }
+
+            return RedirectToAction("Details", "Baskets");
+        }
+
+        // POST: Baskets/ClearBasket
+        [HttpPost, ActionName("ClearBasket")]
+        [ValidateAntiForgeryToken]
+        public ActionResult ClearBasket()
+        {
+            User currUser = context.Users.Find(User.Identity.GetUserId());
+            this.basketService.ClearBasket(currUser);
+            
+            this.TempData["Success"] = "Your Basket is empty! :(";
+            return RedirectToAction("Details", "Baskets");
+        }
+
+        // POST: Baskets/Buy
+        [HttpPost, ActionName("Buy")]
+        [ValidateAntiForgeryToken]
+        public ActionResult BuyBooks()
+        {
+            User currUser = context.Users.Find(User.Identity.GetUserId());
+            this.basketService.BuyBooks(currUser);
+            
+            this.TempData["Success"] = "Your order is accepted!";
             return RedirectToAction("Details", "Baskets");
         }
 

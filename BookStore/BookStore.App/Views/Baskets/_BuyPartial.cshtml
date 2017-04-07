@@ -1,0 +1,61 @@
+﻿@model BookStore.Models.ViewModels.BasketViewModel
+
+<div class="col-md-10 col-md-offset-1">
+    <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#byBasket">Buy</button>
+    <hr />
+    <div class="modal fade" id="byBasket" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center">Your purchase</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-div">
+                        
+                            <p><strong>Books:</strong></p>
+                            @foreach (var b in Model.Count)
+                            {
+                                <p><small>@b.Book.Title - Qty: @b.Count</small></p>
+                            }
+                        
+                    </div>
+                    <hr />
+                    <div class="modal-div">
+                        <p><strong>Delivery:</strong></p>
+                        <p><small>Date of delivery: @DateTime.Now.AddDays(2)</small></p>
+                        <p><small>Address: @Model.User.Address</small></p>
+                        <p><small>Recipient: @Model.User.FirstName @Model.User.LastName</small></p>
+                        <p><small>Phone Number: @Model.User.PhoneNumber</small></p>
+                    </div>
+                    <hr />
+                    <div class="modal-div">
+                        <p><small>Current Price: @Model.TotalPrice BGN</small></p>
+                        <p><small>Discount: @string.Format("{0:0.00}", Model.Discount) %</small></p>
+                        <p class="you-will-save">You will save @string.Format("{0:0.00}", ((Model.TotalPrice * Model.Discount) / 100)) BGN</p>
+                        <p><small>Shipping price: @string.Format("{0:0.00}", Model.ShippingPrice) BGN</small></p>
+                        <p>
+                            <strong>
+                                Total Price: @string.Format("{0:0.00}", (Model.TotalPrice - ((Model.TotalPrice * Model.Discount) / 100)) + Model.ShippingPrice) BGN
+                            </strong>
+                        </p>
+                        <p><small>Method of payment: Cash on Delivery</small></p>
+                        @using (Html.BeginForm("Buy", "Baskets", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-actions no-color text-center">
+                                <input type="submit" value="Buy" class="btn btn-danger" />
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

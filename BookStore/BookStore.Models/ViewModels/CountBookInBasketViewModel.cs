@@ -7,5 +7,7 @@
         public Book Book { get; set; }
 
         public int BookId { get; set; }
+
+        public int NewCount { get; set; }
     }
 }

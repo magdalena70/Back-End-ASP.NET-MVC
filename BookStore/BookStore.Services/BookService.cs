@@ -35,6 +35,40 @@ namespace BookStore.Services
             return newBooks;
         }
 
+        public PromotionsViewModel GetPromotions(string categoryName, decimal discount, DateTime startDate)
+        {
+            var promotionBooks = context.Categories.FirstOrDefault(c => c.Name == categoryName)
+                .Books
+                .Where(b => b.IssueDate.Year == DateTime.Now.Year - 1)
+                .OrderByDescending(b => b.IssueDate)
+                .Select(b => new PromotionBookViewModel()
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    Description = b.Description,
+                    ImageUrl = b.ImageUrl,
+                    Authors = b.Authors.ToList(),
+                    Language = b.Language,
+                    CurrentPrice = b.Price,
+                    Discount = discount,
+                    NewPrice = b.Price - ((b.Price * 10) / 100),
+                    Quantity = b.Quantity,
+                    IssueDate = b.IssueDate
+                })
+                .ToList();
+           
+            PromotionsViewModel viewModel = new PromotionsViewModel()
+            {
+                Category = categoryName,
+                Discount = discount,
+                StartDate = startDate,
+                EndDate = startDate.AddDays(30),
+                Books = promotionBooks
+            };
+
+            return viewModel;
+        }
+
         public BookDetailsViewModel GetDetails(int? id)
         {
             Book book = context.Books.Find(id);

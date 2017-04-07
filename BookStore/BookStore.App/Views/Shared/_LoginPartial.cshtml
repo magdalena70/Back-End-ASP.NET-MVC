@@ -16,17 +16,16 @@
                 </a>
 
                 <ul class="dropdown-menu">
-                    <li>@Html.ActionLink("Profile", "UserProfile", "Users")</li>
-                    <li>@Html.ActionLink("Edit Profile", "EditProfile", "Users")</li>
-                    <li>@Html.ActionLink("Change Password", "ChangePassword", "Manage")</li>
-
-                    <li class="divider"></li>
+                    <li>@Html.ActionLink("My Profile", "UserProfile", "Users")</li>
                     <li>@Html.ActionLink("My Basket", "Details", "Baskets")</li>
-                    <li>@Html.ActionLink("Favorite Books", "FavoriteBooks", "Users")</li>
+                    <li>@Html.ActionLink("My Favorite", "FavoriteBooks", "Users")</li>
 
                     <li class="divider"></li>
                     <li>@Html.ActionLink("Special Offers", "SpecialOffers", "Books")</li>
 
+                    <li class="divider"></li>
+                    <li>@Html.ActionLink("Edit Profile", "EditProfile", "Users")</li>
+                    <li>@Html.ActionLink("Change Password", "ChangePassword", "Manage")</li>
                 </ul>
             </li>
             <li>

@@ -84,10 +84,10 @@
     <hr />
     <div class="row category-div">
         <div class="col-md-10 col-md-offset-1">
-            <h2>You may also like some book from the next categories:</h2>
-            <hr />
             @if (Model.YouMayAlsoLike != null)
             {
+                <h4>You may also like some book from the next categories:</h4>
+                <hr />
                 foreach (var category in Model.YouMayAlsoLike)
                 {
                     <div class="col-md-3">
