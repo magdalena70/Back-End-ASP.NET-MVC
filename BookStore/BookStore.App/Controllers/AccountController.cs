@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BookStore.App.Models;
 using BookStore.Models;
+using BookStore.Models.EntityModels;
 
 namespace BookStore.App.Controllers
 {

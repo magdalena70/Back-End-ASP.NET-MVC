@@ -3,6 +3,7 @@ using BookStore.Models.ViewModels;
 using System.Linq;
 using System.Collections.Generic;
 using BookStore.Models;
+using BookStore.Models.EntityModels;
 
 namespace BookStore.Services
 {
@@ -56,7 +57,21 @@ namespace BookStore.Services
             AuthorWithBooksViewModel viewModel = new AuthorWithBooksViewModel()
             {
                 FullName = author.FullName,
-                Books = author.Books.ToList(),
+                Books = author.Books
+                .OrderByDescending(b => b.IssueDate)
+                .Select(b => new BooksViewModel()
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    Authors = b.Authors.ToList(),
+                    IssueDate = b.IssueDate,
+                    Description = b.Description,
+                    ImageUrl = b.ImageUrl,
+                    Language = b.Language,
+                    Price = b.Price,
+                    Quantity = b.Quantity
+                })
+                .ToList(),
                 BooksCount = author.Books.Count
             };
 

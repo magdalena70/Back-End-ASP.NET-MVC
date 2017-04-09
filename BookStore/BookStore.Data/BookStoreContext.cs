@@ -2,12 +2,13 @@ namespace BookStore.Data
 {
     using Microsoft.AspNet.Identity.EntityFramework;
     using Models;
+    using Models.EntityModels;
     using System.Data.Entity;
 
     public class BookStoreContext : IdentityDbContext<User>
     {
         public BookStoreContext()
-            : base("BookStoreContext", throwIfV1Schema: false)
+            : base("name=BookStoreContext", throwIfV1Schema: false)
         {
         }
 
@@ -22,6 +23,8 @@ namespace BookStore.Data
         public virtual DbSet<Basket> Baskets { get; set; }
 
         public virtual DbSet<BasketBook> BasketsBooks { get; set; }
+
+        public virtual DbSet<Promotion> Promotions { get; set; }
 
         public static BookStoreContext Create()
         {

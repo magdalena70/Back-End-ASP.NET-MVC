@@ -1,4 +1,6 @@
-﻿namespace BookStore.Models.ViewModels
+﻿using BookStore.Models.EntityModels;
+
+namespace BookStore.Models.ViewModels
 {
     public class CountBookInBasketViewModel
     {

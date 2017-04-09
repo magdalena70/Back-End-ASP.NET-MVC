@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using BookStore.Models.ViewModels;
 using System.Linq;
 using BookStore.Models;
+using BookStore.Models.EntityModels;
 
 namespace BookStore.Services
 {
@@ -37,8 +38,13 @@ namespace BookStore.Services
 
         public PromotionsViewModel GetPromotions(string categoryName, decimal discount, DateTime startDate)
         {
-            var promotionBooks = context.Categories.FirstOrDefault(c => c.Name == categoryName)
-                .Books
+            var category = context.Categories.FirstOrDefault(c => c.Name == categoryName);
+            if (category == null)
+            {
+                return null;
+            }
+
+            var promotionBooks = category.Books
                 .Where(b => b.IssueDate.Year == DateTime.Now.Year - 1)
                 .OrderByDescending(b => b.IssueDate)
                 .Select(b => new PromotionBookViewModel()

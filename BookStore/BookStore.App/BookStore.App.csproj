@@ -195,6 +195,12 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AuthorsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BooksController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PromotionsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuthorsController.cs" />
     <Compile Include="Controllers\BasketsController.cs" />
@@ -202,6 +208,7 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PromotionsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -239,6 +246,31 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="fonts\Gloss_And_Bloom.ttf" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\AssignRoles.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_AdminMenuPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Books\AddBook.cshtml" />
+    <Content Include="Areas\Admin\Views\Books\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Books\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Books\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Books\AllBooks.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\AddCategories.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\AllCategories.cshtml" />
+    <Content Include="Areas\Admin\Views\Authors\AddAuthor.cshtml" />
+    <Content Include="Areas\Admin\Views\Authors\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Authors\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Authors\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Authors\AllAuthors.cshtml" />
+    <Content Include="Areas\Admin\Views\Promotions\AddPromotion.cshtml" />
+    <Content Include="Areas\Admin\Views\Promotions\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Promotions\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Promotions\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Promotions\AllPromotions.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -308,6 +340,8 @@
     <Content Include="Views\Authors\Details.cshtml" />
     <Content Include="Views\Baskets\_ClearBasketPartial.cshtml" />
     <Content Include="Views\Baskets\_BuyPartial.cshtml" />
+    <Content Include="Views\Books\_BooksViewPartial.cshtml" />
+    <Content Include="Views\Authors\_AuthorBooksViewPartial.cshtml" />
     <None Include="Views\Categories\All.cshtml" />
     <None Include="Views\Categories\BooksByCategory.cshtml" />
     <Content Include="Views\Categories\BestSellers.cshtml" />
@@ -321,6 +355,12 @@
     <Content Include="Views\Home\TermsAndConditions.cshtml" />
     <Content Include="Views\Users\FavoriteBooks.cshtml" />
     <Content Include="Views\Shared\_BackNextTopButtonsPartial.cshtml" />
+    <Content Include="Views\Categories\_CategoryBooksViewPartial.cshtml" />
+    <Content Include="Views\Promotions\Create.cshtml" />
+    <Content Include="Views\Promotions\Delete.cshtml" />
+    <Content Include="Views\Promotions\Details.cshtml" />
+    <Content Include="Views\Promotions\Edit.cshtml" />
+    <Content Include="Views\Promotions\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

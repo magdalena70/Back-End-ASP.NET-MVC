@@ -1,8 +1,12 @@
 namespace BookStore.Data.Migrations
 {
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using Models;
+    using Models.EntityModels;
     using System;
     using System.Data.Entity.Migrations;
+    using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<BookStoreContext>
     {
@@ -13,6 +17,14 @@ namespace BookStore.Data.Migrations
 
         protected override void Seed(BookStoreContext context)
         {
+            if (!context.Roles.Any(r => r.Name == "Admin"))
+            {
+                var roleStore = new RoleStore<IdentityRole>(context);
+                var roleManager = new RoleManager<IdentityRole>(roleStore);
+                var role = new IdentityRole("Admin");
+                roleManager.Create(role);
+            }
+
             Author samer = new Author
             {
                 FullName = "Samer",
@@ -190,7 +202,7 @@ namespace BookStore.Data.Migrations
             Book wedWabbit = new Book
             {
                 Title = "Wed Wabbit",
-                Price = 45.50m,
+                Price = 20.50m,
                 ISBN = "9788798009994",
                 ImageUrl = "../../Content/Images/Books/wedWabbit.jpg",
                 Description = "A hugely funny 'down the rabbit hole' adventure from the author of "+
@@ -203,13 +215,45 @@ namespace BookStore.Data.Migrations
                 Authors = { lissaEvans }
             };
 
+            Book wedWabbit2 = new Book
+            {
+                Title = "Wed Wabbit 2",
+                Price = 20.50m,
+                ISBN = "9788799639994",
+                ImageUrl = "../../Content/Images/Books/wedWabbit.jpg",
+                Description = "A hugely funny 'down the rabbit hole' adventure from the author of " +
+                "internationally bestselling 'Small Change for Stuart', which was shortlisted for " +
+                "both the Carnegie Medal and Costa Award.",
+                Language = "EN",
+                IssueDate = new DateTime(2016, 06, 18),
+                Quantity = 10,
+                NumberOfPages = 148,
+                Authors = { lissaEvans }
+            };
+
+            Book wedWabbit3 = new Book
+            {
+                Title = "Wed Wabbit 3",
+                Price = 20.50m,
+                ISBN = "9788798088894",
+                ImageUrl = "../../Content/Images/Books/wedWabbit.jpg",
+                Description = "A hugely funny 'down the rabbit hole' adventure from the author of " +
+                "internationally bestselling 'Small Change for Stuart', which was shortlisted for " +
+                "both the Carnegie Medal and Costa Award.",
+                Language = "EN",
+                IssueDate = new DateTime(2016, 11, 20),
+                Quantity = 10,
+                NumberOfPages = 228,
+                Authors = { lissaEvans }
+            };
+
             //
             context.Categories.AddOrUpdate(c => c.Name,
                     new Category { Name = "Science and Technology" },
                     new Category { Name = "Health and Fitness" },
                     new Category { Name = "Popular Psychology", Books = { griefWorks } },
                     new Category { Name = "Nature and Environment" },
-                    new Category { Name = "Books for Children", Books = { wedWabbit } },
+                    new Category { Name = "Books for Children", Books = { wedWabbit, wedWabbit2, wedWabbit3 } },
                     new Category { Name = "Biography" },
                     new Category { Name = "Humour", Books = { theRulesDoNotApply } },
                     new Category { Name = "Business, Finance and Law" },
@@ -219,11 +263,25 @@ namespace BookStore.Data.Migrations
                     new Category { Name = "Travel" },
                     new Category { Name = "History", Books = { ingloriousEmpire } },
                     new Category { Name = "Best Sellers", Books = { theRulesDoNotApply, griefWorks, border, ingloriousEmpire } },
-                    new Category { Name = "Paperback", Books = { border, griefWorks } },
                     new Category { Name = "Hardback", Books = { theRaqqaDiaries, theRulesDoNotApply, ingloriousEmpire } },
                     new Category { Name = "Politics", Books = { theRaqqaDiaries, border, ingloriousEmpire } }
-
                 );
+
+            context.Promotions.AddOrUpdate(p => p.Name,
+                new Promotion()
+                {
+                    Name = "Book In Paperback from last year",
+                    Text = "Some info about...",
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now.AddDays(15),
+                    Discount = 10.0m,
+                    Categories = { new Category
+                                    {
+                                        Name = "Paperback",
+                                        Books = { border, griefWorks, wedWabbit, wedWabbit2, wedWabbit3 }
+                                     }}
+                });
+
             context.SaveChanges();
         }
     }

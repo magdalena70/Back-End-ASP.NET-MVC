@@ -26,11 +26,16 @@
                     <span class="icon-bar"></span>
                 </button>
                 <ul class="nav navbar-nav">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="navbar-brand btn btn-default lead">
+                            @Html.ActionLink("Admin panel", "AllCategories", "Categories", new { area = "Admin" }, new { @class = "navbar-brand btn btn-default" })
+                        </li>
+                    }
                     <li>
-                        @*@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new{@class = "navbar-brand"})*@
                         <a href="/Home/Index" class="navbar-brand btn btn-default">
                             <img src="~/Content/Images/home-icon.png" class="img-rounded" alt="home-icon" />
-                            <p class="carousel-caption lead">home</p>
+                            <p class="carousel-caption">home</p>
                         </a>
                     </li>
                 </ul>

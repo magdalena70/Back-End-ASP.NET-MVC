@@ -5,6 +5,7 @@ using System.Linq;
 using BookStore.Models;
 using BookStore.Models.BindingModels;
 using System.Collections.Generic;
+using BookStore.Models.EntityModels;
 
 namespace BookStore.Services
 {

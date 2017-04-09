@@ -8,6 +8,7 @@ using Owin;
 using BookStore.App.Models;
 using BookStore.Data;
 using BookStore.Models;
+using BookStore.Models.EntityModels;
 
 namespace BookStore.App
 {

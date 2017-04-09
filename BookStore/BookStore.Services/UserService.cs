@@ -4,6 +4,7 @@ using BookStore.Models.ViewModels;
 using System.Linq;
 using System.Collections.Generic;
 using BookStore.Models.BindingModels;
+using BookStore.Models.EntityModels;
 
 namespace BookStore.Services
 {

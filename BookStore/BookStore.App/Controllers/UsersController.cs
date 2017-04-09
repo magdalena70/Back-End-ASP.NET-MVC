@@ -9,6 +9,7 @@ using System;
 using BookStore.Data;
 using BookStore.Models.BindingModels;
 using System.Linq;
+using BookStore.Models.EntityModels;
 
 namespace BookStore.App.Controllers
 {

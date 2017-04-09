@@ -6,7 +6,7 @@ namespace BookStore.Models.ViewModels
     {
         public string FullName { get; set; }
 
-        public List<Book> Books { get; set; }
+        public List<BooksViewModel> Books { get; set; }
 
         public int BooksCount { get; set; }
     }

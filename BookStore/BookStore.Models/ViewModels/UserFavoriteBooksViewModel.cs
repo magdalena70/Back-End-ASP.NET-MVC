@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using BookStore.Models.EntityModels;
+using System.Collections.Generic;
 
 namespace BookStore.Models.ViewModels
 {

@@ -1,0 +1,84 @@
+﻿@using Microsoft.AspNet.Identity
+
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown">
+                    <p>Categories</p>
+                    <b class="caret"></b>
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("All Categories", "AllCategories", "Categories")</li>
+                    <li>@Html.ActionLink("Add Category", "AddCategories", "Categories")</li>
+                    <li>@Html.ActionLink("Search Category", "SearchCategory", "Categories")</li>
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown">
+                    <p>Books</p>
+                    <b class="caret"></b>
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("All Books", "AllBooks", "Books")</li>
+                    <li>@Html.ActionLink("Add Book", "AddBook", "Books")</li>
+                    <li>@Html.ActionLink("Search Book", "SearchBook", "Books")</li>
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown">
+                    <p>Authors</p>
+                    <b class="caret"></b>
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("All Authors", "AllAuthors", "Authors")</li>
+                    <li>@Html.ActionLink("Add Author", "AddAuthor", "Authors")</li>
+                    <li>@Html.ActionLink("Search Author", "SearchAuthor", "Authors")</li>
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown">
+                    <p>Promotions</p>
+                    <b class="caret"></b>
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("All Promotions", "AllPromotions", "Promotions")</li>
+                    <li>@Html.ActionLink("Add Promotion", "AddPromotion", "Promotions")</li>
+                    <li>@Html.ActionLink("Search Promotion", "SearchPromotion", "Promotions")</li>
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown">
+                    <p>Settings</p>
+                    <b class="caret"></b>
+                </a>
+
+                <ul class="dropdown-menu">
+                    @*<li>@Html.ActionLink("Edit Profile", "EditProfile", "Users")</li>
+                    <li>@Html.ActionLink("Change Password", "ChangePassword", "Manage")</li>*@
+                    <li>@Html.ActionLink("Assign Roles", "AssignRoles", "Admin")</li>
+
+                    <li>
+                        <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-default">
+                            <p>log out</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    }
+}
+
+

@@ -13,6 +13,7 @@ using Microsoft.Owin.Security;
 using BookStore.App.Models;
 using BookStore.Models;
 using BookStore.Data;
+using BookStore.Models.EntityModels;
 
 namespace BookStore.App
 {

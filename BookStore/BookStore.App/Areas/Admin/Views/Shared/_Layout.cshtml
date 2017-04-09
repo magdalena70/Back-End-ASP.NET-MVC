@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="container-fluid" id="top">
+        <div class="row text-center home">
+            <h1>Admin Panel</h1>
+        </div>
+    </div>
+    <div class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="navbar-brand btn btn-default lead">
+                    @Html.ActionLink("Book Store", "Index", "Home", new { area = "" }, new { @class = "navbar-brand btn btn-default" })
+                </div>
+            </div>
+            <div class="navbar-collapse collapse">
+                @Html.Partial("_AdminMenuPartial")
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid body-content">
+        <div class="home-div col-md-10 col-md-offset-1">
+            @Html.Partial("_BackNextTopButtonsPartial")
+            @Html.Partial("_MessagesPartial")
+            @RenderBody()
+            <hr />
+            @Html.Partial("_Footer")
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -4,6 +4,7 @@ using BookStore.Services;
 using System.Collections.Generic;
 using System.Linq;
 using BookStore.Models.BindingModels;
+using BookStore.Models.EntityModels;
 
 namespace BookStore.Models
 {
@@ -41,8 +42,19 @@ namespace BookStore.Models
                 Id = category.Id,
                 Name = category.Name,
                 Books = category.Books
-                    .OrderByDescending(b => b.UpRating)
-                    .ThenByDescending(b => b.IssueDate)
+                    .OrderByDescending(b => b.IssueDate)
+                    .Select(b => new BooksViewModel()
+                    {
+                        Id = b.Id,
+                        Title = b.Title,
+                        Authors = b.Authors.ToList(),
+                        IssueDate = b.IssueDate,
+                        Description = b.Description,
+                        ImageUrl = b.ImageUrl,
+                        Language = b.Language,
+                        Price = b.Price,
+                        Quantity = b.Quantity
+                    })
                     .ToList()
             };
                 
@@ -61,7 +73,21 @@ namespace BookStore.Models
             {
                 Id = category.Id,
                 Name = category.Name,
-                Books = category.Books.ToList()
+                BooksCount = category.Books.Count,
+                Books = category.Books
+                .Select(b => new BooksViewModel()
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    Authors = b.Authors.ToList(),
+                    IssueDate = b.IssueDate,
+                    Description = b.Description,
+                    ImageUrl = b.ImageUrl,
+                    Language = b.Language,
+                    Price = b.Price,
+                    Quantity = b.Quantity
+                })
+                .ToList()
             };
 
             return viewModel;
@@ -81,7 +107,20 @@ namespace BookStore.Models
             {
                 Id = category.Id,
                 Name = category.Name,
-                Books = category.Books.ToList()
+                Books = category.Books
+                .Select(b => new BooksViewModel()
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    Authors = b.Authors.ToList(),
+                    IssueDate = b.IssueDate,
+                    Description = b.Description,
+                    ImageUrl = b.ImageUrl,
+                    Language = b.Language,
+                    Price = b.Price,
+                    Quantity = b.Quantity
+                })
+                .ToList()
             };
 
             return viewModel;

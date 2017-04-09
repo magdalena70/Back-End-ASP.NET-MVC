@@ -1,84 +1,30 @@
 ﻿@model BookStore.Models.ViewModels.CategoryViewModel
 
 @{
-    ViewBag.Title = "SearchByName";
+    ViewBag.Title = "Search By Category";
 }
 
-@if (@Model != null)
-{
-    <div class="row text-center">
-        <div class="col-md-10 col-md-offset-1">
-            <h3>@Html.DisplayFor(category => category.Name)</h3>
-            <hr />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1 category-div">
-            @foreach (var book in Model.Books)
-            {
-                <div class="col-md-4 books-list">
-                    <div class="row text-center books-list-title">
-                        <h3>@Html.DisplayFor(b => book.Title)</h3>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <a href="/Books/Details/@book.Id">
-                                <img src="@book.ImageUrl" alt="tweet" class="img-thumbnail" />
-                            </a>
-                        </div>
-                        <div class="col-md-8">
-                            <p>
-                                <span>by </span>
-                                @foreach (var author in book.Authors)
-                                {
-                                    <span class="text-center">
-                                        @Html.ActionLink(author.FullName, "BooksByAuthor", "Authors", new { authorName = author.FullName })
-                                    </span>
-                                }
-                            </p>
-                            <p>Lang - @Html.DisplayFor(b => book.Language)</p>
-                            <p>Price: @Html.DisplayFor(b => book.Price)lv.</p>
-                            @using (Html.BeginForm("FavoriteBooks", "Users", FormMethod.Post))
-                            {
-                                @Html.AntiForgeryToken()
-                                @Html.HiddenFor(b => book.Id)
-                                <div class="form-actions no-color">
-                                    <p>
-                                        <button type="submit" value="Add to Favorite" class="btn btn-default btn-sm">
-                                            <span class="glyphicon glyphicon-heart"></span>
-                                        </button>
-                                    </p>
-                                </div>
-                            }
-                        </div>
-                    </div>
-                    <hr />
-                    <div class="row">
-                        <div class="col-md-6">
-                            @using (Html.BeginForm("AddToBasket", "Baskets", FormMethod.Post))
-                            {
-                                @Html.AntiForgeryToken()
-                                @Html.HiddenFor(b => book.Id)
-                                <div class="form-actions no-color">
-                                    <input type="submit" value="Add To Basket" class="btn btn-default" />
-                                </div>
-                            }
-                        </div>
-                        <div class="col-md-6">
-                            <p class="btn btn-default">
-                                @Html.ActionLink("See more", "Details", "Books", new { id = book.Id }, null)
-                                &raquo;
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
-    <hr />
-}
 <div class="row text-center">
     <div class="col-lg-8 col-md-offset-2">
         @Html.ActionLink("See All Categories", "All", "Categories", null, new { @class = "btn btn-default btn-block" })
     </div>
 </div>
+<hr />
+@if (@Model != null)
+{
+    <div class="row text-center">
+        <div class="col-md-10 col-md-offset-1">
+            <h2>Books By Category</h2>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-md-10 col-md-offset-1">
+            <h3><span>&quot;</span>@Html.DisplayFor(category => category.Name)<span>&quot;</span></h3>
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        @Html.Partial("_CategoryBooksViewPartial")
+    </div>
+    <hr />
+}

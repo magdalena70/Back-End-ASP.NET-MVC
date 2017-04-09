@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace BookStore.Models
+namespace BookStore.Models.EntityModels
 {
     public class Category
     {
         public Category()
         {
             this.Books = new HashSet<Book>();
+            this.Promotions = new HashSet<Promotion>();
         }
 
         [Key]
@@ -17,5 +18,7 @@ namespace BookStore.Models
         public string Name { get; set; }
 
         public virtual ICollection<Book> Books { get; set; }
+
+        public virtual ICollection<Promotion> Promotions { get; set; }
     }
 }

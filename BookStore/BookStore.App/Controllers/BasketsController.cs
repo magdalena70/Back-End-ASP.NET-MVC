@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity;
 using BookStore.Services;
 using BookStore.Models.ViewModels;
 using BookStore.Models.BindingModels;
+using BookStore.Models.EntityModels;
 
 namespace BookStore.App.Controllers
 {

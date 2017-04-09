@@ -3,11 +3,11 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using BookStore.Data;
-using BookStore.Models;
 using BookStore.Services;
 using BookStore.Models.ViewModels;
 using System.Collections.Generic;
 using System;
+using BookStore.Models.EntityModels;
 
 namespace BookStore.App.Controllers
 {
@@ -40,7 +40,14 @@ namespace BookStore.App.Controllers
             string categoryName = "Paperback";
             decimal discount = 10.0m;
             DateTime startDate = new DateTime(2017, 04, 01);
+            
             PromotionsViewModel viewModel = this.bookService.GetPromotions(categoryName, discount, startDate);
+            if (viewModel == null)
+            {
+                this.TempData["Info"] = "No promotions.";
+                return RedirectToAction("Index", "Home");
+            }
+
             if (viewModel.Books.Count() == 0)
             {
                 this.TempData["Info"] = "No books.";

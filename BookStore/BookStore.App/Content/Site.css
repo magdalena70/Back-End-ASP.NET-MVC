@@ -161,6 +161,7 @@ a {
 .books-list {
     background-color: rgba(22, 2, 0, 0.4);
     border-left: solid 1px white;
+    border-bottom: double 1px white;
     border-radius: 7px;
 }
 

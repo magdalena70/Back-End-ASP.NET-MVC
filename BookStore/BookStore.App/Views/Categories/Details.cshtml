@@ -4,70 +4,21 @@
     ViewBag.Title = "Category Details";
 }
 
-<div class="row">  
-    <h2 class="text-center">@Html.DisplayFor(c => Model.Name)</h2> 
-</div>
 <div class="row">
-    <div class="col-md-10 col-md-offset-1 books-list">
-        @foreach (var book in Model.Books)
-        {
-            <div class="col-md-4 books-list">
-                <div class="row text-center books-list-title">
-                    <h4>@Html.DisplayFor(b => book.Title)</h4>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <a href="/Books/Details/@book.Id">
-                            <img src="@book.ImageUrl" alt="book-img" class="img-thumbnail" />
-                        </a>
-                    </div>
-                    <div class="col-md-8">
-                        <p>
-                            <span>by </span>
-                            @foreach (var author in book.Authors)
-                            {
-                                <span class="text-center">
-                                    @Html.ActionLink(author.FullName, "BooksByAuthor", "Authors", new { authorName = author.FullName })
-                                </span>
-                            }
-                        </p>
-                        <p>Lang - @Html.DisplayFor(b => book.Language)</p>
-                        <p>Price: @Html.DisplayFor(b => book.Price)lv.</p>
-
-                        @using (Html.BeginForm("FavoriteBooks", "Users", FormMethod.Post))
-                        {
-                            @Html.AntiForgeryToken()
-                            @Html.HiddenFor(b => book.Id)
-                            <div class="form-actions no-color">
-                                <p>
-                                    <button type="submit" value="Add to Favorite" class="btn btn-default btn-sm">
-                                        <span class="glyphicon glyphicon-heart"></span>
-                                    </button>
-                                </p>
-                            </div>
-                        }
-                    </div>
-                </div>
-                <hr />
-                <div class="row">
-                    <div class="col-md-6">
-                        @using (Html.BeginForm("AddToBasket", "Baskets", FormMethod.Post))
-                        {
-                            @Html.AntiForgeryToken()
-                            @Html.HiddenFor(b => book.Id)
-                            <div class="form-actions no-color">
-                                <input type="submit" value="Add To Basket" class="btn btn-default" />
-                            </div>
-                        }
-                    </div>
-                    <div class="col-md-6">
-                        <p class="btn btn-default">
-                            @Html.ActionLink("See more", "Details", "Books", new { id = book.Id }, null)
-                            &raquo;
-                        </p>
-                    </div>
-                </div>
-            </div>
-        }
+    <div class="col-md-10 col-md-offset-1">
+        <h2 class="text-center">Category</h2>
     </div>
+</div>
+<div class="row"> 
+    <div class="col-md-10 col-md-offset-1">
+        <h3 class="text-center"><span>&quot;</span>@Html.DisplayFor(c => Model.Name)<span>&quot;</span></h3>
+    </div>  
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-10 col-md-offset-1 book-div">
+        <h4>Books: @Html.DisplayFor(c => Model.BooksCount)</h4>
+        <hr />
+    </div>
+    @Html.Partial("_CategoryBooksViewPartial")
 </div>

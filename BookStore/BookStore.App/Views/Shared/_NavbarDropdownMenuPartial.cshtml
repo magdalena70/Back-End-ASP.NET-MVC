@@ -3,7 +3,7 @@
         <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown">
             <img src="~/Content/Images/menu-icon.png"/>
             <b class="caret"></b>
-            <p class="carousel-caption lead">menu</p>
+            <p class="carousel-caption">menu</p>
         </a>
 
         <ul class="dropdown-menu">
@@ -11,13 +11,12 @@
             <li class="divider"></li>
 
             <li>@Html.ActionLink("New Books", "NewBooks", "Books")</li>
-            <li>@Html.ActionLink("Promotions", "Promotions", "Books")</li>    
-
-            <li class="divider"></li>
             <li>@Html.ActionLink("Best Sellers", "BestSellers", "Categories")</li>
-            <li>@Html.ActionLink("All Categories", "All", "Categories")</li>
+            <li>@Html.ActionLink("Promotions2", "Promotions", "Books")</li> 
+            <li>@Html.ActionLink("Promotions", "Index", "Promotions")</li>   
 
             <li class="divider"></li>
+            <li>@Html.ActionLink("All Categories", "All", "Categories")</li>
             <li>@Html.ActionLink("All Authors", "All", "Authors")</li>
             <li></li>
         </ul>
