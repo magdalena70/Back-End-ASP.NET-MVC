@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections.Generic;
 using BookStore.Models.BindingModels;
 using BookStore.Models.EntityModels;
+using AutoMapper;
 
 namespace BookStore.Services
 {
@@ -15,11 +16,7 @@ namespace BookStore.Services
 
         public UserProfileViewModel GetUserProfileViewModel(User currentUser)
         {
-            UserProfileViewModel viewModel = new UserProfileViewModel()
-            {
-                UserName = currentUser.UserName,
-                CountBooksInFavorite = currentUser.FavoriteBooks.Count
-            };
+            UserProfileViewModel viewModel = Mapper.Map<User, UserProfileViewModel>(currentUser);
 
             if (currentUser.Basket != null)
             {
@@ -33,13 +30,14 @@ namespace BookStore.Services
                         Count = b.Count(),
                         Book = b.First().Book
                     }).ToList();
+           
                 viewModel.YouMayAlsoLike = GetCategories(currentUser);
             }
 
             return viewModel;
         }
 
-        private List<Category> GetCategories(User currentUser)
+        private ICollection<AllCategoriesViewModel> GetCategories(User currentUser)
         {
             List<BasketBook> booksInBasket = currentUser.Basket.Books.ToList();
             List<Category> categoryInBasket = new List<Category>();
@@ -54,18 +52,19 @@ namespace BookStore.Services
                 }
             }
 
-            return categoryInBasket;
+            ICollection<AllCategoriesViewModel> categoryInBasketViewModel = Mapper.Map<ICollection<Category>, ICollection<AllCategoriesViewModel>>(categoryInBasket);
+            return categoryInBasketViewModel;
         }
 
         public UserFavoriteBooksViewModel GetFavorite(User currentUser)
         {
-            UserFavoriteBooksViewModel favorite = new UserFavoriteBooksViewModel()
-            {
-                UserName = currentUser.UserName,
-                FavoriteBooks = currentUser.FavoriteBooks.ToList()
-            };
+            var currUserFavorite = currentUser.FavoriteBooks.ToList();
 
-            return favorite;
+            UserFavoriteBooksViewModel viewModel = Mapper.Map<User, UserFavoriteBooksViewModel>(currentUser);
+            ICollection<BooksViewModel> favoriteViewModel = Mapper.Map<ICollection<Book>, ICollection<BooksViewModel>>(currUserFavorite);
+            viewModel.FavoriteBooks = favoriteViewModel;
+
+            return viewModel;
         }
 
         public void AddBookToFavoriteBooks(User currentUser, int bookId)
@@ -86,17 +85,7 @@ namespace BookStore.Services
 
         public EditUserProfileViewModel GetEditUserProfileViewModel(User currentUser)
         {
-            EditUserProfileViewModel viewModel = new EditUserProfileViewModel()
-            {
-                Id = currentUser.Id,
-                FirstName = currentUser.FirstName,
-                LastName = currentUser.LastName,
-                Address = currentUser.Address,
-                UserName = currentUser.UserName,
-                PhoneNumber = currentUser.PhoneNumber,
-                Email = currentUser.Email
-            };
-
+            EditUserProfileViewModel viewModel = Mapper.Map<User, EditUserProfileViewModel>(currentUser);
             return viewModel;
         }
 

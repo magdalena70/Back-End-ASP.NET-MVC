@@ -138,71 +138,63 @@ namespace BookStore.App.Controllers
             return RedirectToAction("Details", "Baskets");
         }
 
-        // GET: Baskets/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+        //to do - clear
+        //// GET: Baskets/Edit/5
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
 
-            Basket basket = context.Baskets.Find(id);
-            if (basket == null)
-            {
-                return HttpNotFound();
-            }
+        //    Basket basket = context.Baskets.Find(id);
+        //    if (basket == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
 
-            return View(basket);
-        }
+        //    return View(basket);
+        //}
 
-        // POST: Baskets/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,TotalPrice,Discount, Owner")] Basket basket)
-        {
-            basket.Owner = context.Users.First();
-            // if (ModelState.IsValid)
-            // {
-            context.Entry(basket).State = EntityState.Modified;
-            context.SaveChanges();
-            return RedirectToAction("UserProfile", "Users");
-            // }
-            // return View(basket);
-        }
+        //// POST: Baskets/Edit/5
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "Id,TotalPrice,Discount, Owner")] Basket basket)
+        //{
+        //    basket.Owner = context.Users.First();
+        //    // if (ModelState.IsValid)
+        //    // {
+        //    context.Entry(basket).State = EntityState.Modified;
+        //    context.SaveChanges();
+        //    return RedirectToAction("UserProfile", "Users");
+        //    // }
+        //    // return View(basket);
+        //}
 
-        // GET: Baskets/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Basket basket = context.Baskets.Find(id);
-            if (basket == null)
-            {
-                return HttpNotFound();
-            }
-            return View(basket);
-        }
+        //// GET: Baskets/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Basket basket = context.Baskets.Find(id);
+        //    if (basket == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(basket);
+        //}
 
-        // POST: Baskets/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Basket basket = context.Baskets.Find(id);
-            context.Baskets.Remove(basket);
-            context.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                context.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //// POST: Baskets/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    Basket basket = context.Baskets.Find(id);
+        //    context.Baskets.Remove(basket);
+        //    context.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
     }
 }

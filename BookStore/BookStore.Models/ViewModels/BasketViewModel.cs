@@ -1,5 +1,4 @@
-﻿using BookStore.Models.EntityModels;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace BookStore.Models.ViewModels
 {
@@ -9,14 +8,20 @@ namespace BookStore.Models.ViewModels
 
         public string OwnerUserName { get; set; }
 
+        public string OwnerAddress { get; set; }
+
+        public string OwnerFirstName { get; set; }
+
+        public string OwnerLastName { get; set; }
+
+        public string OwnerPhoneNumber { get; set; }
+
         public decimal TotalPrice { get; set; }
 
         public decimal Discount { get; set; }
 
         public decimal ShippingPrice { get; set; }
 
-        public List<CountBookInBasketViewModel> Count { get; set; }
-
-        public User User { get; set; }
+        public IEnumerable<CountBookInBasketViewModel> Count { get; set; }
     }
 }

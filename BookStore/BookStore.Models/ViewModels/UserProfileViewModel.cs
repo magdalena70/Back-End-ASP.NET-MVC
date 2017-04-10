@@ -9,7 +9,7 @@ namespace BookStore.Models.ViewModels
 
         public Basket Basket { get; set; }
 
-        public List<CountBookInBasketViewModel> Books { get; set; }
+        public ICollection<CountBookInBasketViewModel> Books { get; set; }
 
         public int CountBooksInBasket { get; set; }
 
@@ -17,6 +17,6 @@ namespace BookStore.Models.ViewModels
 
         public int CountBooksInFavorite { get; set; }
 
-        public List<Category> YouMayAlsoLike { get; set; }
+        public ICollection<AllCategoriesViewModel> YouMayAlsoLike { get; set; }
     }
 }

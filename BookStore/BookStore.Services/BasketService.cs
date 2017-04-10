@@ -1,11 +1,8 @@
-﻿using System;
-using BookStore.Data;
+﻿using BookStore.Data;
 using BookStore.Models.ViewModels;
 using System.Linq;
-using BookStore.Models;
-using BookStore.Models.BindingModels;
-using System.Collections.Generic;
 using BookStore.Models.EntityModels;
+using AutoMapper;
 
 namespace BookStore.Services
 {
@@ -24,15 +21,7 @@ namespace BookStore.Services
                 return null;
             }
 
-            BasketViewModel viewModel = new BasketViewModel()
-            {
-                User = basket.Owner,
-                Id = basket.Id,
-                Discount = basket.Discount,
-                TotalPrice = basket.TotalPrice,
-                ShippingPrice = this.CheckShippingPrice(basket.TotalPrice),
-                OwnerUserName = basket.Owner.UserName,
-                Count = basket.Books
+            var count = basket.Books
                     .GroupBy(b => b.Book.Id)
                     .Select(b => new CountBookInBasketViewModel()
                     {
@@ -40,8 +29,10 @@ namespace BookStore.Services
                         Book = b.First().Book,
                         BookId = b.First().Book.Id,
                         NewCount = 0
-                    }).ToList()
-            };
+                    }).ToList();
+
+            BasketViewModel viewModel = Mapper.Map<Basket, BasketViewModel>(basket);
+            viewModel.Count = count;
 
             return viewModel;
         }

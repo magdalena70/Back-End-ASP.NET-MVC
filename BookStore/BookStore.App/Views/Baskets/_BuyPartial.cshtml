@@ -24,9 +24,9 @@
                     <div class="modal-div">
                         <p><strong>Delivery:</strong></p>
                         <p><small>Date of delivery: @DateTime.Now.AddDays(2)</small></p>
-                        <p><small>Address: @Model.User.Address</small></p>
-                        <p><small>Recipient: @Model.User.FirstName @Model.User.LastName</small></p>
-                        <p><small>Phone Number: @Model.User.PhoneNumber</small></p>
+                        <p><small>Address: @Model.OwnerAddress</small></p>
+                        <p><small>Recipient: @Model.OwnerFirstName @Model.OwnerLastName</small></p>
+                        <p><small>Phone Number: @Model.OwnerPhoneNumber</small></p>
                     </div>
                     <hr />
                     <div class="modal-div">

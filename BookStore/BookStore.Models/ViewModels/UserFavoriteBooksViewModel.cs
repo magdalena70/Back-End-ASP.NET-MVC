@@ -1,5 +1,4 @@
-﻿using BookStore.Models.EntityModels;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace BookStore.Models.ViewModels
 {
@@ -7,6 +6,6 @@ namespace BookStore.Models.ViewModels
     {
         public string UserName { get; set; }
 
-        public List<Book> FavoriteBooks { get; set; }
+        public ICollection<BooksViewModel> FavoriteBooks { get; set; }
     }
 }
