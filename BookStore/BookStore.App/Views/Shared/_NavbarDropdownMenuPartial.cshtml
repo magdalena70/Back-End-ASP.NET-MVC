@@ -7,17 +7,17 @@
         </a>
 
         <ul class="dropdown-menu">
-            <li>@Html.ActionLink("Terms and Conditions", "TermsAndConditions", "Home")</li>
+            <li>@Html.ActionLink("Terms and Conditions", "TermsAndConditions", "Home", new { area = "" }, null)</li>
             <li class="divider"></li>
 
-            <li>@Html.ActionLink("New Books", "NewBooks", "Books")</li>
-            <li>@Html.ActionLink("Best Sellers", "BestSellers", "Categories")</li>
-            <li>@Html.ActionLink("Promotions2", "Promotions", "Books")</li> 
-            <li>@Html.ActionLink("Promotions", "Index", "Promotions")</li>   
+            <li>@Html.ActionLink("New Books", "NewBooks", "Books", new { area = "" }, null)</li>
+            <li>@Html.ActionLink("Best Sellers", "BestSellers", "Categories", new { area = "" }, null)</li>
+            <li>@Html.ActionLink("Promotions2", "Promotions", "Books", new { area = "" }, null)</li> 
+            <li>@Html.ActionLink("Promotions", "Index", "Promotions", new { area = "" }, null)</li>   
 
             <li class="divider"></li>
-            <li>@Html.ActionLink("All Categories", "All", "Categories")</li>
-            <li>@Html.ActionLink("All Authors", "All", "Authors")</li>
+            <li>@Html.ActionLink("All Categories", "All", "Categories", new { area = "" }, null)</li>
+            <li>@Html.ActionLink("All Authors", "All", "Authors", new { area = "" }, null)</li>
             <li></li>
         </ul>
 

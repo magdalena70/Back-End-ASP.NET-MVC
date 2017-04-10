@@ -120,3 +120,5 @@ C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.App.Test
 C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.App.Tests\obj\Debug\BookStore.App.Tests.pdb
 C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.App.Tests\bin\Debug\BookStore.Services.dll
 C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.App.Tests\bin\Debug\BookStore.Services.pdb
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.App.Tests\bin\Debug\AutoMapper.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.App.Tests\bin\Debug\AutoMapper.xml

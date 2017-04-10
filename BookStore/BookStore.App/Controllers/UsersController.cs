@@ -1,14 +1,10 @@
 ﻿using System.Data.Entity;
-using System.Net;
 using System.Web.Mvc;
-using BookStore.Models;
 using BookStore.Models.ViewModels;
 using Microsoft.AspNet.Identity;
 using BookStore.Services;
-using System;
 using BookStore.Data;
 using BookStore.Models.BindingModels;
-using System.Linq;
 using BookStore.Models.EntityModels;
 
 namespace BookStore.App.Controllers
@@ -54,7 +50,6 @@ namespace BookStore.App.Controllers
         }
 
         // POST: Users/FavoriteBooks
-        [Authorize]
         [HttpPost, ActionName("FavoriteBooks")]
         [ValidateAntiForgeryToken]
         public ActionResult AddBookToFavoriteBooks([Bind(Include = "Id")] FavoriteBookBindingModel book)
@@ -66,7 +61,6 @@ namespace BookStore.App.Controllers
         }
 
         // POST: Users/RemoveFromFavorite
-        [Authorize]
         [HttpPost, ActionName("RemoveFromFavorite")]
         [ValidateAntiForgeryToken]
         public ActionResult RemoveBookFromFavoriteBooks([Bind(Include = "Id")] FavoriteBookBindingModel book)
@@ -79,7 +73,6 @@ namespace BookStore.App.Controllers
         }
 
         // GET: Users/EditProfile
-        [Authorize]
         public ActionResult EditProfile()
         {
             User currentUser = this.GetCurrentUser();
@@ -94,7 +87,6 @@ namespace BookStore.App.Controllers
         }
 
         // POST: Users/EditProfile
-        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditProfile(EditUserProfileBindingModel bindingModel)
@@ -107,64 +99,13 @@ namespace BookStore.App.Controllers
             return RedirectToAction("UserProfile", "Users");
         }
 
-        //-------------------to do for admin---------------------------------//
-
-        //// GET: Users/Create
-        //public ActionResult Create()
+        //protected override void Dispose(bool disposing)
         //{
-        //    ViewBag.Id = new SelectList(db.Baskets, "Id", "Id");
-        //    return View();
-        //}
-
-        // POST: Users/Create
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Address,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] User user)
-        //{
-        //    if (ModelState.IsValid)
+        //    if (disposing)
         //    {
-        //        db.Users.Add(user);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
+        //        context.Dispose();
         //    }
-
-        //    ViewBag.Id = new SelectList(db.Baskets, "Id", "Id", user.Id);
-        //    return View(user);
+        //    base.Dispose(disposing);
         //}
-
-        //// GET: Users/Delete/5
-        //public ActionResult Delete(string id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    User user = db.Users.Find(id);
-        //    if (user == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(user);
-        //}
-
-        //// POST: Users/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(string id)
-        //{
-        //    User user = db.Users.Find(id);
-        //    db.Users.Remove(user);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                context.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

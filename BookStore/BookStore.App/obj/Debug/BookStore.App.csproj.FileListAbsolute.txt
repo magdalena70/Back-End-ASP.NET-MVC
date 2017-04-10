@@ -172,3 +172,5 @@ C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.App\obj\
 C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.App\obj\Debug\BookStore.App.pdb
 C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.App\bin\BookStore.Services.dll
 C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.App\bin\BookStore.Services.pdb
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.App\bin\AutoMapper.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.App\bin\AutoMapper.xml

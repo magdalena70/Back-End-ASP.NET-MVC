@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BookStore.Models.BindingModels;
 using BookStore.Models.EntityModels;
+using AutoMapper;
 
 namespace BookStore.Models
 {
@@ -14,16 +15,12 @@ namespace BookStore.Models
         {
         }
 
-        public List<AllCategoriesViewModel> GetAll()
+        public IEnumerable<AllCategoriesViewModel> GetAll()
         {
-            var viewModel = this.context.Categories
-                .Select(c => new AllCategoriesViewModel()
-                {
-                    Name = c.Name,
-                    Id = c.Id
-                })
+            var categories = this.context.Categories
                 .ToList();
 
+            IEnumerable<AllCategoriesViewModel> viewModel = Mapper.Map<IEnumerable<Category>, IEnumerable<AllCategoriesViewModel>>(categories);
             return viewModel;
         }
 
@@ -37,27 +34,14 @@ namespace BookStore.Models
                 return null;
             }
 
-            CategoryViewModel viewModel = new CategoryViewModel()
-            {
-                Id = category.Id,
-                Name = category.Name,
-                Books = category.Books
+            var categoryBooks = category.Books
                     .OrderByDescending(b => b.IssueDate)
-                    .Select(b => new BooksViewModel()
-                    {
-                        Id = b.Id,
-                        Title = b.Title,
-                        Authors = b.Authors.ToList(),
-                        IssueDate = b.IssueDate,
-                        Description = b.Description,
-                        ImageUrl = b.ImageUrl,
-                        Language = b.Language,
-                        Price = b.Price,
-                        Quantity = b.Quantity
-                    })
-                    .ToList()
-            };
-                
+                    .ToList();
+
+            CategoryViewModel viewModel = Mapper.Map<Category, CategoryViewModel>(category);
+            ICollection<BooksViewModel> booksViewModel = Mapper.Map<ICollection<Book>, ICollection<BooksViewModel>>(categoryBooks);
+            viewModel.Books = booksViewModel;
+
             return viewModel;
         }
 
@@ -69,26 +53,11 @@ namespace BookStore.Models
                 return null;
             }
 
-            CategoryViewModel viewModel = new CategoryViewModel()
-            {
-                Id = category.Id,
-                Name = category.Name,
-                BooksCount = category.Books.Count,
-                Books = category.Books
-                .Select(b => new BooksViewModel()
-                {
-                    Id = b.Id,
-                    Title = b.Title,
-                    Authors = b.Authors.ToList(),
-                    IssueDate = b.IssueDate,
-                    Description = b.Description,
-                    ImageUrl = b.ImageUrl,
-                    Language = b.Language,
-                    Price = b.Price,
-                    Quantity = b.Quantity
-                })
-                .ToList()
-            };
+            var categoryBooks = category.Books.ToList();
+
+            CategoryViewModel viewModel = Mapper.Map<Category, CategoryViewModel>(category);
+            ICollection<BooksViewModel> booksViewModel = Mapper.Map<ICollection<Book>, ICollection<BooksViewModel>>(categoryBooks);
+            viewModel.Books = booksViewModel;
 
             return viewModel;
         }
@@ -103,55 +72,13 @@ namespace BookStore.Models
                 return null;
             }
 
-            CategoryViewModel viewModel = new CategoryViewModel()
-            {
-                Id = category.Id,
-                Name = category.Name,
-                Books = category.Books
-                .Select(b => new BooksViewModel()
-                {
-                    Id = b.Id,
-                    Title = b.Title,
-                    Authors = b.Authors.ToList(),
-                    IssueDate = b.IssueDate,
-                    Description = b.Description,
-                    ImageUrl = b.ImageUrl,
-                    Language = b.Language,
-                    Price = b.Price,
-                    Quantity = b.Quantity
-                })
-                .ToList()
-            };
+            var categoryBooks = category.Books.ToList();
+
+            CategoryViewModel viewModel = Mapper.Map<Category, CategoryViewModel>(category);
+            ICollection<BooksViewModel> booksViewModel = Mapper.Map<ICollection<Book>, ICollection<BooksViewModel>>(categoryBooks);
+            viewModel.Books = booksViewModel;
 
             return viewModel;
-        }
-
-        public Category CreateCategory(CategoryBindingModel bindingModel)
-        {
-            Category category = new Category()
-            {
-                Name = bindingModel.Name
-            };
-
-            return category;
-        }
-
-        public Category EditCategory(CategoryBindingModel bindingModel)
-        {
-            Category category = new Category()
-            {
-                Id = bindingModel.Id,
-                Name = bindingModel.Name
-            };
-
-            return category;
-        }
-
-        public void DeleteCategory(int id)
-        {
-            Category category = this.context.Categories.Find(id);
-            this.context.Categories.Remove(category);
-            this.context.SaveChanges();
         }
     }
 }

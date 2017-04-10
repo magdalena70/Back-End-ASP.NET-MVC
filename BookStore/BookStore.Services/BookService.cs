@@ -5,6 +5,7 @@ using BookStore.Models.ViewModels;
 using System.Linq;
 using BookStore.Models;
 using BookStore.Models.EntityModels;
+using AutoMapper;
 
 namespace BookStore.Services
 {
@@ -17,25 +18,16 @@ namespace BookStore.Services
         public IEnumerable<BooksViewModel> GetNewBooks()
         {
             var newBooks = context.Books
-                .Where(b => b.IssueDate.Year == DateTime.Now.Year && b.IssueDate.Month > DateTime.Now.Month - 3)
+                .Where(b => 
+                    b.IssueDate.Year == DateTime.Now.Year && b.IssueDate.Month > DateTime.Now.Month - 3)
                 .OrderByDescending(b => b.IssueDate)
-                .Select(b => new BooksViewModel()
-                {
-                    Id = b.Id,
-                    Title = b.Title,
-                    Description = b.Description,
-                    ImageUrl = b.ImageUrl,
-                    Authors = b.Authors.ToList(),
-                    Language = b.Language,
-                    Price = b.Price,
-                    Quantity = b.Quantity,
-                    IssueDate = b.IssueDate
-                })
                 .ToList();
 
-            return newBooks;
+            IEnumerable<BooksViewModel> viewModel = Mapper.Map<IEnumerable<Book>, IEnumerable<BooksViewModel>>(newBooks);
+            return viewModel;
         }
 
+        //to do
         public PromotionsViewModel GetPromotions(string categoryName, decimal discount, DateTime startDate)
         {
             var category = context.Categories.FirstOrDefault(c => c.Name == categoryName);
@@ -83,51 +75,23 @@ namespace BookStore.Services
                 return null;
             }
 
-            BookDetailsViewModel viewModel = new BookDetailsViewModel()
-            {
-                Id = book.Id,
-                Title = book.Title,
-                IssueDate = book.IssueDate,
-                ImageUrl = book.ImageUrl,
-                Description = book.Description,
-                ISBN = book.ISBN,
-                NumberOfPages = book.NumberOfPages,
-                Price = book.Price,
-                Language = book.Language,
-                Quantity = book.Quantity,
-                Categories = book.Categories.ToList(),
-                Authors = book.Authors.ToList(),
-                Reviews = book.Reviews.ToList(),
-                UpRating = book.UpRating,
-                DownRating = book.DownRating
-            };
-
+            BookDetailsViewModel viewModel = Mapper.Map<Book, BookDetailsViewModel>(book);
             return viewModel;
         }
 
         public IEnumerable<BooksViewModel> GetBooksByTitle(string bookTitle)
         {
             var books = context.Books
+                .Include("Authors")
                 .Where(b => b.Title.Contains(bookTitle))
-                .Select(b => new BooksViewModel()
-                {
-                    Id = b.Id,
-                    Title = b.Title,
-                    ImageUrl = b.ImageUrl,
-                    Description = b.Description,
-                    IssueDate = b.IssueDate,
-                    Authors = b.Authors.ToList(),
-                    Language = b.Language,
-                    Price = b.Price,
-                    Quantity = b.Quantity
-                })
                 .ToList();
             if (books.Count() == 0)
             {
                 return null;
             }
 
-            return books;
+            IEnumerable<BooksViewModel> viewModel = Mapper.Map<IEnumerable<Book>, IEnumerable<BooksViewModel>>(books);
+            return viewModel;
         }
     }
 }

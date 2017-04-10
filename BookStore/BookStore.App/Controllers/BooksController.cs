@@ -69,7 +69,7 @@ namespace BookStore.App.Controllers
             if (id == null)
             {
                 this.TempData["Error"] = "Incorrect url. Book id is required.";
-                 return RedirectToLocal(returnUrl);
+                 return RedirectToAction("Index", "Home");
                 //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
@@ -77,7 +77,7 @@ namespace BookStore.App.Controllers
             if (viewModel == null)
             {
                 this.TempData["Error"] = $"There is no book with id: {id}.";
-                return RedirectToLocal(returnUrl);
+                return RedirectToAction("Index", "Home");
             }
 
             return View(viewModel);
@@ -101,110 +101,6 @@ namespace BookStore.App.Controllers
             }
 
             return View(viewModel);
-        }
-
-        //to do-----------------for admin------------------------------//
-
-        // GET: Books/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Books/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,ImageUrl,Language,Description,Price,Quantity,NumberOfPages,IssueDate,ISBN,UpRating,DownRating")] Book book)
-        {
-            if (ModelState.IsValid)
-            {
-                context.Books.Add(book);
-                context.SaveChanges();
-                return RedirectToAction("NewBooks", "Books");
-            }
-
-            return View(book);
-        }
-
-        // GET: Books/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Book book = context.Books.Find(id);
-            if (book == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(book);
-        }
-
-        // POST: Books/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,ImageUrl,Language,Description,Price,Quantity,NumberOfPages,IssueDate,ISBN,UpRating,DownRating")] Book book)
-        {
-            if (ModelState.IsValid)
-            {
-                context.Entry(book).State = EntityState.Modified;
-                context.SaveChanges();
-                return RedirectToAction("Details/" + book.Id, "Books");
-            }
-
-            return View(book);
-        }
-
-        // GET: Books/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            Book book = context.Books.Find(id);
-            if (book == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(book);
-        }
-
-        // POST: Books/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Book book = context.Books.Find(id);
-            context.Books.Remove(book);
-            context.SaveChanges();
-            return RedirectToAction("Index", "Home");
-        }
-
-        #region Helpers
-        private ActionResult RedirectToLocal(string returnUrl)
-        {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-
-            return RedirectToAction("Index", "Home");
-        }
-        #endregion
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                context.Dispose();
-            }
-
-            base.Dispose(disposing);
         }
     }
 }

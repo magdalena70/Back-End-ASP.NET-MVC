@@ -3,7 +3,6 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using BookStore.Data;
-using BookStore.Models;
 using Microsoft.AspNet.Identity;
 using BookStore.Services;
 using BookStore.Models.ViewModels;
@@ -30,7 +29,7 @@ namespace BookStore.App.Controllers
             BasketViewModel viewModel = this.basketService.GetBasketDetails(ownerId);
             if (viewModel == null)
             {
-                this.TempData["Error"] = "You have no right to access.";
+                this.TempData["Error"] = "You have no basket.";
                 return RedirectToAction("Index", "Home");
             }
 

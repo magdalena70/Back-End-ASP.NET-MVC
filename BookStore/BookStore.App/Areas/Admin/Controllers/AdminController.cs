@@ -1,4 +1,5 @@
-﻿using BookStore.Data;
+﻿using BookStore.App.Attributes;
+using BookStore.Data;
 using BookStore.Models.EntityModels;
 using BookStore.Models.ViewModels;
 using Microsoft.AspNet.Identity;
@@ -8,7 +9,7 @@ using System.Web.Mvc;
 
 namespace BookStore.App.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [CustomAttributeAuth(Roles = "Admin")]
     public class AdminController : Controller
     {
         private BookStoreContext context;

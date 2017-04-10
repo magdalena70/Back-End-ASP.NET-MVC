@@ -70,6 +70,11 @@ a {
     padding: 10px;
 }
 
+.error-div{
+    background-color: black;
+    color: yellow;
+}
+
 #go-top-btn {
     position: fixed;
     right: 1%;
@@ -221,7 +226,8 @@ div.panel {
 }
 
 footer {
-    padding-bottom: 0;
+    background-color: black;
+    padding: 1%;
     margin-bottom: 0;
     font-size: 14px;
     color: lightblue;

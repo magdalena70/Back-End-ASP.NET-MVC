@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.0.2\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -193,6 +197,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\MapperConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
@@ -201,6 +206,7 @@
     <Compile Include="Areas\Admin\Controllers\BooksController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\PromotionsController.cs" />
+    <Compile Include="Attributes\CustomAttributeAuth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuthorsController.cs" />
     <Compile Include="Controllers\BasketsController.cs" />
@@ -229,9 +235,9 @@
     <Content Include="Content\Images\Books\ingloriousEmpire.jpg" />
     <Content Include="Content\Images\Books\theRaqqaDiaries.jpg" />
     <Content Include="Content\Images\Books\theRulesDoNotApply.jpg" />
-    <Content Include="Content\Images\heart-favorite.jpg" />
     <Content Include="Content\Images\home-icon.png" />
     <Content Include="Content\Images\menu-icon.png" />
+    <Content Include="Content\Images\Messages\roleErrorMsg.jpg" />
     <Content Include="Content\Images\search-icon.png" />
     <Content Include="Content\Images\user-basket.png" />
     <Content Include="Content\Images\Books\wedWabbit.jpg" />
@@ -316,21 +322,12 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_MessagesPartial.cshtml" />
-    <Content Include="Views\Books\Create.cshtml" />
-    <Content Include="Views\Books\Delete.cshtml" />
     <Content Include="Views\Books\Details.cshtml" />
-    <Content Include="Views\Books\Edit.cshtml" />
     <Content Include="Views\Books\NewBooks.cshtml" />
     <Content Include="Views\Books\Promotions.cshtml" />
-    <Content Include="Views\Categories\Create.cshtml" />
-    <Content Include="Views\Categories\Delete.cshtml" />
     <Content Include="Views\Categories\Details.cshtml" />
-    <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Books\BooksByTitle.cshtml" />
-    <Content Include="Views\Authors\Create.cshtml" />
-    <Content Include="Views\Authors\Delete.cshtml" />
     <Content Include="Views\Authors\BooksByAuthor.cshtml" />
-    <Content Include="Views\Authors\Edit.cshtml" />
     <Content Include="Views\Authors\All.cshtml" />
     <Content Include="Views\Baskets\AddToBasket.cshtml" />
     <Content Include="Views\Baskets\Delete.cshtml" />
@@ -361,6 +358,7 @@
     <Content Include="Views\Promotions\Details.cshtml" />
     <Content Include="Views\Promotions\Edit.cshtml" />
     <Content Include="Views\Promotions\Index.cshtml" />
+    <Content Include="Views\Shared\RoleErrorMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

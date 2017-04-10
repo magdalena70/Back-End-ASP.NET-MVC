@@ -25,6 +25,14 @@ namespace BookStore.Data.Migrations
                 roleManager.Create(role);
             }
 
+            if (!context.Roles.Any(r => r.Name == "LoyalCustomer"))
+            {
+                var roleStore = new RoleStore<IdentityRole>(context);
+                var roleManager = new RoleManager<IdentityRole>(roleStore);
+                var role = new IdentityRole("LoyalCustomer");
+                roleManager.Create(role);
+            }
+
             Author samer = new Author
             {
                 FullName = "Samer",

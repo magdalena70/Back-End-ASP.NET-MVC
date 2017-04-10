@@ -4,10 +4,11 @@ using System.Net;
 using System.Web.Mvc;
 using BookStore.Data;
 using BookStore.Models.EntityModels;
+using BookStore.App.Attributes;
 
 namespace BookStore.App.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [CustomAttributeAuth(Roles = "Admin")]
     public class BooksController : Controller
     {
         private BookStoreContext db = new BookStoreContext();

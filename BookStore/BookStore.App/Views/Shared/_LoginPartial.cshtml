@@ -2,7 +2,7 @@
 
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new {id = "logoutForm", @class = "navbar-right" }))
     {
         @Html.AntiForgeryToken()
         <ul class="nav navbar-nav navbar-right">
@@ -14,16 +14,16 @@
                 </a>
 
                 <ul class="dropdown-menu">
-                    <li>@Html.ActionLink("My Profile", "UserProfile", "Users")</li>
-                    <li>@Html.ActionLink("My Basket", "Details", "Baskets")</li>
-                    <li>@Html.ActionLink("My Favorite", "FavoriteBooks", "Users")</li>
+                    <li>@Html.ActionLink("My Profile", "UserProfile", "Users", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("My Basket", "Details", "Baskets", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("My Favorite", "FavoriteBooks", "Users", new { area = "" }, null)</li>
 
                     <li class="divider"></li>
-                    <li>@Html.ActionLink("Special Offers", "SpecialOffers", "Books")</li>
+                    <li>@Html.ActionLink("Special Offers", "SpecialOffers", "Books", new { area = "" }, null)</li>
 
                     <li class="divider"></li>
-                    <li>@Html.ActionLink("Edit Profile", "EditProfile", "Users")</li>
-                    <li>@Html.ActionLink("Change Password", "ChangePassword", "Manage")</li>
+                    <li>@Html.ActionLink("Edit Profile", "EditProfile", "Users", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Change Password", "ChangePassword", "Manage", new { area = "" }, null)</li>
                 </ul>
             </li>
             <li>

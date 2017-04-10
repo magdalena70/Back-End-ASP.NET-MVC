@@ -12,7 +12,7 @@ namespace BookStore.Models.ViewModels
 
         public string ImageUrl { get; set; }
 
-        public List<Author> Authors { get; set; }
+        public ICollection<AuthorViewModel> Authors { get; set; }
 
         public string Language { get; set; }
 

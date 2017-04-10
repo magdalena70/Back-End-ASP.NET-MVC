@@ -2,7 +2,7 @@
 
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
         @Html.AntiForgeryToken()
 
@@ -14,9 +14,9 @@
                 </a>
 
                 <ul class="dropdown-menu">
-                    <li>@Html.ActionLink("All Categories", "AllCategories", "Categories")</li>
-                    <li>@Html.ActionLink("Add Category", "AddCategories", "Categories")</li>
-                    <li>@Html.ActionLink("Search Category", "SearchCategory", "Categories")</li>
+                    <li>@Html.ActionLink("All Categories", "AllCategories", "Categories", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink("Add Category", "AddCategories", "Categories", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink("Search Category", "SearchCategory", "Categories", new { area = "Admin" }, null)</li>
                 </ul>
             </li>
 
@@ -27,9 +27,9 @@
                 </a>
 
                 <ul class="dropdown-menu">
-                    <li>@Html.ActionLink("All Books", "AllBooks", "Books")</li>
-                    <li>@Html.ActionLink("Add Book", "AddBook", "Books")</li>
-                    <li>@Html.ActionLink("Search Book", "SearchBook", "Books")</li>
+                    <li>@Html.ActionLink("All Books", "AllBooks", "Books", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink("Add Book", "AddBook", "Books", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink("Search Book", "SearchBook", "Books", new { area = "Admin" }, null)</li>
                 </ul>
             </li>
 
@@ -40,9 +40,9 @@
                 </a>
 
                 <ul class="dropdown-menu">
-                    <li>@Html.ActionLink("All Authors", "AllAuthors", "Authors")</li>
-                    <li>@Html.ActionLink("Add Author", "AddAuthor", "Authors")</li>
-                    <li>@Html.ActionLink("Search Author", "SearchAuthor", "Authors")</li>
+                    <li>@Html.ActionLink("All Authors", "AllAuthors", "Authors", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink("Add Author", "AddAuthor", "Authors", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink("Search Author", "SearchAuthor", "Authors", new { area = "Admin" }, null)</li>
                 </ul>
             </li>
 
@@ -53,9 +53,9 @@
                 </a>
 
                 <ul class="dropdown-menu">
-                    <li>@Html.ActionLink("All Promotions", "AllPromotions", "Promotions")</li>
-                    <li>@Html.ActionLink("Add Promotion", "AddPromotion", "Promotions")</li>
-                    <li>@Html.ActionLink("Search Promotion", "SearchPromotion", "Promotions")</li>
+                    <li>@Html.ActionLink("All Promotions", "AllPromotions", "Promotions", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink("Add Promotion", "AddPromotion", "Promotions", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink("Search Promotion", "SearchPromotion", "Promotions", new { area = "Admin" }, null)</li>
                 </ul>
             </li>
 
@@ -66,9 +66,9 @@
                 </a>
 
                 <ul class="dropdown-menu">
-                    @*<li>@Html.ActionLink("Edit Profile", "EditProfile", "Users")</li>
-                    <li>@Html.ActionLink("Change Password", "ChangePassword", "Manage")</li>*@
-                    <li>@Html.ActionLink("Assign Roles", "AssignRoles", "Admin")</li>
+                    <li>@Html.ActionLink("Edit Profile", "EditProfile", "Users", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Change Password", "ChangePassword", "Manage", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Assign Roles", "AssignRoles", "Admin", new { area = "Admin" }, null)</li>
 
                     <li>
                         <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-default">
