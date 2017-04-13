@@ -7,9 +7,5 @@ namespace BookStore.Models.ViewModels
         public int Count { get; set; }
 
         public Book Book { get; set; }
-
-        public int BookId { get; set; }
-
-        public int NewCount { get; set; }
     }
 }

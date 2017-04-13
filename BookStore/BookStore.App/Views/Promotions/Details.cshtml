@@ -1,58 +1,18 @@
-﻿@model BookStore.Models.EntityModels.Promotion
+﻿@model BookStore.Models.ViewModels.PromotionsViewModel
 
 @{
     ViewBag.Title = "Details";
 }
-
-<h2>Details</h2>
-
-<div>
-    <h4>Promotion</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Text)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Text)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EndDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Discount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Discount)
-        </dd>
-
-    </dl>
+<div class="row text-center">
+    <div class="col-md-10 col-md-offset-1 category-div">
+        <h2>@Html.DisplayFor(p => p.Name)</h2>
+        <h3>@Html.DisplayFor(p => p.Text)</h3>
+        <hr />
+        <h4>Discount: <span class="you-will-save">@Html.DisplayFor(p => Model.Discount)</span></h4>
+        <h5>Start date: <span class="you-will-save">@Html.DisplayFor(p => Model.StartDate)</span> - End Date: <span class="you-will-save">@Html.DisplayFor(p => Model.EndDate)</span></h5>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<hr />
+<div class="row">
+    @Html.Partial("_BooksInPromotionViewPartial")
+</div>

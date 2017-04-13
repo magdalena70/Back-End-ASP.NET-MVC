@@ -35,6 +35,12 @@ namespace BookStore.App.App_Start
                     .ForMember(vm => vm.OwnerLastName, options => options.MapFrom(b => b.Owner.LastName))
                     .ForMember(vm => vm.OwnerPhoneNumber, options => options.MapFrom(b => b.Owner.PhoneNumber));
 
+                ex.CreateMap<Promotion, PromotionsViewModel>();
+
+                ex.CreateMap<Book, HomeNewBookViewModel>();
+                ex.CreateMap<Author, HomeNewBookAuthorViewModel>();
+                ex.CreateMap<Promotion, HomePromotionViewModel>();
+
             });
         }
     }

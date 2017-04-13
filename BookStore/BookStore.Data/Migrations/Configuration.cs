@@ -2,7 +2,6 @@ namespace BookStore.Data.Migrations
 {
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
-    using Models;
     using Models.EntityModels;
     using System;
     using System.Data.Entity.Migrations;
@@ -189,8 +188,24 @@ namespace BookStore.Data.Migrations
                     "how Britain's rise was built upon its plunder of India.",
                 Language = "EN",
                 IssueDate = new DateTime(2016, 08, 17),
-                Quantity = 1,
+                Quantity = 10,
                 NumberOfPages = 350,
+                Authors = { shashiTharoor }
+            };
+
+            Book ingloriousEmpire2 = new Book
+            {
+                Title = "Inglorious Empire - Part 2",
+                Price = 42.50m,
+                ISBN = "9788798009995",
+                ImageUrl = "../../Content/Images/Books/ingloriousEmpire.jpg",
+                Description = "Inglorious Empire tells the real story of the British in India - " +
+                   "from the arrival of the East India Company to the end of the Raj - revealing " +
+                   "how Britain's rise was built upon its plunder of India.",
+                Language = "EN",
+                IssueDate = new DateTime(2016, 12, 22),
+                Quantity = 10,
+                NumberOfPages = 285,
                 Authors = { shashiTharoor }
             };
 
@@ -269,8 +284,8 @@ namespace BookStore.Data.Migrations
                     new Category { Name = "Arts" },
                     new Category { Name = "Sport" },
                     new Category { Name = "Travel" },
-                    new Category { Name = "History", Books = { ingloriousEmpire } },
-                    new Category { Name = "Best Sellers", Books = { theRulesDoNotApply, griefWorks, border, ingloriousEmpire } },
+                    new Category { Name = "History", Books = { ingloriousEmpire, ingloriousEmpire2 } },
+                    new Category { Name = "Best Sellers", Books = { theRulesDoNotApply, griefWorks, border, ingloriousEmpire, ingloriousEmpire2 } },
                     new Category { Name = "Hardback", Books = { theRaqqaDiaries, theRulesDoNotApply, ingloriousEmpire } },
                     new Category { Name = "Politics", Books = { theRaqqaDiaries, border, ingloriousEmpire } }
                 );
@@ -278,7 +293,7 @@ namespace BookStore.Data.Migrations
             context.Promotions.AddOrUpdate(p => p.Name,
                 new Promotion()
                 {
-                    Name = "Book In Paperback from last year",
+                    Name = "Books In 'Paperback' from last year",
                     Text = "Some info about...",
                     StartDate = DateTime.Now,
                     EndDate = DateTime.Now.AddDays(15),
@@ -288,7 +303,21 @@ namespace BookStore.Data.Migrations
                                         Name = "Paperback",
                                         Books = { border, griefWorks, wedWabbit, wedWabbit2, wedWabbit3 }
                                      }}
-                });
+                },
+                new Promotion()
+                {
+                    Name = "Books from 'Home and Garden' category",
+                    Text = "Some info about this promotion...",
+                    StartDate = DateTime.Now.AddDays(5),
+                    EndDate = DateTime.Now.AddDays(15),
+                    Discount = 5.0m,
+                    Categories = { new Category
+                                    {
+                                        Name = "Home and Garden",
+                                        Books = { theRulesDoNotApply }
+                                     }}
+                }
+            );
 
             context.SaveChanges();
         }

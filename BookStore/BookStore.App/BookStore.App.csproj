@@ -324,7 +324,6 @@
     <Content Include="Views\Shared\_MessagesPartial.cshtml" />
     <Content Include="Views\Books\Details.cshtml" />
     <Content Include="Views\Books\NewBooks.cshtml" />
-    <Content Include="Views\Books\Promotions.cshtml" />
     <Content Include="Views\Categories\Details.cshtml" />
     <Content Include="Views\Books\BooksByTitle.cshtml" />
     <Content Include="Views\Authors\BooksByAuthor.cshtml" />
@@ -352,12 +351,14 @@
     <Content Include="Views\Users\FavoriteBooks.cshtml" />
     <Content Include="Views\Shared\_BackNextTopButtonsPartial.cshtml" />
     <Content Include="Views\Categories\_CategoryBooksViewPartial.cshtml" />
-    <Content Include="Views\Promotions\Create.cshtml" />
-    <Content Include="Views\Promotions\Delete.cshtml" />
     <Content Include="Views\Promotions\Details.cshtml" />
-    <Content Include="Views\Promotions\Edit.cshtml" />
-    <Content Include="Views\Promotions\Index.cshtml" />
+    <Content Include="Views\Promotions\AllPromotions.cshtml" />
     <Content Include="Views\Shared\RoleErrorMessage.cshtml" />
+    <Content Include="Views\Promotions\_BooksInPromotionViewPartial.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\HomePromotionViewModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\BooksViewModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\HomeNewBookAuthorViewModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\AuthorViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

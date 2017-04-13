@@ -33,35 +33,6 @@ namespace BookStore.App.Controllers
             return View(viewModel);
         }
 
-        //Get: Books/Promotions
-        //to do
-        public ActionResult Promotions()
-        {
-            string categoryName = "Paperback";
-            decimal discount = 10.0m;
-            DateTime startDate = new DateTime(2017, 04, 01);
-            
-            PromotionsViewModel viewModel = this.bookService.GetPromotions(categoryName, discount, startDate);
-            if (viewModel == null)
-            {
-                this.TempData["Info"] = "No promotions.";
-                return RedirectToAction("Index", "Home");
-            }
-
-            if (viewModel.Books.Count() == 0)
-            {
-                this.TempData["Info"] = "No books.";
-            }
-
-            if (viewModel.EndDate < DateTime.Now)
-            {
-                this.TempData["Info"] = "No Promotions.";
-                return RedirectToAction("Index", "Home");
-            }
-
-            return View(viewModel);
-        }
-
         // GET: Books/Details/5
         public ActionResult Details(int? id, string returnUrl)
         {

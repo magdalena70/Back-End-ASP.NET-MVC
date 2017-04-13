@@ -11,6 +11,8 @@ namespace BookStore.Models.EntityModels
         public User()
         {
             this.Reviews = new HashSet<Review>();
+            this.FavoriteBooks = new HashSet<Book>();
+            this.Purchases = new HashSet<Purchase>();
         }
 
         public string FirstName { get; set; }
@@ -26,6 +28,9 @@ namespace BookStore.Models.EntityModels
         public virtual ICollection<Review> Reviews { get; set; }
 
         public virtual ICollection<Book> FavoriteBooks { get; set; }
+
+        public virtual ICollection<Purchase> Purchases { get; set; }
+
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         {

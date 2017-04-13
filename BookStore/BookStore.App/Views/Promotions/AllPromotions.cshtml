@@ -1,0 +1,72 @@
+﻿@model IEnumerable<BookStore.Models.ViewModels.PromotionsViewModel>
+
+@{
+    ViewBag.Title = "Promotions";
+}
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1 text-center">
+        <h2>@ViewBag.Title</h2>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <table class="table table-bordered book-div">
+            <tr>
+                <th class="text-center">Status</th>
+                <th class="text-center">
+                    @Html.DisplayNameFor(p => p.Name)
+                </th>
+                <th class="text-center">
+                    @Html.DisplayNameFor(p => p.StartDate)
+                </th>
+                <th class="text-center">
+                    @Html.DisplayNameFor(p => p.EndDate)
+                </th>
+                <th class="text-center"><span class="glyphicon glyphicon-hand-right"></span></th>
+            </tr>
+
+            @foreach (var promotion in Model)
+            {
+                if (promotion.StartDate < DateTime.Now)
+                {
+                    <tr>
+                        <td>Current Promotion</td>
+                        <td>
+                            @Html.DisplayFor(p => promotion.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(p => promotion.StartDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(p => promotion.EndDate)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { id = promotion.Id })
+                        </td>
+                    </tr>
+                }
+
+                if (promotion.StartDate > DateTime.Now)
+                {
+                    <tr>
+                        <td>Comming Soon</td>
+                        <td>
+                            @Html.DisplayFor(p => promotion.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(p => promotion.StartDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(p => promotion.EndDate)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Learn More", "Details", new { id = promotion.Id })
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+</div>

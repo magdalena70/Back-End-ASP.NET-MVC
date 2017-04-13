@@ -1,0 +1,13 @@
+﻿@model BookStore.Models.ViewModels.HomePromotionViewModel
+
+<tr>
+    <td>
+        <h4>@Html.DisplayFor(p => Model.Name)</h4>
+    </td>
+    <td>
+        <h4>Discount: @Html.DisplayFor(p => Model.Discount)</h4>
+    </td>
+    <td>
+        @Html.ActionLink("Learn More", "Details", "Promotions", new { id = Model.Id }, new { @class="btn btn-info"})
+    </td>
+</tr>

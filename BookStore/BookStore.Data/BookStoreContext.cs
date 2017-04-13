@@ -1,7 +1,6 @@
 namespace BookStore.Data
 {
     using Microsoft.AspNet.Identity.EntityFramework;
-    using Models;
     using Models.EntityModels;
     using System.Data.Entity;
 
@@ -25,6 +24,11 @@ namespace BookStore.Data
         public virtual DbSet<BasketBook> BasketsBooks { get; set; }
 
         public virtual DbSet<Promotion> Promotions { get; set; }
+
+        public virtual DbSet<Purchase> Purchases { get; set; }
+
+        public virtual DbSet<Rating> Ratings { get; set; }
+
 
         public static BookStoreContext Create()
         {

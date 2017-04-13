@@ -1,0 +1,3 @@
+﻿@model BookStore.Models.ViewModels.AuthorViewModel
+
+<p>@Html.ActionLink(Model.FullName, "Details", "Authors", new { id = Model.Id}, null)</p>

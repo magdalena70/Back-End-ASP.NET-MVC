@@ -26,9 +26,7 @@ namespace BookStore.Services
                     .Select(b => new CountBookInBasketViewModel()
                     {
                         Count = b.Count(),
-                        Book = b.First().Book,
-                        BookId = b.First().Book.Id,
-                        NewCount = 0
+                        Book = b.First().Book
                     }).ToList();
 
             BasketViewModel viewModel = Mapper.Map<Basket, BasketViewModel>(basket);

@@ -1,0 +1,12 @@
+﻿@model BookStore.Models.ViewModels.BooksViewModel
+
+<div class="col-md-4 text-center">
+    <h5>@Html.DisplayFor(b => Model.Title)</h5>
+    <div class="img-box">
+        <img src="@Model.ImageUrl" alt="book-img" class="img img-thumbnail" width="50%"/>
+    </div>
+    <div class="row">
+        <small>by @Html.DisplayFor(b => Model.Authors)</small>
+        <p><small>@Html.DisplayFor(b => Model.Price)</small></p>
+    </div>
+</div>

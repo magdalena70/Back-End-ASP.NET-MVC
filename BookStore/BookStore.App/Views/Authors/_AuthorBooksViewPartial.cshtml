@@ -25,9 +25,9 @@
                     </a>
                 </div>
                 <div class="col-md-8">
-                    <p>Issue Date - @book.IssueDate.ToString("dd-MM-yyyy")</p>
+                    <p>Issue Date - @Html.DisplayFor(b => book.IssueDate)</p>
                     <p>Lang - @Html.DisplayFor(b => book.Language)</p>
-                    <p>Price - @Html.DisplayFor(b => book.Price) BGN</p>
+                    <p>Price - @Html.DisplayFor(b => book.Price)</p>
                     <p>In Stock - @Html.DisplayFor(b => book.Quantity)</p>
                     @using (Html.BeginForm("FavoriteBooks", "Users", FormMethod.Post))
                     {

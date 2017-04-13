@@ -1,6 +1,6 @@
-﻿using BookStore.Models.EntityModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BookStore.Models.ViewModels
 {
@@ -16,12 +16,12 @@ namespace BookStore.Models.ViewModels
 
         public string Language { get; set; }
 
-        public string Description { get; set; }
-
+        [DisplayFormat(DataFormatString = "{0:0.00} BGN", ApplyFormatInEditMode = true)]
         public decimal Price { get; set; }
 
         public int Quantity { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime IssueDate { get; set; }
     }
 }
