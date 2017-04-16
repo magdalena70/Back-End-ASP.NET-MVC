@@ -5,11 +5,9 @@
 
 body {
     padding-bottom: 20px;
-    background-image: url("Images/anglerfish.jpg");
-    background-repeat: repeat;
     font-family: 'Times New Roman', Times, sans-serif;
     font-size: 19px;
-    color: white;
+    color: #E3DDDF;
     font-style: italic;
 }
 
@@ -17,9 +15,9 @@ hr {
     display: block;
     height: 1px;
     border: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
     margin: 1em 0;
-    padding: 0; 
+    padding: 0;
 }
 
 .affix {
@@ -35,18 +33,19 @@ h1, h2, h3, h4, h5, .lead {
     font-family: Gloss_And_Bloom, sans-serif !important;
     text-shadow: 10px 5px 1px #160200;
     letter-spacing: 4px;
+    color: rgba(224, 201, 218, 04);
 }
 
-h3, h4{
+/*h3, h4{
     margin-left: 3%;
-}
+}*/
 
 .lead {
     font-size: 17px;
 }
 
 img {
-    box-shadow: 5px 5px 5px #160200;
+    box-shadow: 5px 15px 15px #160200;
 }
 
 a, a:hover {
@@ -57,20 +56,80 @@ a, a:hover {
 
 a {
     font-weight: 900;
-    color: white;
+    color: #E3DDDF;
 }
 
     a:hover {
-        color: yellow;
+        color: deeppink;
+    }
+
+.home {
+    background-image: url("Images/banner-magic-fly-books-1280x720.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: auto;
+    max-height: 700px;
+    width: 100%;
+}
+
+    .home h1 {
+        letter-spacing: 7px;
+        text-shadow: 10px 5px 1px #4A486F;
+        color: ghostwhite;
+        margin-top: 1%;
+    }
+
+    .home h3, .home h4 {
+        letter-spacing: 7px;
+        font-weight: 900;
+        text-shadow: none;
+        color: #3E3B46;
+    }
+
+    .home h4 {
+        margin-bottom: 33%;
+    }
+
+.user-body-content {
+    background-image: url("Images/background_motion_1152x864.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+}
+
+#basket-title {
+    background-image: url("Images/background_motion_1152x864.jpg");
+    background-size: cover;
+    background-repeat: repeat;
+    background-position: center;
+}
+
+    #basket-title h2, #basket-title h4, #basket-title h5{
+        text-shadow: none;
+    }
+
+.promotion-table, #promotion-in-basket {
+    background-image: url("Images/background_snowflakes_color_1_1024x768.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+    .promotion-table th, .promotion-table td, .promotion-table h3, .promotion-table h4, #promotion-in-basket p {
+        color: black !important;
+        text-shadow: none;
     }
 
 .home-div, .category-div, .book-div, .book-details-div, .author-div,
- #login-form, #register-form, #all-authors-table {
-    background-color: rgba(22, 2, 0, 0.4);
-    padding: 10px;
+#login-form, #register-form, #all-authors-table, .home-section, .admin {
+    background-image: url("Images/background_motion4_1152x864.jpg");
+    background-size: cover;
+    background-repeat: repeat;
+    background-position: top;
 }
 
-.error-div{
+.error-div {
     background-color: black;
     color: yellow;
 }
@@ -87,61 +146,29 @@ a {
     top: 37%;
 }
 
-#go-top-btn p, #back-next-btns p{
-    border-top: solid 1px rgba(255, 255, 255, 0.5);
-    border-bottom: solid 1px rgba(255, 255, 255, 0.5);
+    #go-top-btn p, #back-next-btns p {
+        border-top: solid 1px rgba(255, 255, 255, 0.5);
+        border-bottom: solid 1px rgba(255, 255, 255, 0.5);
+    }
+
+.add-rating, #basket-total-price, .you-will-save {
+    color: pink;
 }
 
-#book-store-title, .add-rating, #basket-total-price, .you-will-save {
-    color: yellow;
-}
-
-.old-price{
-    color: gray;
+.old-price {
+    color: black;
     text-decoration: line-through;
 }
 
-.you-will-save{
+.you-will-save {
     text-decoration: underline;
-}
-
-.jumbotron, .well {
-    background-color: rgba(255, 255, 255, 0.4);
-}
-
-.home {
-    background-color: black;
-    border-bottom: 1px solid gray;
-}
-
-    .home h1 {
-        letter-spacing: 7px;
-        text-shadow: 10px 5px 1px gray;
-    }
-
-    .home .lead {
-        letter-spacing: 7px;
-        font-weight: 900;
-        text-shadow: none;
-        color: gray;
-    }
-
-.home-section{
-    background-color: rgba(22, 2, 0, 0.5);
-    border-radius: 50%;
-    border: solid 1px rgba(255, 255, 255, 0.4);
-
-}
-
-#promotion-table{
-    color: yellow;
 }
 
 .btn-info {
     font-size: 25px;
     font-weight: bold;
     text-shadow: 3px 3px 2px #000;
-    background-color: rgba(22, 2, 0, 0.8);
+    background-color: rgba(173, 88, 121, 0.8);
     border: solid 1px rgba(255, 255, 255, 0.5);
     border-radius: 50%;
     text-decoration: none;
@@ -150,20 +177,30 @@ a {
 
     .btn-info:hover {
         background-color: transparent;
-        color: yellow;
-        border-color: yellow;
+        color: rgba(112, 42, 61, 0.6);
+        border-color: pink;
     }
 
 .btn-default {
     background-color: rgba(22, 2, 0, 0.4);
     font-size: 18px;
     font-weight: bold;
-    color: white;
+    color: #E3DDDF;
     border-color: rgba(255, 255, 255, 0.5);
 }
 
+.btn-danger {
+    background-color: rgba(206, 78, 103, 0.9);
+    border-color: hotpink;
+}
+
+    .btn-danger:hover {
+        background-color: transparent;
+        color: deeppink;
+    }
+
 .navbar-inverse, .navbar-brand, .navbar, .nav, .navbar-right {
-    background-color: #160200;
+    background-color: black;
     font-weight: bold;
     font-size: 19px;
     text-decoration: none;
@@ -173,42 +210,42 @@ a {
     text-decoration: none;
 }
 
-.dropdown-menu li a {
+.dropdown-menu li a, .glyphicon-chevron-left, .glyphicon-chevron-right, .glyphicon-heart {
     font-weight: bold;
-    color: #160200;
+    color: hotpink;
     text-shadow: none;
 }
 
 .books-list {
     background-color: rgba(22, 2, 0, 0.4);
-    border-left: solid 1px white;
-    border-bottom: double 1px white;
+    border-left: solid 1px rgba(243, 212, 215, 04);
+    border-bottom: solid 1px rgba(243, 212, 215, 04);
     border-radius: 7px;
+    margin-bottom: 10px;
 }
 
 .books-list-title {
-    border-bottom: solid 1px white;
-    border-top: solid 1px white;
+    border-bottom: solid 1px #E3DDDF;
+    border-top: solid 1px #E3DDDF;
 }
 
 .text-danger {
-    color: yellow;
+    color: hotpink;
     font-weight: bold;
 }
 
 /*carousel*/
 .carousel-inner {
-    /*background-color: rgba(22, 2, 0, 0.6);*/
     background-color: transparent;
 }
 
     .carousel-inner > .item > .img-box > img,
     .carousel-inner > .item-active > .img-box > img {
-        width: 50%;
+        max-height: 400px;
         margin: auto;
     }
 
-    .home-new-book{
+.home-new-book {
     background-color: rgba(255, 255, 255, 0.4);
     color: black;
     font-weight: bold;
@@ -216,13 +253,13 @@ a {
 }
 
 /*modal*/
-.modal-title, .modal-body p{
+.modal-title, .modal-body p {
     color: black;
     text-shadow: none;
 }
 
-.modal-body .modal-div{
-    border-top: 1px solid rgba(255, 255, 255, 0.9);
+.modal-body .modal-div {
+    border-top: 1px solid rgba(206, 78, 103, 0.9);
 }
 
 /*accordion*/
@@ -239,9 +276,9 @@ button.accordion {
     transition: 0.4s;
 }
 
-button.accordion.active, button.accordion:hover {
-    background-color: #ddd; 
-}
+    button.accordion.active, button.accordion:hover {
+        background-color: #ddd;
+    }
 
 div.panel {
     padding: 0 18px;
@@ -254,5 +291,5 @@ footer {
     padding: 1%;
     margin-bottom: 0;
     font-size: 14px;
-    color: lightblue;
+    color: #E3DDDF;
 }

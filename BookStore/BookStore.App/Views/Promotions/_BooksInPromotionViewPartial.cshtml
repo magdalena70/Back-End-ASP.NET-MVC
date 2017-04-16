@@ -1,6 +1,6 @@
 ﻿@model BookStore.Models.ViewModels.PromotionsViewModel
 
-<div class="col-md-10 col-md-offset-1 book-div">
+<div class="col-md-10 col-md-offset-1 promotion-table">
     @foreach (var category in Model.Categories)
     {
         <h4>Books In Category: @Html.DisplayFor(c => category.BooksCount)</h4>

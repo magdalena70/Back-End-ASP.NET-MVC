@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BookStore.Models.ViewModels
 {
@@ -16,12 +18,24 @@ namespace BookStore.Models.ViewModels
 
         public string OwnerPhoneNumber { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:0.00} BGN", ApplyFormatInEditMode = true)]
         public decimal TotalPrice { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:0.00} %", ApplyFormatInEditMode = true)]
         public decimal Discount { get; set; }
 
-        public decimal ShippingPrice { get; set; }
+        [DisplayFormat(DataFormatString = "{0:0.00} BGN", ApplyFormatInEditMode = true)]
+        public decimal YouWillSave { get; set; }
 
-        public IEnumerable<CountBookInBasketViewModel> Count { get; set; }
+        [DisplayFormat(DataFormatString = "{0:0.00} BGN", ApplyFormatInEditMode = true)]
+        public decimal LastPrice { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:0.00} BGN", ApplyFormatInEditMode = true)]
+        public decimal DeliveryPrice { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime DeliveryDate { get; set; }
+
+        public IEnumerable<CountBookInBasketViewModel> Books { get; set; }
     }
 }

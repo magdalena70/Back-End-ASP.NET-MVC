@@ -1,8 +1,4 @@
-﻿using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web.Mvc;
-using BookStore.Data;
+﻿using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using BookStore.Services;
 using BookStore.Models.ViewModels;
@@ -14,12 +10,11 @@ namespace BookStore.App.Controllers
     [Authorize]
     public class BasketsController : Controller
     {
-        private BookStoreContext context = new BookStoreContext();
         private BasketService basketService;
 
         public BasketsController()
         {
-            this.basketService = new BasketService(context);
+            this.basketService = new BasketService();
         }
 
         // GET: Baskets/Details
@@ -41,8 +36,8 @@ namespace BookStore.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateBasketAndAddBookInIt([Bind(Include = "Id")] AddBookToBasketBindingModel book)
         {
-            Book currBook = context.Books.Find(book.Id);
-            User currUser = context.Users.Find(User.Identity.GetUserId());
+            Book currBook = this.basketService.GetCurrentBook(book.Id);
+            User currUser = this.basketService.GetCurrentUser(User.Identity.GetUserId());         
             if (currBook.Quantity == 0)
             {
                 this.TempData["Info"] = $"You can not add book '{currBook.Title}' in basket. it's not on stock.";
@@ -62,8 +57,8 @@ namespace BookStore.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult RemoveOneOfThisBookFromBasket([Bind(Include = "BookId")] RemoveBookFromBasketBindingModel book)
         {
-            Book currentBook = context.Books.Find(book.BookId);
-            User currUser = context.Users.Find(User.Identity.GetUserId());
+            Book currentBook = this.basketService.GetCurrentBook(book.BookId);
+            User currUser = this.basketService.GetCurrentUser(User.Identity.GetUserId());
             if (currentBook != null)
             {
                 this.basketService.RemoveOneOfThisFromBasket(currentBook, currUser);
@@ -79,8 +74,8 @@ namespace BookStore.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult RemoveAllOfThisBookFromBasket([Bind(Include = "BookId, Count")] RemoveBooksFromBasketBindingModel book)
         {
-            Book currentBook = context.Books.Find(book.BookId);
-            User currUser = context.Users.Find(User.Identity.GetUserId());
+            Book currentBook = this.basketService.GetCurrentBook(book.BookId);
+            User currUser = this.basketService.GetCurrentUser(User.Identity.GetUserId());
             if (currentBook != null)
             {
                 this.basketService.RemoveAllOfThisFromBasket(currentBook, currUser, book.Count);
@@ -96,8 +91,13 @@ namespace BookStore.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditBookQuantityInBasket([Bind(Include = "BookId, Count, NewCount")] EditBookQuantityInBasketBindingModel book)
         {
-            Book currentBook = context.Books.Find(book.BookId);
-            User currUser = context.Users.Find(User.Identity.GetUserId());
+            Book currentBook = this.basketService.GetCurrentBook(book.BookId);
+            if (currentBook == null)
+            {
+                return RedirectToAction("Details", "Basket");
+            }
+
+            User currUser = this.basketService.GetCurrentUser(User.Identity.GetUserId());
             int currQty = book.Count;
             if (currentBook != null && book.NewCount > 0 && book.NewCount <= (currentBook.Quantity + currQty))
             {
@@ -119,7 +119,7 @@ namespace BookStore.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ClearBasket()
         {
-            User currUser = context.Users.Find(User.Identity.GetUserId());
+            User currUser = this.basketService.GetCurrentUser(User.Identity.GetUserId());
             this.basketService.ClearBasket(currUser);
             
             this.TempData["Success"] = "Your Basket is empty! :(";
@@ -131,7 +131,7 @@ namespace BookStore.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult BuyBooks()
         {
-            User currUser = context.Users.Find(User.Identity.GetUserId());
+            User currUser = this.basketService.GetCurrentUser(User.Identity.GetUserId());
             this.basketService.BuyBooks(currUser);
             
             this.TempData["Success"] = "Your order is accepted!";

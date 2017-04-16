@@ -1,5 +1,4 @@
-﻿using BookStore.Data;
-using BookStore.Models.ViewModels;
+﻿using BookStore.Models.ViewModels;
 using System.Linq;
 using System.Collections.Generic;
 using BookStore.Models.EntityModels;
@@ -9,13 +8,10 @@ namespace BookStore.Services
 {
     public class AuthorService : Service
     {
-        public AuthorService(BookStoreContext context) : base(context)
-        {
-        }
 
         public IEnumerable<AuthorViewModel> GetAll()
         {
-            var allAuthors = context.Authors.ToList();
+            var allAuthors = this.Context.Authors.ToList();
 
             IEnumerable<AuthorViewModel> viewModel = Mapper.Map<IEnumerable<Author>, IEnumerable<AuthorViewModel>>(allAuthors);
             return viewModel;
@@ -23,7 +19,7 @@ namespace BookStore.Services
 
         public AuthorViewModel GetAuthor(int? id)
         {
-            Author author = context.Authors.Find(id);
+            Author author = this.Context.Authors.Find(id);
             if (author == null)
             {
                 
@@ -36,7 +32,7 @@ namespace BookStore.Services
 
         public AuthorWithBooksViewModel GetAuthorWithBooks(string authorName)
         {
-            Author author = context.Authors
+            Author author = this.Context.Authors
                 .Include("Books")
                 .FirstOrDefault(a => a.FullName.Contains(authorName));
             if (author == null)

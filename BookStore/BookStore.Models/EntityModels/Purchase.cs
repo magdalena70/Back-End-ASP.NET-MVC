@@ -8,7 +8,7 @@ namespace BookStore.Models.EntityModels
     {
         public Purchase()
         {
-            this.Books = new HashSet<Book>();
+            this.Books = new HashSet<BasketBook>();
         }
 
         [Key]
@@ -30,6 +30,6 @@ namespace BookStore.Models.EntityModels
 
         public virtual User User { get; set; }
 
-        public virtual ICollection<Book> Books { get; set; }
+        public virtual ICollection<BasketBook> Books { get; set; }
     }
 }

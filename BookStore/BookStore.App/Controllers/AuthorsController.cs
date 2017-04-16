@@ -12,12 +12,11 @@ namespace BookStore.App.Controllers
 {
     public class AuthorsController : Controller
     {
-        private BookStoreContext context = new BookStoreContext();
         private AuthorService authorService;
 
         public AuthorsController()
         {
-            this.authorService = new AuthorService(context);
+            this.authorService = new AuthorService();
         }
 
         // GET: Authors

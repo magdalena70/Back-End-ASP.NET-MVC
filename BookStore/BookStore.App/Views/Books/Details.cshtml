@@ -32,8 +32,8 @@
                 <p>ISBN - @Html.DisplayFor(book => book.ISBN)</p>
                 <p>Quantity - @Html.DisplayFor(book => book.Quantity)</p>
                 <p>Number Of Pages - @Html.DisplayFor(book => book.NumberOfPages)</p>
-                <p>Issue Date - @Model.IssueDate.ToString("dd-MM-yyyy")</p>
-                <p class="lead">Price: @Html.DisplayFor(book => book.Price)lv.</p>
+                <p>Issue Date - @Html.DisplayFor(book => book.IssueDate)</p>
+                <p class="lead">Price: @Html.DisplayFor(book => book.Price)</p>
                 <p>
                     <ul>Categories:
                         @foreach (var category in Model.Categories)
@@ -45,10 +45,7 @@
                 <hr />
                 <div class="row">
                     <p>
-                        <span class="lead add-rating">Up Vote - @Html.DisplayFor(book => book.UpRating)</span>
-                    </p>
-                    <p>
-                        <span class="lead add-rating">Down Vote - @Html.DisplayFor(book => book.DownRating)</span>
+                        <span class="lead add-rating">Rating - @Html.DisplayFor(book => book.Ratings)</span>
                     </p>
                 </div>
             </div>

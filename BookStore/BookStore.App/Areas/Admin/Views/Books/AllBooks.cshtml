@@ -38,12 +38,6 @@
         <th>
             @Html.DisplayNameFor(model => model.ISBN)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpRating)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DownRating)
-        </th>
         <th></th>
     </tr>
 
@@ -75,12 +69,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ISBN)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpRating)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DownRating)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

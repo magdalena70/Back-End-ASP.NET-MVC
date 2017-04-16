@@ -5,19 +5,21 @@
 }
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
-        <p class="pull-right btn btn-default">
-            @Html.ActionLink("My " + Model.CountBooksInFavorite + " Favorite", "FavoriteBooks", "Users")
-            <span class="glyphicon glyphicon-heart"></span> 
-        </p>
         <h2 class="text-center">My Profile</h2>
         <hr />
     </div>
 </div>
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
+        <p class="pull-right btn btn-default">
+            <a href="/Users/FavoriteBooks">
+                <img src="~/Content/Images/UserProfile/favorite-64.png" />
+                @Model.CountBooksInFavorite
+            </a>
+        </p>
         <p class="btn btn-default" title="My Basket">
             <a href="/Baskets/Details">
-                <img src="~/Content/Images/empty-shopping-cart-icon.png" alt="user-basket-img" class="img-rounded" />
+                <img src="~/Content/Images/UserProfile/shopping-cart.png" alt="user-basket-img" class="img-rounded" width="64" />
                 @Html.DisplayFor(basket => basket.CountBooksInBasket)
             </a>
         </p>
@@ -29,7 +31,7 @@
     <div class="row">
 
         @*user-basket view - carousel*@
-        <div class="row">
+        <div class="row home-div">
             <div id="myCarousel" class="carousel slide col-md-10 col-md-offset-1" data-ride="carousel">
 
                 <div class="carousel-inner text-center" role="listbox">
@@ -38,8 +40,8 @@
                         <div class="item active">
                             <div class="img-box">
                                 <h3>@Model.UserName's basket</h3>
-                                <p><strong>Total Price: @Model.Basket.TotalPrice BGN</strong></p>
-                                <img src="~/Content/Images/user-basket.png" alt="basket-img" class="img-rounded">
+                                <p><strong>Total Price: @Html.DisplayFor(b => Model.Basket.TotalPrice)</strong></p>
+                                <img src="~/Content/Images/UserProfile/basket.png" alt="basket-img" class="img-rounded" width="30%">
                                 <div class="carousel-caption">
                                     <p>@Html.ActionLink("Go To Basket", "Details", "Baskets", null, new { @class = "btn btn-default btn-lg" })</p>
                                 </div>
@@ -51,8 +53,8 @@
                             <div class="item">
                                 <div class="img-box">
                                     <h3>@Html.DisplayFor(b => book.Book.Title)</h3>
-                                    <p><strong>@Html.DisplayFor(b => book.Book.Price) BGN / Count: @book.Count</strong></p>
-                                    <img src=@book.Book.ImageUrl alt="basket-book-img">
+                                    <p><strong>@Html.DisplayFor(b => book.Book.Price) / Count: @book.Count</strong></p>
+                                    <img src=@book.Book.ImageUrl alt="basket-book-img" width="30%">
                                 </div>
                             </div>
                         }
@@ -61,8 +63,8 @@
                     {
                         <div class="img-box">
                             <h3>@Model.UserName's baket</h3>
-                            <p><strong>Books:@Model.CountBooksInBasket / Total Price: @Model.BasketTotalPrice BGN</strong></p>
-                            <img src="~/Content/Images/user-basket.png" alt="basket-img" class="img-rounded">
+                            <p><strong>Books:@Model.CountBooksInBasket / Total Price: @Html.DisplayFor(b => Model.BasketTotalPrice)</strong></p>
+                            <img src="~/Content/Images/UserProfile/basket.png" alt="basket-img" class="img-rounded" width="30%">
                             <div class="carousel-caption">
                                 <h1>Basket is empty.</h1>
                             </div>

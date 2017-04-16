@@ -14,7 +14,7 @@
                     <div class="modal-div">
                         
                             <p><strong>Books:</strong></p>
-                            @foreach (var b in Model.Count)
+                            @foreach (var b in Model.Books)
                             {
                                 <p><small>@b.Book.Title - Qty: @b.Count</small></p>
                             }
@@ -23,33 +23,34 @@
                     <hr />
                     <div class="modal-div">
                         <p><strong>Delivery:</strong></p>
-                        <p><small>Date of delivery: @DateTime.Now.AddDays(2)</small></p>
+                        <p><small>Date of delivery: @Html.DisplayFor(p => Model.DeliveryDate)</small></p>
                         <p><small>Address: @Model.OwnerAddress</small></p>
                         <p><small>Recipient: @Model.OwnerFirstName @Model.OwnerLastName</small></p>
                         <p><small>Phone Number: @Model.OwnerPhoneNumber</small></p>
                     </div>
                     <hr />
                     <div class="modal-div">
-                        <p><small>Current Price: @Model.TotalPrice BGN</small></p>
-                        <p><small>Discount: @string.Format("{0:0.00}", Model.Discount) %</small></p>
-                        <p class="you-will-save">You will save @string.Format("{0:0.00}", ((Model.TotalPrice * Model.Discount) / 100)) BGN</p>
-                        <p><small>Shipping price: @string.Format("{0:0.00}", Model.ShippingPrice) BGN</small></p>
+                        <p><small>Current Price: @Html.DisplayFor(b => Model.TotalPrice)</small></p>
+                        <p><small>Discount: @Html.DisplayFor(b => Model.Discount)</small></p>
+                        <p class="you-will-save">You will save @Html.DisplayFor(b => Model.YouWillSave)</p>
+                        <p><small>Delivery price: @Html.DisplayFor(b => Model.DeliveryPrice)</small></p>
                         <p>
                             <strong>
-                                Total Price: @string.Format("{0:0.00}", (Model.TotalPrice - ((Model.TotalPrice * Model.Discount) / 100)) + Model.ShippingPrice) BGN
+                                Total Price: @Html.DisplayFor(b => Model.LastPrice)
                             </strong>
                         </p>
                         <p><small>Method of payment: Cash on Delivery</small></p>
-                        @using (Html.BeginForm("Buy", "Baskets", FormMethod.Post))
-                        {
-                            @Html.AntiForgeryToken()
-                            <div class="form-actions no-color text-center">
-                                <input type="submit" value="Buy" class="btn btn-danger" />
-                            </div>
-                        }
+
                     </div>
                 </div>
                 <div class="modal-footer">
+                    @using (Html.BeginForm("Buy", "Baskets", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-actions no-color text-center">
+                            <input type="submit" value="Buy" class="btn btn-danger" />
+                        </div>
+                    }
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                 </div>
             </div>

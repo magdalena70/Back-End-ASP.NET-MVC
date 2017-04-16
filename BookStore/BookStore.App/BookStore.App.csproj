@@ -225,23 +225,28 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\background_motion4_1152x864.jpg" />
+    <Content Include="Content\Images\background_motion5_1024x768.jpg" />
+    <Content Include="Content\Images\background_motion_1152x864.jpg" />
+    <Content Include="Content\Images\background_snowflakes_color_1_1024x768.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Images\anglerfish.jpg" />
-    <Content Include="Content\Images\authentication-key-icon.png" />
     <Content Include="Content\Images\Books\border.jpg" />
-    <Content Include="Content\Images\empty-shopping-cart-icon.png" />
     <Content Include="Content\Images\Books\griefWorks.jpg" />
     <Content Include="Content\Images\Books\ingloriousEmpire.jpg" />
     <Content Include="Content\Images\Books\theRaqqaDiaries.jpg" />
     <Content Include="Content\Images\Books\theRulesDoNotApply.jpg" />
-    <Content Include="Content\Images\home-icon.png" />
-    <Content Include="Content\Images\menu-icon.png" />
+    <Content Include="Content\Images\banner-magic-fly-books-1280x720.jpg" />
     <Content Include="Content\Images\Messages\roleErrorMsg.jpg" />
-    <Content Include="Content\Images\search-icon.png" />
-    <Content Include="Content\Images\user-basket.png" />
+    <Content Include="Content\Images\NavBar\home-2-64.png" />
+    <Content Include="Content\Images\NavBar\key-2-64.png" />
+    <Content Include="Content\Images\NavBar\list-2-64.png" />
+    <Content Include="Content\Images\NavBar\search-9-64.png" />
+    <Content Include="Content\Images\UserProfile\basket.png" />
+    <Content Include="Content\Images\UserProfile\favorite-64.png" />
+    <Content Include="Content\Images\NavBar\user-3-64.png" />
     <Content Include="Content\Images\Books\wedWabbit.jpg" />
-    <Content Include="Content\Images\user-icon.png" />
+    <Content Include="Content\Images\UserProfile\shopping-cart.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

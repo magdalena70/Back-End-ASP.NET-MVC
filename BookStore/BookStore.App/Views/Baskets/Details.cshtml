@@ -5,24 +5,29 @@
 }
 
 <div class="row text-center">
-    <div class="col-md-10 col-md-offset-1 book-div">
+    <div class="col-md-10 col-md-offset-1">
         <h3>My Basket</h3>
-        <hr />
-        <h2>Current Price: @Model.TotalPrice BGN</h2>
-        <h4>Discount: @string.Format("{0:0.00}", Model.Discount) %</h4>
-        <h5 class="you-will-save">You will save @string.Format("{0:0.00}", ((Model.TotalPrice * Model.Discount) / 100)) BGN</h5>
-        <h2 id="basket-total-price">Total Price: @string.Format("{0:0.00}", (Model.TotalPrice - ((Model.TotalPrice * Model.Discount) / 100))) BGN</h2>
     </div>
+    <hr />
+    <div id="basket-title" class="col-md-10 col-md-offset-1">
+        <h2>Current Price: @Html.DisplayFor(b => Model.TotalPrice)</h2>
+        <h4>Discount: @Html.DisplayFor(b => Model.Discount)</h4>
+        <h5 class="you-will-save">You will save @Html.DisplayFor(b => Model.YouWillSave)</h5>
+        <h2 id="basket-total-price">Total Price: @Html.DisplayFor(p => Model.LastPrice)</h2>
+     </div>
 </div>
 <hr />
-@if (@Model != null)
+@if (Model != null)
 {
     <div class="row">
-        @Html.Partial("_ClearBasketPartial")
+        @if (Model.TotalPrice > 0)
+        {
+            @Html.Partial("_ClearBasketPartial")
+        }
     </div>
     <div class="row">
         <div class="col-md-10 col-md-offset-1 book-div">
-            @foreach (var book in Model.Count)
+            @foreach (var book in Model.Books)
                 {
                 <div class="col-md-4 books-list">
                     <div class="row text-center books-list-title">
@@ -46,7 +51,19 @@
                             </p>
                             <p><small>In Stock - more</small> @Html.DisplayFor(b => book.Book.Quantity)</p>
                             <p><small>Lang</small> - <strong>@Html.DisplayFor(b => book.Book.Language)</strong></p>
-                            <p><small>Price</small> - <strong>@Html.DisplayFor(b => book.Book.Price) BGN</strong></p>
+                       
+                            @if (book.PromotionDiscount > 0)
+                            {
+                                <p class="old-price"><small>Old Price</small> - <strong>@Html.DisplayFor(b => book.Book.Price)</strong></p>
+                                <p><small>Promo Discount</small> - <strong>@Html.DisplayFor(b => book.PromotionDiscount)</strong></p>
+                                <p class="you-will-save"><small>New Price</small> - <strong>@Html.DisplayFor(b => book.NewPrice)</strong></p>
+                            }
+                            else
+                            {
+                                <p><small>Price</small> - <strong>@Html.DisplayFor(b => book.Book.Price)</strong></p>
+
+                            }
+
                             <p><small>Qty In Basket</small> - @book.Count</p>
                         </div>
                     </div>
@@ -98,8 +115,10 @@
                                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                             <p>Current Qty is @book.Count</p>
                                             @Html.LabelFor(b => book.NewCount, "Enter new quantity", new { @class = "control-label" })
+
                                             @Html.EditorFor(b => book.NewCount, new { @class = "form-control" , @min = "1" , @max = book.Book.Quantity + book.NewCount })
                                             @Html.ValidationMessageFor(b => book.NewCount, "", new { @class = "text-danger" })
+
                                             @Html.HiddenFor(b => book.BookId)
                                             @Html.HiddenFor(b => book.Count)                                           
                                             <div class="form-actions no-color">
@@ -124,5 +143,15 @@
 }
 <hr />
 <div class="row">
-    @Html.Partial("_BuyPartial")
+    @if (Model.TotalPrice > 0)
+    {
+        @Html.Partial("_BuyPartial")
+    }
+    else
+    {
+        <div id="promotion-in-basket" class="col-md-10 col-md-offset-1 text-center">
+            <p><strong>Your basket is empty.</strong></p>
+            <p><strong>See current promotions @Html.ActionLink("Learn more", "AllPromotions", "Promotions")</strong></p>
+        </div>
+    }
 </div>

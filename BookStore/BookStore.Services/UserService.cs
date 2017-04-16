@@ -1,19 +1,16 @@
-﻿using BookStore.Data;
-using BookStore.Models.ViewModels;
+﻿using BookStore.Models.ViewModels;
 using System.Linq;
 using System.Collections.Generic;
 using BookStore.Models.BindingModels;
 using BookStore.Models.EntityModels;
 using AutoMapper;
+using System.Data.Entity;
 
 namespace BookStore.Services
 {
     public class UserService : Service
     {
-        public UserService(BookStoreContext context) : base(context)
-        {
-        }
-
+        
         public UserProfileViewModel GetUserProfileViewModel(User currentUser)
         {
             UserProfileViewModel viewModel = Mapper.Map<User, UserProfileViewModel>(currentUser);
@@ -35,6 +32,12 @@ namespace BookStore.Services
             }
 
             return viewModel;
+        }
+
+        public User GetCurrentUser(string authenticatedUserId)
+        {
+            User currentUser = this.Context.Users.Find(authenticatedUserId);
+            return currentUser;
         }
 
         private ICollection<AllCategoriesViewModel> GetCategories(User currentUser)
@@ -69,18 +72,18 @@ namespace BookStore.Services
 
         public void AddBookToFavoriteBooks(User currentUser, int bookId)
         {
-            Book currentBook = this.context.Books.Find(bookId);
+            Book currentBook = this.Context.Books.Find(bookId);
             currentUser.FavoriteBooks.Add(currentBook);
-            this.context.SaveChanges();
+            this.Context.SaveChanges();
         }
 
         public void RemoveBookFromFavoriteBooks(User currentUser, int bookId)
         {
             var userId = currentUser.Id;
-            Book currentBook = this.context.Books.Find(bookId);
+            Book currentBook = this.Context.Books.Find(bookId);
             currentUser.FavoriteBooks.Remove(currentBook);
 
-            this.context.SaveChanges();
+            this.Context.SaveChanges();
         }
 
         public EditUserProfileViewModel GetEditUserProfileViewModel(User currentUser)
@@ -89,7 +92,7 @@ namespace BookStore.Services
             return viewModel;
         }
 
-        public User EditUserProfile(User currentUser, EditUserProfileBindingModel bindingModel)
+        public void EditUserProfile(User currentUser, EditUserProfileBindingModel bindingModel)
         {
             currentUser.FirstName = bindingModel.FirstName;
             currentUser.LastName = bindingModel.LastName;
@@ -98,7 +101,8 @@ namespace BookStore.Services
             currentUser.Email = bindingModel.Email;
             currentUser.UserName = bindingModel.UserName;
 
-            return currentUser;
+            this.Context.Entry(currentUser).State = EntityState.Modified;
+            this.Context.SaveChanges();
         }
     }
 }

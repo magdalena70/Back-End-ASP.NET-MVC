@@ -9,12 +9,11 @@ namespace BookStore.App.Controllers
     [AllowAnonymous]
     public class CategoriesController : Controller
     {
-        private BookStoreContext context = new BookStoreContext();
         private CategoryService categoryService;
 
         public CategoriesController()
         {
-            this.categoryService = new CategoryService(context);
+            this.categoryService = new CategoryService();
         }
 
         // GET: Categories/All

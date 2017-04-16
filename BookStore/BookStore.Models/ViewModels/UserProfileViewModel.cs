@@ -1,5 +1,6 @@
 ﻿using BookStore.Models.EntityModels;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BookStore.Models.ViewModels
 {
@@ -13,6 +14,7 @@ namespace BookStore.Models.ViewModels
 
         public int CountBooksInBasket { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:0.00} BGN", ApplyFormatInEditMode = true)]
         public decimal BasketTotalPrice { get; set; }
 
         public int CountBooksInFavorite { get; set; }

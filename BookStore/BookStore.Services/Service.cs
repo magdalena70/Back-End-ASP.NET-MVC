@@ -4,11 +4,12 @@ namespace BookStore.Services
 {
     public abstract class Service
     {
-        protected BookStoreContext context;
 
-        public Service(BookStoreContext context)
+        public Service()
         {
-            this.context = context;
+            this.Context = new BookStoreContext();
         }
+
+        protected BookStoreContext Context { get; }
     }
 }

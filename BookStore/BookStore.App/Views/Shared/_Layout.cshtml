@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Book Store Anglerfish</title>
+    <title>@ViewBag.Title - Bookstore Imagination</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -11,12 +11,19 @@
 <body>
     <div class="container-fluid" id="top">
         <div class="row text-center home">
-            <h1>Book Store <span id="book-store-title">Anglerfish</span></h1>
-            <p class="lead">There is a light in the darkness.</p>
-            <p class="lead">Some creatures glow, while others simply float downstream.</p>
+            <div>
+                <h1>Bookstore <span>&quot;Imagination&quot;</span></h1>
+            </div>
+            <div>
+                <h3 class="lead">Spend your days with imagination.</h3>
+            </div>
+            <div>
+                <h4 class="lead">Spend your money at Bookstore &quot;Imagination&quot;</h4>
+            </div>
+            @Html.Partial("_MessagesPartial")
         </div>
     </div>
-    <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
+    <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="97">
         <div class="container">
 
             <div class="navbar-header">
@@ -34,7 +41,7 @@
                     }
                     <li>
                         <a href="/Home/Index" class="navbar-brand btn btn-default">
-                            <img src="~/Content/Images/home-icon.png" class="img-rounded" alt="home-icon" />
+                            <img src="~/Content/Images/NavBar/home-2-64.png" class="img-rounded" alt="home-icon" />
                             <p class="carousel-caption">home</p>
                         </a>
                     </li>
@@ -49,9 +56,9 @@
         </div>
     </nav>
 
-    <div class="container-fluid body-content">
+    <div class="container-fluid user-body-content">
         @Html.Partial("_BackNextTopButtonsPartial")
-        @Html.Partial("_MessagesPartial")
+        
         @RenderBody()
         <hr />
         @Html.Partial("_Footer")

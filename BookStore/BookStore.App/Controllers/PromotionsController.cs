@@ -11,12 +11,11 @@ namespace BookStore.App.Controllers
     [AllowAnonymous]
     public class PromotionsController : Controller
     {
-        private BookStoreContext context = new BookStoreContext();
         private PromotionService promotionService;
 
         public PromotionsController()
         {
-            this.promotionService = new PromotionService(context);
+            this.promotionService = new PromotionService();
         }
 
         // GET: Promotions

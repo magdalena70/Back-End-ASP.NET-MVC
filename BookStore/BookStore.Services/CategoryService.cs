@@ -1,9 +1,7 @@
-﻿using BookStore.Data;
-using BookStore.Models.ViewModels;
+﻿using BookStore.Models.ViewModels;
 using BookStore.Services;
 using System.Collections.Generic;
 using System.Linq;
-using BookStore.Models.BindingModels;
 using BookStore.Models.EntityModels;
 using AutoMapper;
 
@@ -11,13 +9,10 @@ namespace BookStore.Models
 {
     public class CategoryService : Service
     {
-        public CategoryService(BookStoreContext context) : base(context)
-        {
-        }
-
+      
         public IEnumerable<AllCategoriesViewModel> GetAll()
         {
-            var categories = this.context.Categories
+            var categories = this.Context.Categories
                 .ToList();
 
             IEnumerable<AllCategoriesViewModel> viewModel = Mapper.Map<IEnumerable<Category>, IEnumerable<AllCategoriesViewModel>>(categories);
@@ -26,7 +21,7 @@ namespace BookStore.Models
 
         public CategoryViewModel GetBestSellers()
         {
-            var category = this.context.Categories
+            var category = this.Context.Categories
                 .Include("Books")
                 .FirstOrDefault(c => c.Name == "Best Sellers");
             if (category == null)
@@ -47,7 +42,7 @@ namespace BookStore.Models
 
         public CategoryViewModel GetCategoryDetails(int? id)
         {
-            var category = this.context.Categories.Find(id);
+            var category = this.Context.Categories.Find(id);
             if (category == null)
             {
                 return null;
@@ -64,7 +59,7 @@ namespace BookStore.Models
 
         public CategoryViewModel GetCategoryByName(string categoryName)
         {
-            var category = context.Categories
+            var category = this.Context.Categories
                 .Include("Books")
                .FirstOrDefault(c => c.Name.Contains(categoryName));
             if (category == null)

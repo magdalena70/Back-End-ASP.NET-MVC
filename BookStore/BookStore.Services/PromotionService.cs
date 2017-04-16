@@ -10,13 +10,10 @@ namespace BookStore.Services
 {
     public class PromotionService : Service
     {
-        public PromotionService(BookStoreContext context) : base(context)
-        {
-        }
 
         public IEnumerable<PromotionsViewModel> GetAll()
         {
-            var promotions = context.Promotions
+            var promotions = this.Context.Promotions
                 .Include("Categories")
                 .Where(p => p.EndDate > DateTime.Now)
                 .OrderBy(p => p.StartDate)
@@ -31,7 +28,7 @@ namespace BookStore.Services
 
         public PromotionsViewModel GetDetails(int? id)
         {
-            Promotion promotion = context.Promotions.Find(id);
+            Promotion promotion = this.Context.Promotions.Find(id);
             if (promotion == null)
             {
                 return null;

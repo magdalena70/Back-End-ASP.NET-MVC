@@ -6,13 +6,10 @@
 
 <div class="row">
     <div class="col-md-10 col-md-offset-1 home-section">
-        <table id="promotion-table" class="table table-responsive">
+        <table class="table table-responsive promotion-table">
             <tr>
                 <th colspan="3">
-                    <h3 class="text-center">
-                        Current Promotions:
-                        <span class="glyphicon glyphicon-hand-right"></span>
-                    </h3>
+                    <h3 class="text-center">You will save money with owr promotions:</h3>
                 </th>
             </tr>
             @Html.DisplayFor(model => model.CurrentPromotions)
@@ -22,7 +19,7 @@
 <hr /><hr />
 <div class="row home-section">
     <div class="col-md-10 col-md-offset-1">
-        <h3 class="text-center">The Last 9 New Books In Store</h3>
+        <h3 class="text-center">The Last Nine New Books In Store</h3>
         <hr />
         @*---carousel---*@
         <div id="new-books" class="carousel slide" data-ride="carousel">
@@ -33,11 +30,12 @@
                         @foreach (var book in Model.NewBooks.Skip(i * 3).Take(3))
                         {
                             <div class="col-md-4">
+                                <p>@Html.DisplayFor(b => book.Title)</p>
+                                <p><small>by @Html.DisplayFor(b => book.Authors)</small></p>
                                 <div class="img-box">
-                                    <img src="@book.ImageUrl" alt="book-img" class="img img-thumbnail" width="60%"/>
+                                    <img src="@book.ImageUrl" alt="book-img" class="img img-thumbnail" width="60%" />
                                     <div class="carousel-caption home-new-book">
-                                        <p>@Html.DisplayFor(b => book.Title)</p>
-                                        <p><small>by @Html.DisplayFor(b => book.Authors)</small></p>
+                                        @Html.ActionLink("Details", "BooksByTitle", "Books", new { bookTitle = book.Title }, null)
                                     </div>
                                 </div>
                             </div>

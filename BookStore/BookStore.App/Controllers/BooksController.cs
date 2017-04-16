@@ -1,24 +1,18 @@
-﻿using System.Data.Entity;
-using System.Linq;
-using System.Net;
+﻿using System.Linq;
 using System.Web.Mvc;
-using BookStore.Data;
 using BookStore.Services;
 using BookStore.Models.ViewModels;
 using System.Collections.Generic;
-using System;
-using BookStore.Models.EntityModels;
 
 namespace BookStore.App.Controllers
 {
     public class BooksController : Controller
     {
-        private BookStoreContext context = new BookStoreContext();
         private BookService bookService;
 
         public BooksController()
         {
-            this.bookService = new BookService(context);
+            this.bookService = new BookService();
         }
 
         // GET: Books/NewBooks

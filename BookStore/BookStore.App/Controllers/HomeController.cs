@@ -8,12 +8,11 @@ namespace BookStore.App.Controllers
     [AllowAnonymous]
     public class HomeController : Controller
     {
-        private BookStoreContext context = new BookStoreContext();
         private HomeService homeService;
 
         public HomeController()
         {
-            this.homeService = new HomeService(context);
+            this.homeService = new HomeService();
         }
 
         public ActionResult Index()

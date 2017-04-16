@@ -1,5 +1,4 @@
 ﻿using System;
-using BookStore.Data;
 using BookStore.Models.ViewModels;
 using System.Linq;
 using AutoMapper;
@@ -10,23 +9,20 @@ namespace BookStore.Services
 {
     public class HomeService : Service
     {
-        public HomeService(BookStoreContext context) : base(context)
-        {
-        }
 
         public HomePageViewModel GetHomePageViewModel()
         {
-            var currPromotions = context.Promotions
+            var currPromotions = this.Context.Promotions
                 .Where(p => p.StartDate <= DateTime.Now)
                 .OrderBy(p => p.StartDate)
                 .ThenBy(p => p.EndDate)
                 .ToList();
-            var newBooks = context.Books
+            var newBooks = this.Context.Books
                 .Include("Authors")
                 .OrderByDescending(b => b.IssueDate)
                 .Take(9)
                 .ToList();
-            var top3FromLastYear = context.Books
+            var top3FromLastYear = this.Context.Books
                 .Include("Authors")
                 .Where(b => b.IssueDate.Year == ((DateTime.Now.Year)-1))
                 .OrderByDescending(b => b.Ratings.Sum(r => r.Value))
@@ -34,7 +30,7 @@ namespace BookStore.Services
                 .ThenByDescending(p => p.Price)
                 .Take(3)
                 .ToList();
-            var top3FromCurrentYear = context.Books
+            var top3FromCurrentYear = this.Context.Books
                 .Include("Authors")
                 .Where(b => b.IssueDate.Year == (DateTime.Now.Year))
                 .OrderByDescending(b => b.Ratings.Sum(r => r.Value))

@@ -12,25 +12,17 @@ namespace BookStore.App.Controllers
     [Authorize]
     public class UsersController : Controller
     {
-        private BookStoreContext context = new BookStoreContext();
         private UserService userService;
 
         public UsersController()
         {
-            this.userService = new UserService(context);
-        }
-
-        private User GetCurrentUser()
-        {
-            string currUserId = User.Identity.GetUserId();
-            User currentUser = this.context.Users.Find(currUserId);
-            return currentUser;
+            this.userService = new UserService();
         }
 
         // GET: Users/UserProfile
         public ActionResult UserProfile()
         {
-            User currentUser = GetCurrentUser();
+            User currentUser = this.userService.GetCurrentUser(User.Identity.GetUserId());
             if (currentUser == null)
             {
                 this.TempData["Error"] = "Log in, please!";
@@ -44,7 +36,7 @@ namespace BookStore.App.Controllers
         // GET: Users/FavoriteBooks
         public ActionResult FavoriteBooks()
         {
-            var currentUser = GetCurrentUser();
+            var currentUser = this.userService.GetCurrentUser(User.Identity.GetUserId());
             UserFavoriteBooksViewModel viewModel = this.userService.GetFavorite(currentUser);
             return View(viewModel);
         }
@@ -54,7 +46,7 @@ namespace BookStore.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddBookToFavoriteBooks([Bind(Include = "Id")] FavoriteBookBindingModel book)
         {
-            User currentUser = GetCurrentUser();
+            User currentUser = this.userService.GetCurrentUser(User.Identity.GetUserId());
             this.userService.AddBookToFavoriteBooks(currentUser, book.Id);
             
             return RedirectToAction("FavoriteBooks", "Users");
@@ -65,7 +57,7 @@ namespace BookStore.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult RemoveBookFromFavoriteBooks([Bind(Include = "Id")] FavoriteBookBindingModel book)
         {
-            User currentUser = GetCurrentUser();
+            User currentUser = this.userService.GetCurrentUser(User.Identity.GetUserId());
             this.userService.RemoveBookFromFavoriteBooks(currentUser, book.Id);
 
             this.TempData["Success"] = $"You removed one book from Favorite Books.";
@@ -75,7 +67,7 @@ namespace BookStore.App.Controllers
         // GET: Users/EditProfile
         public ActionResult EditProfile()
         {
-            User currentUser = this.GetCurrentUser();
+            User currentUser = this.userService.GetCurrentUser(User.Identity.GetUserId());
             if (currentUser == null)
             {
                 return RedirectToAction("Index", "Home");
@@ -91,21 +83,14 @@ namespace BookStore.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditProfile(EditUserProfileBindingModel bindingModel)
         {
-            User currentUser = this.GetCurrentUser();
-            User editedUser = this.userService.EditUserProfile(currentUser, bindingModel);
+            User currentUser = this.userService.GetCurrentUser(User.Identity.GetUserId());
+            if (ModelState.IsValid)
+            {
+                this.userService.EditUserProfile(currentUser, bindingModel);
+                return RedirectToAction("UserProfile", "Users");
+            }
 
-            this.context.Entry(editedUser).State = EntityState.Modified;
-            this.context.SaveChanges();
-            return RedirectToAction("UserProfile", "Users");
+            return this.View(currentUser);
         }
-
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        context.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
     }
 }

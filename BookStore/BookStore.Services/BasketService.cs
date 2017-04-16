@@ -1,54 +1,82 @@
-﻿using BookStore.Data;
-using BookStore.Models.ViewModels;
+﻿using BookStore.Models.ViewModels;
 using System.Linq;
 using BookStore.Models.EntityModels;
 using AutoMapper;
+using System;
+using System.Collections.Generic;
 
 namespace BookStore.Services
 {
     public class BasketService : Service
     {
-        public BasketService(BookStoreContext context) : base(context)
-        {
-        }
 
         public BasketViewModel GetBasketDetails(string ownerId)
         {
-            Basket basket = context.Baskets
+            Basket basket = this.Context.Baskets
                 .FirstOrDefault(b => b.Owner.Id == ownerId);
             if (basket == null)
             {
                 return null;
             }
 
-            var count = basket.Books
+            var countBooks = basket.Books
                     .GroupBy(b => b.Book.Id)
                     .Select(b => new CountBookInBasketViewModel()
                     {
                         Count = b.Count(),
-                        Book = b.First().Book
+                        Book = b.First().Book,
+                        BookId = b.First().Book.Id,
+                        NewCount = 0
                     }).ToList();
 
             BasketViewModel viewModel = Mapper.Map<Basket, BasketViewModel>(basket);
-            viewModel.Count = count;
+
+            foreach (var countBook in countBooks)
+            {
+                this.CheckForCurrentPromotion(countBook);               
+                countBook.NewPrice = this.CheckNewPrice(countBook.Book.Price, countBook.PromotionDiscount);
+            }
+            viewModel.Books = countBooks;
+            viewModel.DeliveryPrice = this.CheckDeliveryPrice(basket.TotalPrice);
 
             return viewModel;
         }
 
-        private decimal CheckShippingPrice(decimal totalPrice)
+        private void CheckForCurrentPromotion(CountBookInBasketViewModel countBook)
         {
-            decimal shippingPrice = 0;
-            if (totalPrice < 50.0m)
+            foreach (var category in countBook.Book.Categories)
             {
-                shippingPrice = 3.5m;
+                foreach (var promotion in category.Promotions)
+                {
+                    if (promotion.StartDate <= DateTime.Now && promotion.EndDate > DateTime.Now)
+                    {
+                        countBook.PromotionDiscount = promotion.Discount;
+                    }
+                }
+            }
+        }
+
+        private decimal CheckNewPrice(decimal price, decimal promotionDiscount)
+        {
+            decimal newPrice = price;
+            if (promotionDiscount > 0)
+            {
+                newPrice = price - (price * promotionDiscount) / 100;
             }
 
-            if (totalPrice >= 50 && totalPrice < 150)
-            {
-                shippingPrice = 2.5m;
-            }
+            return newPrice;
+        }
 
-            return shippingPrice;
+        public User GetCurrentUser(string authenticatedUserId)
+        {
+            User currentUser = this.Context.Users.Find(authenticatedUserId);
+            return currentUser;
+        }
+
+        public Book GetCurrentBook(int bookId)
+        {
+            Book currentBook = this.Context.Books.Find(bookId);
+            return currentBook;
         }
 
         public void AddBookToBasket(User currUser, Book currBook)
@@ -59,11 +87,11 @@ namespace BookStore.Services
                 Basket basket = new Basket()
                 {
                     Owner = currUser,
-                    TotalPrice = currBook.Price,
+                    TotalPrice = this.CheckCurrentBookPrice(currBook),
                     Discount = this.CheckDiscount(currBook.Price, currUser.MoneySpentBalance)
                 };
 
-                this.context.BasketsBooks.Add(new BasketBook()
+                this.Context.BasketsBooks.Add(new BasketBook()
                 {
                     Basket = basket,
                     Book = currBook
@@ -71,7 +99,7 @@ namespace BookStore.Services
             }
             else
             {
-                currBasket.TotalPrice += currBook.Price;
+                currBasket.TotalPrice += this.CheckCurrentBookPrice(currBook);
                 currBasket.Discount = this.CheckDiscount(currBasket.TotalPrice, currUser.MoneySpentBalance);
                 var newBook = new BasketBook()
                 {
@@ -79,40 +107,57 @@ namespace BookStore.Services
                     Book = currBook
                 };
 
-                this.context.BasketsBooks.Add(newBook);
+                this.Context.BasketsBooks.Add(newBook);
             }
             if (currBook.Quantity > 0)
             {
                 currBook.Quantity--;
             }
 
-            context.SaveChanges();
+            this.Context.SaveChanges();
+        }
+
+        private decimal CheckCurrentBookPrice(Book currBook)
+        {
+            decimal currBookPrice = currBook.Price;
+            foreach (var category in currBook.Categories)
+            {
+                foreach (var promotion in category.Promotions)
+                {
+                    if (promotion.StartDate <= DateTime.Now && promotion.EndDate > DateTime.Now)
+                    {
+                        currBookPrice = currBook.Price - (currBook.Price * promotion.Discount) / 100;
+                    }
+                }
+            }
+
+            return currBookPrice;
         }
 
         public void RemoveOneOfThisFromBasket(Book currentBook, User currUser)
         {
             Basket currBasket = currUser.Basket;
-            currBasket.TotalPrice -= currentBook.Price;
+            currBasket.TotalPrice -= this.CheckCurrentBookPrice(currentBook);
             currBasket.Discount = this.CheckDiscount(currBasket.TotalPrice, currUser.MoneySpentBalance);
-            var currBasketBooks = context.BasketsBooks
+            var currBasketBooks = this.Context.BasketsBooks
                 .FirstOrDefault(b => b.Basket.Id == currBasket.Id && b.Book.Id == currentBook.Id);
             currBasket.Books.Remove(currBasketBooks);
 
             currentBook.Quantity++;
-            context.SaveChanges();
+            this.Context.SaveChanges();
         }
 
         public void RemoveAllOfThisFromBasket(Book currentBook, User currUser, int count)
         {
             Basket currBasket = currUser.Basket;
-            currBasket.TotalPrice -= currentBook.Price * count;
+            currBasket.TotalPrice -= this.CheckCurrentBookPrice(currentBook) * count;
             currBasket.Discount = this.CheckDiscount(currBasket.TotalPrice, currUser.MoneySpentBalance);
-            var currBasketBooks = context.BasketsBooks
+            var currBasketBooks = this.Context.BasketsBooks
                 .Where(b => b.Basket.Id == currBasket.Id && b.Book.Id == currentBook.Id);
-            context.BasketsBooks.RemoveRange(currBasketBooks);
+            this.Context.BasketsBooks.RemoveRange(currBasketBooks);
 
             currentBook.Quantity += count;
-            context.SaveChanges();
+            this.Context.SaveChanges();
         }
 
         private decimal CheckDiscount(decimal price, decimal moneySpentBalance)
@@ -168,12 +213,12 @@ namespace BookStore.Services
 
                 for (int i = 0; i < difference; i++)
                 {
-                    this.context.BasketsBooks.Add(bookInBasket);
-                    this.context.SaveChanges();
+                    this.Context.BasketsBooks.Add(bookInBasket);
+                    this.Context.SaveChanges();
                 }
 
                 currentBook.Quantity -= difference;
-                currBasket.TotalPrice += currentBook.Price * difference;
+                currBasket.TotalPrice += this.CheckCurrentBookPrice(currentBook) * difference;
                 currBasket.Discount = this.CheckDiscount(currBasket.TotalPrice, currUser.MoneySpentBalance);
             }
 
@@ -181,21 +226,21 @@ namespace BookStore.Services
             {
                 difference = currQty - newCount;
                 //var editedBooks = Enumerable.Repeat(bookInBasket, newCount).ToList();
-                var currBasketBooks = context.BasketsBooks
+                var currBasketBooks = this.Context.BasketsBooks
                     .Where(b => b.Basket.Id == currBasket.Id && b.Book.Id == currentBook.Id);
-                this.context.BasketsBooks.RemoveRange(currBasketBooks);
+                this.Context.BasketsBooks.RemoveRange(currBasketBooks);
                 for (int i = 0; i < newCount; i++)
                 {
-                    this.context.BasketsBooks.Add(bookInBasket);
-                    this.context.SaveChanges();
+                    this.Context.BasketsBooks.Add(bookInBasket);
+                    this.Context.SaveChanges();
                 }
               
-                currBasket.TotalPrice -= currentBook.Price * difference;
+                currBasket.TotalPrice -= this.CheckCurrentBookPrice(currentBook) * difference;
                 currBasket.Discount = this.CheckDiscount(currBasket.TotalPrice, currUser.MoneySpentBalance);
                 currentBook.Quantity += difference;           
             }
 
-            this.context.SaveChanges();
+            this.Context.SaveChanges();
         }
 
         public void ClearBasket(User currUser)
@@ -208,17 +253,58 @@ namespace BookStore.Services
             currBasket.Books = null;
             currBasket.TotalPrice = 0;
             currBasket.Discount = this.CheckDiscount(currUser.Basket.TotalPrice, currUser.MoneySpentBalance);
-            this.context.SaveChanges();
+            this.Context.SaveChanges();
         }
 
         public void BuyBooks(User currUser)
         {
             Basket currBasket = currUser.Basket;
             currUser.MoneySpentBalance = currBasket.TotalPrice;
+            Purchase currentPurchase = new Purchase()
+            {
+                TotalPrice = currBasket.TotalPrice,
+                CompletedOndate = DateTime.Now,
+                DeliveryAddress = currUser.Address,
+                Discount = this.CheckDiscount(currBasket.TotalPrice, currUser.MoneySpentBalance),
+                DeliveryDate = DateTime.Now.AddDays(2),
+                DeliveryPrice = this.CheckDeliveryPrice(currBasket.TotalPrice),
+                IsCompleted = true
+            };
+
+            var currBasketBooks = currBasket.Books.ToList();
+            this.AddBooksFromCurrentBasket(currBasketBooks, currentPurchase.Books);
+            //currentPurchase.Books.AddRange(currBasketBooks);
+
+            currUser.Purchases.Add(currentPurchase);
             currBasket.Books = null;
             currBasket.TotalPrice = 0;
             currBasket.Discount = this.CheckDiscount(currBasket.TotalPrice, currUser.MoneySpentBalance);
-            this.context.SaveChanges();
+            this.Context.SaveChanges();
+        }
+
+        private void AddBooksFromCurrentBasket(List<BasketBook> currBasketBooks, ICollection<BasketBook> books)
+        {
+            foreach (var basketBook in currBasketBooks)
+            {
+                books.Add(basketBook);
+            }
+        }
+
+        private decimal CheckDeliveryPrice(decimal totalPrice)
+        {
+            decimal deliveryPrice = 5.0m;
+
+            if (totalPrice >= 100m && totalPrice < 150m)
+            {
+                deliveryPrice = 3.5m;
+            }
+
+            if (totalPrice >= 150)
+            {
+                deliveryPrice = 2.5m;
+            }
+
+            return deliveryPrice;
         }
     }
 }

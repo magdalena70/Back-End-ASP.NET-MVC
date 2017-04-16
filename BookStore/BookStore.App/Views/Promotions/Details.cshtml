@@ -4,7 +4,7 @@
     ViewBag.Title = "Details";
 }
 <div class="row text-center">
-    <div class="col-md-10 col-md-offset-1 category-div">
+    <div class="col-md-10 col-md-offset-1">
         <h2>@Html.DisplayFor(p => p.Name)</h2>
         <h3>@Html.DisplayFor(p => p.Text)</h3>
         <hr />
@@ -14,5 +14,13 @@
 </div>
 <hr />
 <div class="row">
-    @Html.Partial("_BooksInPromotionViewPartial")
+    @if (Model.StartDate < DateTime.Now)
+    {
+        @Html.Partial("_BooksInPromotionViewPartial")
+    }
+    else
+    {
+        <h1 class="text-center">Comming soon!!!</h1>  
+        <hr />
+    }
 </div>
