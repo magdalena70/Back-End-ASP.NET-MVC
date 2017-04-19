@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BookStore.Models.ViewModels.AllCategoriesViewModel>
+﻿@model IEnumerable<BookStore.Models.ViewModels.Category.AllCategoriesViewModel>
 
 @{
     ViewBag.Title = "All Categories";
@@ -19,7 +19,6 @@
 </div>
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
-        <h2 class="text-center">All Categories</h2>
         <hr />
         @foreach (var category in Model)
         {

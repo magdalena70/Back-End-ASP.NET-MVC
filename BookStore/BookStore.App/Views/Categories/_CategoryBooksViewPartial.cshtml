@@ -1,9 +1,9 @@
-﻿@model BookStore.Models.ViewModels.CategoryViewModel
+﻿@model BookStore.Models.ViewModels.Category.CategoryViewModel
 
 <div class="col-md-10 col-md-offset-1 book-div">
     @foreach (var book in Model.Books)
     {
-        <div class="col-md-4 books-list">
+        <div class="col-md-4 col-sm-6 books-list">
             <div class="row text-center books-list-title">
                 <h4><span>&quot;</span>@Html.DisplayFor(b => book.Title)<span>&quot;</span></h4>
                 <p>

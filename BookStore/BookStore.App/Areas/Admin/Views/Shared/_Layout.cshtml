@@ -3,17 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Bookstore Imagination</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="container-fluid" id="top">
-        <div class="row text-center admin">
+    <div class="container-fluid admin" id="top">
+        <div class="row">
             <h1>Admin Panel</h1>
         </div>
+        @Html.Partial("_MessagesPartial")
     </div>
-    <div class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
+    <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -31,22 +32,18 @@
         </div>
     </div>
 
-    <div class="container-fluid body-content">
+    <div class="container-fluid admin-body-content">
         <div class="home-div col-md-10 col-md-offset-1">
-            @Html.Partial("_BackNextTopButtonsPartial")
-            @Html.Partial("_MessagesPartial")
             @RenderBody()
-            <hr />
-            @Html.Partial("_Footer")
         </div>
-        
+        @Html.Partial("_BackNextTopButtonsPartial")
+        <hr />
     </div>
-    @*<div class="row">
-        @Html.Partial("_Footer")
-    </div>*@
-   
+    @Html.Partial("_Footer")
+
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

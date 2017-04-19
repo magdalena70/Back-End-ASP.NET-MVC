@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using BookStore.Models.ViewModels;
 using System.Linq;
 using BookStore.Models.EntityModels;
 using AutoMapper;
+using BookStore.Models.ViewModels.Book;
 
 namespace BookStore.Services
 {

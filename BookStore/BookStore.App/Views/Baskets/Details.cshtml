@@ -1,19 +1,16 @@
-﻿@model BookStore.Models.ViewModels.BasketViewModel
+﻿@model BookStore.Models.ViewModels.Basket.BasketViewModel
 
 @{
-    ViewBag.Title = "Basket";
+    ViewBag.Title = "My Basket";
 }
 
 <div class="row text-center">
-    <div class="col-md-10 col-md-offset-1">
-        <h3>My Basket</h3>
-    </div>
     <hr />
     <div id="basket-title" class="col-md-10 col-md-offset-1">
-        <h2>Current Price: @Html.DisplayFor(b => Model.TotalPrice)</h2>
+        <h3>Current Price: @Html.DisplayFor(b => Model.TotalPrice)</h3>
         <h4>Discount: @Html.DisplayFor(b => Model.Discount)</h4>
         <h5 class="you-will-save">You will save @Html.DisplayFor(b => Model.YouWillSave)</h5>
-        <h2 id="basket-total-price">Total Price: @Html.DisplayFor(p => Model.LastPrice)</h2>
+        <h3 id="basket-total-price">Total Price: @Html.DisplayFor(p => Model.LastPrice)</h3>
      </div>
 </div>
 <hr />

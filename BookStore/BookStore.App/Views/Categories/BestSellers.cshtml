@@ -1,12 +1,10 @@
-﻿@model BookStore.Models.ViewModels.CategoryViewModel
+﻿@model BookStore.Models.ViewModels.Category.CategoryViewModel
 
 @{
     ViewBag.Title = "Best Sellers";
 }
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
-        <h2 class="text-center">Best Sellers</h2>
-        <hr />
         @Html.ActionLink("New Books", "NewBooks", "Books", null, new { @class = "btn btn-default pull-left" })
         @Html.ActionLink("Promotions", "AllPromotions", "Promotions", null, new { @class = "btn btn-default pull-right" })
     </div>

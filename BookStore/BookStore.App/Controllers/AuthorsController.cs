@@ -7,6 +7,7 @@ using BookStore.Models.ViewModels;
 using BookStore.Services;
 using System.Collections.Generic;
 using BookStore.Models.EntityModels;
+using BookStore.Models.ViewModels.Author;
 
 namespace BookStore.App.Controllers
 {

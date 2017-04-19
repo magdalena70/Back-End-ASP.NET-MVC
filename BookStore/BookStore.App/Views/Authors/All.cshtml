@@ -1,14 +1,9 @@
-﻿@model IEnumerable<BookStore.Models.ViewModels.AuthorViewModel>
+﻿@model IEnumerable<BookStore.Models.ViewModels.Author.AuthorViewModel>
 
 @{
     ViewBag.Title = "All Authors";
 }
 
-<div class="row text-center">
-    <div class="col-md-10 col-md-offset-1">
-        <h2>@ViewBag.Title</h2>
-    </div>
-</div>
 <hr />
 @if (@Model != null)
 {

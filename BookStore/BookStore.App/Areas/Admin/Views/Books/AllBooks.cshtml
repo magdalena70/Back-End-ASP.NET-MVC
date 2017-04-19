@@ -1,10 +1,14 @@
 ﻿@model IEnumerable<BookStore.Models.EntityModels.Book>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "All Books";
 }
 
-<h2>Index</h2>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <h2>@ViewBag.Title</h2>
+    </div>
+</div>
 
 <p>
     @Html.ActionLink("Add Book", "AddBook")
@@ -15,16 +19,7 @@
             @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ImageUrl)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Language)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Quantity)
@@ -41,39 +36,30 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var book in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Title)
+            @Html.DisplayFor(modelItem => book.Title)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ImageUrl)
+            @Html.DisplayFor(modelItem => book.Language)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Language)
+            @Html.DisplayFor(modelItem => book.Quantity)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Description)
+            @Html.DisplayFor(modelItem => book.NumberOfPages)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Price)
+            @Html.DisplayFor(modelItem => book.IssueDate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Quantity)
+            @Html.DisplayFor(modelItem => book.ISBN)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.NumberOfPages)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IssueDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ISBN)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Edit", "Edit", new { id= book.Id }) |
+            @Html.ActionLink("Details", "Details", new { id= book.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id= book.Id })
         </td>
     </tr>
 }

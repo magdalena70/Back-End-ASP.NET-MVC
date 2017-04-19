@@ -1,5 +1,6 @@
 ﻿using BookStore.Data;
 using BookStore.Models.ViewModels;
+using BookStore.Models.ViewModels.Home;
 using BookStore.Services;
 using System.Web.Mvc;
 

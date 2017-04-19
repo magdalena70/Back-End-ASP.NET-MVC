@@ -1,22 +1,39 @@
-﻿using System.Data.Entity;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Web.Mvc;
-using BookStore.Data;
 using BookStore.Models.EntityModels;
 using BookStore.App.Attributes;
+using BookStore.Models;
+using System.Collections.Generic;
+using BookStore.Models.BindingModels.Category;
+using BookStore.Models.ViewModels.Category;
 
 namespace BookStore.App.Areas.Admin.Controllers
 {
     [CustomAttributeAuth(Roles = "Admin")]
     public class CategoriesController : Controller
     {
-        private BookStoreContext db = new BookStoreContext();
+        private CategoryService categoryService;
 
-        // GET: Admin/Categories
-        public ActionResult AllCategories()
+        public CategoriesController()
         {
-            return View(db.Categories.ToList());
+            this.categoryService = new CategoryService();
+        }
+
+        // GET: Admin/Categories?categoryName=
+        public ActionResult AllCategories(string categoryName)
+        {
+            IEnumerable<AllCategoriesViewModel> viewModel;
+            if (categoryName == null)
+            {
+                viewModel = this.categoryService.GetAll();
+
+            }
+            else
+            {
+                viewModel = this.categoryService.GetAllByName(categoryName);
+            }
+
+            return View(viewModel);
         }
 
         // GET: Admin/Categories/Details/5
@@ -24,14 +41,23 @@ namespace BookStore.App.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                this.TempData["Error"] = "Incorect url";
+                return RedirectToAction("Index", "Home");
             }
-            Category category = db.Categories.Find(id);
-            if (category == null)
+
+            CategoryViewModel viewModel = this.categoryService.GetCategoryDetails(id);
+            if (viewModel == null)
             {
-                return HttpNotFound();
+                this.TempData["Error"] = $"There is no category with id: {id}.";
+                return RedirectToAction("All", "Categories");
             }
-            return View(category);
+
+            if (viewModel.Books.Count == 0)
+            {
+                this.TempData["Info"] = $"There are no books in category '{viewModel.Name}'.";
+            }
+
+            return View(viewModel);
         }
 
         // GET: Admin/Categories/Create
@@ -40,21 +66,27 @@ namespace BookStore.App.Areas.Admin.Controllers
             return View();
         }
 
-        // POST: Admin/Categories/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Admin/Categories/AddCategories
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddCategories([Bind(Include = "Id,Name")] Category category)
+        public ActionResult AddCategories([Bind(Include = "Name")] AddCategoryBindingModel bindingModel)
         {
             if (ModelState.IsValid)
             {
-                db.Categories.Add(category);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (this.categoryService.IsCategoryExists(bindingModel.Name))
+                {
+                    this.TempData["Error"] = $"Category with name {bindingModel.Name} already exists";
+                    return View(bindingModel);
+                }
+
+                this.categoryService.AddNewCategory(bindingModel);
+                CategoryViewModel newCategory = this.categoryService.GetCurrentCategory(bindingModel.Name); 
+                this.TempData["Success"] = $"Category '{bindingModel.Name}' was created successfully.";
+
+                return RedirectToAction("Details", "Categories", new { id = newCategory.Id});
             }
 
-            return View(category);
+            return View(bindingModel);
         }
 
         // GET: Admin/Categories/Edit/5
@@ -64,28 +96,31 @@ namespace BookStore.App.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
-            if (category == null)
+
+            EditCategoryViewModel viewModel = this.categoryService.GetCategoryViewModel(id);
+            if (viewModel == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+
+            return View(viewModel);
         }
 
         // POST: Admin/Categories/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] Category category)
+        public ActionResult Edit([Bind(Include = "Id,Name")] EditCategoryBindingModel bindingModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(category).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                this.categoryService.EditCategory(bindingModel);
+
+                this.TempData["Success"] = "This category was edited successfully.";
+                return RedirectToAction("Details", "Categories", new { id = bindingModel.Id });
             }
-            return View(category);
+
+            EditCategoryViewModel viewModel = this.categoryService.GetCategoryViewModel(bindingModel.Id);
+            return View(viewModel);
         }
 
         // GET: Admin/Categories/Delete/5
@@ -95,11 +130,13 @@ namespace BookStore.App.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
+
+            Category category = this.categoryService.GetCurrentCategory(id);
             if (category == null)
             {
                 return HttpNotFound();
             }
+
             return View(category);
         }
 
@@ -108,19 +145,11 @@ namespace BookStore.App.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Category category = db.Categories.Find(id);
-            db.Categories.Remove(category);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+            string currCategoryName = this.categoryService.GetCategoryName(id);
+            this.categoryService.DeleteCategory(id);
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+                this.TempData["Success"] = $"Category '{currCategoryName}' was removed successfully.";
+            return RedirectToAction("AllCategories", "Categories");
         }
     }
 }

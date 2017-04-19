@@ -2,6 +2,7 @@
 using BookStore.Data;
 using BookStore.Models.EntityModels;
 using BookStore.Models.ViewModels;
+using BookStore.Models.ViewModels.Admin;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Linq;

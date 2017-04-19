@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BookStore.Models.ViewModels.BooksViewModel>
+﻿@model IEnumerable<BookStore.Models.ViewModels.Book.BooksViewModel>
 
 @{
     ViewBag.Title = "Books By Title";
@@ -6,11 +6,6 @@
 
 @if (@Model != null)
 {
-    <div class="row text-center">
-        <div class="col-md-10 col-md-offset-1">
-            <h2>@ViewBag.Title</h2>
-        </div>
-    </div>
     <hr />
     <div class="row">
         @Html.Partial("_BooksViewPartial")

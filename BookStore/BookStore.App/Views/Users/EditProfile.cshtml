@@ -1,4 +1,4 @@
-﻿@model BookStore.Models.ViewModels.EditUserProfileViewModel
+﻿@model BookStore.Models.ViewModels.User.EditUserProfileViewModel
 
 @{
     ViewBag.Title = "Edit Profile";
@@ -9,7 +9,6 @@
         <p class="pull-right">
             @Html.ActionLink("Change Password", "ChangePassword", "Manage", null, new { @class = "btn btn-default" })
         </p>
-        <h2>@ViewBag.Title</h2>
     </div>
 </div>
 <hr />

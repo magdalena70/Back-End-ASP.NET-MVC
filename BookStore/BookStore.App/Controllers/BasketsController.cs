@@ -4,6 +4,8 @@ using BookStore.Services;
 using BookStore.Models.ViewModels;
 using BookStore.Models.BindingModels;
 using BookStore.Models.EntityModels;
+using BookStore.Models.BindingModels.Basket;
+using BookStore.Models.ViewModels.Basket;
 
 namespace BookStore.App.Controllers
 {

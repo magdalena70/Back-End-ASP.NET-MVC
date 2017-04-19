@@ -16,7 +16,7 @@
                 <ul class="dropdown-menu">
                     <li>@Html.ActionLink("All Categories", "AllCategories", "Categories", new { area = "Admin" }, null)</li>
                     <li>@Html.ActionLink("Add Category", "AddCategories", "Categories", new { area = "Admin" }, null)</li>
-                    <li>@Html.ActionLink("Search Category", "SearchCategory", "Categories", new { area = "Admin" }, null)</li>
+                    
                 </ul>
             </li>
 
@@ -29,7 +29,6 @@
                 <ul class="dropdown-menu">
                     <li>@Html.ActionLink("All Books", "AllBooks", "Books", new { area = "Admin" }, null)</li>
                     <li>@Html.ActionLink("Add Book", "AddBook", "Books", new { area = "Admin" }, null)</li>
-                    <li>@Html.ActionLink("Search Book", "SearchBook", "Books", new { area = "Admin" }, null)</li>
                 </ul>
             </li>
 
@@ -42,7 +41,6 @@
                 <ul class="dropdown-menu">
                     <li>@Html.ActionLink("All Authors", "AllAuthors", "Authors", new { area = "Admin" }, null)</li>
                     <li>@Html.ActionLink("Add Author", "AddAuthor", "Authors", new { area = "Admin" }, null)</li>
-                    <li>@Html.ActionLink("Search Author", "SearchAuthor", "Authors", new { area = "Admin" }, null)</li>
                 </ul>
             </li>
 
@@ -55,7 +53,17 @@
                 <ul class="dropdown-menu">
                     <li>@Html.ActionLink("All Promotions", "AllPromotions", "Promotions", new { area = "Admin" }, null)</li>
                     <li>@Html.ActionLink("Add Promotion", "AddPromotion", "Promotions", new { area = "Admin" }, null)</li>
-                    <li>@Html.ActionLink("Search Promotion", "SearchPromotion", "Promotions", new { area = "Admin" }, null)</li>
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown">
+                    <p>Purchases</p>
+                    <b class="caret"></b>
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("All Purchases", "AllPurchases", "Purchases", new { area = "Admin" }, null)</li>
                 </ul>
             </li>
 

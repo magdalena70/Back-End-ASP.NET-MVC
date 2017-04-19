@@ -1,14 +1,9 @@
-﻿@model BookStore.Models.ViewModels.CategoryViewModel
+﻿@model BookStore.Models.ViewModels.Category.CategoryViewModel
 
 @{
-    ViewBag.Title = "Category Details";
+    ViewBag.Title = "Category's Details";
 }
 
-<div class="row">
-    <div class="col-md-10 col-md-offset-1">
-        <h2 class="text-center">Category</h2>
-    </div>
-</div>
 <div class="row"> 
     <div class="col-md-10 col-md-offset-1">
         <h3 class="text-center"><span>&quot;</span>@Html.DisplayFor(c => Model.Name)<span>&quot;</span></h3>

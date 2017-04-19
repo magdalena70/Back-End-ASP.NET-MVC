@@ -1,22 +1,37 @@
-﻿using System.Data.Entity;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Web.Mvc;
-using BookStore.Data;
-using BookStore.Models.EntityModels;
 using BookStore.App.Attributes;
+using BookStore.Services;
+using System.Collections.Generic;
+using BookStore.Models.ViewModels.Author;
+using BookStore.Models.BindingModels.Author;
 
 namespace BookStore.App.Areas.Admin.Controllers
 {
     [CustomAttributeAuth(Roles = "Admin")]
     public class AuthorsController : Controller
     {
-        private BookStoreContext db = new BookStoreContext();
+        private AuthorService authorService;
 
-        // GET: Admin/Authors
-        public ActionResult AllAuthors()
+        public AuthorsController()
         {
-            return View(db.Authors.ToList());
+            this.authorService = new AuthorService();
+        }
+
+        // GET: Admin/Authors?authorName=
+        public ActionResult AllAuthors(string authorName)
+        {
+            IEnumerable<AuthorViewModel> viewModel;
+            if (authorName == null)
+            {
+                viewModel = this.authorService.GetAll();
+            }
+            else
+            {
+                viewModel = this.authorService.GetAllByName(authorName);
+            }
+
+            return View(viewModel);
         }
 
         // GET: Admin/Authors/Details/5
@@ -26,12 +41,14 @@ namespace BookStore.App.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Author author = db.Authors.Find(id);
-            if (author == null)
+
+            AuthorWithBooksViewModel viewModel = this.authorService.GetAuthorDetails(id);
+            if (viewModel == null)
             {
                 return HttpNotFound();
             }
-            return View(author);
+
+            return View(viewModel);
         }
 
         // GET: Admin/Authors/Create
@@ -41,20 +58,26 @@ namespace BookStore.App.Areas.Admin.Controllers
         }
 
         // POST: Admin/Authors/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddAuthor([Bind(Include = "Id,FullName,Bio")] Author author)
+        public ActionResult AddAuthor([Bind(Include = "Id,FullName,Bio")] AddAuthorBindingModel bindingModel)
         {
             if (ModelState.IsValid)
             {
-                db.Authors.Add(author);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (this.authorService.IsAuthorExists(bindingModel.FullName))
+                {
+                    this.TempData["Error"] = $"Author with name {bindingModel.FullName} already exists";
+                    return View(bindingModel);
+                }
+
+                this.authorService.AddAuthor(bindingModel);
+                AuthorViewModel newAuthor = this.authorService.GetCurrentAuthor(bindingModel.FullName);
+                
+                this.TempData["Success"] = $"Author is created successfully";
+                return RedirectToAction("Details", "Authors", new { id = newAuthor.Id});
             }
 
-            return View(author);
+            return View(bindingModel);
         }
 
         // GET: Admin/Authors/Edit/5
@@ -64,28 +87,31 @@ namespace BookStore.App.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Author author = db.Authors.Find(id);
-            if (author == null)
+
+            AuthorViewModel viewModel = this.authorService.GetAuthor(id);
+            if (viewModel == null)
             {
                 return HttpNotFound();
             }
-            return View(author);
+
+            return View(viewModel);
         }
 
         // POST: Admin/Authors/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FullName,Bio")] Author author)
+        public ActionResult Edit([Bind(Include = "Id,FullName,Bio")] EditAuthorBindingModel bindingModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(author).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                this.authorService.EditAuthor(bindingModel);
+
+                this.TempData["Success"] = "Author is edited successfully";
+                return RedirectToAction("Details", "Authors", new { id = bindingModel.Id});
             }
-            return View(author);
+
+            AuthorViewModel viewModel = this.authorService.GetCurrentAuthor(bindingModel.FullName);
+            return View(viewModel);
         }
 
         // GET: Admin/Authors/Delete/5
@@ -95,12 +121,14 @@ namespace BookStore.App.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Author author = db.Authors.Find(id);
-            if (author == null)
+
+            AuthorViewModel viewModel = this.authorService.GetAuthor(id);
+            if (viewModel == null)
             {
                 return HttpNotFound();
             }
-            return View(author);
+
+            return View(viewModel);
         }
 
         // POST: Admin/Authors/Delete/5
@@ -108,19 +136,9 @@ namespace BookStore.App.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Author author = db.Authors.Find(id);
-            db.Authors.Remove(author);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            this.authorService.DeleteAuthor(id);
+            this.TempData["Success"] = "Author was removed successfully.";
+            return RedirectToAction("AllAuthors");
         }
     }
 }

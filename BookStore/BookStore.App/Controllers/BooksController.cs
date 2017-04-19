@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using BookStore.Services;
 using BookStore.Models.ViewModels;
 using System.Collections.Generic;
+using BookStore.Models.ViewModels.Book;
 
 namespace BookStore.App.Controllers
 {

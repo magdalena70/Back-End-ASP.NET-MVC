@@ -3,10 +3,10 @@
     src: url("../fonts/Gloss_And_Bloom.ttf");
 }
 
-body {
+body { 
+    background-color: #E3DDDD;
     padding-bottom: 20px;
     font-family: 'Times New Roman', Times, sans-serif;
-    font-size: 19px;
     color: #E3DDDF;
     font-style: italic;
 }
@@ -20,25 +20,12 @@ hr {
     padding: 0;
 }
 
-.affix {
-    top: 0;
-    width: 100%;
-}
-
-    .affix + .container-fluid {
-        padding-top: 60px;
-    }
-
 h1, h2, h3, h4, h5, .lead {
     font-family: Gloss_And_Bloom, sans-serif !important;
     text-shadow: 10px 5px 1px #160200;
     letter-spacing: 4px;
     color: rgba(224, 201, 218, 04);
 }
-
-/*h3, h4{
-    margin-left: 3%;
-}*/
 
 .lead {
     font-size: 17px;
@@ -71,24 +58,32 @@ a {
     height: auto;
     max-height: 700px;
     width: 100%;
+    margin-top: 100px;
 }
 
     .home h1 {
         letter-spacing: 7px;
         text-shadow: 10px 5px 1px #4A486F;
         color: ghostwhite;
-        margin-top: 1%;
+        margin-top: 1.5%;
     }
 
-    .home h3, .home h4 {
+    .home h2{
+        margin-bottom: 3%;
+        padding-left: 15%;
+        color: white;
+        border-bottom: solid 1px white;
+    }
+
+    .home .lead {
         letter-spacing: 7px;
         font-weight: 900;
         text-shadow: none;
-        color: #3E3B46;
+        color: #3E3B46;   
     }
 
-    .home h4 {
-        margin-bottom: 33%;
+    .home .store-title {
+        margin-bottom: 25%;
     }
 
 .user-body-content {
@@ -96,6 +91,17 @@ a {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: top;
+    padding-top: 3%;
+}
+
+.admin{
+    background-color: black;
+    margin-top: 80px;
+    margin-bottom: 5%;
+}
+
+.admin-body-content{
+    color: black;
 }
 
 #basket-title {
@@ -103,6 +109,7 @@ a {
     background-size: cover;
     background-repeat: repeat;
     background-position: center;
+    border-radius: 10px;
 }
 
     #basket-title h2, #basket-title h4, #basket-title h5{
@@ -114,6 +121,7 @@ a {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    border-radius: 10px;
 }
 
     .promotion-table th, .promotion-table td, .promotion-table h3, .promotion-table h4, #promotion-in-basket p {
@@ -122,11 +130,12 @@ a {
     }
 
 .home-div, .category-div, .book-div, .book-details-div, .author-div,
-#login-form, #register-form, #all-authors-table, .home-section, .admin {
+#login-form, #register-form, #all-authors-table, .home-section {
     background-image: url("Images/background_motion4_1152x864.jpg");
     background-size: cover;
     background-repeat: repeat;
     background-position: top;
+    border-radius: 10px;
 }
 
 .error-div {
@@ -244,13 +253,6 @@ a {
         max-height: 400px;
         margin: auto;
     }
-
-.home-new-book {
-    background-color: rgba(255, 255, 255, 0.4);
-    color: black;
-    font-weight: bold;
-    font-size: 25px;
-}
 
 /*modal*/
 .modal-title, .modal-body p {

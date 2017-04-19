@@ -6,6 +6,8 @@ using BookStore.Services;
 using BookStore.Data;
 using BookStore.Models.BindingModels;
 using BookStore.Models.EntityModels;
+using BookStore.Models.BindingModels.Book;
+using BookStore.Models.ViewModels.User;
 
 namespace BookStore.App.Controllers
 {

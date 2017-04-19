@@ -1,7 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -9,7 +6,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BookStore.App.Models;
-using BookStore.Models;
 using BookStore.Models.EntityModels;
 
 namespace BookStore.App.Controllers
@@ -59,6 +55,11 @@ namespace BookStore.App.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -82,8 +83,8 @@ namespace BookStore.App.Controllers
             {
                 case SignInStatus.Success:
                     this.TempData["Success"] = "User logged in successfully.";
-                    //return RedirectToAction("UserProfile", "Users");
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("UserProfile", "Users");
+                    //return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -144,6 +145,11 @@ namespace BookStore.App.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
 
@@ -178,7 +184,7 @@ namespace BookStore.App.Controllers
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                     this.TempData["Success"] = "User registered successfully.";
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("UserProfile", "Users");
                 }
                 AddErrors(result);
             }

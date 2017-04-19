@@ -1,4 +1,4 @@
-﻿@model BookStore.Models.ViewModels.AuthorWithBooksViewModel
+﻿@model BookStore.Models.ViewModels.Author.AuthorWithBooksViewModel
 
 @{
     ViewBag.Title = "Books By Author";
@@ -11,11 +11,6 @@
 <hr />
 @if (@Model != null)
 {
-    <div class="row text-center">
-        <div class="col-md-10 col-md-offset-1">
-            <h2>@ViewBag.Title</h2>
-        </div>
-    </div>
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <h3 class="text-center">@Html.DisplayFor(model => model.FullName)</h3>

@@ -1,40 +1,37 @@
-﻿@model BookStore.Models.EntityModels.Author
+﻿@model BookStore.Models.ViewModels.Author.AuthorViewModel
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Delete Author";
 }
-
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Author</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FullName)
-        </dt>
-
-        <dd>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <h4>@ViewBag.Title</h4>
+    </div>
+</div>
+<div class="row text-center">
+    <div class="col-md-10 col-md-offset-1">
+        <h3 class="text-danger">
+            Are you sure you want to delete
+            <span>&quot;</span>
             @Html.DisplayFor(model => model.FullName)
-        </dd>
+            <span>&quot;</span>
+        </h3>
+        <hr />
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Bio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Bio)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+            </div>
+        }
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) ||
+        @Html.ActionLink("Back to All Authors", "AllAuthors") ||
+        @Html.ActionLink("Details", "Details", new { id = Model.Id })
+    </div>
 </div>

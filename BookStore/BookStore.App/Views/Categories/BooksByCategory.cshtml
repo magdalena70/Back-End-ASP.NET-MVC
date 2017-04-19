@@ -1,4 +1,4 @@
-﻿@model BookStore.Models.ViewModels.CategoryViewModel
+﻿@model BookStore.Models.ViewModels.Category.CategoryViewModel
 
 @{
     ViewBag.Title = "Search By Category";
@@ -12,11 +12,6 @@
 <hr />
 @if (@Model != null)
 {
-    <div class="row text-center">
-        <div class="col-md-10 col-md-offset-1">
-            <h2>Books By Category</h2>
-        </div>
-    </div>
     <div class="row text-center">
         <div class="col-md-10 col-md-offset-1">
             <h3><span>&quot;</span>@Html.DisplayFor(category => category.Name)<span>&quot;</span></h3>

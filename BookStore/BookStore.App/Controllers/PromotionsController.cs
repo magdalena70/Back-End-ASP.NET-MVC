@@ -5,6 +5,7 @@ using BookStore.Models.ViewModels;
 using BookStore.Services;
 using System.Collections.Generic;
 using System;
+using BookStore.Models.ViewModels.Promotion;
 
 namespace BookStore.App.Controllers
 {
@@ -33,14 +34,14 @@ namespace BookStore.App.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
+
             PromotionsViewModel viewModel = this.promotionService.GetDetails(id);
             if (viewModel == null)
             {
                 this.TempData["Info"] = "No promotion.";
                 return RedirectToAction("Index", "Home");
             }
-            
+
             if (viewModel.EndDate < DateTime.Now)
             {
                 this.TempData["Info"] = "Promotion expired.";

@@ -1,13 +1,21 @@
 ﻿@model BookStore.Models.EntityModels.Book
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Book Details";
 }
 
-<h2>Details</h2>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <h2>@ViewBag.Title</h2>
+    </div>
+</div>
 
 <div>
-    <h4>Book</h4>
+    <div class="text-center">
+        <img src="@Model.ImageUrl.Replace("../", "../../")" alt="book-img" />
+        
+            @Html.DisplayFor(model => model.Authors)  
+    </div>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -16,14 +24,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ImageUrl)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ImageUrl)
         </dd>
 
         <dt>
@@ -83,21 +83,28 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.UpRating)
+            @Html.DisplayNameFor(model => model.Ratings)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.UpRating)
+            @Html.DisplayFor(model => model.Ratings)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DownRating)
+            @Html.DisplayNameFor(model => model.Purchases)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DownRating)
+            @Html.DisplayFor(model => model.Purchases.Count)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Reviews)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reviews.Count)
+        </dd>
     </dl>
 </div>
 <p>

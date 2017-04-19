@@ -1,9 +1,10 @@
-﻿using BookStore.Models.ViewModels;
-using System.Linq;
+﻿using System.Linq;
 using BookStore.Models.EntityModels;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
+using BookStore.Models.ViewModels.Basket;
+using BookStore.Models.ViewModels.Book;
 
 namespace BookStore.Services
 {
@@ -24,7 +25,7 @@ namespace BookStore.Services
                     .Select(b => new CountBookInBasketViewModel()
                     {
                         Count = b.Count(),
-                        Book = b.First().Book,
+                        Book = Mapper.Map<Book, BookDetailsViewModel>(b.First().Book),
                         BookId = b.First().Book.Id,
                         NewCount = 0
                     }).ToList();

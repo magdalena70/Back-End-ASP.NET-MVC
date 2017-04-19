@@ -1,10 +1,13 @@
-﻿using BookStore.Models.ViewModels;
-using System.Linq;
+﻿using System.Linq;
 using System.Collections.Generic;
-using BookStore.Models.BindingModels;
 using BookStore.Models.EntityModels;
 using AutoMapper;
 using System.Data.Entity;
+using BookStore.Models.ViewModels.User;
+using BookStore.Models.BindingModels.Book;
+using BookStore.Models.ViewModels.Category;
+using BookStore.Models.ViewModels.Book;
+using BookStore.Models.ViewModels.Basket;
 
 namespace BookStore.Services
 {
@@ -17,7 +20,8 @@ namespace BookStore.Services
 
             if (currentUser.Basket != null)
             {
-                viewModel.Basket = currentUser.Basket;
+
+                viewModel.Basket = Mapper.Map<Basket, BasketViewModel>(currentUser.Basket);
                 viewModel.BasketTotalPrice = currentUser.Basket.TotalPrice;
                 viewModel.CountBooksInBasket = currentUser.Basket.Books.Count;
                 viewModel.Books = currentUser.Basket.Books
@@ -25,7 +29,7 @@ namespace BookStore.Services
                     .Select(b => new CountBookInBasketViewModel()
                     {
                         Count = b.Count(),
-                        Book = b.First().Book
+                        Book = Mapper.Map<Book, BookDetailsViewModel>(b.First().Book)
                     }).ToList();
            
                 viewModel.YouMayAlsoLike = GetCategories(currentUser);

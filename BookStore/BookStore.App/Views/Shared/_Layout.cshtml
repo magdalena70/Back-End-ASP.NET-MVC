@@ -9,29 +9,25 @@
 
 </head>
 <body>
-    <div class="container-fluid" id="top">
-        <div class="row text-center home">
-            <div>
-                <h1>Bookstore <span>&quot;Imagination&quot;</span></h1>
-            </div>
-            <div>
-                <h3 class="lead">Spend your days with imagination.</h3>
-            </div>
-            <div>
-                <h4 class="lead">Spend your money at Bookstore &quot;Imagination&quot;</h4>
+    <div class="container-fluid home" id="top">
+        <div class="row text-center">
+            <div class="store-title">
+                <h1>Bookstore <span>&quot;Imagination&quot;</span></h1>          
+                <p class="lead">Spend your days with imagination.</p>           
+                <p class="lead">Spend your money at Bookstore &quot;Imagination&quot;</p>
             </div>
             @Html.Partial("_MessagesPartial")
         </div>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <h2>@ViewBag.Title</h2>
+            </div>
+        </div>
     </div>
-    <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="97">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+
                 <ul class="nav navbar-nav">
                     @if (User.IsInRole("Admin"))
                     {
@@ -40,12 +36,17 @@
                         </li>
                     }
                     <li>
-                        <a href="/Home/Index" class="navbar-brand btn btn-default">
+                        <a href="/Home/Index" class="navbar-brand">
                             <img src="~/Content/Images/NavBar/home-2-64.png" class="img-rounded" alt="home-icon" />
-                            <p class="carousel-caption">home</p>
                         </a>
                     </li>
                 </ul>
+
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
             </div>
 
             <div class="navbar-collapse collapse">
@@ -57,12 +58,13 @@
     </nav>
 
     <div class="container-fluid user-body-content">
-        @Html.Partial("_BackNextTopButtonsPartial")
-        
-        @RenderBody()
+        <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+            @RenderBody()
+        </div>
+        @Html.Partial("_BackNextTopButtonsPartial")      
         <hr />
-        @Html.Partial("_Footer")
     </div>
+    @Html.Partial("_Footer")
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")

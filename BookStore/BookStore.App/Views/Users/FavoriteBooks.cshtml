@@ -1,13 +1,11 @@
-﻿@model BookStore.Models.ViewModels.UserFavoriteBooksViewModel
+﻿@model BookStore.Models.ViewModels.User.UserFavoriteBooksViewModel
 @{
     ViewBag.Title = "Favorite Books";
 }
 
-<div class="row text-center">
-    <h2>@Model.UserName's @ViewBag.Title</h2>
-</div>
 <hr />
 <div class="row">
+    <h3>@Model.UserName's @ViewBag.Title</h3>
     <div class="col-md-10 col-md-offset-1 books-list">
         @foreach (var book in Model.FavoriteBooks)
         {

@@ -1,21 +1,25 @@
-﻿@model BookStore.Models.EntityModels.Author
+﻿@model BookStore.Models.ViewModels.Author.AuthorWithBooksViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Author Details";
 }
 
-<h2>Details</h2>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <h2>@ViewBag.Title</h2>
+    </div>
+</div>
 
-<div>
-    <h4>Author</h4>
-    <hr />
+<div class="row">
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.FullName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FullName)
+            <h4>
+                @Html.DisplayFor(model => model.FullName)
+            </h4>
         </dd>
 
         <dt>
@@ -25,10 +29,35 @@
         <dd>
             @Html.DisplayFor(model => model.Bio)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Books)
+        </dt>
 
+        <dd>
+            <div class="row">
+                @foreach (var book in Model.Books)
+                {
+                    <div class="col-md-4 text-center">
+                        <h5>@Html.DisplayFor(b => book.Title)</h5>
+                        <div class="img-box">
+                            <a href="@Url.Action("Details", "Books", new { id = book.Id}, null)">
+                                <img src="@book.ImageUrl.Replace("../", "../../")" alt="book-img" class="img img-thumbnail" width="50%" />
+                            </a>
+                        </div>
+                        <div class="row">
+                            <small>by @Html.DisplayFor(b => book.Authors)</small>
+                            <p><small>@Html.DisplayFor(b => book.Price)</small></p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </dd>
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) ||
+        @Html.ActionLink("Back to All Authors", "AllAuthors") ||
+        @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
+    </div>
+</div>
