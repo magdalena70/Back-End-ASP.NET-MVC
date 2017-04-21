@@ -11,6 +11,8 @@ namespace BookStore.Models.ViewModels.Promotion
 
         public string Name { get; set; }
 
+        public string Status { get; set; }
+
         public string Text { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
@@ -21,6 +23,8 @@ namespace BookStore.Models.ViewModels.Promotion
 
         [DisplayFormat(DataFormatString = "{0:0.00} %", ApplyFormatInEditMode = true)]
         public decimal Discount { get; set; }
+
+        public bool AreThereBooks { get; set; }
 
         public ICollection<CategoryViewModel> Categories { get; set; }
     }

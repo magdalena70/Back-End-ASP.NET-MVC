@@ -388,6 +388,7 @@
     <Content Include="Content\bootstrap\bootstrap.less" />
     <Content Include="Content\bootstrap\badges.less" />
     <Content Include="Content\bootstrap\alerts.less" />
+    <Content Include="Areas\Admin\Views\Promotions\_PromotionsSearchFormPartial.cshtml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -483,6 +484,7 @@
     <Content Include="Views\Shared\DisplayTemplates\BooksViewModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\HomeNewBookAuthorViewModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\AuthorViewModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\PromotionsViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

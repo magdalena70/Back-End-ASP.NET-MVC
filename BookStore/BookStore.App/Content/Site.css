@@ -7,6 +7,7 @@ body {
     background-color: #E3DDDD;
     padding-bottom: 20px;
     font-family: 'Times New Roman', Times, sans-serif;
+    font-size: 17px;
     color: #E3DDDF;
     font-style: italic;
 }
@@ -28,7 +29,7 @@ h1, h2, h3, h4, h5, .lead {
 }
 
 .lead {
-    font-size: 17px;
+    font-size: 15px;
 }
 
 img {
@@ -122,11 +123,13 @@ a {
     background-repeat: no-repeat;
     background-position: center;
     border-radius: 10px;
+    border-bottom: 1px solid black; 
 }
 
-    .promotion-table th, .promotion-table td, .promotion-table h3, .promotion-table h4, #promotion-in-basket p {
+    .promotion-table div h5, #promotion-in-basket p {
         color: black !important;
         text-shadow: none;
+        font-weight: bolder;
     }
 
 .home-div, .category-div, .book-div, .book-details-div, .author-div,

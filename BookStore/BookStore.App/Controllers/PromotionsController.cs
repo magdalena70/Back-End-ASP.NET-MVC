@@ -22,7 +22,7 @@ namespace BookStore.App.Controllers
         // GET: Promotions
         public ActionResult AllPromotions()
         {
-            IEnumerable<PromotionsViewModel> viewModel = this.promotionService.GetAll();
+            IEnumerable<PromotionsViewModel> viewModel = this.promotionService.GetCurrentAndUpcoming();
             return View(viewModel);
         }
 
@@ -42,11 +42,17 @@ namespace BookStore.App.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
+            if (viewModel.AreThereBooks == false)
+            {
+                this.TempData["Info"] = "No books.";
+            }
+
             if (viewModel.EndDate < DateTime.Now)
             {
                 this.TempData["Info"] = "Promotion expired.";
                 return RedirectToAction("Index", "Home");
             }
+
             return View(viewModel);
         }
     }

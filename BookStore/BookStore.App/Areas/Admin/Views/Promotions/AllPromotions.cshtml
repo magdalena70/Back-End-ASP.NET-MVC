@@ -1,60 +1,26 @@
-﻿@model IEnumerable<BookStore.Models.EntityModels.Promotion>
+﻿@model IEnumerable<BookStore.Models.ViewModels.Promotion.PromotionsViewModel>
 
 @{
-    ViewBag.Title = "All Promotions";
+    ViewBag.Title = "Promotions";
 }
 
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
         <h2>@ViewBag.Title</h2>
+        <p class="pull-right lead">
+            @Html.ActionLink("Add Promotion", "AddPromotion")
+        </p>
     </div>
 </div>
-<p>
-    @Html.ActionLink("Add Promotion", "AddPromotion")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Text)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Discount)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Text)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EndDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Discount)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+<div class="row">
+    @Html.Partial("_PromotionsSearchFormPartial")
+</div>
 
-</table>
+<div>
+    <h4 class="text-center">@ViewBag.PromotionsTitle</h4>
+    <hr />
+</div>
+<div class="row">
+    @Html.DisplayForModel()
+</div>

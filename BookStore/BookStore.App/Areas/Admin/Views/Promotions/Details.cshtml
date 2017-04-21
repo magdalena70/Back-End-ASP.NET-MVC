@@ -1,4 +1,4 @@
-﻿@model BookStore.Models.EntityModels.Promotion
+﻿@model BookStore.Models.ViewModels.Promotion.PromotionsViewModel
 
 @{
     ViewBag.Title = "Promotion Details";
@@ -56,6 +56,7 @@
 
     </dl>
 </div>
+@Html.DisplayFor(p => Model.Categories)
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to All Promotions", "AllPromotions")

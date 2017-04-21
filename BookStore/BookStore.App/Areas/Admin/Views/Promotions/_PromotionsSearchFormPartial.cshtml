@@ -1,0 +1,43 @@
+﻿<div class="col-lg-10 col-md-offset-1">
+    <h5 class="text-danger">Search Promotions By Start Date</h5>
+    @using (Html.BeginForm("AllPromotions", "Promotions", FormMethod.Get, new { @class = "form-group", role = "search" }))
+    {
+        <div class="form-group col-md-4">
+            <label class="text-danger">
+                <span class="glyphicon glyphicon-search"></span>
+                Start Date - Year
+            </label>
+            <input type="number" name="startDateYear" 
+                   class="form-control" 
+                   placeholder="Enter year in format: yyyy" 
+                   pattern="[0-9]{4}" min="2010" max="@DateTime.Now.Year">
+        </div>
+
+        <div class="form-group col-md-4">
+            <label class="text-danger">
+                <span class="glyphicon glyphicon-search"></span>
+                Start Date - Month
+            </label>
+            <input type="number" name="startDateMonth" 
+                   class="form-control" 
+                   placeholder="Enter month in format: MM" 
+                   pattern="[0-9]{1,2}" min="1" max="12">
+        </div>
+
+        <div class="form-group col-md-4">
+            <label class="text-danger">
+                <span class="glyphicon glyphicon-search"></span>
+                Start Date - Day
+            </label>
+            <input type="number" name="startDateDay" 
+                   class="form-control" 
+                   placeholder="Enter day in format: dd" 
+                   pattern="[0-9]{1,2}" min="1" max="31">
+        </div>
+
+            <div class="form-group text-center">
+                <input type="submit" value="Search" class="btn btn-default" />
+            </div>
+    }
+</div>
+

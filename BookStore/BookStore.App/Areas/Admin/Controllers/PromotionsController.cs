@@ -5,6 +5,10 @@ using System.Web.Mvc;
 using BookStore.Data;
 using BookStore.Models.EntityModels;
 using BookStore.App.Attributes;
+using BookStore.Services;
+using System.Collections.Generic;
+using BookStore.Models.ViewModels.Promotion;
+using System;
 
 namespace BookStore.App.Areas.Admin.Controllers
 {
@@ -12,11 +16,92 @@ namespace BookStore.App.Areas.Admin.Controllers
     public class PromotionsController : Controller
     {
         private BookStoreContext db = new BookStoreContext();
+        private PromotionService promotionService;
 
-        // GET: Admin/Promotions
-        public ActionResult AllPromotions()
+        public PromotionsController()
         {
-            return View(db.Promotions.ToList());
+            this.promotionService = new PromotionService();
+        }
+
+        // GET: Admin/Promotions?startDateYear=""&startDateMonth=""&startDateDay=""
+        public ActionResult AllPromotions(string startDateYear, string startDateMonth, string startDateDay)
+        { 
+            IEnumerable<PromotionsViewModel> viewModel;
+
+            if (string.IsNullOrEmpty(startDateYear) &&
+                string.IsNullOrEmpty(startDateMonth) &&
+                string.IsNullOrEmpty(startDateDay))
+            {
+                ViewBag.PromotionsTitle = "All promotions.";
+                viewModel = this.promotionService.GetAll();
+                return View(viewModel);
+
+            }
+
+            if (!string.IsNullOrEmpty(startDateYear) &&
+                !string.IsNullOrEmpty(startDateMonth) &&
+                !string.IsNullOrEmpty(startDateDay))
+            {
+                ViewBag.PromotionsTitle = $"Promotions with start date: {startDateYear}-{startDateMonth}-{startDateDay}";
+                viewModel = this.promotionService.GetAllByStartDate(startDateYear, startDateMonth, startDateDay);
+                return View(viewModel);
+            }
+
+            if(!string.IsNullOrEmpty(startDateYear) &&
+                string.IsNullOrEmpty(startDateMonth) &&
+                string.IsNullOrEmpty(startDateDay))
+            {
+                ViewBag.PromotionsTitle = $"Promotions launched during the specific year: { startDateYear}";
+                viewModel = this.promotionService.GetAllByStartDateYear(startDateYear);
+                return View(viewModel);
+            }
+
+            if (string.IsNullOrEmpty(startDateYear) &&
+                !string.IsNullOrEmpty(startDateMonth) &&
+                string.IsNullOrEmpty(startDateDay))
+            {
+                ViewBag.PromotionsTitle = $"Promotions launched during the specific month: { startDateMonth}";
+                viewModel = this.promotionService.GetAllByStartDateMonth(startDateMonth);
+                return View(viewModel);
+            }
+
+            if (string.IsNullOrEmpty(startDateYear) &&
+                string.IsNullOrEmpty(startDateMonth) &&
+                !string.IsNullOrEmpty(startDateDay))
+            {
+                ViewBag.PromotionsTitle = $"Promotions launched during the specific day: { startDateDay}";
+                viewModel = this.promotionService.GetAllByStartDateDay(startDateDay);
+                return View(viewModel);
+            }
+
+            if (!string.IsNullOrEmpty(startDateYear) &&
+                !string.IsNullOrEmpty(startDateMonth) &&
+                string.IsNullOrEmpty(startDateDay))
+            {
+                ViewBag.PromotionsTitle = $"Promotions launched during the {startDateMonth} month in year {startDateYear}";
+                viewModel = this.promotionService.GetAllByStartDateYearAndStartDateMonth(startDateYear, startDateMonth);
+                return View(viewModel);
+            }
+
+            if (string.IsNullOrEmpty(startDateYear) &&
+                !string.IsNullOrEmpty(startDateMonth) &&
+                !string.IsNullOrEmpty(startDateDay))
+            {
+                ViewBag.PromotionsTitle = $"Promotions launched during the {startDateDay} day in month {startDateMonth}";
+                viewModel = this.promotionService.GetAllByStartDateMonthAndStartDateDay(startDateDay, startDateMonth);
+                return View(viewModel);
+            }
+
+            if (!string.IsNullOrEmpty(startDateYear) &&
+                string.IsNullOrEmpty(startDateMonth) &&
+                !string.IsNullOrEmpty(startDateDay))
+            {
+                ViewBag.PromotionsTitle = $"Promotions launched during the {startDateDay} day in year {startDateYear}";
+                viewModel = this.promotionService.GetAllByStartDateYearAndStartDateDay(startDateYear, startDateDay);
+                return View(viewModel);
+            }
+
+            return View();
         }
 
         // GET: Admin/Promotions/Details/5
@@ -26,12 +111,20 @@ namespace BookStore.App.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Promotion promotion = db.Promotions.Find(id);
-            if (promotion == null)
+
+            PromotionsViewModel viewModel = this.promotionService.GetDetails(id);
+            if (viewModel == null)
             {
-                return HttpNotFound();
+                this.TempData["Info"] = "No promotion.";
+                return RedirectToAction("AllPromotions", "Promotions");
             }
-            return View(promotion);
+
+            if (viewModel.AreThereBooks == false)
+            {
+                this.TempData["Info"] = "No books.";
+            }
+
+            return View(viewModel);
         }
 
         // GET: Admin/Promotions/Create
