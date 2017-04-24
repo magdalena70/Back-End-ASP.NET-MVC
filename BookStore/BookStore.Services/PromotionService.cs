@@ -5,6 +5,8 @@ using BookStore.Models.EntityModels;
 using System.Collections.Generic;
 using BookStore.Models.ViewModels.Promotion;
 using System.Net;
+using BookStore.Models.BindingModels.Promotion;
+using System.Data.Entity;
 
 namespace BookStore.Services
 {
@@ -43,28 +45,19 @@ namespace BookStore.Services
             return viewModel;
         }
 
-        private void AddPromotionStatus(IEnumerable<PromotionsViewModel> viewModel)
+        public void AddPromotion(AddPromotionBindingModel bindingModel)
         {
-            foreach (var promotion in viewModel)
-            {
-                if (promotion.EndDate < DateTime.Now)
-                {
-                    promotion.Status = "Expired";
-                }
-                else
-                {
-                    if (promotion.StartDate <= DateTime.Now)
-                    {
-                        promotion.Status = "Current";
-                    }
+            var newPromotion = Mapper.Map<AddPromotionBindingModel, Promotion>(bindingModel);
+            this.Context.Promotions.Add(newPromotion);
+            this.Context.SaveChanges();
+        }
 
-                    if (promotion.StartDate > DateTime.Now)
-                    {
-                        promotion.Status = "Upcoming";
-                    }
-                }
+        public Promotion GetPromotionByName(string promotionName)
+        {
+            var promotion = this.Context.Promotions
+                .FirstOrDefault(p => p.Name == promotionName);
 
-            }
+            return promotion;
         }
 
         public PromotionsViewModel GetDetails(int? id)
@@ -78,6 +71,32 @@ namespace BookStore.Services
             PromotionsViewModel promotionsViewModel = Mapper.Map<Promotion, PromotionsViewModel>(promotion);
             promotionsViewModel.AreThereBooks = CheckIfThereAreBooks(promotion);
             return promotionsViewModel;
+        }
+
+        public EditPromotionViewModel GetPromotionById(int? id)
+        {
+            Promotion promotion = this.Context.Promotions.Find(id);
+            if (promotion == null)
+            {
+                return null;
+            }
+
+            EditPromotionViewModel viewModel = Mapper.Map<Promotion, EditPromotionViewModel>(promotion);
+            return viewModel;
+        }
+
+        public void EditPromotion(EditPromotionBindingModel bindingModel)
+        {
+            Promotion editedPromotion = Mapper.Map<EditPromotionBindingModel, Promotion>(bindingModel);
+            this.Context.Entry(editedPromotion).State = EntityState.Modified;
+            this.Context.SaveChanges();
+        }
+
+        public void DeletePromotion(int id)
+        {
+            Promotion promotion = this.GetCurrentPromotion(id);
+            this.Context.Promotions.Remove(promotion);
+            this.Context.SaveChanges();
         }
 
         public IEnumerable<PromotionsViewModel> GetAllByStartDate(string startDateYear, string startDateMonth, string startDateDay)
@@ -218,6 +237,18 @@ namespace BookStore.Services
             return viewModel;
         }
 
+        public string GetPromotionName(int id)
+        {
+            string promotionName = this.GetCurrentPromotion(id).Name;
+            return promotionName;
+        }
+
+        public Promotion GetCurrentPromotion(int? id)
+        {
+            Promotion currentPromotion = this.Context.Promotions.Find(id);
+            return currentPromotion;
+        }
+
         private string ValidateMonthAndDayValue(string value)
         {
             if (value.Length == 2 && value[0] == '0')
@@ -225,8 +256,7 @@ namespace BookStore.Services
                 value = value[1].ToString();
             }
 
-            //return WebUtility.HtmlDecode(value);
-            return value;
+            return WebUtility.HtmlDecode(value);
         }
 
         private bool CheckIfThereAreBooks(Promotion promotion)
@@ -251,6 +281,30 @@ namespace BookStore.Services
             }
 
             return result;
+        }
+
+        private void AddPromotionStatus(IEnumerable<PromotionsViewModel> viewModel)
+        {
+            foreach (var promotion in viewModel)
+            {
+                if (promotion.EndDate < DateTime.Now)
+                {
+                    promotion.Status = "Expired";
+                }
+                else
+                {
+                    if (promotion.StartDate <= DateTime.Now)
+                    {
+                        promotion.Status = "Current";
+                    }
+
+                    if (promotion.StartDate > DateTime.Now)
+                    {
+                        promotion.Status = "Upcoming";
+                    }
+                }
+
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BookStore.Models.EntityModels.Book>
+﻿@model IEnumerable<BookStore.Models.ViewModels.Book.AllBooksViewModel>
 
 @{
     ViewBag.Title = "All Books";
@@ -9,59 +9,47 @@
         <h2>@ViewBag.Title</h2>
     </div>
 </div>
+<hr />
+<div class="row">
+    <div class="col-lg-10 col-md-offset-1">
+        <ul class="pagination">
+            @for (int page = 1; page <= ViewBag.Totalpages; page++)
+            {
+                string htmlClass = "";
+                if (page == ViewBag.CurrentPage)
+                {
+                    htmlClass = "active";
+                }
 
-<p>
-    @Html.ActionLink("Add Book", "AddBook")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Language)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Quantity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NumberOfPages)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IssueDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ISBN)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var book in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => book.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => book.Language)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => book.Quantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => book.NumberOfPages)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => book.IssueDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => book.ISBN)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id= book.Id }) |
-            @Html.ActionLink("Details", "Details", new { id= book.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id= book.Id })
-        </td>
-    </tr>
-}
-
-</table>
+                <li class="@htmlClass">
+                    @Html.ActionLink(page.ToString(), "AllBooks", "Books", new { page = page, count = 6 }, null)
+            </li>
+            }
+        </ul>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+       @foreach (var book in Model)
+       {
+        <div class="col-md-4">
+            <p><strong>Title -</strong></p>
+            <p>@Html.DisplayFor(b => book.Title)</p>
+        </div>
+        <div class="col-md-3">
+            <p><strong>Authors -</strong></p>
+            <p>@Html.DisplayFor(b => book.Authors)</p>
+        </div>
+        <div class="col-md-3">
+            <p><strong>ISBN -</strong></p>
+            @Html.DisplayFor(b => book.ISBN)
+        </div>
+        <div class="col-md-2">
+            <p>@Html.ActionLink("Edit", "Edit", new { id = book.Id })</p>
+           <p>@Html.ActionLink("Details", "Details", new { id = book.Id })</p>
+            <p>@Html.ActionLink("Delete", "Delete", new { id = book.Id })</p>
+        </div>
+       }
+    </div>
+</div>

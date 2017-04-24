@@ -80,10 +80,10 @@ namespace BookStore.App.Areas.Admin.Controllers
                 }
 
                 this.categoryService.AddNewCategory(bindingModel);
-                CategoryViewModel newCategory = this.categoryService.GetCurrentCategory(bindingModel.Name); 
+                CategoryViewModel newCategory = this.categoryService.GetCurrentCategory(bindingModel.Name);
                 this.TempData["Success"] = $"Category '{bindingModel.Name}' was created successfully.";
 
-                return RedirectToAction("Details", "Categories", new { id = newCategory.Id});
+                return RedirectToAction("Details", "Categories", new { id = newCategory.Id });
             }
 
             return View(bindingModel);
@@ -148,7 +148,7 @@ namespace BookStore.App.Areas.Admin.Controllers
             string currCategoryName = this.categoryService.GetCategoryName(id);
             this.categoryService.DeleteCategory(id);
 
-                this.TempData["Success"] = $"Category '{currCategoryName}' was removed successfully.";
+            this.TempData["Success"] = $"Category '{currCategoryName}' was removed successfully.";
             return RedirectToAction("AllCategories", "Categories");
         }
     }

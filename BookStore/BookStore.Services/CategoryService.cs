@@ -147,10 +147,8 @@ namespace BookStore.Models
 
         public void EditCategory(EditCategoryBindingModel bindingModel)
         {
-
-            Category category = this.Context.Categories.Find(bindingModel.Id);
-            category.Name = bindingModel.Name;
-            this.Context.Entry(category).State = EntityState.Modified;
+            Category editedCategory = Mapper.Map<EditCategoryBindingModel, Category>(bindingModel);
+            this.Context.Entry(editedCategory).State = EntityState.Modified;
             this.Context.SaveChanges();
         }
 

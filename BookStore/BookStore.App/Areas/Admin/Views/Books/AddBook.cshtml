@@ -83,12 +83,14 @@
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.IssueDate, htmlAttributes: new { @class = "control-label" })
-                    <div class='input-group date datetimepicker row'>
-                        @Html.EditorFor(model => model.IssueDate, new { htmlAttributes = new { @class = "form-control" } })
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                        @Html.ValidationMessageFor(model => model.IssueDate, "", new { @class = "text-danger" })
+                    <div class="row">
+                        <div class='input-group date'>
+                            @Html.EditorFor(model => model.IssueDate, new { htmlAttributes = new { @class = "form-control datetimepicker" } })
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                            @Html.ValidationMessageFor(model => model.IssueDate, "", new { @class = "text-danger" })
+                        </div>
                     </div>
                 </div>
 
@@ -108,7 +110,7 @@
 @section scripts{
     <script type="text/javascript">
         $(function () {
-            $('.datetimepicker').datetimepicker();
+            $('.datetimepicker').datetimepicker({ format: 'YYYY-MM-DD HH:mm:ss' });
         });
     </script>
 }

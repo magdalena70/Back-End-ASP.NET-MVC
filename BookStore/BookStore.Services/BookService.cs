@@ -22,6 +22,25 @@ namespace BookStore.Services
             return viewModel;
         }
 
+        public IEnumerable<AllBooksViewModel> GetAll(int page, int count)
+        {
+            var books = this.Context.Books
+                .Include("Authors")
+                .OrderBy(b => b.Title)
+                .ThenByDescending(b => b.IssueDate)
+                .Skip(page - 1)
+                .Take(count);
+
+            IEnumerable<AllBooksViewModel> viewModel = Mapper.Map<IEnumerable<Book>, IEnumerable<AllBooksViewModel>>(books);
+            return viewModel;
+        }
+
+        public int GetAllBooksCount()
+        {
+            int count = this.Context.Books.Count();
+            return count;
+        }
+
         public BookDetailsViewModel GetDetails(int? id)
         {
             Book book = this.Context.Books.Find(id);

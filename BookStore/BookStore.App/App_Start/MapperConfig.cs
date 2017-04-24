@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BookStore.Models.BindingModels.Author;
 using BookStore.Models.BindingModels.Category;
+using BookStore.Models.BindingModels.Promotion;
 using BookStore.Models.EntityModels;
 using BookStore.Models.ViewModels.Author;
 using BookStore.Models.ViewModels.Basket;
@@ -27,6 +28,7 @@ namespace BookStore.App.App_Start
 
                 ex.CreateMap<Book, BookDetailsViewModel>();
                 ex.CreateMap<Book, BooksViewModel>();
+                ex.CreateMap<Book, AllBooksViewModel>();
 
                 ex.CreateMap<Category, AllCategoriesViewModel>();
                 ex.CreateMap<Category, CategoryViewModel>();
@@ -54,6 +56,9 @@ namespace BookStore.App.App_Start
 
                 ex.CreateMap<Promotion, PromotionsViewModel>();
                 ex.CreateMap<Promotion, PromotionViewModel>();
+                ex.CreateMap<AddPromotionBindingModel, Promotion>();
+                ex.CreateMap<Promotion, EditPromotionViewModel>();
+                ex.CreateMap<EditPromotionBindingModel, Promotion>();
 
                 ex.CreateMap<Book, HomeNewBookViewModel>();
                 ex.CreateMap<Author, HomeNewBookAuthorViewModel>();

@@ -103,6 +103,8 @@ a {
 
 .admin-body-content{
     color: black;
+    font-weight: bold;
+    text-shadow: none;
 }
 
 #basket-title {

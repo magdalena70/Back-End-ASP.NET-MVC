@@ -1,4 +1,4 @@
-﻿@model BookStore.Models.EntityModels.Promotion
+﻿@model BookStore.Models.ViewModels.Promotion.EditPromotionViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -35,7 +35,12 @@
         <div class="form-group">
             @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="input-group date">
+                    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control datetimepicker" } })
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
                 @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -43,7 +48,12 @@
         <div class="form-group">
             @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="input-group date">
+                    @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control datetimepicker" } })
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
                 @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -65,5 +75,15 @@
 }
 
 <div>
-    @Html.ActionLink("Back to All Promotions", "AllPromotions")
+    <p>@Html.ActionLink("Back to All Promotions", "AllPromotions")</p>
+    <p>@Html.ActionLink("Details", "Details", "Promotions", new { area = "Admin", id = Model.Id }, null)</p>
+    <p>@Html.ActionLink("Delete", "Delete", "Promotions", new { area = "Admin", id = Model.Id }, null)</p>
 </div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('.datetimepicker').datetimepicker({ format: 'YYYY-MM-DD HH:mm:ss' });
+        });
+    </script>
+}

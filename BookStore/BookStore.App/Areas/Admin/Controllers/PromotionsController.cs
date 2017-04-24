@@ -1,21 +1,17 @@
-﻿using System.Data.Entity;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Web.Mvc;
-using BookStore.Data;
 using BookStore.Models.EntityModels;
 using BookStore.App.Attributes;
 using BookStore.Services;
 using System.Collections.Generic;
 using BookStore.Models.ViewModels.Promotion;
-using System;
+using BookStore.Models.BindingModels.Promotion;
 
 namespace BookStore.App.Areas.Admin.Controllers
 {
     [CustomAttributeAuth(Roles = "Admin")]
     public class PromotionsController : Controller
     {
-        private BookStoreContext db = new BookStoreContext();
         private PromotionService promotionService;
 
         public PromotionsController()
@@ -134,20 +130,24 @@ namespace BookStore.App.Areas.Admin.Controllers
         }
 
         // POST: Admin/Promotions/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddPromotion([Bind(Include = "Id,Name,Text,StartDate,EndDate,Discount")] Promotion promotion)
+        public ActionResult AddPromotion([Bind(Include = "Id,Name,Text,StartDate,EndDate,Discount")] AddPromotionBindingModel bindingModel)
         {
-            if (ModelState.IsValid)
+            if (bindingModel.Discount < 1 || bindingModel.Discount > 100 )
             {
-                db.Promotions.Add(promotion);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return this.View(bindingModel);
             }
 
-            return View(promotion);
+            if (ModelState.IsValid)
+            {
+                this.promotionService.AddPromotion(bindingModel);
+                var newPromotion = this.promotionService.GetPromotionByName(bindingModel.Name);
+
+                return RedirectToAction("Details", "Promotions", new { id = newPromotion.Id});
+            }
+
+            return View(bindingModel);
         }
 
         // GET: Admin/Promotions/Edit/5
@@ -155,30 +155,32 @@ namespace BookStore.App.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("AllPromotions", "Promotions");
             }
-            Promotion promotion = db.Promotions.Find(id);
-            if (promotion == null)
+
+            EditPromotionViewModel viewModel = this.promotionService.GetPromotionById(id);
+            if (viewModel == null)
             {
-                return HttpNotFound();
+                this.TempData["Info"] = "No such promotion";
+                return RedirectToAction("AllPromotions", "Promotions");
             }
-            return View(promotion);
+
+            return View(viewModel);
         }
 
         // POST: Admin/Promotions/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Text,StartDate,EndDate,Discount")] Promotion promotion)
+        public ActionResult Edit([Bind(Include = "Id,Name,Text,StartDate,EndDate,Discount")] EditPromotionBindingModel bindingModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(promotion).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                this.promotionService.EditPromotion(bindingModel);
+                return RedirectToAction("Details", "Promotions", new { id = bindingModel.Id});
             }
-            return View(promotion);
+
+            EditPromotionViewModel viewModel = this.promotionService.GetPromotionById(bindingModel.Id);
+            return View(viewModel);
         }
 
         // GET: Admin/Promotions/Delete/5
@@ -188,11 +190,13 @@ namespace BookStore.App.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Promotion promotion = db.Promotions.Find(id);
+          
+            Promotion promotion = this.promotionService.GetCurrentPromotion(id);
             if (promotion == null)
             {
                 return HttpNotFound();
             }
+
             return View(promotion);
         }
 
@@ -201,19 +205,11 @@ namespace BookStore.App.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Promotion promotion = db.Promotions.Find(id);
-            db.Promotions.Remove(promotion);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+            string promotionName = this.promotionService.GetPromotionName(id);
+            this.promotionService.DeletePromotion(id);
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            this.TempData["Success"] = $"Promotion '{promotionName}' was removed successfully.";
+            return RedirectToAction("Allpromotions", "Promotions");
         }
     }
 }

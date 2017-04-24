@@ -5,6 +5,9 @@ using System.Web.Mvc;
 using BookStore.Data;
 using BookStore.Models.EntityModels;
 using BookStore.App.Attributes;
+using BookStore.Services;
+using BookStore.Models.ViewModels.Book;
+using System.Collections.Generic;
 
 namespace BookStore.App.Areas.Admin.Controllers
 {
@@ -12,11 +15,27 @@ namespace BookStore.App.Areas.Admin.Controllers
     public class BooksController : Controller
     {
         private BookStoreContext db = new BookStoreContext();
+        private BookService bookService;
+
+        public BooksController()
+        {
+            this.bookService = new BookService();
+        }
 
         // GET: Admin/Books
-        public ActionResult AllBooks()
+        public ActionResult AllBooks(int page = 1, int count = 6)
         {
-            return View(db.Books.ToList());
+            IEnumerable<AllBooksViewModel> viewModel = this.bookService.GetAll(page, count);
+            int booksCount = this.bookService.GetAllBooksCount();
+            if (booksCount == 0)
+            {
+                this.TempData["Info"] = "No books";
+            }
+
+            this.ViewBag.TotalPages = (booksCount + count - 1) / count;
+            this.ViewBag.CurrentPage = page;
+
+            return View(viewModel);
         }
 
         // GET: Admin/Books/Details/5

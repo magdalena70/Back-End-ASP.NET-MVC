@@ -12,9 +12,7 @@
     <div class="col-md-10 col-md-offset-1">
         <h3 class="text-danger">
             Are you sure you want to delete
-            <span>&quot;</span>
-            @Html.DisplayFor(model => model.FullName)
-            <span>&quot;</span>
+            <span>&quot;</span>@Html.DisplayFor(model => model.FullName)<span>&quot;</span>
         </h3>
         <hr />
         @using (Html.BeginForm())
