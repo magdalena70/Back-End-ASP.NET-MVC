@@ -1,20 +1,17 @@
-﻿using System.Data.Entity;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Web.Mvc;
-using BookStore.Data;
 using BookStore.Models.EntityModels;
 using BookStore.App.Attributes;
 using BookStore.Services;
 using BookStore.Models.ViewModels.Book;
 using System.Collections.Generic;
+using BookStore.Models.BindingModels.Book;
 
 namespace BookStore.App.Areas.Admin.Controllers
 {
     [CustomAttributeAuth(Roles = "Admin")]
     public class BooksController : Controller
     {
-        private BookStoreContext db = new BookStoreContext();
         private BookService bookService;
 
         public BooksController()
@@ -23,7 +20,7 @@ namespace BookStore.App.Areas.Admin.Controllers
         }
 
         // GET: Admin/Books
-        public ActionResult AllBooks(int page = 1, int count = 6)
+        public ActionResult AllBooks(int page = 1, int count = 3)
         {
             IEnumerable<AllBooksViewModel> viewModel = this.bookService.GetAll(page, count);
             int booksCount = this.bookService.GetAllBooksCount();
@@ -43,37 +40,40 @@ namespace BookStore.App.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("AllBooks", "Books");
             }
-            Book book = db.Books.Find(id);
-            if (book == null)
+
+            BookDetailsViewModel viewModel = this.bookService.GetDetails(id);
+            if (viewModel == null)
             {
-                return HttpNotFound();
+                this.TempData["Info"] = $"No book with id {id}";
+                return RedirectToAction("AllBooks", "Books");
             }
-            return View(book);
+
+            return View(viewModel);
         }
 
-        // GET: Admin/Books/Create
+        // GET: Admin/Books/AddBook
         public ActionResult AddBook()
         {
             return View();
         }
 
-        // POST: Admin/Books/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Admin/Books/AddBook
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddBook([Bind(Include = "Id,Title,ImageUrl,Language,Description,Price,Quantity,NumberOfPages,IssueDate,ISBN,UpRating,DownRating")] Book book)
+        public ActionResult AddBook([Bind(Include = "Id,Title,ImageUrl,Language,Description,Price,Quantity,NumberOfPages,IssueDate,ISBN")] AddBookBindingModel bindingModel)
         {
             if (ModelState.IsValid)
             {
-                db.Books.Add(book);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                this.bookService.AddBook(bindingModel);
+                Book newBook = this.bookService.GetNewBooks(bindingModel.Title, bindingModel.ISBN);
+
+                this.TempData["Success"] = $"Book {bindingModel.Title} was added successfully.";
+                return RedirectToAction("Details", "Books", new { id = newBook.Id});
             }
 
-            return View(book);
+            return View(bindingModel);
         }
 
         // GET: Admin/Books/Edit/5
@@ -81,30 +81,31 @@ namespace BookStore.App.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("AllBooks", "Books");
             }
-            Book book = db.Books.Find(id);
-            if (book == null)
+
+            EditBookViewModel viewModel = this.bookService.GetEditBookViewModel(id);
+            if (viewModel == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("AllBooks", "Books");
             }
-            return View(book);
+
+            return View(viewModel);
         }
 
         // POST: Admin/Books/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,ImageUrl,Language,Description,Price,Quantity,NumberOfPages,IssueDate,ISBN,UpRating,DownRating")] Book book)
+        public ActionResult Edit([Bind(Include = "Id,Title,ImageUrl,Language,Description,Price,Quantity,NumberOfPages,IssueDate,ISBN")] EditBookBindingModel bindingModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(book).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                this.bookService.GetEditBook(bindingModel);
+                
+                return RedirectToAction("Details", "Books", new { id = bindingModel.Id});
             }
-            return View(book);
+
+            return View(bindingModel);
         }
 
         // GET: Admin/Books/Delete/5
@@ -114,12 +115,14 @@ namespace BookStore.App.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Book book = db.Books.Find(id);
-            if (book == null)
+
+            DeleteBookViewModel viewModel = this.bookService.GetDeliteBookViewModel(id);
+            if (viewModel == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("AllBooks", "Books");
             }
-            return View(book);
+
+            return View(viewModel);
         }
 
         // POST: Admin/Books/Delete/5
@@ -127,19 +130,12 @@ namespace BookStore.App.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Book book = db.Books.Find(id);
-            db.Books.Remove(book);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+            Book book = this.bookService.GetCurrentBook(id);
+            string bookTitle = book.Title;
+            this.bookService.DeleteBook(book);
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            this.TempData["Success"] = $"Book {bookTitle} was removed successfully.";
+            return RedirectToAction("AllBooks", "Books");
         }
     }
 }

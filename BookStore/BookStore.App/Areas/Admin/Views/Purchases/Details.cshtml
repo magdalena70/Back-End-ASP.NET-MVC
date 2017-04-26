@@ -1,4 +1,4 @@
-﻿@model BookStore.Models.EntityModels.Purchase
+﻿@model BookStore.Models.ViewModels.Purchase.PurchaseDetailsViewModel
 
 @{
     ViewBag.Title = "Purchase Details";
@@ -10,69 +10,132 @@
     </div>
 </div>
 
-<div>
-    <h4>Purchase</h4>
+<div class="row">
+    <h3 class="text-center text-danger">Purchase</h3>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TotalPrice)
-        </dt>
+    <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-6">
+            <p>
+                @Html.DisplayNameFor(model => model.TotalPrice) -
+                @Html.DisplayFor(model => model.TotalPrice)
+            </p>
+        </div>
+        <div class="col-md-6">
+            <p>
+                @Html.DisplayNameFor(model => model.Discount) -
+                @Html.DisplayFor(model => model.Discount)
+            </p>
+        </div>
+        <div class="col-md-6">
+            <p>
+                @Html.DisplayNameFor(model => model.CompletedOndate) -
+                @Html.DisplayFor(model => model.CompletedOndate)
+            </p>
+        </div>
+        <div class="col-md-6">
+            <p>
+                @Html.DisplayNameFor(model => model.IsCompleted) -
+                @Html.DisplayFor(model => model.IsCompleted)
+            </p>
+        </div>
+        <div class="col-md-4">
+            <p>
+                @Html.DisplayNameFor(model => model.DeliveryAddress) -
+                @Html.DisplayFor(model => model.DeliveryAddress)
+            </p>
+        </div>
+        <div class="col-md-4">
+            <p>
+                @Html.DisplayNameFor(model => model.DeliveryDate) -
+                @Html.DisplayFor(model => model.DeliveryDate)
+            </p>
+        </div>
+        <div class="col-md-4">
+            <p>
+                @Html.DisplayNameFor(model => model.DeliveryPrice) -
+                @Html.DisplayFor(model => model.DeliveryPrice)
+            </p>
+        </div>
+        <div class="col-md-10 col-md-offset-1">
+            <h4>User:</h4>
+            <hr />
+            <p>
+                @Html.DisplayNameFor(model => model.User.UserName) -
+                @Html.DisplayFor(model => model.User.UserName)
+            </p>
+            <p class="text-capitalize">
+                @Html.DisplayNameFor(model => model.User.FullName) -
+                @Html.DisplayFor(model => model.User.FullName)
+            </p>
+            <p>
+                @Html.DisplayNameFor(model => model.User.PhoneNumber) -
+                @Html.DisplayFor(model => model.User.PhoneNumber)
+            </p>
+            <p>
+                @Html.DisplayNameFor(model => model.User.Email) -
+                @Html.DisplayFor(model => model.User.Email)
+            </p>
+            <p>
+                @Html.DisplayNameFor(model => model.User.PurchasesCount) -
+                @Html.DisplayFor(model => model.User.PurchasesCount)
+            </p>
+            <p>
+                @Html.DisplayNameFor(model => model.User.MoneySpentBalance) -
+                @Html.DisplayFor(model => model.User.MoneySpentBalance)
+            </p>
+        </div>
+        <div class="col-md-10 col-md-offset-1">
+            <h4>Books:</h4>
+            <p>
+                Books @Html.DisplayNameFor(model => model.BooksCount):
+                @Html.DisplayFor(model => model.BooksCount)
+            </p>
+            <hr />
+            @foreach (var book in Model.Books)
+            {
+                <div class="row">
+                    <div class="col-md-4">
+                        <p>@Html.DisplayNameFor(model => book.Book.Title) -</p>
+                        @Html.ActionLink(book.Book.Title, "Details", "Books", new { area = "Admin", id = book.BookId }, null)
+                    </div>
+                    <div class="col-md-4">
+                        <p>@Html.DisplayNameFor(model => book.Book.Authors) -</p>
+                        @foreach (var author in book.Book.Authors)
+                        {
+                            <p>
+                                @Html.ActionLink(author.FullName, "Details", "Authors", new { area = "Admin", id = author.Id }, null)
+                            </p>
+                        }
 
-        <dd>
-            @Html.DisplayFor(model => model.TotalPrice)
-        </dd>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="old-price">@Html.DisplayNameFor(model => book.Book.Price) -
+                        @Html.DisplayFor(model => book.Book.Price)</p>
+                        <p>
+                            @Html.DisplayNameFor(model => book.PromotionDiscount) -
+                            @Html.DisplayFor(model => book.PromotionDiscount)
+                        </p>
+                        <p>
+                            @Html.DisplayNameFor(model => book.NewPrice) -
+                            @Html.DisplayFor(model => book.NewPrice)
+                        </p>
+                        <p>
+                            @Html.DisplayNameFor(model => book.Count) -
+                            @Html.DisplayFor(model => book.Count)
+                        </p>
+                    </div>
+                </div>
+                <hr />
+            }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Discount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Discount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CompletedOndate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CompletedOndate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsCompleted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsCompleted)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DeliveryAddress)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DeliveryAddress)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DeliveryDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DeliveryDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DeliveryPrice)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DeliveryPrice)
-        </dd>
-
-    </dl>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+            @Html.ActionLink("Back to All Purchases", "AllPurchases")
+        </p>
+    </div>
+</div>

@@ -131,13 +131,13 @@ namespace BookStore.App.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Category category = this.categoryService.GetCurrentCategory(id);
-            if (category == null)
+            DeleteCategoryViewModel viewModel = this.categoryService.GetDeleteCategoryViewModel(id);
+            if (viewModel == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("AllCategories", "Categories");
             }
 
-            return View(category);
+            return View(viewModel);
         }
 
         // POST: Admin/Categories/Delete/5

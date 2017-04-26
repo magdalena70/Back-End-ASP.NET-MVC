@@ -20,6 +20,7 @@ namespace BookStore.Models.ViewModels.Book
         [DisplayFormat(DataFormatString = "{0:0.00} BGN", ApplyFormatInEditMode = true)]
         public decimal Price { get; set; }
 
+        [Display(Name = "In Stock")]
         public int Quantity { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]

@@ -7,7 +7,6 @@ using System.Data.Entity;
 using BookStore.Models.ViewModels.Category;
 using BookStore.Models.BindingModels.Category;
 using BookStore.Models.ViewModels.Book;
-using System;
 using System.Web;
 
 namespace BookStore.Models
@@ -31,7 +30,8 @@ namespace BookStore.Models
                 .Where(c => c.Name.Contains(categoryName))
                 .ToList();
 
-            IEnumerable<AllCategoriesViewModel> viewModel = Mapper.Map<IEnumerable<Category>, IEnumerable<AllCategoriesViewModel>>(categories);
+            IEnumerable<AllCategoriesViewModel> viewModel = 
+                Mapper.Map<IEnumerable<Category>, IEnumerable<AllCategoriesViewModel>>(categories);
             return viewModel;
         }
 
@@ -50,7 +50,8 @@ namespace BookStore.Models
                     .ToList();
 
             CategoryViewModel viewModel = Mapper.Map<Category, CategoryViewModel>(category);
-            ICollection<BooksViewModel> booksViewModel = Mapper.Map<ICollection<Book>, ICollection<BooksViewModel>>(categoryBooks);
+            ICollection<BooksViewModel> booksViewModel = 
+                Mapper.Map<ICollection<Book>, ICollection<BooksViewModel>>(categoryBooks);
             viewModel.Books = booksViewModel;
 
             return viewModel;
@@ -67,7 +68,8 @@ namespace BookStore.Models
             var categoryBooks = category.Books.ToList();
 
             CategoryViewModel viewModel = Mapper.Map<Category, CategoryViewModel>(category);
-            ICollection<BooksViewModel> booksViewModel = Mapper.Map<ICollection<Book>, ICollection<BooksViewModel>>(categoryBooks);
+            ICollection<BooksViewModel> booksViewModel = 
+                Mapper.Map<ICollection<Book>, ICollection<BooksViewModel>>(categoryBooks);
             viewModel.Books = booksViewModel;
 
             return viewModel;
@@ -99,7 +101,8 @@ namespace BookStore.Models
             var categoryBooks = category.Books.ToList();
 
             CategoryViewModel viewModel = Mapper.Map<Category, CategoryViewModel>(category);
-            ICollection<BooksViewModel> booksViewModel = Mapper.Map<ICollection<Book>, ICollection<BooksViewModel>>(categoryBooks);
+            ICollection<BooksViewModel> booksViewModel = 
+                Mapper.Map<ICollection<Book>, ICollection<BooksViewModel>>(categoryBooks);
             viewModel.Books = booksViewModel;
 
             return viewModel;
@@ -120,8 +123,22 @@ namespace BookStore.Models
             var categoryBooks = category.Books.ToList();
 
             CategoryViewModel viewModel = Mapper.Map<Category, CategoryViewModel>(category);
-            ICollection<BooksViewModel> booksViewModel = Mapper.Map<ICollection<Book>, ICollection<BooksViewModel>>(categoryBooks);
+            ICollection<BooksViewModel> booksViewModel = 
+                Mapper.Map<ICollection<Book>, ICollection<BooksViewModel>>(categoryBooks);
             viewModel.Books = booksViewModel;
+
+            return viewModel;
+        }
+
+        public DeleteCategoryViewModel GetDeleteCategoryViewModel(int? id)
+        {
+            Category currentCategory = this.Context.Categories.Find(id);
+            DeleteCategoryViewModel viewModel = 
+                Mapper.Map<Category, DeleteCategoryViewModel>(currentCategory);
+            if (viewModel == null)
+            {
+                return null;
+            }
 
             return viewModel;
         }

@@ -27,7 +27,7 @@ namespace BookStore.Services
                 .Include("Authors")
                 .Where(b => b.IssueDate.Year == ((DateTime.Now.Year)-1))
                 .OrderByDescending(b => b.Ratings.Sum(r => r.Value))
-                .ThenBy(b => b.Purchases.Count)
+                .ThenBy(b => b.Baskets.Count)
                 .ThenByDescending(p => p.Price)
                 .Take(3)
                 .ToList();
@@ -35,7 +35,7 @@ namespace BookStore.Services
                 .Include("Authors")
                 .Where(b => b.IssueDate.Year == (DateTime.Now.Year))
                 .OrderByDescending(b => b.Ratings.Sum(r => r.Value))
-                .ThenBy(b => b.Purchases.Count)
+                .ThenBy(b => b.Baskets.Count)
                 .ThenByDescending(p => p.Price)
                 .Take(3)
                 .ToList();

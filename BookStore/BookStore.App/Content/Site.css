@@ -10,6 +10,7 @@ body {
     font-size: 17px;
     color: #E3DDDF;
     font-style: italic;
+     word-wrap: break-word; 
 }
 
 hr {
@@ -97,8 +98,8 @@ a {
 
 .admin{
     background-color: black;
-    margin-top: 80px;
-    margin-bottom: 5%;
+    margin-top: 20px;
+    margin-bottom: 2%;
 }
 
 .admin-body-content{

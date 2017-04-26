@@ -14,6 +14,7 @@ namespace BookStore.Models.EntityModels
             this.Baskets = new HashSet<BasketBook>();
             this.Fans = new HashSet<User>();
             this.Purchases = new HashSet<Purchase>();
+
         }
 
         [Key]
@@ -44,9 +45,9 @@ namespace BookStore.Models.EntityModels
 
         public string ISBN { get; set; }
 
-        public virtual ICollection<Purchase> Purchases { get; set; }
-
         public virtual ICollection<Category> Categories { get; set; }
+
+        public virtual ICollection<Purchase> Purchases { get; set; }
 
         public virtual ICollection<Author> Authors { get; set; }
 

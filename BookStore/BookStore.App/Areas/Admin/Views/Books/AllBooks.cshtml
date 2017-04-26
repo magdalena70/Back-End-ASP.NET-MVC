@@ -11,7 +11,7 @@
 </div>
 <hr />
 <div class="row">
-    <div class="col-lg-10 col-md-offset-1">
+    <div class="col-md-6 col-md-offset-1">
         <ul class="pagination">
             @for (int page = 1; page <= ViewBag.Totalpages; page++)
             {
@@ -22,34 +22,39 @@
                 }
 
                 <li class="@htmlClass">
-                    @Html.ActionLink(page.ToString(), "AllBooks", "Books", new { page = page, count = 6 }, null)
-            </li>
+                    @Html.ActionLink(page.ToString(), "AllBooks", "Books", new { page = page, count = 3 }, new { @class = "btn btn-default"})
+                </li>
             }
         </ul>
+    </div>
+    <div class="col-md-4 col-md-offset-1">
+        @Html.ActionLink("Add Book", "AddBook", "Books")
     </div>
 </div>
 <hr>
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
-       @foreach (var book in Model)
-       {
-        <div class="col-md-4">
-            <p><strong>Title -</strong></p>
-            <p>@Html.DisplayFor(b => book.Title)</p>
-        </div>
-        <div class="col-md-3">
-            <p><strong>Authors -</strong></p>
-            <p>@Html.DisplayFor(b => book.Authors)</p>
-        </div>
-        <div class="col-md-3">
-            <p><strong>ISBN -</strong></p>
-            @Html.DisplayFor(b => book.ISBN)
-        </div>
-        <div class="col-md-2">
-            <p>@Html.ActionLink("Edit", "Edit", new { id = book.Id })</p>
-           <p>@Html.ActionLink("Details", "Details", new { id = book.Id })</p>
-            <p>@Html.ActionLink("Delete", "Delete", new { id = book.Id })</p>
-        </div>
-       }
+        @foreach (var book in Model)
+        {
+            <div class="row book-div">
+                <div class="col-md-4">
+                    <p><strong>Title -</strong></p>
+                    <p>@Html.DisplayFor(b => book.Title)</p>
+                </div>
+                <div class="col-md-3">
+                    <p><strong>Authors -</strong></p>
+                    <p>@Html.DisplayFor(b => book.Authors)</p>
+                </div>
+                <div class="col-md-3">
+                    <p><strong>ISBN -</strong></p>
+                    @Html.DisplayFor(b => book.ISBN)
+                </div>
+                <div class="col-md-2">
+                    <p>@Html.ActionLink("Edit", "Edit", new { id = book.Id })</p>
+                    <p>@Html.ActionLink("Details", "Details", new { id = book.Id })</p>
+                    <p>@Html.ActionLink("Delete", "Delete", new { id = book.Id })</p>
+                </div>
+            </div>
+        }
     </div>
 </div>

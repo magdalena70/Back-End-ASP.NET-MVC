@@ -1,7 +1,6 @@
 ﻿using BookStore.Models.ViewModels.Book;
 using BookStore.Models.ViewModels.Promotion;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace BookStore.Models.ViewModels.Category
 {

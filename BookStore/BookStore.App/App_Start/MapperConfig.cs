@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using BookStore.Models.BindingModels.Author;
+using BookStore.Models.BindingModels.Book;
 using BookStore.Models.BindingModels.Category;
 using BookStore.Models.BindingModels.Promotion;
+using BookStore.Models.BindingModels.Purchase;
 using BookStore.Models.EntityModels;
 using BookStore.Models.ViewModels.Author;
 using BookStore.Models.ViewModels.Basket;
@@ -9,8 +11,10 @@ using BookStore.Models.ViewModels.Book;
 using BookStore.Models.ViewModels.Category;
 using BookStore.Models.ViewModels.Home;
 using BookStore.Models.ViewModels.Promotion;
+using BookStore.Models.ViewModels.Purchase;
 using BookStore.Models.ViewModels.User;
 using System;
+using System.Linq;
 
 namespace BookStore.App.App_Start
 {
@@ -29,18 +33,27 @@ namespace BookStore.App.App_Start
                 ex.CreateMap<Book, BookDetailsViewModel>();
                 ex.CreateMap<Book, BooksViewModel>();
                 ex.CreateMap<Book, AllBooksViewModel>();
+                ex.CreateMap<Book, AddBookViewModel>();
+                ex.CreateMap<AddBookBindingModel, Book>();
+                ex.CreateMap<Book, EditBookViewModel>();
+                ex.CreateMap<EditBookBindingModel, Book>();
+                ex.CreateMap<Book, DeleteBookViewModel>();
 
                 ex.CreateMap<Category, AllCategoriesViewModel>();
                 ex.CreateMap<Category, CategoryViewModel>();
                 ex.CreateMap<AddCategoryBindingModel, Category>();
                 ex.CreateMap<Category, EditCategoryViewModel>();
                 ex.CreateMap<EditCategoryBindingModel, Category>();
+                ex.CreateMap<Category, DeleteCategoryViewModel>();
 
                 ex.CreateMap<User, UserFavoriteBooksViewModel>();
                 ex.CreateMap<User, EditUserProfileViewModel>();
                 ex.CreateMap<User, UserProfileViewModel>()
                     .ForMember(vm => vm.CountBooksInFavorite, options => options.MapFrom(u => u.FavoriteBooks.Count))
                     .ForMember(vm => vm.CountBooksInBasket, options => options.MapFrom(u => u.Basket.Books.Count));
+                ex.CreateMap<User, UserPurchaseViewModel>()
+                    .ForMember(vm => vm.PurchasesCount, options => options.MapFrom(u => u.Purchases.Count))
+                    .ForMember(vm => vm.FullName, options => options.MapFrom(u => u.FirstName + " " + u.LastName));
 
                 ex.CreateMap<BasketBook, CountBookInBasketViewModel>();
 
@@ -63,6 +76,11 @@ namespace BookStore.App.App_Start
                 ex.CreateMap<Book, HomeNewBookViewModel>();
                 ex.CreateMap<Author, HomeNewBookAuthorViewModel>();
                 ex.CreateMap<Promotion, HomePromotionViewModel>();
+
+                ex.CreateMap<Purchase, AllPurchasesViewModel>();
+                ex.CreateMap<Purchase, PurchaseDetailsViewModel>();
+                ex.CreateMap<Purchase, EditPurchaseViewModel>();
+                ex.CreateMap<EditPurchaseBindingModel, Purchase>();
 
             });
         }

@@ -22,6 +22,7 @@ namespace BookStore.Models.ViewModels.Promotion
         public DateTime EndDate { get; set; }
 
         [Required]
+        [DisplayFormat(DataFormatString = "{0:0.00}", ApplyFormatInEditMode = true)]
         public decimal Discount { get; set; }
     }
 }

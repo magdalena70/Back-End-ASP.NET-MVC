@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BookStore.Models.EntityModels.Purchase>
+﻿@model IEnumerable<BookStore.Models.ViewModels.Purchase.AllPurchasesViewModel>
 
 @{
     ViewBag.Title = "All Purchases";
@@ -9,65 +9,28 @@
         <h2>@ViewBag.Title</h2>
     </div>
 </div>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TotalPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Discount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CompletedOndate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsCompleted)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DeliveryAddress)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DeliveryDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DeliveryPrice)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Discount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CompletedOndate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsCompleted)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeliveryAddress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeliveryDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeliveryPrice)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>
+<hr />
+<div class="row">
+    @foreach (var purchase in Model)
+    {
+        <div class="col-md-10 col-md-offset-1 book-div">
+            <div class="col-md-3">
+                <p>@Html.DisplayNameFor(model => model.TotalPrice)</p>
+                <p>@Html.DisplayFor(modelItem => purchase.TotalPrice)</p>
+            </div>
+            <div class="col-md-3">
+                <p>@Html.DisplayNameFor(model => model.CompletedOndate)</p>
+                <p>@Html.DisplayFor(modelItem => purchase.CompletedOndate)</p>
+            </div>
+            <div class="col-md-3">
+                <p>@Html.DisplayNameFor(model => model.DeliveryDate)</p>
+                <p>@Html.DisplayFor(modelItem => purchase.DeliveryDate)</p>
+            </div>
+            <div class="col-md-3">
+                <p>@Html.ActionLink("Edit", "Edit", new { id = purchase.Id })</p>
+                <p>@Html.ActionLink("Details", "Details", new { id = purchase.Id })</p>
+                <p>@Html.ActionLink("Delete", "Delete", new { id = purchase.Id })</p>
+            </div>
+        </div>
+    }
+</div>

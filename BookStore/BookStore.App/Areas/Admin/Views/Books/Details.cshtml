@@ -1,4 +1,4 @@
-﻿@model BookStore.Models.EntityModels.Book
+﻿@model BookStore.Models.ViewModels.Book.BookDetailsViewModel
 
 @{
     ViewBag.Title = "Book Details";
@@ -10,104 +10,88 @@
     </div>
 </div>
 
-<div>
-    <div class="text-center">
-        <img src="@Model.ImageUrl.Replace("../", "../../")" alt="book-img" />
-        
-            @Html.DisplayFor(model => model.Authors)  
+<div class="row">
+    <div class="col-md-10 col-md-offset-1 text-center">
+            <h5 class="text-center text-capitalize">
+                @Html.DisplayNameFor(book => book.Title) -
+                @Html.DisplayFor(book => book.Title)
+            </h5>
+            <p class="text-center">
+                @Html.DisplayNameFor(model => model.Language) -
+                @Html.DisplayFor(model => model.Language)
+            </p>
+        <div class="img-box">
+            <img src="@Model.ImageUrl.Replace("../", "../../")" alt="book-img" class="img-thumbnail" />
+        </div>
+        @Html.DisplayNameFor(book => book.Authors) -
+        @Html.DisplayFor(book => book.Authors)
+        <p>@Html.DisplayNameFor(book => book.Categories) -
+        @Html.DisplayFor(book => book.Categories)</p>
+        <hr />
     </div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Language)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Language)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Quantity)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Quantity)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NumberOfPages)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NumberOfPages)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IssueDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IssueDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ISBN)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ISBN)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Ratings)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ratings)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Purchases)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Purchases.Count)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Reviews)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Reviews.Count)
-        </dd>
-    </dl>
+    <div class="col-md-10 col-md-offset-1 book-div">
+        <div class="col-md-12"><button type="button" class="btn btn-default" data-toggle="collapse" data-target="#description">
+            @Html.DisplayNameFor(book => book.Description) -
+        </button></div>
+        <div class="col-md-12 collapse" id="description">
+            <p>
+                @Html.DisplayFor(book => book.Description)
+            </p>
+        </div>
+        <div class="col-md-3">
+            <p>
+                @Html.DisplayNameFor(book => book.Price) -
+                @Html.DisplayFor(book => book.Price)
+            </p>
+        </div>
+        <div class="col-md-3">
+            <p>
+                @Html.DisplayNameFor(book => book.Quantity) -
+                @Html.DisplayFor(book => book.Quantity)
+            </p>
+        </div>
+        <div class="col-md-3">
+            <p>
+                @Html.DisplayNameFor(book => book.NumberOfPages) -
+                @Html.DisplayFor(book => book.NumberOfPages)
+            </p>
+        </div>
+        <div class="col-md-3">
+            <p>
+                @Html.DisplayNameFor(book => book.IssueDate) -
+                @Html.DisplayFor(book => book.IssueDate)
+            </p>
+        </div>
+        <div class="col-md-6">
+            <p>
+                @Html.DisplayNameFor(book => book.ISBN) -
+                @Html.DisplayFor(book => book.ISBN)
+            </p>
+        </div>
+        <div class="col-md-6">
+            <p>
+                @Html.DisplayNameFor(book => book.Ratings) -
+                @Html.DisplayFor(book => book.Ratings)
+            </p>
+        </div>
+        <div class="col-md-6">
+            <p>
+                @Html.DisplayNameFor(model => model.PurchasesCount) -
+                @Html.DisplayFor(model => model.PurchasesCount)
+            </p>
+        </div>
+        <div class="col-md-6">
+            <p>
+                @Html.DisplayNameFor(model => model.Reviews) -
+                @Html.DisplayFor(model => model.Reviews.Count)
+            </p>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to All Books", "AllBooks")
-</p>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <p>@Html.ActionLink("Edit", "Edit", new { id = Model.Id })</p>
+        <p>@Html.ActionLink("Delete", "Delete", new { id = Model.Id })</p>
+        <p>@Html.ActionLink("Back to All Books", "AllBooks")</p>
+    </div>
+</div>

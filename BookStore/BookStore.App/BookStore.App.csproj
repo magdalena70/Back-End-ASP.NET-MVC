@@ -296,7 +296,6 @@
     <Content Include="Areas\Admin\Views\Promotions\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Promotions\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Promotions\AllPromotions.cshtml" />
-    <Content Include="Areas\Admin\Views\Purchases\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Purchases\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Purchases\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Purchases\Edit.cshtml" />

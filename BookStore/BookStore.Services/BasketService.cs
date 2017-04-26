@@ -260,7 +260,7 @@ namespace BookStore.Services
         public void BuyBooks(User currUser)
         {
             Basket currBasket = currUser.Basket;
-            currUser.MoneySpentBalance = currBasket.TotalPrice;
+            currUser.MoneySpentBalance += currBasket.TotalPrice;
             Purchase currentPurchase = new Purchase()
             {
                 TotalPrice = currBasket.TotalPrice,
