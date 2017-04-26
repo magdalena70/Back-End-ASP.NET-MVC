@@ -1,9 +1,6 @@
-﻿using System.Data.Entity;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using BookStore.Data;
-using BookStore.Models.EntityModels;
 using BookStore.Services;
 using BookStore.Models.ViewModels.Purchase;
 using System.Collections.Generic;
@@ -13,7 +10,6 @@ namespace BookStore.App.Areas.Admin.Controllers
 {
     public class PurchasesController : Controller
     {
-        private BookStoreContext db = new BookStoreContext();
         private PurchaseService purchaseService;
 
         public PurchasesController()
@@ -89,12 +85,15 @@ namespace BookStore.App.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Purchase purchase = db.Purchases.Find(id);
-            if (purchase == null)
+
+            DeletePurchaseViewModel viewModel = this.purchaseService.GetDeletePurchaseViewModel(id);
+            if (viewModel == null)
             {
-                return HttpNotFound();
+                this.TempData["Error"] = "There is no such purchase.";
+                return RedirectToAction("AllPurchases", "Purchases");
             }
-            return View(purchase);
+
+            return View(viewModel);
         }
 
         // POST: Admin/Purchases/Delete/5
@@ -102,19 +101,9 @@ namespace BookStore.App.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Purchase purchase = db.Purchases.Find(id);
-            db.Purchases.Remove(purchase);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            this.purchaseService.DeletePurchase(id);
+            this.TempData["Success"] = "Purchase was removed successfully.";
+            return RedirectToAction("AllPurchases", "Purchases");
         }
     }
 }

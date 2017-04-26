@@ -9,6 +9,21 @@
         <h2>@ViewBag.Title</h2>
     </div>
 </div>
+<div class="row">
+    <div class="col-md-4 col-md-offset-0">
+        <p>
+            @Html.ActionLink("Back to All Purchases", "AllPurchases")
+        </p>
+        <hr />
+    </div>
+    <div class="col-md-4 col-md-offset-0">
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "" })
+        </p>
+        <hr />
+    </div>
+    @Html.Partial("_DeletePurchasePartial")
+</div>
 
 <div class="row">
     <h3 class="text-center text-danger">Purchase</h3>
@@ -129,13 +144,5 @@
             }
 
         </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-10 col-md-offset-1">
-        <p>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-            @Html.ActionLink("Back to All Purchases", "AllPurchases")
-        </p>
     </div>
 </div>

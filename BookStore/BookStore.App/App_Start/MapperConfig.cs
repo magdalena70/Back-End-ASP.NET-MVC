@@ -81,6 +81,7 @@ namespace BookStore.App.App_Start
                 ex.CreateMap<Purchase, PurchaseDetailsViewModel>();
                 ex.CreateMap<Purchase, EditPurchaseViewModel>();
                 ex.CreateMap<EditPurchaseBindingModel, Purchase>();
+                ex.CreateMap<Purchase, DeletePurchaseViewModel>();
 
             });
         }

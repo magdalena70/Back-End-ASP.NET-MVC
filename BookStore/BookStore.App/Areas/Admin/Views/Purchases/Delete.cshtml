@@ -1,80 +1,54 @@
-﻿@model BookStore.Models.EntityModels.Purchase
+﻿@model BookStore.Models.ViewModels.Purchase.DeletePurchaseViewModel
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Delete Purchase";
 }
 
-<h2>Delete</h2>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <h2>@ViewBag.Title</h2>
+    </div>
+</div>
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
     <h4>Purchase</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TotalPrice)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TotalPrice)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Discount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Discount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CompletedOndate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CompletedOndate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsCompleted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsCompleted)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DeliveryAddress)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DeliveryAddress)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DeliveryDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DeliveryDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DeliveryPrice)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DeliveryPrice)
-        </dd>
-
-    </dl>
+    <dliv class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <p>
+                @Html.DisplayNameFor(model => model.TotalPrice) -
+                @Html.DisplayFor(model => model.TotalPrice)
+            </p>
+            <p>
+                @Html.DisplayNameFor(model => model.CompletedOndate) -
+                @Html.DisplayFor(model => model.CompletedOndate)
+            </p>
+            <p>
+                @Html.DisplayNameFor(model => model.IsCompleted) -
+                @Html.DisplayFor(model => model.IsCompleted)
+            </p>
+            <p>
+                @Html.DisplayNameFor(model => model.DeliveryAddress) -
+                @Html.DisplayFor(model => model.DeliveryAddress)
+            </p>
+            <p>
+                @Html.DisplayNameFor(model => model.DeliveryDate) -
+                @Html.DisplayFor(model => model.DeliveryDate)
+            </p>
+            <p>
+                @Html.DisplayNameFor(model => model.DeliveryPrice) -
+                @Html.DisplayFor(model => model.DeliveryPrice)
+            </p>
+        </div>
+    </dliv>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Back to All Purchases", "AllPurchases")
         </div>
     }
 </div>

@@ -49,6 +49,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -57,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BindingModels\Admin\AssignRolesBindingModel.cs" />
     <Compile Include="BindingModels\Author\AddAuthorBindingModel.cs" />
     <Compile Include="BindingModels\Author\EditAuthorBindingModel.cs" />
     <Compile Include="BindingModels\Book\AddBookBindingModel.cs" />
@@ -100,6 +102,7 @@
     <Compile Include="ViewModels\Promotion\EditPromotionViewModel.cs" />
     <Compile Include="ViewModels\Promotion\PromotionViewModel.cs" />
     <Compile Include="ViewModels\Purchase\AllPurchasesViewModel.cs" />
+    <Compile Include="ViewModels\Purchase\DeletePurchaseViewModel.cs" />
     <Compile Include="ViewModels\Purchase\EditPurchaseViewModel.cs" />
     <Compile Include="ViewModels\Purchase\PurchaseDetailsViewModel.cs" />
     <Compile Include="ViewModels\User\EditUserProfileViewModel.cs" />
@@ -108,7 +111,7 @@
     <Compile Include="ViewModels\Home\HomePageViewModel.cs" />
     <Compile Include="ViewModels\Home\HomePromotionViewModel.cs" />
     <Compile Include="ViewModels\Promotion\PromotionsViewModel.cs" />
-    <Compile Include="ViewModels\Admin\RoleViewModel.cs" />
+    <Compile Include="ViewModels\Admin\AssignRolesViewModel.cs" />
     <Compile Include="ViewModels\User\UserFavoriteBooksViewModel.cs" />
     <Compile Include="ViewModels\User\UserProfileViewModel.cs" />
     <Compile Include="ViewModels\User\UserPurchaseViewModel.cs" />

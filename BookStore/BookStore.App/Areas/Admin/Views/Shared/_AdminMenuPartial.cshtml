@@ -69,6 +69,19 @@
 
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown">
+                    <p>Users</p>
+                    <b class="caret"></b>
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("All Users", "Index", "Users", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink("Add User", "Create", "Users", new { area = "Admin" }, null)</li>
+
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown">
                     <p>Settings</p>
                     <b class="caret"></b>
                 </a>

@@ -30,3 +30,5 @@ C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.Data\bin
 C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.Data\obj\Debug\BookStore.Data.csprojResolveAssemblyReference.cache
 C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.Data\obj\Debug\BookStore.Data.dll
 C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.Data\obj\Debug\BookStore.Data.pdb
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.Data\bin\Debug\System.Web.Mvc.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.Data\bin\Debug\System.Web.Mvc.xml

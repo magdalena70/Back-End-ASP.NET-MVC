@@ -19,7 +19,7 @@ namespace BookStore.Services
                 .OrderByDescending(p => p.CompletedOndate)
                 .ThenByDescending(p => p.DeliveryDate)
                 .ToList();
-            IEnumerable<AllPurchasesViewModel> viewModel = 
+            IEnumerable<AllPurchasesViewModel> viewModel =
                 Mapper.Map<IEnumerable<Purchase>, IEnumerable<AllPurchasesViewModel>>(purchases);
 
             return viewModel;
@@ -69,7 +69,6 @@ namespace BookStore.Services
 
         public void EditPurchase(EditPurchaseBindingModel bindingModel)
         {
-            //Purchase purchase = this.Context.Purchases.Find(bindingModel.Id);
             Purchase editedPurchase = Mapper.Map<EditPurchaseBindingModel, Purchase>(bindingModel);
             this.Context.Entry(editedPurchase).State = EntityState.Modified;
             this.Context.SaveChanges();
@@ -86,6 +85,18 @@ namespace BookStore.Services
             return count;
         }
 
+        public DeletePurchaseViewModel GetDeletePurchaseViewModel(int? id)
+        {
+            Purchase purchase = this.Context.Purchases.Find(id);
+            if (purchase == null)
+            {
+                return null;
+            }
+
+            DeletePurchaseViewModel viewModel = Mapper.Map<Purchase, DeletePurchaseViewModel>(purchase);
+            return viewModel;
+        }
+
         private void CheckForCurrentPromotion(CountBookInBasketViewModel countBook, DateTime completedOndate)
         {
             foreach (var category in countBook.Book.Categories)
@@ -98,6 +109,25 @@ namespace BookStore.Services
                     }
                 }
             }
+        }
+
+        public void DeletePurchase(int id)
+        {
+            Purchase purchase = this.Context.Purchases.Find(id);
+            User currPurchaseUser = purchase.User;
+            currPurchaseUser.MoneySpentBalance -= purchase.TotalPrice;
+       
+            foreach (var book in purchase.Books)
+            {
+                book.Book.Quantity++; // book quantity in stock
+            }
+            this.Context.SaveChanges();
+
+            this.Context.BasketsBooks.RemoveRange(purchase.Books);
+            this.Context.SaveChanges();
+
+            this.Context.Purchases.Remove(purchase);
+            this.Context.SaveChanges();
         }
 
         private decimal CheckNewPrice(decimal price, decimal promotionDiscount)

@@ -7,12 +7,6 @@ namespace BookStore.Models.ViewModels.Purchase
     {
         public int Id { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:0.00}", ApplyFormatInEditMode = true)]
-        public decimal TotalPrice { get; set; }
-
-        [DisplayFormat(DataFormatString = "{0:0.00}", ApplyFormatInEditMode = true)]
-        public decimal Discount { get; set; }
-
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd hh:mm:ss}", ApplyFormatInEditMode = true)]
         public DateTime CompletedOndate { get; set; }
 

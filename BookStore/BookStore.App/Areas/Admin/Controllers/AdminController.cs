@@ -1,11 +1,7 @@
 ﻿using BookStore.App.Attributes;
-using BookStore.Data;
-using BookStore.Models.EntityModels;
-using BookStore.Models.ViewModels;
+using BookStore.Models.BindingModels.Admin;
 using BookStore.Models.ViewModels.Admin;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using System.Linq;
+using BookStore.Services;
 using System.Web.Mvc;
 
 namespace BookStore.App.Areas.Admin.Controllers
@@ -13,52 +9,35 @@ namespace BookStore.App.Areas.Admin.Controllers
     [CustomAttributeAuth(Roles = "Admin")]
     public class AdminController : Controller
     {
-        private BookStoreContext context;
+        private AdminService adminService;
 
         public AdminController()
         {
-            this.context = new BookStoreContext();
+            this.adminService = new AdminService();
         }
 
-        // GET: Admin/Roles
+        // GET: Admin/AssignRoles
+        [HttpGet]
         public ActionResult AssignRoles()
         {
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(this.context));
-            var roles = this.context.Roles
-                .Select(r => new SelectListItem()
-                {
-                    Value = r.Name,
-                    Text = r.Name
-                })
-                .ToList();
-            var users = this.context.Users
-                .Select(u => new SelectListItem()
-                {
-                    Value = u.Id,
-                    Text = u.UserName
-                })
-                .ToList();
-
-            ViewBag.Roles = roles;
-            ViewBag.Users = users;
-
-            //RoleViewModel viewModel = new RoleViewModel()
-            //{
-            //    Roles = Role,
-            //    Users = users
-            //};
-
-            return View();
+            AssignRolesViewModel viewModel = this.adminService.GetAssignRolesViewModel();
+            return View(viewModel);
         }
 
+        // POST: Admin/AssignRoles
         [HttpPost]
-        public ActionResult AssignRoles(RoleViewModel viewModel)
+        [ValidateAntiForgeryToken]
+        public ActionResult AssignRoles(AssignRolesBindingModel bindingModel)
         {
-            var userManager = new UserManager<User>(new UserStore<User>(this.context));
-            var user = userManager.FindById(viewModel.Users);
-            userManager.AddToRole(viewModel.Users, viewModel.Roles);
+            if (ModelState.IsValid)
+            {
+                this.adminService.AssignRoles(bindingModel);
+                this.TempData["Success"] = "Success";
+                return RedirectToAction("AllCategories", "Categories");
+                
+            }
 
-            return RedirectToAction("AssignRoles", "Admin");
+            return View(bindingModel);
         }
     }
 }

@@ -18,3 +18,5 @@ C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.Services
 C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.Services\obj\Debug\BookStore.Services.pdb
 C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.Services\bin\Debug\AutoMapper.dll
 C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.Services\bin\Debug\AutoMapper.xml
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.Services\bin\Debug\System.Web.Mvc.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.Services\bin\Debug\System.Web.Mvc.xml

@@ -166,32 +166,32 @@ namespace BookStore.Services
             var discount = 0m;
             if (price > 50)
             {
-                discount = 5.0m;
+                discount = 2.0m;
             }
 
             if (price > 100)
             {
-                discount = 10.0m;
+                discount = 5.0m;
             }
 
             if (price > 200)
             {
-                discount = 15.0m;
+                discount = 8.0m;
             }
 
             if (moneySpentBalance > 50)
             {
-                discount += 2.0m;
+                discount += 1.0m;
             }
 
             if (moneySpentBalance > 150)
             {
-                discount += 6.0m;
+                discount += 3.0m;
             }
 
             if (moneySpentBalance > 300)
             {
-                discount += 10.0m;
+                discount += 5.0m;
             }
 
             return discount;

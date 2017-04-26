@@ -1,6 +1,6 @@
-﻿namespace BookStore.Models.ViewModels.Admin
+﻿namespace BookStore.Models.BindingModels.Admin
 {
-    public class RoleViewModel
+    public class AssignRolesBindingModel
     {
         public string Users { get; set; }
 
