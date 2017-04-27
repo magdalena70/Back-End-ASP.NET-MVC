@@ -1,146 +1,100 @@
-﻿@model BookStore.Models.EntityModels.User
+﻿@model BookStore.Models.ViewModels.User.UserDetailsViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "User Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>User</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Basket.Id)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Basket.Id)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MoneySpentBalance)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MoneySpentBalance)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EmailConfirmed)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EmailConfirmed)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PasswordHash)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PasswordHash)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SecurityStamp)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SecurityStamp)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumberConfirmed)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TwoFactorEnabled)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TwoFactorEnabled)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LockoutEndDateUtc)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LockoutEndDateUtc)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LockoutEnabled)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LockoutEnabled)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AccessFailedCount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AccessFailedCount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
-
-    </dl>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <h3>@ViewBag.Title</h3>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        @using (Html.BeginForm("Delete", "Users", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.UserName)
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" />
+            </div>
+        }
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <p>
+            @Html.DisplayNameFor(model => model.MoneySpentBalance) -
+            @Html.DisplayFor(model => model.MoneySpentBalance) BGN
+        </p>
+        @Html.Partial("_EditUserMoneySpentBalansPartial")
+    </div>
+    <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-6">
+            <hr />
+            <p>
+                @Html.DisplayNameFor(model => model.UserName) -
+                @Html.DisplayFor(model => model.UserName)
+            </p>
+            <p>
+                @Html.DisplayNameFor(model => model.FirstName) -
+                @Html.DisplayFor(model => model.FirstName)
+            </p>
+            <p>
+                @Html.DisplayNameFor(model => model.LastName) -
+                @Html.DisplayFor(model => model.LastName)
+            </p>
+            <p>
+                @Html.DisplayNameFor(model => model.Address) -
+                @Html.DisplayFor(model => model.Address)
+            </p>
+            <p>
+                @Html.DisplayNameFor(model => model.Email) -
+                @Html.DisplayFor(model => model.Email)
+            </p>
+            <p>
+                @Html.DisplayNameFor(model => model.PhoneNumber) -
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </p>
+            <h5>Basket:</h5>
+            <p>
+                @Html.DisplayNameFor(model => model.Basket.Discount) -
+                @Html.DisplayFor(model => model.Basket.Discount)
+            </p>
+            <p>
+                @Html.DisplayNameFor(model => model.Basket.TotalPrice) -
+                @Html.DisplayFor(model => model.Basket.TotalPrice)
+            </p>
+        </div>
+        <div class="col-md-6">
+            <h5>Purchases: @Html.DisplayFor(model => model.Purchases.Count)</h5>
+            <hr />
+            @foreach (var purchase in Model.Purchases)
+            {
+                <p>TotalPrice - @Html.DisplayFor(p => purchase.TotalPrice)</p>
+                <p>CompletedOndate - @Html.DisplayFor(p => purchase.CompletedOndate)</p>
+                <p>DeliveryDate - @Html.DisplayFor(p => purchase.DeliveryDate)</p>
+                <p>@Html.ActionLink("Details", "Details", "Purchases", new { area = "Admin", id = purchase.Id }, null)</p>
+                <hr />
+            }
+            <h5>Favorite Books: @Html.DisplayFor(model => model.FavoriteBooks.Count)</h5>
+            @foreach (var book in Model.FavoriteBooks)
+            {
+                <p>
+                    @Html.ActionLink(book.Title, "Details", "Books", new { area = "Admin", id = book.Id }, null)
+                </p>
+                <hr />
+            }
+        </div>
+    </div>
+</div>
+
+<div class="col-md-10 col-md-offset-1">
+    <hr />
+    <p>
+        @Html.ActionLink("Back to All Users", "AllUsers")
+    </p>
+</div>

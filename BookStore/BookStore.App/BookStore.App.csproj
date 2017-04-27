@@ -390,11 +390,9 @@
     <Content Include="Content\bootstrap\alerts.less" />
     <Content Include="Areas\Admin\Views\Promotions\_PromotionsSearchFormPartial.cshtml" />
     <Content Include="Areas\Admin\Views\Purchases\_DeletePurchasePartial.cshtml" />
-    <Content Include="Areas\Admin\Views\Users\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Users\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\AllUsers.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\_EditUserMoneySpentBalansPartial.cshtml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

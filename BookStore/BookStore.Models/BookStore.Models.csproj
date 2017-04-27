@@ -105,6 +105,8 @@
     <Compile Include="ViewModels\Purchase\DeletePurchaseViewModel.cs" />
     <Compile Include="ViewModels\Purchase\EditPurchaseViewModel.cs" />
     <Compile Include="ViewModels\Purchase\PurchaseDetailsViewModel.cs" />
+    <Compile Include="ViewModels\User\AllUsersViewModel.cs" />
+    <Compile Include="ViewModels\User\EditUserMoneySpentBalanceBindingModel.cs" />
     <Compile Include="ViewModels\User\EditUserProfileViewModel.cs" />
     <Compile Include="ViewModels\Home\HomeNewBookAuthorViewModel.cs" />
     <Compile Include="ViewModels\Home\HomeNewBookViewModel.cs" />
@@ -112,6 +114,7 @@
     <Compile Include="ViewModels\Home\HomePromotionViewModel.cs" />
     <Compile Include="ViewModels\Promotion\PromotionsViewModel.cs" />
     <Compile Include="ViewModels\Admin\AssignRolesViewModel.cs" />
+    <Compile Include="ViewModels\User\UserDetailsViewModel.cs" />
     <Compile Include="ViewModels\User\UserFavoriteBooksViewModel.cs" />
     <Compile Include="ViewModels\User\UserProfileViewModel.cs" />
     <Compile Include="ViewModels\User\UserPurchaseViewModel.cs" />

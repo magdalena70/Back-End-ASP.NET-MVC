@@ -8,6 +8,7 @@ using BookStore.Models.BindingModels.Book;
 using BookStore.Models.ViewModels.Category;
 using BookStore.Models.ViewModels.Book;
 using BookStore.Models.ViewModels.Basket;
+using System;
 
 namespace BookStore.Services
 {
@@ -38,6 +39,38 @@ namespace BookStore.Services
             return viewModel;
         }
 
+        public UserDetailsViewModel GetUserDetails(string username)
+        {
+            User user = this.Context.Users
+                .Include("Basket")
+                .Include("FavoriteBooks")
+                .Include("Purchases")
+                .FirstOrDefault(u => u.UserName == username);
+            if (user == null)
+            {
+                return null;
+            }
+
+            UserDetailsViewModel viewModel = Mapper.Map<User, UserDetailsViewModel>(user);
+            return viewModel;
+
+        }
+
+        public IEnumerable<AllUsersViewModel> GetAll()
+        {
+            var users = this.Context.Users.ToList();
+            if (users.Count() == 0)
+            {
+                return null;
+            }
+
+            IEnumerable<AllUsersViewModel> viewModel = 
+                Mapper.Map<IEnumerable<User>, IEnumerable<AllUsersViewModel>> (users);
+
+            return viewModel;
+
+        }
+
         public User GetCurrentUser(string authenticatedUserId)
         {
             User currentUser = this.Context.Users.Find(authenticatedUserId);
@@ -61,6 +94,31 @@ namespace BookStore.Services
 
             ICollection<AllCategoriesViewModel> categoryInBasketViewModel = Mapper.Map<ICollection<Category>, ICollection<AllCategoriesViewModel>>(categoryInBasket);
             return categoryInBasketViewModel;
+        }
+
+        public void EditUserMoneySpentBalance(EditUserMoneySpentBalanceBindingModel bindingModel)
+        {
+            User editedUser = this.Context.Users.Find(bindingModel.Id);
+            editedUser.MoneySpentBalance = bindingModel.MoneySpentBalance;
+            this.Context.SaveChanges();
+        }
+
+        public void DeleteUser(string username)
+        {
+            User user = this.Context.Users.FirstOrDefault(u => u.UserName == username);
+            if (user.Purchases.Count > 0)
+            {
+                foreach (var purchase in user.Purchases)
+                {
+                    this.Context.BasketsBooks.RemoveRange(purchase.Books);
+                }
+            }
+
+            this.Context.Purchases.RemoveRange(user.Purchases);
+            //this.Context.Books.RemoveRange(user.FavoriteBooks);
+            this.Context.Baskets.Remove(user.Basket);
+            this.Context.Users.Remove(user);
+            this.Context.SaveChanges();
         }
 
         public UserFavoriteBooksViewModel GetFavorite(User currentUser)
