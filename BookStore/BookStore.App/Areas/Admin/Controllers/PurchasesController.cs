@@ -5,6 +5,7 @@ using BookStore.Services;
 using BookStore.Models.ViewModels.Purchase;
 using System.Collections.Generic;
 using BookStore.Models.BindingModels.Purchase;
+using System;
 
 namespace BookStore.App.Areas.Admin.Controllers
 {
@@ -34,13 +35,13 @@ namespace BookStore.App.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new Exception("Invalid URL - promotion's id can not be null");
             }
 
             PurchaseDetailsViewModel viewModel = this.purchaseService.GetDetails(id);
             if (viewModel == null)
             {
-                return RedirectToAction("AllPurchases", "Purchases");
+                throw new Exception($"Invalid URL - there is no promotion with id {id}");
             }
 
             return View(viewModel);
@@ -51,13 +52,13 @@ namespace BookStore.App.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new Exception("Invalid URL - promotion's id can not be null");
             }
 
             EditPurchaseViewModel viewModel = this.purchaseService.GetEditPurchaseViewModel(id);
             if (viewModel == null)
             {
-                return HttpNotFound();
+                throw new Exception($"Invalid URL - there is no promotion with id {id}");
             }
 
             return View(viewModel);
@@ -83,14 +84,13 @@ namespace BookStore.App.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new Exception("Invalid URL - promotion's id can not be null");
             }
 
             DeletePurchaseViewModel viewModel = this.purchaseService.GetDeletePurchaseViewModel(id);
             if (viewModel == null)
             {
-                this.TempData["Error"] = "There is no such purchase.";
-                return RedirectToAction("AllPurchases", "Purchases");
+                throw new Exception($"Invalid URL - there is no promotion with id {id}");
             }
 
             return View(viewModel);

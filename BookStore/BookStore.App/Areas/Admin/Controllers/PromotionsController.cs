@@ -1,11 +1,11 @@
-﻿using System.Net;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using BookStore.Models.EntityModels;
 using BookStore.App.Attributes;
 using BookStore.Services;
 using System.Collections.Generic;
 using BookStore.Models.ViewModels.Promotion;
 using BookStore.Models.BindingModels.Promotion;
+using System;
 
 namespace BookStore.App.Areas.Admin.Controllers
 {
@@ -105,14 +105,13 @@ namespace BookStore.App.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new Exception("Invalid URL - promotion's id can not be null");
             }
 
             PromotionsViewModel viewModel = this.promotionService.GetDetails(id);
             if (viewModel == null)
             {
-                this.TempData["Info"] = "No promotion.";
-                return RedirectToAction("AllPromotions", "Promotions");
+                throw new Exception($"Invalid URL - there is no promotion with id {id}");
             }
 
             if (viewModel.AreThereBooks == false)
@@ -123,13 +122,13 @@ namespace BookStore.App.Areas.Admin.Controllers
             return View(viewModel);
         }
 
-        // GET: Admin/Promotions/Create
+        // GET: Admin/Promotions/AddPromotion
         public ActionResult AddPromotion()
         {
             return View();
         }
 
-        // POST: Admin/Promotions/Create
+        // POST: Admin/Promotions/AddPromotion
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddPromotion([Bind(Include = "Id,Name,Text,StartDate,EndDate,Discount")] AddPromotionBindingModel bindingModel)
@@ -155,14 +154,13 @@ namespace BookStore.App.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return RedirectToAction("AllPromotions", "Promotions");
+                throw new Exception("Invalid URL - promotion's id can not be null");
             }
 
             EditPromotionViewModel viewModel = this.promotionService.GetPromotionById(id);
             if (viewModel == null)
             {
-                this.TempData["Info"] = "No such promotion";
-                return RedirectToAction("AllPromotions", "Promotions");
+                throw new Exception($"Invalid URL - there is no promotion with id {id}");
             }
 
             return View(viewModel);
@@ -188,13 +186,13 @@ namespace BookStore.App.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new Exception("Invalid URL - promotion's id can not be null");
             }
-          
+
             Promotion promotion = this.promotionService.GetCurrentPromotion(id);
             if (promotion == null)
             {
-                return HttpNotFound();
+                throw new Exception($"Invalid URL - there is no promotion with id {id}");
             }
 
             return View(promotion);

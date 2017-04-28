@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using BookStore.Services;
 using BookStore.Models.ViewModels.User;
 using System.Collections.Generic;
+using System;
 
 namespace BookStore.App.Areas.Admin.Controllers
 {
@@ -32,15 +33,14 @@ namespace BookStore.App.Areas.Admin.Controllers
         {
             if (username == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new Exception("Invalid URL - user's username can not be null");
             }
 
             UserDetailsViewModel viewModel = this.userService.GetUserDetails(username);
             
             if (viewModel == null)
             {
-                this.TempData["Error"] = $"There is no user with username {username}.";
-                return View();
+                throw new Exception($"Invalid URL - there is no user with username {username}");
             }
 
             return View(viewModel);
@@ -60,7 +60,7 @@ namespace BookStore.App.Areas.Admin.Controllers
             return View(bindingModel);
         }
 
-        // POST: Admin/Users/Delete/5
+        // POST: Admin/Users/Delete/username=
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string username)

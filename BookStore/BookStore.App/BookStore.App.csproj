@@ -254,6 +254,7 @@
     <Content Include="Content\Images\Books\theRaqqaDiaries.jpg" />
     <Content Include="Content\Images\Books\theRulesDoNotApply.jpg" />
     <Content Include="Content\Images\banner-magic-fly-books-1280x720.jpg" />
+    <Content Include="Content\Images\Messages\customErrorsMsg.jpg" />
     <Content Include="Content\Images\Messages\roleErrorMsg.jpg" />
     <Content Include="Content\Images\NavBar\home-2-64.png" />
     <Content Include="Content\Images\NavBar\key-2-64.png" />
@@ -493,6 +494,7 @@
     <Content Include="Views\Shared\DisplayTemplates\HomeNewBookAuthorViewModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\AuthorViewModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\PromotionsViewModel.cshtml" />
+    <Content Include="Views\Shared\CustomErrors.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

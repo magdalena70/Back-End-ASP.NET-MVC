@@ -1,7 +1,5 @@
 ﻿using System.Net;
 using System.Web.Mvc;
-using BookStore.Data;
-using BookStore.Models.ViewModels;
 using BookStore.Services;
 using System.Collections.Generic;
 using System;
@@ -32,14 +30,13 @@ namespace BookStore.App.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new Exception("Invalid URL - promotion's id can not be null");
             }
 
             PromotionsViewModel viewModel = this.promotionService.GetDetails(id);
             if (viewModel == null)
             {
-                this.TempData["Info"] = "No promotion.";
-                return RedirectToAction("Index", "Home");
+                throw new Exception($"Invalid URL - there is no promotion with id {id}");
             }
 
             if (viewModel.AreThereBooks == false)
@@ -49,7 +46,7 @@ namespace BookStore.App.Controllers
 
             if (viewModel.EndDate < DateTime.Now)
             {
-                this.TempData["Info"] = "Promotion expired.";
+                this.TempData["Info"] = "Expired promotion";
                 return RedirectToAction("Index", "Home");
             }
 

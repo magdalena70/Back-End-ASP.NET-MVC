@@ -6,6 +6,7 @@ using BookStore.Models;
 using System.Collections.Generic;
 using BookStore.Models.BindingModels.Category;
 using BookStore.Models.ViewModels.Category;
+using System;
 
 namespace BookStore.App.Areas.Admin.Controllers
 {
@@ -41,15 +42,13 @@ namespace BookStore.App.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                this.TempData["Error"] = "Incorect url";
-                return RedirectToAction("Index", "Home");
+                throw new Exception($"Invalid URL - category's id can not be null");
             }
 
             CategoryViewModel viewModel = this.categoryService.GetCategoryDetails(id);
             if (viewModel == null)
             {
-                this.TempData["Error"] = $"There is no category with id: {id}.";
-                return RedirectToAction("All", "Categories");
+                throw new Exception($"Invalid URL - there is no category with id {id}");
             }
 
             if (viewModel.Books.Count == 0)
@@ -94,13 +93,13 @@ namespace BookStore.App.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new Exception($"Invalid URL - category's id can not be null");
             }
 
             EditCategoryViewModel viewModel = this.categoryService.GetCategoryViewModel(id);
             if (viewModel == null)
             {
-                return HttpNotFound();
+                throw new Exception($"Invalid URL - there is no category with id {id}");
             }
 
             return View(viewModel);
@@ -128,13 +127,13 @@ namespace BookStore.App.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new Exception($"Invalid URL - category's id can not be null");
             }
 
             DeleteCategoryViewModel viewModel = this.categoryService.GetDeleteCategoryViewModel(id);
             if (viewModel == null)
             {
-                return RedirectToAction("AllCategories", "Categories");
+                throw new Exception($"Invalid URL - there is no category with id {id}");
             }
 
             return View(viewModel);

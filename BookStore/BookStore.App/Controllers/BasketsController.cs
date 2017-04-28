@@ -1,11 +1,10 @@
 ﻿using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using BookStore.Services;
-using BookStore.Models.ViewModels;
-using BookStore.Models.BindingModels;
 using BookStore.Models.EntityModels;
 using BookStore.Models.BindingModels.Basket;
 using BookStore.Models.ViewModels.Basket;
+using System;
 
 namespace BookStore.App.Controllers
 {
@@ -26,8 +25,7 @@ namespace BookStore.App.Controllers
             BasketViewModel viewModel = this.basketService.GetBasketDetails(ownerId);
             if (viewModel == null)
             {
-                this.TempData["Error"] = "You have no basket.";
-                return RedirectToAction("Index", "Home");
+                throw new Exception("Invalid URL - You have no basket. Select any books before and add them to basket.");
             }
 
             return View(viewModel);

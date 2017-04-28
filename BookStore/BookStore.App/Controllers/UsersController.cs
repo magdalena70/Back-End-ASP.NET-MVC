@@ -1,13 +1,10 @@
-﻿using System.Data.Entity;
-using System.Web.Mvc;
-using BookStore.Models.ViewModels;
+﻿using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using BookStore.Services;
-using BookStore.Data;
-using BookStore.Models.BindingModels;
 using BookStore.Models.EntityModels;
 using BookStore.Models.BindingModels.Book;
 using BookStore.Models.ViewModels.User;
+using System;
 
 namespace BookStore.App.Controllers
 {
@@ -72,8 +69,7 @@ namespace BookStore.App.Controllers
             User currentUser = this.userService.GetCurrentUser(User.Identity.GetUserId());
             if (currentUser == null)
             {
-                return RedirectToAction("Index", "Home");
-
+                throw new Exception("Invalid URL - You can not edit this profile!");
             }
 
             EditUserProfileViewModel viewModel = this.userService.GetEditUserProfileViewModel(currentUser);

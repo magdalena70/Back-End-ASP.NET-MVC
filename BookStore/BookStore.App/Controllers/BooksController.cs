@@ -4,6 +4,7 @@ using BookStore.Services;
 using BookStore.Models.ViewModels;
 using System.Collections.Generic;
 using BookStore.Models.ViewModels.Book;
+using System;
 
 namespace BookStore.App.Controllers
 {
@@ -55,15 +56,13 @@ namespace BookStore.App.Controllers
         {
             if (string.IsNullOrEmpty(bookTitle))
             {
-                this.TempData["Error"] = "Incorrect url.Enter book's title to find books.";
-                return View();
+                throw new Exception("Invalid URL - book's title can not be null");
             }
 
             IEnumerable<BooksViewModel> viewModel = this.bookService.GetBooksByTitle(bookTitle);
             if (viewModel == null)
             {
-                this.TempData["Error"] = $"No book with title: '{bookTitle}'";
-                return View();
+                throw new Exception($"Invalid URL - there is no book with title {bookTitle}");
             }
 
             return View(viewModel);

@@ -6,6 +6,7 @@ using BookStore.Services;
 using BookStore.Models.ViewModels.Book;
 using System.Collections.Generic;
 using BookStore.Models.BindingModels.Book;
+using System;
 
 namespace BookStore.App.Areas.Admin.Controllers
 {
@@ -40,14 +41,13 @@ namespace BookStore.App.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return RedirectToAction("AllBooks", "Books");
+                throw new Exception("Invalid URL - book's id can not be null");
             }
 
             BookDetailsViewModel viewModel = this.bookService.GetDetails(id);
             if (viewModel == null)
             {
-                this.TempData["Info"] = $"No book with id {id}";
-                return RedirectToAction("AllBooks", "Books");
+                throw new Exception($"Invalid URL - there is no book with id {id}");
             }
 
             return View(viewModel);
@@ -116,13 +116,13 @@ namespace BookStore.App.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return RedirectToAction("AllBooks", "Books");
+                throw new Exception("Invalid URL - book's id can not be null");
             }
 
             EditBookViewModel viewModel = this.bookService.GetEditBookViewModel(id);
             if (viewModel == null)
             {
-                return RedirectToAction("AllBooks", "Books");
+                throw new Exception($"Invalid URL - there is no book with id {id}");
             }
 
             return View(viewModel);
@@ -148,13 +148,13 @@ namespace BookStore.App.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new Exception("Invalid URL - book's id can not be null");
             }
 
             DeleteBookViewModel viewModel = this.bookService.GetDeliteBookViewModel(id);
             if (viewModel == null)
             {
-                return RedirectToAction("AllBooks", "Books");
+                throw new Exception($"Invalid URL - there is no book with id {id}");
             }
 
             return View(viewModel);

@@ -5,6 +5,7 @@ using BookStore.Services;
 using System.Collections.Generic;
 using BookStore.Models.ViewModels.Author;
 using BookStore.Models.BindingModels.Author;
+using System;
 
 namespace BookStore.App.Areas.Admin.Controllers
 {
@@ -45,19 +46,19 @@ namespace BookStore.App.Areas.Admin.Controllers
             AuthorWithBooksViewModel viewModel = this.authorService.GetAuthorDetails(id);
             if (viewModel == null)
             {
-                return HttpNotFound();
+                throw new Exception($"Invalid URL - there is no author with id {id}");
             }
 
             return View(viewModel);
         }
 
-        // GET: Admin/Authors/Create
+        // GET: Admin/Authors/AddAuthor
         public ActionResult AddAuthor()
         {
             return View();
         }
 
-        // POST: Admin/Authors/Create
+        // POST: Admin/Authors/AddAuthor
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddAuthor([Bind(Include = "Id,FullName,Bio")] AddAuthorBindingModel bindingModel)
@@ -85,13 +86,13 @@ namespace BookStore.App.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new Exception("Invalid URL - author's id can not be null");
             }
 
             AuthorViewModel viewModel = this.authorService.GetAuthor(id);
             if (viewModel == null)
             {
-                return HttpNotFound();
+                throw new Exception($"Invalid URL - there is no author with id {id}");
             }
 
             return View(viewModel);
@@ -119,13 +120,13 @@ namespace BookStore.App.Areas.Admin.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new Exception("Invalid URL - author's id can not be null");
             }
 
             AuthorViewModel viewModel = this.authorService.GetAuthor(id);
             if (viewModel == null)
             {
-                return HttpNotFound();
+                throw new Exception($"Invalid URL - there is no author with id {id}");
             }
 
             return View(viewModel);

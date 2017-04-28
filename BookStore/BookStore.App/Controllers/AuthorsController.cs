@@ -8,6 +8,7 @@ using BookStore.Services;
 using System.Collections.Generic;
 using BookStore.Models.EntityModels;
 using BookStore.Models.ViewModels.Author;
+using System;
 
 namespace BookStore.App.Controllers
 {
@@ -33,15 +34,13 @@ namespace BookStore.App.Controllers
         {
             if(id == null)
             {
-                this.TempData["Error"] = "Invalid url.";
-                return RedirectToAction("All", "Authors");
+                throw new Exception("Invalid URL - author's id can not be null");
             }
 
             AuthorViewModel viewModel = this.authorService.GetAuthor(id);
             if (viewModel == null)
             {
-                this.TempData["Error"] = $"There is no author whit id: {id}";
-                return RedirectToAction("All", "Authors");
+                throw new Exception($"Invalid URL - there is no author with id {id}");
             }
 
             return View(viewModel);
@@ -60,8 +59,7 @@ namespace BookStore.App.Controllers
             AuthorWithBooksViewModel viewModel = this.authorService.GetAuthorWithBooks(authorName);
             if (viewModel == null)
             {
-                this.TempData["Error"] = $"No author whith name: '{authorName}'";
-                return View();
+                throw new Exception($"Invalid URL - there is no author with name {authorName}");
             }
 
             return View(viewModel);

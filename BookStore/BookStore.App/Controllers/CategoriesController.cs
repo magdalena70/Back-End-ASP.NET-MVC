@@ -1,9 +1,8 @@
 ﻿using System.Web.Mvc;
-using BookStore.Data;
 using BookStore.Models;
-using BookStore.Models.ViewModels;
 using System.Collections.Generic;
 using BookStore.Models.ViewModels.Category;
+using System;
 
 namespace BookStore.App.Controllers
 {
@@ -43,15 +42,13 @@ namespace BookStore.App.Controllers
         {
             if (id == null)
             {
-                this.TempData["Error"] = "Incorect url";
-                return RedirectToAction("Index", "Home");
+                throw new Exception("Invalid URL - category's id can not be null");
             }
 
             CategoryViewModel viewModel = this.categoryService.GetCategoryDetails(id);
             if (viewModel == null)
             {
-                this.TempData["Error"] = $"There is no category with id: {id}.";
-                return RedirectToAction("All", "Categories");
+                throw new Exception($"Invalid URL - there is no category with id: { id }");
             }
 
             if (viewModel.Books.Count == 0)
@@ -68,8 +65,7 @@ namespace BookStore.App.Controllers
         {
             if (string.IsNullOrEmpty(categoryName))
             {
-                this.TempData["Info"] = "Enter category name to find books.";
-                return View();
+                throw new Exception("Invalid URL - category's name can not be null");
             }
 
             CategoryViewModel viewModel = this.categoryService.GetCategoryByName(categoryName);
