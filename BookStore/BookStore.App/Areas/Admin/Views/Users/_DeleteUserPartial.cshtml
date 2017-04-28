@@ -1,0 +1,47 @@
+﻿@model BookStore.Models.ViewModels.User.UserDetailsViewModel
+
+<div class="col-md-4">
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-user">
+        Delete User
+    </button>
+    <hr />
+    <div class="modal fade" id="delete-user" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h1 class="modal-title text-center text-danger"><span class="glyphicon glyphicon-trash"></span></h1>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="modal-div">
+                        <p class="text-danger">Are you sure you want to delete user</p>
+                        <p><strong>@Html.DisplayFor(u => u.UserName)</strong></p>
+                    </div>
+                    <hr />
+                    <div class="modal-div">
+                        @using (Html.BeginForm("Delete", "Users", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(model => model.Id)
+                            @Html.HiddenFor(model => model.UserName)
+
+                            <div class="form-actions no-color">
+                                <input type="submit" value="Delete" class="btn btn-danger" />
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+

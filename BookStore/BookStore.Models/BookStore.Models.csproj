@@ -61,7 +61,9 @@
     <Compile Include="BindingModels\Admin\AssignRolesBindingModel.cs" />
     <Compile Include="BindingModels\Author\AddAuthorBindingModel.cs" />
     <Compile Include="BindingModels\Author\EditAuthorBindingModel.cs" />
+    <Compile Include="BindingModels\Book\AddAuthorToBookBindingModel.cs" />
     <Compile Include="BindingModels\Book\AddBookBindingModel.cs" />
+    <Compile Include="BindingModels\Book\AddCategoryToBookBindingModel.cs" />
     <Compile Include="BindingModels\Book\EditBookBindingModel.cs" />
     <Compile Include="BindingModels\Book\FavoriteBookBindingModel.cs" />
     <Compile Include="BindingModels\Category\AddCategoryBindingModel.cs" />

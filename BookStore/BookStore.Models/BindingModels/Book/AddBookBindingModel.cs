@@ -33,5 +33,9 @@ namespace BookStore.Models.BindingModels.Book
 
         [Required, MaxLength(20)]
         public string ISBN { get; set; }
+
+        public string Authors { get; set; }
+
+        public string Categories { get; set; }
     }
 }

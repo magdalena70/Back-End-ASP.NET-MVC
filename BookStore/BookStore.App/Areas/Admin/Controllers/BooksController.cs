@@ -53,16 +53,51 @@ namespace BookStore.App.Areas.Admin.Controllers
             return View(viewModel);
         }
 
+        //POST: Admin/Books/Deails/5
+        [HttpPost, ActionName("AddAuthorToBook")]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddAuthorToBook([Bind(Include = "Id,SelectAuthors")] AddAuthorToBookBindingModel bindingModel)
+        {
+            if (ModelState.IsValid)
+            {
+                this.bookService.AddAuthorToBook(bindingModel);
+                this.TempData["Success"] = "Success";
+                return RedirectToAction("Details", "Books", new { id = bindingModel.Id });
+            }
+
+            this.TempData["Error"] = "Error";
+            return RedirectToAction("Details", "Books", new { id = bindingModel.Id });
+
+        }
+
+        //POST: Admin/Books/Deails/5
+        [HttpPost, ActionName("AddCategoryToBook")]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddCategoryToBook([Bind(Include = "Id,SelectCategories")] AddCategoryToBookBindingModel bindingModel)
+        {
+            if (ModelState.IsValid)
+            {
+                this.bookService.AddCategoryToBook(bindingModel);
+                this.TempData["Success"] = "Success";
+                return RedirectToAction("Details", "Books", new { id = bindingModel.Id });
+            }
+
+            this.TempData["Error"] = "Error";
+            return RedirectToAction("Details", "Books", new { id = bindingModel.Id });
+
+        }
+
         // GET: Admin/Books/AddBook
         public ActionResult AddBook()
         {
-            return View();
+            AddBookViewModel viewModel = this.bookService.GetAddBookViewModel();
+            return View(viewModel);
         }
 
         // POST: Admin/Books/AddBook
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddBook([Bind(Include = "Id,Title,ImageUrl,Language,Description,Price,Quantity,NumberOfPages,IssueDate,ISBN")] AddBookBindingModel bindingModel)
+        public ActionResult AddBook([Bind(Include = "Id,Title,ImageUrl,Language,Description,Price,Quantity,NumberOfPages,IssueDate,ISBN,Categories, Authors")] AddBookBindingModel bindingModel)
         {
             if (ModelState.IsValid)
             {

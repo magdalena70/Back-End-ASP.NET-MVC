@@ -11,16 +11,7 @@
 </div>
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
-        @using (Html.BeginForm("Delete", "Users", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-            @Html.HiddenFor(model => model.Id)
-            @Html.HiddenFor(model => model.UserName)
-
-            <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-default" />
-            </div>
-        }
+        @Html.Partial("_DeleteUserPartial")
     </div>
 </div>
 <hr />

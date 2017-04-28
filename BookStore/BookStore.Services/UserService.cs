@@ -113,10 +113,17 @@ namespace BookStore.Services
                     this.Context.BasketsBooks.RemoveRange(purchase.Books);
                 }
             }
-
             this.Context.Purchases.RemoveRange(user.Purchases);
-            //this.Context.Books.RemoveRange(user.FavoriteBooks);
+
+            if (user.Basket.Books.Count > 0)
+            {
+                foreach (var book in user.Basket.Books)
+                {
+                    book.Book.Quantity++;
+                }
+            }
             this.Context.Baskets.Remove(user.Basket);
+
             this.Context.Users.Remove(user);
             this.Context.SaveChanges();
         }

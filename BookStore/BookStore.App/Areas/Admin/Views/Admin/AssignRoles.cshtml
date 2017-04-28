@@ -1,5 +1,4 @@
-﻿@*@model System.Web.Mvc.SelectListItem*@
-@model BookStore.Models.ViewModels.Admin.AssignRolesViewModel
+﻿@model BookStore.Models.ViewModels.Admin.AssignRolesViewModel
 @{
     ViewBag.Title = "Assign Roles";
 }
@@ -15,6 +14,7 @@
         @using (Html.BeginForm("AssignRoles", "Admin", FormMethod.Post, new { @role = "form" }))
         {
             @Html.AntiForgeryToken()
+
             <div class="col-md-5">
                 @Html.LabelFor(model => model.Roles, htmlAttributes: new { @class = "control-label" })
                 <div class="form-group">

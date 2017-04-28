@@ -11,6 +11,11 @@
 </div>
 
 <div class="row">
+    @Html.Partial("_AddThisBookInCategoryPartial")
+    @Html.Partial("_AddAuthorToThisBookPartial")
+</div>
+
+<div class="row">
     <div class="col-md-10 col-md-offset-1 text-center">
             <h5 class="text-center text-capitalize">
                 @Html.DisplayNameFor(book => book.Title) -

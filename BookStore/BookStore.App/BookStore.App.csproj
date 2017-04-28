@@ -393,6 +393,10 @@
     <Content Include="Areas\Admin\Views\Users\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Users\AllUsers.cshtml" />
     <Content Include="Areas\Admin\Views\Users\_EditUserMoneySpentBalansPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\_DeleteUserPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\DisplayTemplates\CategoryViewModel.cshtml" />
+    <Content Include="Areas\Admin\Views\Books\_AddThisBookInCategoryPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Books\_AddAuthorToThisBookPartial.cshtml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

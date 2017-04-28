@@ -26,7 +26,7 @@ namespace BookStore.App.App_Start
             {
                 ex.CreateMap<Author, AuthorViewModel>();
                 ex.CreateMap<Author, AuthorWithBooksViewModel>()
-               .ForMember(vm => vm.BooksCount, options => options.MapFrom(a => a.Books.Count));
+                    .ForMember(vm => vm.BooksCount, options => options.MapFrom(a => a.Books.Count));
                 ex.CreateMap<AddAuthorBindingModel, Author>();
                 ex.CreateMap<EditAuthorBindingModel, Author>();
 
@@ -57,7 +57,6 @@ namespace BookStore.App.App_Start
                     .ForMember(vm => vm.PurchasesCount, options => options.MapFrom(u => u.Purchases.Count))
                     .ForMember(vm => vm.FullName, options => options.MapFrom(u => u.FirstName + " " + u.LastName));
                 ex.CreateMap<EditUserMoneySpentBalanceBindingModel, User>();
-
 
                 ex.CreateMap<BasketBook, CountBookInBasketViewModel>();
 

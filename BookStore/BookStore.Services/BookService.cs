@@ -6,6 +6,7 @@ using AutoMapper;
 using BookStore.Models.ViewModels.Book;
 using BookStore.Models.BindingModels.Book;
 using System.Data.Entity;
+using System.Web.Mvc;
 
 namespace BookStore.Services
 {
@@ -52,11 +53,48 @@ namespace BookStore.Services
             }
 
             BookDetailsViewModel viewModel = Mapper.Map<Book, BookDetailsViewModel>(book);
+            var authors = this.Context.Authors
+               .Select(a => new SelectListItem()
+               {
+                   Value = a.Id.ToString(),
+                   Text = a.FullName
+               })
+               .ToList();
+
+            var categories = this.Context.Categories
+               .Select(c => new SelectListItem()
+               {
+                   Value = c.Id.ToString(),
+                   Text = c.Name
+               })
+               .ToList();
+
             int bookPurchasesCount = this.Context.BasketsBooks
                 .Where(b => b.Book.Id == id).Count();
+
+            viewModel.SelectAuthors = authors;
+            viewModel.SelectCategories = categories;
             viewModel.PurchasesCount = bookPurchasesCount;
 
             return viewModel;
+        }
+
+        public void AddCategoryToBook(AddCategoryToBookBindingModel bindingModel)
+        {
+            Book book = this.Context.Books.Find(bindingModel.Id);
+            Category category = this.Context.Categories
+                .First(c => c.Id.ToString() == bindingModel.SelectCategories);
+            book.Categories.Add(category);
+            this.Context.SaveChanges();
+        }
+
+        public void AddAuthorToBook(AddAuthorToBookBindingModel bindingModel)
+        {
+            Book book = this.Context.Books.Find(bindingModel.Id);
+            Author author = this.Context.Authors
+                .First(a => a.Id.ToString() == bindingModel.SelectAuthors);
+            book.Authors.Add(author);
+            this.Context.SaveChanges();
         }
 
         public IEnumerable<BooksViewModel> GetBooksByTitle(string bookTitle)
@@ -74,9 +112,48 @@ namespace BookStore.Services
             return viewModel;
         }
 
+        public AddBookViewModel GetAddBookViewModel()
+        {
+            var authors = this.Context.Authors
+               .Select(a => new SelectListItem()
+               {
+                   Value = a.Id.ToString(),
+                   Text = a.FullName
+               })
+               .ToList();
+
+            var categories = this.Context.Categories
+               .Select(c => new SelectListItem()
+               {
+                   Value = c.Id.ToString(),
+                   Text = c.Name
+               })
+               .ToList();
+
+            AddBookViewModel viewModel = new AddBookViewModel()
+            {
+                Categories = categories,
+                Authors = authors
+            };
+
+            return viewModel;
+        }
+
         public void AddBook(AddBookBindingModel bindingModel)
         {
+            Author author = this.Context.Authors
+                .First(a => a.Id.ToString() == bindingModel.Authors);
+            bindingModel.Authors = null;
+
+            Category category = this.Context.Categories
+               .First(c => c.Id.ToString() == bindingModel.Categories);
+            bindingModel.Categories = null;
+
             Book newBook = Mapper.Map<AddBookBindingModel, Book>(bindingModel);
+            newBook.Categories.Add(category);
+            newBook.Authors.Add(author);
+            
+
             this.Context.Books.Add(newBook);
             this.Context.SaveChanges();
         }

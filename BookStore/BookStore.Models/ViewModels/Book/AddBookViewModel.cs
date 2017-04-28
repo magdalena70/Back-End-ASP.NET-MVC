@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace BookStore.Models.ViewModels.Book
 {
@@ -31,5 +33,9 @@ namespace BookStore.Models.ViewModels.Book
 
         [Required, MaxLength(20)]
         public string ISBN { get; set; }
+
+        public ICollection<SelectListItem> Authors { get; set; }
+
+        public ICollection<SelectListItem> Categories { get; set; }
     }
 }

@@ -1,10 +1,10 @@
 ﻿using BookStore.Models.EntityModels;
 using BookStore.Models.ViewModels.Author;
 using BookStore.Models.ViewModels.Category;
-using BookStore.Models.ViewModels.Purchase;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace BookStore.Models.ViewModels.Book
 {
@@ -45,6 +45,8 @@ namespace BookStore.Models.ViewModels.Book
 
         public List<Rating> Ratings { get; set; }
 
+        public ICollection<SelectListItem> SelectAuthors { get; set; }
 
+        public ICollection<SelectListItem> SelectCategories { get; set; }
     }
 }
