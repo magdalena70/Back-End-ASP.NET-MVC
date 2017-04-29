@@ -71,6 +71,7 @@
     <Compile Include="PromotionService.cs" />
     <Compile Include="PurchaseService.cs" />
     <Compile Include="AdminService.cs" />
+    <Compile Include="ReviewService.cs" />
     <Compile Include="Service.cs" />
     <Compile Include="UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,6 +1,7 @@
 ﻿using BookStore.Models.EntityModels;
 using BookStore.Models.ViewModels.Author;
 using BookStore.Models.ViewModels.Category;
+using BookStore.Models.ViewModels.Review;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -38,7 +39,7 @@ namespace BookStore.Models.ViewModels.Book
 
         public List<AuthorViewModel> Authors { get; set; }
 
-        public List<Review> Reviews { get; set; }
+        public List<ReviewViewModel> Reviews { get; set; }
 
         [Display(Name = "Purchases Count")]
         public int PurchasesCount { get; set; }

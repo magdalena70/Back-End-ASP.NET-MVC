@@ -227,6 +227,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PromotionsController.cs" />
+    <Compile Include="Controllers\ReviewsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -495,6 +496,12 @@
     <Content Include="Views\Shared\DisplayTemplates\AuthorViewModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\PromotionsViewModel.cshtml" />
     <Content Include="Views\Shared\CustomErrors.cshtml" />
+    <Content Include="Views\Reviews\Create.cshtml" />
+    <Content Include="Views\Reviews\Delete.cshtml" />
+    <Content Include="Views\Reviews\Details.cshtml" />
+    <Content Include="Views\Reviews\Edit.cshtml" />
+    <Content Include="Views\Reviews\Index.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\ReviewViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

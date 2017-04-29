@@ -1,0 +1,12 @@
+﻿@model BookStore.Models.ViewModels.Review.ReviewViewModel
+
+<div class="book-div col-md-12">
+    <p>
+        <small>
+            posted on @Html.DisplayFor(r => r.DateCreate) -
+            by @Html.DisplayFor(r => r.Author.UserName)
+        </small>
+    </p>
+
+    <p class="text-danger">@Html.DisplayFor(r => r.Text)</p>
+</div>

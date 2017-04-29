@@ -71,6 +71,7 @@
     <Compile Include="BindingModels\Promotion\AddPromotionBindingModel.cs" />
     <Compile Include="BindingModels\Promotion\EditPromotionBindingModel.cs" />
     <Compile Include="BindingModels\Purchase\EditPurchaseBindingModel.cs" />
+    <Compile Include="BindingModels\Review\AddReviewBindingModel.cs" />
     <Compile Include="EntityModels\Author.cs" />
     <Compile Include="EntityModels\Basket.cs" />
     <Compile Include="EntityModels\BasketBook.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="ViewModels\Purchase\DeletePurchaseViewModel.cs" />
     <Compile Include="ViewModels\Purchase\EditPurchaseViewModel.cs" />
     <Compile Include="ViewModels\Purchase\PurchaseDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Review\ReviewViewModel.cs" />
     <Compile Include="ViewModels\User\AllUsersViewModel.cs" />
     <Compile Include="ViewModels\User\EditUserMoneySpentBalanceBindingModel.cs" />
     <Compile Include="ViewModels\User\EditUserProfileViewModel.cs" />

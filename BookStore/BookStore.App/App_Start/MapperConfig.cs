@@ -4,6 +4,7 @@ using BookStore.Models.BindingModels.Book;
 using BookStore.Models.BindingModels.Category;
 using BookStore.Models.BindingModels.Promotion;
 using BookStore.Models.BindingModels.Purchase;
+using BookStore.Models.BindingModels.Review;
 using BookStore.Models.EntityModels;
 using BookStore.Models.ViewModels.Author;
 using BookStore.Models.ViewModels.Basket;
@@ -12,6 +13,7 @@ using BookStore.Models.ViewModels.Category;
 using BookStore.Models.ViewModels.Home;
 using BookStore.Models.ViewModels.Promotion;
 using BookStore.Models.ViewModels.Purchase;
+using BookStore.Models.ViewModels.Review;
 using BookStore.Models.ViewModels.User;
 using System;
 using System.Linq;
@@ -86,6 +88,8 @@ namespace BookStore.App.App_Start
                 ex.CreateMap<EditPurchaseBindingModel, Purchase>();
                 ex.CreateMap<Purchase, DeletePurchaseViewModel>();
 
+                ex.CreateMap<Review, ReviewViewModel>();
+                ex.CreateMap<AddReviewBindingModel, Review>();
             });
         }
     }
