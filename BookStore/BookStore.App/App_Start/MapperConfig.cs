@@ -4,6 +4,7 @@ using BookStore.Models.BindingModels.Book;
 using BookStore.Models.BindingModels.Category;
 using BookStore.Models.BindingModels.Promotion;
 using BookStore.Models.BindingModels.Purchase;
+using BookStore.Models.BindingModels.Rating;
 using BookStore.Models.BindingModels.Review;
 using BookStore.Models.EntityModels;
 using BookStore.Models.ViewModels.Author;
@@ -13,6 +14,7 @@ using BookStore.Models.ViewModels.Category;
 using BookStore.Models.ViewModels.Home;
 using BookStore.Models.ViewModels.Promotion;
 using BookStore.Models.ViewModels.Purchase;
+using BookStore.Models.ViewModels.Rating;
 using BookStore.Models.ViewModels.Review;
 using BookStore.Models.ViewModels.User;
 using System;
@@ -90,6 +92,9 @@ namespace BookStore.App.App_Start
 
                 ex.CreateMap<Review, ReviewViewModel>();
                 ex.CreateMap<AddReviewBindingModel, Review>();
+
+                ex.CreateMap<Rating, RatingViewModel>();
+                ex.CreateMap<AddRatingBindingModel, Rating>();
             });
         }
     }

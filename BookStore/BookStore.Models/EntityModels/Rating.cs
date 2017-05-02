@@ -1,9 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BookStore.Models.EntityModels
 {
     public class Rating
     {
+        public Rating()
+        {
+            this.Books = new HashSet<Book>();
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -13,7 +19,6 @@ namespace BookStore.Models.EntityModels
         [Required]
         public int Value { get; set; }
 
-        [Required]
-        public virtual Book Book { get; set; }
+        public virtual ICollection<Book> Books { get; set; }
     }
 }

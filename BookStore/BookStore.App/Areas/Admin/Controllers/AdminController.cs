@@ -33,7 +33,7 @@ namespace BookStore.App.Areas.Admin.Controllers
             {
                 this.adminService.AssignRoles(bindingModel);
                 this.TempData["Success"] = "Success";
-                return RedirectToAction("AllCategories", "Categories");
+                return RedirectToAction("AllUsers", "Users");
                 
             }
 

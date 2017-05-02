@@ -7,6 +7,7 @@ using BookStore.Models.ViewModels.Book;
 using BookStore.Models.BindingModels.Book;
 using System.Data.Entity;
 using System.Web.Mvc;
+using BookStore.Models.ViewModels.Rating;
 
 namespace BookStore.Services
 {
@@ -44,7 +45,7 @@ namespace BookStore.Services
             return count;
         }
 
-        public BookDetailsViewModel GetDetails(int? id)
+        public BookDetailsViewModel GetDetails(int? id, string currUserId)
         {
             Book book = this.Context.Books.Find(id);
             if (book == null)
@@ -75,8 +76,51 @@ namespace BookStore.Services
             viewModel.SelectAuthors = authors;
             viewModel.SelectCategories = categories;
             viewModel.PurchasesCount = bookPurchasesCount;
+            viewModel.Reviews = viewModel.Reviews.OrderByDescending(r => r.DateCreate).ToList();
+            viewModel.IsCurrentUserRated = this.CheckIfCurrentUserRated(viewModel.Ratings, currUserId);
+            viewModel.CurrentUserRatingValue = this.GetCurrentUserRatingValue(viewModel.Ratings, currUserId);
+            viewModel.AvgRating = this.CalculateAvgRating(viewModel.Ratings);
 
             return viewModel;
+        }
+
+        private double CalculateAvgRating(List<RatingViewModel> ratings)
+        {
+            double avgRating = 0;
+            if (ratings.Sum(r => r.Value) > 0)
+            {
+                avgRating = ratings.Average(r => r.Value);
+            }
+
+            return avgRating;
+        }
+
+        private int GetCurrentUserRatingValue(List<RatingViewModel> ratings, string currUserId)
+        {
+            int ratingValue = 0;
+            foreach (var rating in ratings)
+            {
+                if (rating.UserId == currUserId)
+                {
+                    ratingValue = rating.Value;
+                }
+            }
+
+            return ratingValue;
+        }
+
+        private bool CheckIfCurrentUserRated(List<RatingViewModel> ratings, string currUserId)
+        {
+            bool isRated = false;
+            foreach (var rating in ratings)
+            {
+                if (rating.UserId == currUserId)
+                {
+                    isRated = true;
+                }
+            }
+
+            return isRated;
         }
 
         public void AddCategoryToBook(AddCategoryToBookBindingModel bindingModel)

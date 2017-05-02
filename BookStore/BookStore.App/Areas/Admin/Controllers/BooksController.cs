@@ -7,6 +7,7 @@ using BookStore.Models.ViewModels.Book;
 using System.Collections.Generic;
 using BookStore.Models.BindingModels.Book;
 using System;
+using Microsoft.AspNet.Identity;
 
 namespace BookStore.App.Areas.Admin.Controllers
 {
@@ -44,7 +45,8 @@ namespace BookStore.App.Areas.Admin.Controllers
                 throw new Exception("Invalid URL - book's id can not be null");
             }
 
-            BookDetailsViewModel viewModel = this.bookService.GetDetails(id);
+            string currUserId = User.Identity.GetUserId();
+            BookDetailsViewModel viewModel = this.bookService.GetDetails(id, currUserId);
             if (viewModel == null)
             {
                 throw new Exception($"Invalid URL - there is no book with id {id}");

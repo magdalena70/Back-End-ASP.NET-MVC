@@ -1,6 +1,7 @@
 ﻿using BookStore.Models.EntityModels;
 using BookStore.Models.ViewModels.Author;
 using BookStore.Models.ViewModels.Category;
+using BookStore.Models.ViewModels.Rating;
 using BookStore.Models.ViewModels.Review;
 using System;
 using System.Collections.Generic;
@@ -44,7 +45,14 @@ namespace BookStore.Models.ViewModels.Book
         [Display(Name = "Purchases Count")]
         public int PurchasesCount { get; set; }
 
-        public List<Rating> Ratings { get; set; }
+        public List<RatingViewModel> Ratings { get; set; }
+
+        public bool IsCurrentUserRated { get; set; }
+
+        public int CurrentUserRatingValue { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:0.00}", ApplyFormatInEditMode = true)]
+        public double AvgRating { get; set; }
 
         public ICollection<SelectListItem> SelectAuthors { get; set; }
 

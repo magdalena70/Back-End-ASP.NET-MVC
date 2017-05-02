@@ -1,0 +1,45 @@
+﻿@model BookStore.Models.ViewModels.Book.BookDetailsViewModel
+
+<div class="row">
+    <button type="button" class="btn btn-default btn-block" data-toggle="collapse" data-target="#reviews-view">
+        <h4>Reviews</h4>
+        <b class="caret"></b>
+    </button>
+    <hr />
+    <div id="reviews-view">
+        <div id="reviews" class="col-md-10 col-md-offset-1 book-div"></div>
+        <div class="col-md-6 col-md-offset-3">
+
+            @using (Ajax.BeginForm("AddReview", "Reviews", new { id = Model.Id }, new AjaxOptions()
+            {
+                HttpMethod = "POST",
+                InsertionMode = InsertionMode.InsertAfter,
+                UpdateTargetId = "reviews",
+                OnSuccess = "onSuccess"
+            }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <input type="text" id="text" name="Text" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Add" class="btn btn-default" />
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="col-md-10 col-md-offset-1 book-div">
+            @if (Model.Reviews.Any(r => r.Text != null))
+            {
+                @Html.DisplayFor(b => b.Reviews)
+            }
+            else
+            {
+                <p>No reviews</p>
+            }
+        </div>
+    </div>
+</div>
+

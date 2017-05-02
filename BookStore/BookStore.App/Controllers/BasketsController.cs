@@ -4,7 +4,6 @@ using BookStore.Services;
 using BookStore.Models.EntityModels;
 using BookStore.Models.BindingModels.Basket;
 using BookStore.Models.ViewModels.Basket;
-using System;
 
 namespace BookStore.App.Controllers
 {
@@ -25,13 +24,13 @@ namespace BookStore.App.Controllers
             BasketViewModel viewModel = this.basketService.GetBasketDetails(ownerId);
             if (viewModel == null)
             {
-                throw new Exception("Invalid URL - You have no basket. Select any books before and add them to basket.");
+                this.TempData["Info"] = "You have no basket. Select any books before and add them to basket.";
+                return RedirectToAction("UserProfile", "Users");
             }
 
             return View(viewModel);
         }
 
-        // POST: Baskets/AddToBasket
         [HttpPost, ActionName("AddToBasket")]
         [ValidateAntiForgeryToken]
         public ActionResult CreateBasketAndAddBookInIt([Bind(Include = "Id")] AddBookToBasketBindingModel book)
@@ -52,7 +51,6 @@ namespace BookStore.App.Controllers
             return RedirectToAction("Details", "Baskets");
         }
 
-        // POST: Baskets/RemoveOneOfThisFromBasket
         [HttpPost, ActionName("RemoveOneOfThisFromBasket")]
         [ValidateAntiForgeryToken]
         public ActionResult RemoveOneOfThisBookFromBasket([Bind(Include = "BookId")] RemoveBookFromBasketBindingModel book)
@@ -69,7 +67,6 @@ namespace BookStore.App.Controllers
             return RedirectToAction("Details", "Baskets");
         }
 
-        // POST: Baskets/RemoveAllOfThisFromBasket
         [HttpPost, ActionName("RemoveAllOfThisFromBasket")]
         [ValidateAntiForgeryToken]
         public ActionResult RemoveAllOfThisBookFromBasket([Bind(Include = "BookId, Count")] RemoveBooksFromBasketBindingModel book)
@@ -86,7 +83,6 @@ namespace BookStore.App.Controllers
             return RedirectToAction("Details", "Baskets");
         }
 
-        // POST: Baskets/EditBookQuantityInBasket
         [HttpPost, ActionName("EditBookQuantityInBasket")]
         [ValidateAntiForgeryToken]
         public ActionResult EditBookQuantityInBasket([Bind(Include = "BookId, Count, NewCount")] EditBookQuantityInBasketBindingModel book)
@@ -114,7 +110,6 @@ namespace BookStore.App.Controllers
             return RedirectToAction("Details", "Baskets");
         }
 
-        // POST: Baskets/ClearBasket
         [HttpPost, ActionName("ClearBasket")]
         [ValidateAntiForgeryToken]
         public ActionResult ClearBasket()
@@ -126,7 +121,6 @@ namespace BookStore.App.Controllers
             return RedirectToAction("Details", "Baskets");
         }
 
-        // POST: Baskets/Buy
         [HttpPost, ActionName("Buy")]
         [ValidateAntiForgeryToken]
         public ActionResult BuyBooks()
@@ -137,64 +131,5 @@ namespace BookStore.App.Controllers
             this.TempData["Success"] = "Your order is accepted!";
             return RedirectToAction("Details", "Baskets");
         }
-
-        //to do - clear
-        //// GET: Baskets/Edit/5
-        //public ActionResult Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-
-        //    Basket basket = context.Baskets.Find(id);
-        //    if (basket == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-
-        //    return View(basket);
-        //}
-
-        //// POST: Baskets/Edit/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "Id,TotalPrice,Discount, Owner")] Basket basket)
-        //{
-        //    basket.Owner = context.Users.First();
-        //    // if (ModelState.IsValid)
-        //    // {
-        //    context.Entry(basket).State = EntityState.Modified;
-        //    context.SaveChanges();
-        //    return RedirectToAction("UserProfile", "Users");
-        //    // }
-        //    // return View(basket);
-        //}
-
-        //// GET: Baskets/Delete/5
-        //public ActionResult Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Basket basket = context.Baskets.Find(id);
-        //    if (basket == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(basket);
-        //}
-
-        //// POST: Baskets/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    Basket basket = context.Baskets.Find(id);
-        //    context.Baskets.Remove(basket);
-        //    context.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
     }
 }

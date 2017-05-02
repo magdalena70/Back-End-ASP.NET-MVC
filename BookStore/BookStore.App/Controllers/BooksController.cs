@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using BookStore.Services;
-using BookStore.Models.ViewModels;
 using System.Collections.Generic;
 using BookStore.Models.ViewModels.Book;
 using System;
+using Microsoft.AspNet.Identity;
 
 namespace BookStore.App.Controllers
 {
@@ -30,21 +30,19 @@ namespace BookStore.App.Controllers
         }
 
         // GET: Books/Details/5
-        public ActionResult Details(int? id, string returnUrl)
+        [Authorize]
+        public ActionResult Details(int? id)
         {
-            ViewBag.ReturnUrl = returnUrl;
             if (id == null)
             {
-                this.TempData["Error"] = "Incorrect url. Book id is required.";
-                 return RedirectToAction("Index", "Home");
-                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                throw new Exception("Incorrect url. Book id can not be null.");
             }
 
-            BookDetailsViewModel viewModel = this.bookService.GetDetails(id);
+            string currUserId = User.Identity.GetUserId();
+            BookDetailsViewModel viewModel = this.bookService.GetDetails(id, currUserId);
             if (viewModel == null)
             {
-                this.TempData["Error"] = $"There is no book with id: {id}.";
-                return RedirectToAction("Index", "Home");
+                throw new Exception($"There is no book with id: {id}.");
             }
 
             return View(viewModel);

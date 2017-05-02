@@ -24,7 +24,7 @@ hr {
 
 h1, h2, h3, h4, h5, .lead {
     font-family: Gloss_And_Bloom, sans-serif !important;
-    text-shadow: 10px 5px 1px #160200;
+    text-shadow: 8px 3px 1px #160200;
     letter-spacing: 4px;
     color: rgba(224, 201, 218, 04);
 }
@@ -58,21 +58,20 @@ a {
     background-position: center;
     background-size: cover;
     height: auto;
-    max-height: 700px;
+    max-height: 500px;
     width: 100%;
-    margin-top: 100px;
+    margin-top: 70px;
 }
 
     .home h1 {
         letter-spacing: 7px;
-        text-shadow: 10px 5px 1px #4A486F;
+        text-shadow: 8px 3px 1px #4A486F;
         color: ghostwhite;
-        margin-top: 1.5%;
+         margin-top: 5%;
     }
 
-    .home h2{
-        margin-bottom: 3%;
-        padding-left: 15%;
+    .home h2{  
+        
         color: white;
         border-bottom: solid 1px white;
     }
@@ -80,12 +79,13 @@ a {
     .home .lead {
         letter-spacing: 7px;
         font-weight: 900;
-        text-shadow: none;
-        color: #3E3B46;   
+        text-shadow: 1px 1px 1px #4A486F; 
+        color: white; 
+        background-color: rgba(173, 88, 121, 0.1);
     }
 
     .home .store-title {
-        margin-bottom: 25%;
+        margin-bottom: 18%;
     }
 
 .user-body-content {

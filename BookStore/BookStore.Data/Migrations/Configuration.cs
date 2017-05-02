@@ -14,6 +14,7 @@ namespace BookStore.Data.Migrations
             AutomaticMigrationsEnabled = true;
         }
 
+        // you have to register some user and then runing Seed method
         protected override void Seed(BookStoreContext context)
         {
             if (!context.Roles.Any(r => r.Name == "Admin"))
@@ -22,6 +23,14 @@ namespace BookStore.Data.Migrations
                 var roleManager = new RoleManager<IdentityRole>(roleStore);
                 var role = new IdentityRole("Admin");
                 roleManager.Create(role);
+            }
+
+            // you have to register some user - first registered user will get role "Admin"
+            if (context.Users.Any())
+            {
+                var userManager = new UserManager<User>(new UserStore<User>(context));
+                var admin = userManager.Users.FirstOrDefault();
+                userManager.AddToRole(admin.Id, "Admin");
             }
 
             if (!context.Roles.Any(r => r.Name == "LoyalCustomer"))

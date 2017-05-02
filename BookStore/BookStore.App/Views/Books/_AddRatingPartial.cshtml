@@ -1,0 +1,64 @@
+﻿@model BookStore.Models.ViewModels.Book.BookDetailsViewModel
+
+<div class="row">
+    <div class="col-md-6">
+        <p class="text-danger">Rating: <span class="badge">@Html.DisplayFor(r => Model.AvgRating)</span></p>
+    </div>
+
+    <div class="col-md-6" id="rating-@Model.Id">
+        @if (Model.IsCurrentUserRated)
+        {
+            <p class="text-danger">You rated with: <span class="badge">@Model.CurrentUserRatingValue</span></p>
+        }
+        else
+        {
+            using (Ajax.BeginForm("AddRating", "Ratings", new { Model.Id, value = 1 }, new AjaxOptions()
+            {
+                HttpMethod = "POST",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = string.Format("rating-{0}", Model.Id),
+                OnSuccess = "onSuccessRate"
+            }))
+            {
+                @Html.AntiForgeryToken()
+
+                <p>
+                    <input type="radio" value="1" name="Value" />
+                    <span class="glyphicon glyphicon-star"></span>
+                </p>
+                <p>
+                    <input type="radio" value="2" name="Value" />
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                </p>
+                <p>
+                    <input type="radio" value="3" name="Value" />
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                </p>
+                <p>
+                    <input type="radio" value="4" name="Value" />
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                </p>
+                <p>
+                    <input type="radio" value="5" name="Value" />
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                </p>
+
+                <p>
+                    <input type="submit" value="Rate" class="btn btn-default" />
+                </p>
+            }
+        }
+
+    </div>
+</div>
+

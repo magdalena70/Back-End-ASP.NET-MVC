@@ -9,6 +9,12 @@ namespace BookStore.Models.ViewModels.User
     {
         public string UserName { get; set; }
 
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string Email { get; set; }
+
         public BasketViewModel Basket { get; set; }
 
         public ICollection<CountBookInBasketViewModel> Books { get; set; }

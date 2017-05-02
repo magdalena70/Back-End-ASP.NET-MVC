@@ -227,6 +227,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PromotionsController.cs" />
+    <Compile Include="Controllers\RatingsController.cs" />
     <Compile Include="Controllers\ReviewsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -462,10 +463,7 @@
     <Content Include="Views\Books\BooksByTitle.cshtml" />
     <Content Include="Views\Authors\BooksByAuthor.cshtml" />
     <Content Include="Views\Authors\All.cshtml" />
-    <Content Include="Views\Baskets\Delete.cshtml" />
     <Content Include="Views\Baskets\Details.cshtml" />
-    <Content Include="Views\Baskets\Edit.cshtml" />
-    <Content Include="Views\Baskets\Index.cshtml" />
     <Content Include="Views\Authors\Details.cshtml" />
     <Content Include="Views\Baskets\_ClearBasketPartial.cshtml" />
     <Content Include="Views\Baskets\_BuyPartial.cshtml" />
@@ -473,6 +471,8 @@
     <Content Include="Views\Authors\_AuthorBooksViewPartial.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
+    <Content Include="Views\Books\_AddReviewPartial.cshtml" />
+    <Content Include="Views\Books\_AddRatingPartial.cshtml" />
     <None Include="Views\Categories\All.cshtml" />
     <None Include="Views\Categories\BooksByCategory.cshtml" />
     <Content Include="Views\Categories\BestSellers.cshtml" />
@@ -496,12 +496,8 @@
     <Content Include="Views\Shared\DisplayTemplates\AuthorViewModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\PromotionsViewModel.cshtml" />
     <Content Include="Views\Shared\CustomErrors.cshtml" />
-    <Content Include="Views\Reviews\Create.cshtml" />
-    <Content Include="Views\Reviews\Delete.cshtml" />
-    <Content Include="Views\Reviews\Details.cshtml" />
-    <Content Include="Views\Reviews\Edit.cshtml" />
-    <Content Include="Views\Reviews\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\ReviewViewModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\CategoryViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

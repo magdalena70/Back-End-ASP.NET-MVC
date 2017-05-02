@@ -9,7 +9,22 @@
     <div class="col-md-8 col-md-offset-2 book-details-div">
         <div class="row text-center books-list-title">
             <h3>@Html.DisplayFor(book => book.Title)</h3>
-        </div>
+            <p>
+                @using (Html.BeginForm("FavoriteBooks", "Users", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(book => book.Id)
+                    <div class="form-actions no-color">
+                <p>
+                    <button type="submit" value="Add to Favorite" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-heart"></span>
+                    </button>
+                </p>
+            </div>
+                }
+                </p>
+            </div>
+
         <div class="row">
             <div class="col-md-5 img-rounded">
                 <img src="@Model.ImageUrl" alt="book-img" class="img img-responsive" width="100%" />
@@ -30,24 +45,22 @@
                 <p>Number Of Pages - @Html.DisplayFor(book => book.NumberOfPages)</p>
                 <p>Issue Date - @Html.DisplayFor(book => book.IssueDate)</p>
                 <p class="lead">Price: @Html.DisplayFor(book => book.Price)</p>
-                <p>
-                    <ul>
-                        Categories:
-                        @foreach (var category in Model.Categories)
-                        {
-                            <li>@Html.DisplayFor(c => category.Name)</li>
-                        }
-                    </ul>
-                </p>
+                <div>@Html.DisplayFor(book => book.Categories)</div>
                 <hr />
-                <div class="row">
-                    <p>
-                        <span class="lead add-rating">Rating - @Html.DisplayFor(book => book.Ratings)</span>
-                    </p>
-                </div>
+                @Html.Partial("_AddRatingPartial")
             </div>
         </div>
         <hr />
+    <div class="row text-center">
+        @using (Html.BeginForm("AddToBasket", "Baskets", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(book => book.Id)
+            <div class="form-actions no-color">
+                <input type="submit" value="Add To Basket" class="btn btn-default" />
+            </div>
+        }
+    </div>
         <div class="row">
             <div class="col-md-12">
                 <button type="button" class="btn btn-default btn-block" data-toggle="collapse" data-target="#description">
@@ -62,49 +75,10 @@
             </div>
         </div>
         <hr />
-        <div class="row">
-            <button type="button" class="btn btn-default btn-block" data-toggle="collapse" data-target="#reviews-view">
-                <h4>Reviews</h4>
-                <b class="caret"></b>
-            </button>
-            <hr />
-            <div id="reviews-view">
-                <div id="reviews" class="col-md-10 col-md-offset-1 book-div"></div>
-                <div class="col-md-6 col-md-offset-3">
-                   
-                    @using (Ajax.BeginForm("AddReview", "Reviews", new { id = Model.Id }, new AjaxOptions()
-                    {
-                        HttpMethod = "POST",
-                        InsertionMode = InsertionMode.InsertBefore,
-                        UpdateTargetId = "reviews",
-                        OnSuccess = "OnSuccess"
-                    }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <div class="form-horizontal">
-                            <div class="form-group">
-                                <label for="text" class="control-label">Add Review</label>
-                                <input type="text" id="text" name="Text" value="" class="form-control" />
-                            </div>
-
-                            <div class="form-group">
-                                <input type="submit" value="Add" class="btn btn-default" />
-                            </div>
-                        </div>
-                    }
-                </div>
-                <div class="col-md-10 col-md-offset-1 book-div">
-                    @if (Model.Reviews.Any(r => r.Text != null))
-                    {
-                        @Html.DisplayFor(b => b.Reviews)
-                    }
-                    else
-                    {
-                        <p>No reviews</p>
-                    }
-                </div>
-            </div>
-        </div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            @Html.Partial("_AddReviewPartial")
+        }
     </div>
 </div>
 
@@ -112,8 +86,16 @@
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script>
         //ajax
-        function OnSuccess() {
+        function onSuccess() {
             document.getElementById("text").value = '';
+        }
+
+        function OnSuccessDelete() {      
+            location.reload();
+        }
+
+        function onSuccessRate() {
+            $('#rate').hide(1000);
         }
     </script>
 }

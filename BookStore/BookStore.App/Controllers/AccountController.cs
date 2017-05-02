@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BookStore.App.Models;
 using BookStore.Models.EntityModels;
+using BookStore.Services;
 
 namespace BookStore.App.Controllers
 {
@@ -173,6 +174,7 @@ namespace BookStore.App.Controllers
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
+
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);

@@ -7,6 +7,23 @@
 <hr />
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
+        <p class="text-center"><strong>User:</strong></p>
+        <div class="col-md-6">
+            <p>@Html.DisplayFor(u => Model.UserName)</p>
+            <p class="text-capitalize">@Model.FirstName @Model.LastName</p>
+        </div>
+        <div class="col-md-6">
+            <p>@Html.DisplayFor(u => Model.Email)</p>
+            @if (Model.Basket != null)
+            {
+                <p>Current Discount: @Html.DisplayFor(u => Model.Basket.Discount)</p>
+            }
+        </div>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
         <p class="pull-right btn btn-default">
             <a href="/Users/FavoriteBooks">
                 <img src="~/Content/Images/UserProfile/favorite-64.png" />
