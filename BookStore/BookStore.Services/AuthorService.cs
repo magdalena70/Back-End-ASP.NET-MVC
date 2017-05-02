@@ -7,10 +7,11 @@ using BookStore.Models.ViewModels.Book;
 using BookStore.Models.BindingModels.Author;
 using System.Web;
 using System.Data.Entity;
+using BookStore.Services.Interfaces;
 
 namespace BookStore.Services
 {
-    public class AuthorService : Service
+    public class AuthorService : Service, IAuthorService
     {
 
         public IEnumerable<AuthorViewModel> GetAll()

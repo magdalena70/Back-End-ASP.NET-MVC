@@ -210,3 +210,10 @@ C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.App\bin\
 C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.App\bin\roslyn\vbc.rsp
 C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.App\bin\roslyn\VBCSCompiler.exe
 C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.App\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.App\bin\Ninject.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.App\bin\Ninject.Web.Common.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.App\bin\Ninject.Web.Mvc.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.App\bin\WebActivatorEx.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.App\bin\Ninject.xml
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.App\bin\Ninject.Web.Common.xml
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.App\bin\Ninject.Web.Mvc.xml

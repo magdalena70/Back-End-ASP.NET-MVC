@@ -5,10 +5,11 @@ using System.Linq;
 using System.Web.Mvc;
 using BookStore.Models.BindingModels.Admin;
 using BookStore.Models.EntityModels;
+using BookStore.Services.Interfaces;
 
 namespace BookStore.Services
 {
-    public class AdminService: Service
+    public class AdminService : Service, IAdminService
     {
         public AssignRolesViewModel GetAssignRolesViewModel()
         {

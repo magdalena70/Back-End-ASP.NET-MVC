@@ -1,19 +1,19 @@
 ﻿using System.Web.Mvc;
-using BookStore.Models;
 using System.Collections.Generic;
 using BookStore.Models.ViewModels.Category;
 using System;
+using BookStore.Services.Interfaces;
 
 namespace BookStore.App.Controllers
 {
     [AllowAnonymous]
     public class CategoriesController : Controller
     {
-        private CategoryService categoryService;
+        private ICategoryService categoryService;
 
-        public CategoriesController()
+        public CategoriesController(ICategoryService service)
         {
-            this.categoryService = new CategoryService();
+            this.categoryService = service;
         }
 
         // GET: Categories/All

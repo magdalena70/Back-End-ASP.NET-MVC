@@ -18,7 +18,6 @@ using BookStore.Models.ViewModels.Rating;
 using BookStore.Models.ViewModels.Review;
 using BookStore.Models.ViewModels.User;
 using System;
-using System.Linq;
 
 namespace BookStore.App.App_Start
 {

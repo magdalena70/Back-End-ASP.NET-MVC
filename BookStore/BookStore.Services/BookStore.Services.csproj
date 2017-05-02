@@ -68,6 +68,17 @@
     <Compile Include="BookService.cs" />
     <Compile Include="CategoryService.cs" />
     <Compile Include="HomeService.cs" />
+    <Compile Include="Interfaces\IHomeService.cs" />
+    <Compile Include="Interfaces\ICategoryService.cs" />
+    <Compile Include="Interfaces\IBookService.cs" />
+    <Compile Include="Interfaces\IBasketService.cs" />
+    <Compile Include="Interfaces\IAuthorService.cs" />
+    <Compile Include="Interfaces\IAdminService.cs" />
+    <Compile Include="Interfaces\IPromotionService.cs" />
+    <Compile Include="Interfaces\IPurchaseService.cs" />
+    <Compile Include="Interfaces\IRatingService.cs" />
+    <Compile Include="Interfaces\IReviewService.cs" />
+    <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="PromotionService.cs" />
     <Compile Include="PurchaseService.cs" />
     <Compile Include="AdminService.cs" />

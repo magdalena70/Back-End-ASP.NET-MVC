@@ -1,5 +1,4 @@
-﻿using BookStore.Services;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using BookStore.Models.EntityModels;
 using AutoMapper;
@@ -8,10 +7,11 @@ using BookStore.Models.ViewModels.Category;
 using BookStore.Models.BindingModels.Category;
 using BookStore.Models.ViewModels.Book;
 using System.Web;
+using BookStore.Services.Interfaces;
 
-namespace BookStore.Models
+namespace BookStore.Services
 {
-    public class CategoryService : Service
+    public class CategoryService : Service, ICategoryService
     {
       
         public IEnumerable<AllCategoriesViewModel> GetAll()

@@ -1,19 +1,19 @@
 ﻿using System.Web.Mvc;
-using BookStore.Services;
 using BookStore.Models.BindingModels.Review;
 using BookStore.Models.ViewModels.Review;
 using Microsoft.AspNet.Identity;
+using BookStore.Services.Interfaces;
 
 namespace BookStore.App.Controllers
 {
     [Authorize]
     public class ReviewsController : Controller
     {
-        private ReviewService reviewService;
+        private IReviewService reviewService;
 
-        public ReviewsController()
+        public ReviewsController(IReviewService service)
         {
-            this.reviewService = new ReviewService();
+            this.reviewService = service;
         }
 
         //POST Books/Details/5

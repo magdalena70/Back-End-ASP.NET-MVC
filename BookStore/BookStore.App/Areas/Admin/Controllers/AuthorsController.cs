@@ -1,22 +1,22 @@
 ﻿using System.Net;
 using System.Web.Mvc;
 using BookStore.App.Attributes;
-using BookStore.Services;
 using System.Collections.Generic;
 using BookStore.Models.ViewModels.Author;
 using BookStore.Models.BindingModels.Author;
 using System;
+using BookStore.Services.Interfaces;
 
 namespace BookStore.App.Areas.Admin.Controllers
 {
     [CustomAttributeAuth(Roles = "Admin")]
     public class AuthorsController : Controller
     {
-        private AuthorService authorService;
+        private IAuthorService authorService;
 
-        public AuthorsController()
+        public AuthorsController(IAuthorService service)
         {
-            this.authorService = new AuthorService();
+            this.authorService = service;
         }
 
         // GET: Admin/Authors?authorName=

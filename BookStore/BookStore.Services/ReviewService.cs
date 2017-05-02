@@ -4,10 +4,11 @@ using BookStore.Models.EntityModels;
 using System.Web;
 using AutoMapper;
 using BookStore.Models.ViewModels.Review;
+using BookStore.Services.Interfaces;
 
 namespace BookStore.Services
 {
-    public class ReviewService : Service
+    public class ReviewService : Service, IReviewService
     {
         public ReviewViewModel AddReviewAndGetResult(AddReviewBindingModel bindingModel, int bookId, string authorId)
         {

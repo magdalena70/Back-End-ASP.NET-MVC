@@ -1,20 +1,20 @@
 ﻿using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using BookStore.Services;
 using BookStore.Models.EntityModels;
 using BookStore.Models.BindingModels.Basket;
 using BookStore.Models.ViewModels.Basket;
+using BookStore.Services.Interfaces;
 
 namespace BookStore.App.Controllers
 {
     [Authorize]
     public class BasketsController : Controller
     {
-        private BasketService basketService;
+        private IBasketService basketService;
 
-        public BasketsController()
+        public BasketsController(IBasketService service)
         {
-            this.basketService = new BasketService();
+            this.basketService = service;
         }
 
         // GET: Baskets/Details

@@ -1,21 +1,20 @@
 ﻿using System.Linq;
-using System.Net;
 using System.Web.Mvc;
-using BookStore.Services;
 using BookStore.Models.ViewModels.Purchase;
 using System.Collections.Generic;
 using BookStore.Models.BindingModels.Purchase;
 using System;
+using BookStore.Services.Interfaces;
 
 namespace BookStore.App.Areas.Admin.Controllers
 {
     public class PurchasesController : Controller
     {
-        private PurchaseService purchaseService;
+        private IPurchaseService purchaseService;
 
-        public PurchasesController()
+        public PurchasesController(IPurchaseService service)
         {
-            this.purchaseService = new PurchaseService();
+            this.purchaseService = service;
         }
 
         // GET: Admin/Purchases

@@ -5,10 +5,11 @@ using System;
 using System.Collections.Generic;
 using BookStore.Models.ViewModels.Basket;
 using BookStore.Models.ViewModels.Book;
+using BookStore.Services.Interfaces;
 
 namespace BookStore.Services
 {
-    public class BasketService : Service
+    public class BasketService : Service, IBasketService
     {
 
         public BasketViewModel GetBasketDetails(string ownerId)

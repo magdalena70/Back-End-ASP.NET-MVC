@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using BookStore.Models.EntityModels;
 using BookStore.Models.ViewModels.Home;
 using BookStore.Models.ViewModels.Book;
+using BookStore.Services.Interfaces;
 
 namespace BookStore.Services
 {
-    public class HomeService : Service
+    public class HomeService : Service, IHomeService
     {
 
         public HomePageViewModel GetHomePageViewModel()

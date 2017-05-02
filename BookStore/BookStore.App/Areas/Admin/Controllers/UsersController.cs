@@ -1,19 +1,18 @@
-﻿using System.Net;
-using System.Web.Mvc;
-using BookStore.Services;
+﻿using System.Web.Mvc;
 using BookStore.Models.ViewModels.User;
 using System.Collections.Generic;
 using System;
+using BookStore.Services.Interfaces;
 
 namespace BookStore.App.Areas.Admin.Controllers
 {
     public class UsersController : Controller
     {
-        private UserService userService;
+        private IUserService userService;
 
-        public UsersController()
+        public UsersController(IUserService service)
         {
-            this.userService = new UserService();
+            this.userService = service;
         }
 
         // GET: Admin/Users/AllUsers

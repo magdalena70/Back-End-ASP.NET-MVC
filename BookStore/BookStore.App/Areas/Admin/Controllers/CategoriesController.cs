@@ -1,23 +1,21 @@
-﻿using System.Net;
-using System.Web.Mvc;
-using BookStore.Models.EntityModels;
+﻿using System.Web.Mvc;
 using BookStore.App.Attributes;
-using BookStore.Models;
 using System.Collections.Generic;
 using BookStore.Models.BindingModels.Category;
 using BookStore.Models.ViewModels.Category;
 using System;
+using BookStore.Services.Interfaces;
 
 namespace BookStore.App.Areas.Admin.Controllers
 {
     [CustomAttributeAuth(Roles = "Admin")]
     public class CategoriesController : Controller
     {
-        private CategoryService categoryService;
+        private ICategoryService categoryService;
 
-        public CategoriesController()
+        public CategoriesController(ICategoryService service)
         {
-            this.categoryService = new CategoryService();
+            this.categoryService = service;
         }
 
         // GET: Admin/Categories?categoryName=

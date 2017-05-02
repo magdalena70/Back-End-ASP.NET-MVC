@@ -1,24 +1,18 @@
-﻿using System.Data.Entity;
-using System.Net;
-using System.Web.Mvc;
-using BookStore.Data;
-using BookStore.Models;
-using BookStore.Models.ViewModels;
-using BookStore.Services;
+﻿using System.Web.Mvc;
 using System.Collections.Generic;
-using BookStore.Models.EntityModels;
 using BookStore.Models.ViewModels.Author;
 using System;
+using BookStore.Services.Interfaces;
 
 namespace BookStore.App.Controllers
 {
     public class AuthorsController : Controller
     {
-        private AuthorService authorService;
+        private IAuthorService authorService;
 
-        public AuthorsController()
+        public AuthorsController(IAuthorService service)
         {
-            this.authorService = new AuthorService();
+            this.authorService = service;
         }
 
         // GET: Authors

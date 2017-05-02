@@ -96,6 +96,10 @@
       <Project>{19ECB246-28CE-4F13-80DC-160D7536B5D6}</Project>
       <Name>BookStore.App</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BookStore.Services\BookStore.Services.csproj">
+      <Project>{854B317A-E378-4804-A0C5-39DFDF43FAEB}</Project>
+      <Name>BookStore.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

@@ -1,5 +1,5 @@
 ﻿using BookStore.Models.ViewModels.Home;
-using BookStore.Services;
+using BookStore.Services.Interfaces;
 using System.Web.Mvc;
 
 namespace BookStore.App.Controllers
@@ -7,11 +7,11 @@ namespace BookStore.App.Controllers
     [AllowAnonymous]
     public class HomeController : Controller
     {
-        private HomeService homeService;
+        private IHomeService homeService;
 
-        public HomeController()
+        public HomeController(IHomeService service)
         {
-            this.homeService = new HomeService();
+            this.homeService = service;
         }
 
         public ActionResult Index()

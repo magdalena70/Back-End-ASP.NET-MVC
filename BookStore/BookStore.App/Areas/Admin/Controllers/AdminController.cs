@@ -1,7 +1,7 @@
 ﻿using BookStore.App.Attributes;
 using BookStore.Models.BindingModels.Admin;
 using BookStore.Models.ViewModels.Admin;
-using BookStore.Services;
+using BookStore.Services.Interfaces;
 using System.Web.Mvc;
 
 namespace BookStore.App.Areas.Admin.Controllers
@@ -9,11 +9,11 @@ namespace BookStore.App.Areas.Admin.Controllers
     [CustomAttributeAuth(Roles = "Admin")]
     public class AdminController : Controller
     {
-        private AdminService adminService;
+        private IAdminService adminService;
 
-        public AdminController()
+        public AdminController(IAdminService service)
         {
-            this.adminService = new AdminService();
+            this.adminService = service;
         }
 
         // GET: Admin/AssignRoles

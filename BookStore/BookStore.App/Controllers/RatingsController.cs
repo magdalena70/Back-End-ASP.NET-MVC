@@ -1,18 +1,18 @@
 ﻿using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using BookStore.Services;
 using BookStore.Models.BindingModels.Rating;
+using BookStore.Services.Interfaces;
 
 namespace BookStore.App.Controllers
 {
     [Authorize]
     public class RatingsController : Controller
     {
-        private RatingService ratingService;
+        private IRatingService ratingService;
 
-        public RatingsController()
+        public RatingsController(IRatingService service)
         {
-            this.ratingService = new RatingService();
+            this.ratingService = service;
         }
 
         //POST Books/Details/5

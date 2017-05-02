@@ -1,22 +1,22 @@
 ﻿using System.Web.Mvc;
 using BookStore.Models.EntityModels;
 using BookStore.App.Attributes;
-using BookStore.Services;
 using System.Collections.Generic;
 using BookStore.Models.ViewModels.Promotion;
 using BookStore.Models.BindingModels.Promotion;
 using System;
+using BookStore.Services.Interfaces;
 
 namespace BookStore.App.Areas.Admin.Controllers
 {
     [CustomAttributeAuth(Roles = "Admin")]
     public class PromotionsController : Controller
     {
-        private PromotionService promotionService;
+        private IPromotionService promotionService;
 
-        public PromotionsController()
+        public PromotionsController(IPromotionService service)
         {
-            this.promotionService = new PromotionService();
+            this.promotionService = service;
         }
 
         // GET: Admin/Promotions?startDateYear=""&startDateMonth=""&startDateDay=""

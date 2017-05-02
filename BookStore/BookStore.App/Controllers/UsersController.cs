@@ -1,21 +1,21 @@
 ﻿using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using BookStore.Services;
 using BookStore.Models.EntityModels;
 using BookStore.Models.BindingModels.Book;
 using BookStore.Models.ViewModels.User;
 using System;
+using BookStore.Services.Interfaces;
 
 namespace BookStore.App.Controllers
 {
     [Authorize]
     public class UsersController : Controller
     {
-        private UserService userService;
+        private IUserService userService;
 
-        public UsersController()
+        public UsersController(IUserService service)
         {
-            this.userService = new UserService();
+            this.userService = service;
         }
 
         // GET: Users/UserProfile

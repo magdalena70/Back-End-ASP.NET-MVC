@@ -8,10 +8,11 @@ using BookStore.Models.BindingModels.Book;
 using BookStore.Models.ViewModels.Category;
 using BookStore.Models.ViewModels.Book;
 using BookStore.Models.ViewModels.Basket;
+using BookStore.Services.Interfaces;
 
 namespace BookStore.Services
 {
-    public class UserService : Service
+    public class UserService : Service, IUserService
     {
         
         public UserProfileViewModel GetUserProfileViewModel(User currentUser)

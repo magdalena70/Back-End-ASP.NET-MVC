@@ -1,24 +1,23 @@
-﻿using System.Net;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using BookStore.Models.EntityModels;
 using BookStore.App.Attributes;
-using BookStore.Services;
 using BookStore.Models.ViewModels.Book;
 using System.Collections.Generic;
 using BookStore.Models.BindingModels.Book;
 using System;
 using Microsoft.AspNet.Identity;
+using BookStore.Services.Interfaces;
 
 namespace BookStore.App.Areas.Admin.Controllers
 {
     [CustomAttributeAuth(Roles = "Admin")]
     public class BooksController : Controller
     {
-        private BookService bookService;
+        private IBookService bookService;
 
-        public BooksController()
+        public BooksController(IBookService service)
         {
-            this.bookService = new BookService();
+            this.bookService = service;
         }
 
         // GET: Admin/Books

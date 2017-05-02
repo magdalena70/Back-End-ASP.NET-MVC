@@ -7,10 +7,11 @@ using BookStore.Models.ViewModels.Promotion;
 using System.Net;
 using BookStore.Models.BindingModels.Promotion;
 using System.Data.Entity;
+using BookStore.Services.Interfaces;
 
 namespace BookStore.Services
 {
-    public class PromotionService : Service
+    public class PromotionService : Service, IPromotionService
     {
 
         public IEnumerable<PromotionsViewModel> GetAll()

@@ -8,10 +8,11 @@ using BookStore.Models.BindingModels.Book;
 using System.Data.Entity;
 using System.Web.Mvc;
 using BookStore.Models.ViewModels.Rating;
+using BookStore.Services.Interfaces;
 
 namespace BookStore.Services
 {
-    public class BookService : Service
+    public class BookService : Service, IBookService
     {
 
         public IEnumerable<BooksViewModel> GetNewBooks()

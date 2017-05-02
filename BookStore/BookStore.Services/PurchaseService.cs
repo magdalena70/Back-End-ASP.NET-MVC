@@ -8,10 +8,11 @@ using BookStore.Models.ViewModels.Book;
 using System;
 using BookStore.Models.BindingModels.Purchase;
 using System.Data.Entity;
+using BookStore.Services.Interfaces;
 
 namespace BookStore.Services
 {
-    public class PurchaseService : Service
+    public class PurchaseService : Service, IPurchaseService
     {
         public IEnumerable<AllPurchasesViewModel> GetAll()
         {

@@ -1,20 +1,19 @@
-﻿using System.Net;
-using System.Web.Mvc;
-using BookStore.Services;
+﻿using System.Web.Mvc;
 using System.Collections.Generic;
 using System;
 using BookStore.Models.ViewModels.Promotion;
+using BookStore.Services.Interfaces;
 
 namespace BookStore.App.Controllers
 {
     [AllowAnonymous]
     public class PromotionsController : Controller
     {
-        private PromotionService promotionService;
+        private IPromotionService promotionService;
 
-        public PromotionsController()
+        public PromotionsController(IPromotionService service)
         {
-            this.promotionService = new PromotionService();
+            this.promotionService = service;
         }
 
         // GET: Promotions
