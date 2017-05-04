@@ -1,0 +1,18 @@
+﻿@model IEnumerable<BookStore.Models.ViewModels.Book.BooksViewModel>
+
+@{
+    ViewBag.Title = "New Books";
+}
+
+<div class="row text-center">
+    <div class="col-md-10 col-md-offset-1">
+        <h4>From the last three months of the year @DateTime.Now.Year</h4>
+        <hr />
+        @Html.ActionLink("Best Sellers", "BestSellers", "Categories", null, new { @class = "btn btn-default pull-left" })
+        @Html.ActionLink("Promotions", "AllPromotions", "Promotions", null, new { @class = "btn btn-default pull-right" })
+    </div>
+</div>
+<hr />
+<div class="row">
+    @Html.Partial("_BooksViewPartial")    
+</div>

@@ -1,0 +1,104 @@
+﻿@using Microsoft.AspNet.Identity
+
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown">
+                    <p>Categories</p>
+                    <b class="caret"></b>
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("All Categories", "AllCategories", "Categories", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink("Add Category", "AddCategories", "Categories", new { area = "Admin" }, null)</li>
+                    
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown">
+                    <p>Books</p>
+                    <b class="caret"></b>
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("All Books", "AllBooks", "Books", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink("Add Book", "AddBook", "Books", new { area = "Admin" }, null)</li>
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown">
+                    <p>Authors</p>
+                    <b class="caret"></b>
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("All Authors", "AllAuthors", "Authors", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink("Add Author", "AddAuthor", "Authors", new { area = "Admin" }, null)</li>
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown">
+                    <p>Promotions</p>
+                    <b class="caret"></b>
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("All Promotions", "AllPromotions", "Promotions", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink("Add Promotion", "AddPromotion", "Promotions", new { area = "Admin" }, null)</li>
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown">
+                    <p>Purchases</p>
+                    <b class="caret"></b>
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("All Purchases", "AllPurchases", "Purchases", new { area = "Admin" }, null)</li>
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown">
+                    <p>Users</p>
+                    <b class="caret"></b>
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("All Users", "AllUsers", "Users", new { area = "Admin" }, null)</li>
+
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown">
+                    <p>Settings</p>
+                    <b class="caret"></b>
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("Edit Profile", "EditProfile", "Users", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Change Password", "ChangePassword", "Manage", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Assign Roles", "AssignRoles", "Admin", new { area = "Admin" }, null)</li>
+
+                    <li>
+                        <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-default">
+                            <p>log out</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    }
+}
+
+

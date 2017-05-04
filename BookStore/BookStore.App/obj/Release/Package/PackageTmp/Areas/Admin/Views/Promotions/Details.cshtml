@@ -1,0 +1,67 @@
+﻿@model BookStore.Models.ViewModels.Promotion.PromotionsViewModel
+
+@{
+    ViewBag.Title = "Promotion Details";
+}
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <h2>@ViewBag.Title</h2>
+    </div>
+</div>
+
+<div class="row text-center">
+    <h3><span>&quot;</span>@Html.DisplayFor(model => model.Name)<span>&quot;</span></h3>
+    <hr />
+    <div class="col-md-4">
+        <h6>@Html.DisplayNameFor(model => model.Text)</h6>
+        <p>@Html.DisplayFor(model => model.Text)</p>
+    </div>
+    <div class="col-md-3">
+        <h6>@Html.DisplayNameFor(model => model.StartDate)</h6>
+        <p>@Html.DisplayFor(model => model.StartDate)</p>
+    </div>
+    <div class="col-md-3">
+        <h6>@Html.DisplayNameFor(model => model.EndDate)</h6>
+        <p>@Html.DisplayFor(model => model.EndDate)</p>
+    </div>
+    <div class="col-md-2">
+        <h6>@Html.DisplayNameFor(model => model.Discount)</h6>
+        <p>@Html.DisplayFor(model => model.Discount)</p>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <h4 class="col-md-10 col-md-offset-1">Categories:</h4>
+    <div class="col-md-10 col-md-offset-1">
+        @foreach (var category in Model.Categories)
+        {
+            <h5 class="text-center">
+                Books in category
+                <span>&quot;</span>@Html.ActionLink(category.Name, "Details", "Categories", new { area = "Admin", id = category.Id}, null)<span>&quot;</span> -
+                <span class="text-danger">@category.Books.Count</span>
+            </h5>
+            <hr />
+                foreach (var book in category.Books)
+                {
+                    <div class="col-md-4 text-center">
+                        <h5>@Html.DisplayFor(b => book.Title)</h5>
+                        <p>In Stock: @Html.DisplayFor(b => book.Quantity)</p>
+                        <div class="img-box">
+                            <a href="@Url.Action("Details", "Books", new { id = book.Id}, null)">
+                                <img src="@book.ImageUrl.Replace("../", "../../")" alt="book-img" class="img img-thumbnail" width="50%" />
+                            </a>
+                        </div>
+                        <div class="row">
+                            <small>by @Html.DisplayFor(b => book.Authors)</small>
+                            <p><small>@Html.DisplayFor(b => book.Price)</small></p>
+                        </div>
+                    </div>
+                }
+        }
+    </div>
+</div>
+
+<p>@Html.ActionLink("Back to All Promotions", "AllPromotions")</p>
+<p>@Html.ActionLink("Edit", "Edit", "Promotions", new { area = "Admin", id = Model.Id }, null)</p>
+<p>@Html.ActionLink("Delete", "Delete", "Promotions", new { area = "Admin", id = Model.Id }, null)</p>

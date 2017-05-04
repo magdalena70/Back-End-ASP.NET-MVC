@@ -1,0 +1,41 @@
+﻿@model BookStore.Models.ViewModels.Admin.AssignRolesViewModel
+@{
+    ViewBag.Title = "Assign Roles";
+}
+
+<div class="row text-center">
+    <div class="col-md-10 col-md-offset-1">
+        <h2>@ViewBag.Title</h2>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        @using (Html.BeginForm("AssignRoles", "Admin", FormMethod.Post, new { @role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="col-md-5">
+                @Html.LabelFor(model => model.Roles, htmlAttributes: new { @class = "control-label" })
+                <div class="form-group">
+                    @Html.DropDownList("Roles", Model.Roles as SelectList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Roles, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-5">
+                @Html.LabelFor(model => model.Users, htmlAttributes: new { @class = "control-label" })
+                <div class="form-group">
+                    @Html.DropDownList("Users", Model.Users as SelectList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Users, "", new { @class = "text-danger" })
+                </div>
+            </div>
+                <div class="col-md-2">
+                    <hr />
+                    <input type="submit" value="Assign Role" class="btn btn-default" />
+
+                </div>
+        }
+
+    </div>
+</div>
+<hr /><hr />

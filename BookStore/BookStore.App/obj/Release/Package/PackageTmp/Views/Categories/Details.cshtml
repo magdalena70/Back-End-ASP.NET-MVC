@@ -1,0 +1,19 @@
+﻿@model BookStore.Models.ViewModels.Category.CategoryViewModel
+
+@{
+    ViewBag.Title = "Category's Details";
+}
+
+<div class="row"> 
+    <div class="col-md-10 col-md-offset-1">
+        <h3 class="text-center"><span>&quot;</span>@Html.DisplayFor(c => Model.Name)<span>&quot;</span></h3>
+    </div>  
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-10 col-md-offset-1 book-div">
+        <h4>Books: @Html.DisplayFor(c => Model.BooksCount)</h4>
+        <hr />
+    </div>
+    @Html.Partial("_CategoryBooksViewPartial")
+</div>

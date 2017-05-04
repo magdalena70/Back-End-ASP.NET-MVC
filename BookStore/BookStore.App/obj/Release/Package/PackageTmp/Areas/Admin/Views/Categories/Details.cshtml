@@ -1,0 +1,44 @@
+﻿@model BookStore.Models.ViewModels.Category.CategoryViewModel
+
+@{
+    ViewBag.Title = "Categoty Details";
+}
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <h4>@ViewBag.Title</h4>
+    </div>
+</div>
+
+<div class="row text-center">
+    <h2>&quot;@Html.DisplayFor(category => category.Name)&quot;</h2>
+    <hr />
+    <h5>
+        Books in this category:
+        <span class="text-danger">
+            @Html.DisplayFor(category => category.BooksCount)
+        </span>
+    </h5>
+</div>
+<div class="row">
+    @foreach (var book in Model.Books)
+    {
+        <div class="col-md-4 text-center">
+            <h5>@Html.DisplayFor(b => book.Title)</h5>
+            <div class="img-box">
+                <a href="@Url.Action("Details", "Books", new { id = book.Id}, null)">
+                    <img src="@book.ImageUrl.Replace("../", "../../")" alt="book-img" class="img img-thumbnail" width="50%" />
+                </a>
+            </div>
+            <div class="row">
+                <small>by @Html.DisplayFor(b => book.Authors)</small>
+                <p><small>@Html.DisplayFor(b => book.Price)</small></p>
+            </div>
+        </div>
+    }
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) ||
+    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }) ||
+    @Html.ActionLink("Back to All Categories", "AllCategories")
+</p>

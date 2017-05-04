@@ -1,0 +1,24 @@
+﻿<ul class="nav navbar-nav">
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown">
+            <img src="~/Content/Images/NavBar/list-2-64.png"/>
+            <b class="caret"></b>
+            <p class="carousel-caption">menu</p>
+        </a>
+
+        <ul class="dropdown-menu">
+            <li>@Html.ActionLink("Terms and Conditions", "TermsAndConditions", "Home", new { area = "" }, null)</li>
+            <li class="divider"></li>
+
+            <li>@Html.ActionLink("New Books", "NewBooks", "Books", new { area = "" }, null)</li>
+            <li>@Html.ActionLink("Best Sellers", "BestSellers", "Categories", new { area = "" }, null)</li>
+            <li>@Html.ActionLink("Promotions", "AllPromotions", "Promotions", new { area = "" }, null)</li>   
+
+            <li class="divider"></li>
+            <li>@Html.ActionLink("All Categories", "All", "Categories", new { area = "" }, null)</li>
+            <li>@Html.ActionLink("All Authors", "All", "Authors", new { area = "" }, null)</li>
+            <li></li>
+        </ul>
+
+    </li>
+</ul> 

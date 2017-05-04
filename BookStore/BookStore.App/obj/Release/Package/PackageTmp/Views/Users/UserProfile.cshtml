@@ -1,0 +1,118 @@
+﻿@model BookStore.Models.ViewModels.User.UserProfileViewModel
+
+@{
+    ViewBag.Title = "My Profile";
+}
+
+<hr />
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <p class="text-center"><strong>User:</strong></p>
+        <div class="col-md-6">
+            <p>@Html.DisplayFor(u => Model.UserName)</p>
+            <p class="text-capitalize">@Model.FirstName @Model.LastName</p>
+        </div>
+        <div class="col-md-6">
+            <p>@Html.DisplayFor(u => Model.Email)</p>
+            @if (Model.Basket != null)
+            {
+                <p>Current Discount: @Html.DisplayFor(u => Model.Basket.Discount)</p>
+            }
+        </div>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <p class="pull-right btn btn-default">
+            <a href="/Users/FavoriteBooks">
+                <img src="~/Content/Images/UserProfile/favorite-64.png" />
+                @Model.CountBooksInFavorite
+            </a>
+        </p>
+        <p class="btn btn-default" title="My Basket">
+            <a href="/Baskets/Details">
+                <img src="~/Content/Images/UserProfile/shopping-cart.png" alt="user-basket-img" class="img-rounded" width="64" />
+                @Html.DisplayFor(basket => basket.CountBooksInBasket)
+            </a>
+        </p>
+    </div>
+</div>
+<hr />
+@if (Model.Basket != null)
+{
+    <div class="row">
+
+        @*user-basket view - carousel*@
+        <div class="row home-div">
+            <div id="myCarousel" class="carousel slide col-md-10 col-md-offset-1" data-ride="carousel">
+
+                <div class="carousel-inner text-center" role="listbox">
+                    @if (Model.CountBooksInBasket > 0)
+                    {
+                        <div class="item active">
+                            <div class="img-box">
+                                <h3>@Model.UserName's basket</h3>
+                                <p><strong>Total Price: @Html.DisplayFor(b => Model.Basket.TotalPrice)</strong></p>
+                                <img src="~/Content/Images/UserProfile/basket.png" alt="basket-img" class="img-rounded" width="30%">
+                                <div class="carousel-caption">
+                                    <p>@Html.ActionLink("Go To Basket", "Details", "Baskets", null, new { @class = "btn btn-default btn-lg" })</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        foreach (var book in Model.Books)
+                        {
+                            <div class="item">
+                                <div class="img-box">
+                                    <h3>@Html.DisplayFor(b => book.Book.Title)</h3>
+                                    <p><strong>@Html.DisplayFor(b => book.Book.Price) / Count: @book.Count</strong></p>
+                                    <img src=@book.Book.ImageUrl alt="basket-book-img" width="30%">
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="img-box">
+                            <h3>@Model.UserName's baket</h3>
+                            <p><strong>Books:@Model.CountBooksInBasket / Total Price: @Html.DisplayFor(b => Model.BasketTotalPrice)</strong></p>
+                            <img src="~/Content/Images/UserProfile/basket.png" alt="basket-img" class="img-rounded" width="30%">
+                            <div class="carousel-caption">
+                                <h1>Basket is empty.</h1>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="row category-div">
+        <div class="col-md-10 col-md-offset-1">
+            @if (Model.YouMayAlsoLike != null)
+            {
+                <h4>You may also like some book from the next categories:</h4>
+                <hr />
+                foreach (var category in Model.YouMayAlsoLike)
+                {
+                    <div class="col-md-3">
+                        <p class="lead">
+                            @Html.ActionLink(category.Name, "BooksByCategory", "Categories", new { categoryName = category.Name }, null)
+                            &raquo;
+                        </p>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+}

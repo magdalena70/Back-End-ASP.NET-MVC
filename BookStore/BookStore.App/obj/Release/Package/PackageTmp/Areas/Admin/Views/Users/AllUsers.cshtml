@@ -1,0 +1,56 @@
+﻿@model IEnumerable<BookStore.Models.ViewModels.User.AllUsersViewModel>
+
+@{
+    ViewBag.Title = "All Users";
+}
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <h2>@ViewBag.Title</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1 lead">
+        <div class="col-md-3">
+            @Html.DisplayNameFor(u => u.FirstName)
+            <hr />
+        </div>
+        <div class="col-md-3">
+            @Html.DisplayNameFor(u => u.LastName)
+            <hr />
+        </div>
+        <div class="col-md-3">
+            @Html.DisplayNameFor(u => u.UserName)
+            <hr />
+        </div>
+        <div class="col-md-3">More...<hr /></div>
+    </div>
+@foreach (var user in Model) {
+    <div class="col-md-10 col-md-offset-1 author-div">
+        <div class="col-md-3 text-capitalize">
+            @Html.DisplayFor(u => user.FirstName)   
+        </div>
+        <div class="col-md-3 text-capitalize">
+            @Html.DisplayFor(u => user.LastName)
+        </div>
+        <div class="col-md-3">
+            @Html.DisplayFor(u => user.UserName)
+        </div>
+        <div class="col-md-3">
+            <p>@Html.ActionLink("Details", "Details", new { username= user.UserName })</p>
+            <p>@using (Html.BeginForm("Delete", "Users", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                //@Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(u => user.UserName)
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-default" />
+                </div>
+            }</p>
+        </div>
+    </div>
+}
+
+</div>

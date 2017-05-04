@@ -1,0 +1,9 @@
+﻿@model BookStore.Models.ViewModels.Home.HomePromotionViewModel
+
+<div class="col-md-10 col-md-offset-1 promotion-table">
+    <div class="col-sm-5"><h5>@Html.DisplayFor(p => Model.Name)</h5></div>
+    <div class="col-sm-4"><h5>@Html.DisplayFor(p => Model.Discount) OFF</h5></div>
+    <div class="col-sm-3">
+        @Html.ActionLink("Learn More", "Details", "Promotions", new { id = Model.Id }, new { @class = "btn btn-info" })
+    </div>
+</div>

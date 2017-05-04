@@ -1,0 +1,33 @@
+﻿@model BookStore.Models.ViewModels.Promotion.PromotionsViewModel
+
+<div class="col-sm-10 col-sm-offset-1 promotion-table text-center">
+    <div class="col-sm-2">
+        <h5>@Html.DisplayNameFor(p => p.Name)</h5>
+        @Html.DisplayFor(p => Model.Name)
+    </div>
+    <div class="col-sm-2">
+        <h5>@Html.DisplayNameFor(p => p.Status)</h5>
+        @Html.DisplayFor(p => Model.Status)
+    </div>
+    <div class="col-sm-2">
+        <h5>@Html.DisplayNameFor(p => p.StartDate)</h5>
+        @Html.DisplayFor(p => Model.StartDate)
+    </div>
+    <div class="col-sm-2">
+        <h5>@Html.DisplayNameFor(p => p.EndDate)</h5>
+        @Html.DisplayFor(p => Model.EndDate)
+    </div>
+    <div class="col-sm-2">
+        <h5>@Html.DisplayNameFor(p => p.Discount)</h5>
+        @Html.DisplayFor(p => Model.Discount)
+    </div>
+    <div class="col-sm-2">
+        <p>@Html.ActionLink("Details", "Details", new { id = Model.Id })</p>
+        @if (User.IsInRole("Admin"))
+            {
+            <p>@Html.ActionLink("Edit", "Edit", "Promotions", new { area = "Admin", id = Model.Id }, null)</p>
+            <p>@Html.ActionLink("Delete", "Delete", "Promotions", new { area = "Admin", id = Model.Id }, null)</p>
+        }
+    </div>
+    <hr />
+</div>

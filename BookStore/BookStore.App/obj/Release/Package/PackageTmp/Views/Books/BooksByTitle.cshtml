@@ -1,0 +1,14 @@
+﻿@model IEnumerable<BookStore.Models.ViewModels.Book.BooksViewModel>
+
+@{
+    ViewBag.Title = "Books By Title";
+}
+
+@if (@Model != null)
+{
+    <hr />
+    <div class="row">
+        @Html.Partial("_BooksViewPartial")
+    </div>
+}
+

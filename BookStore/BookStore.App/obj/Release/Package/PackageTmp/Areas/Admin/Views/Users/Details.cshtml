@@ -1,0 +1,91 @@
+﻿@model BookStore.Models.ViewModels.User.UserDetailsViewModel
+
+@{
+    ViewBag.Title = "User Details";
+}
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <h3>@ViewBag.Title</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        @Html.Partial("_DeleteUserPartial")
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <p>
+            @Html.DisplayNameFor(model => model.MoneySpentBalance) -
+            @Html.DisplayFor(model => model.MoneySpentBalance) BGN
+        </p>
+        @Html.Partial("_EditUserMoneySpentBalansPartial")
+    </div>
+    <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-6">
+            <hr />
+            <p>
+                @Html.DisplayNameFor(model => model.UserName) -
+                @Html.DisplayFor(model => model.UserName)
+            </p>
+            <p>
+                @Html.DisplayNameFor(model => model.FirstName) -
+                @Html.DisplayFor(model => model.FirstName)
+            </p>
+            <p>
+                @Html.DisplayNameFor(model => model.LastName) -
+                @Html.DisplayFor(model => model.LastName)
+            </p>
+            <p>
+                @Html.DisplayNameFor(model => model.Address) -
+                @Html.DisplayFor(model => model.Address)
+            </p>
+            <p>
+                @Html.DisplayNameFor(model => model.Email) -
+                @Html.DisplayFor(model => model.Email)
+            </p>
+            <p>
+                @Html.DisplayNameFor(model => model.PhoneNumber) -
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </p>
+            <h5>Basket:</h5>
+            <p>
+                @Html.DisplayNameFor(model => model.Basket.Discount) -
+                @Html.DisplayFor(model => model.Basket.Discount)
+            </p>
+            <p>
+                @Html.DisplayNameFor(model => model.Basket.TotalPrice) -
+                @Html.DisplayFor(model => model.Basket.TotalPrice)
+            </p>
+        </div>
+        <div class="col-md-6">
+            <h5>Purchases: @Html.DisplayFor(model => model.Purchases.Count)</h5>
+            <hr />
+            @foreach (var purchase in Model.Purchases)
+            {
+                <p>TotalPrice - @Html.DisplayFor(p => purchase.TotalPrice)</p>
+                <p>CompletedOndate - @Html.DisplayFor(p => purchase.CompletedOndate)</p>
+                <p>DeliveryDate - @Html.DisplayFor(p => purchase.DeliveryDate)</p>
+                <p>@Html.ActionLink("Details", "Details", "Purchases", new { area = "Admin", id = purchase.Id }, null)</p>
+                <hr />
+            }
+            <h5>Favorite Books: @Html.DisplayFor(model => model.FavoriteBooks.Count)</h5>
+            @foreach (var book in Model.FavoriteBooks)
+            {
+                <p>
+                    @Html.ActionLink(book.Title, "Details", "Books", new { area = "Admin", id = book.Id }, null)
+                </p>
+                <hr />
+            }
+        </div>
+    </div>
+</div>
+
+<div class="col-md-10 col-md-offset-1">
+    <hr />
+    <p>
+        @Html.ActionLink("Back to All Users", "AllUsers")
+    </p>
+</div>

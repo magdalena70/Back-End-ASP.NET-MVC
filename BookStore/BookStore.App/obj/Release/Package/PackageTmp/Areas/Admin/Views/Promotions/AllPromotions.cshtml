@@ -1,0 +1,26 @@
+﻿@model IEnumerable<BookStore.Models.ViewModels.Promotion.PromotionsViewModel>
+
+@{
+    ViewBag.Title = "Promotions";
+}
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <h2>@ViewBag.Title</h2>
+        <p class="pull-right lead">
+            @Html.ActionLink("Add Promotion", "AddPromotion")
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    @Html.Partial("_PromotionsSearchFormPartial")
+</div>
+
+<div>
+    <h4 class="text-center">@ViewBag.PromotionsTitle</h4>
+    <hr />
+</div>
+<div class="row">
+    @Html.DisplayForModel()
+</div>

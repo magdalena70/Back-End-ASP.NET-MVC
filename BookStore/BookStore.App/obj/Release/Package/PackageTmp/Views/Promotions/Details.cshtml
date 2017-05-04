@@ -1,0 +1,26 @@
+﻿@model BookStore.Models.ViewModels.Promotion.PromotionsViewModel
+
+@{
+    ViewBag.Title = "Promotion's Details";
+}
+<div class="row text-center">
+    <div class="col-md-10 col-md-offset-1">
+        <h3>@Html.DisplayFor(p => p.Name)</h3>
+        <p class="lead">@Html.DisplayFor(p => p.Text)</p>
+        <hr />
+        <h4>Discount: <span class="you-will-save">@Html.DisplayFor(p => Model.Discount)</span></h4>
+        <h5>Start date: <span class="you-will-save">@Html.DisplayFor(p => Model.StartDate)</span> - End Date: <span class="you-will-save">@Html.DisplayFor(p => Model.EndDate)</span></h5>
+    </div>
+</div>
+<hr />
+<div class="row">
+    @if (Model.StartDate < DateTime.Now)
+    {
+        @Html.Partial("_BooksInPromotionViewPartial")
+    }
+    else
+    {
+        <h1 class="text-center">Comming soon!!!</h1>  
+        <hr />
+    }
+</div>

@@ -1,0 +1,62 @@
+﻿@model BookStore.Models.ViewModels.Basket.BasketViewModel
+
+<div class="col-md-10 col-md-offset-1">
+    <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#byBasket">Buy</button>
+    <hr />
+    <div class="modal fade" id="byBasket" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center">Your purchase</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-div">
+                        
+                            <p><strong>Books:</strong></p>
+                            @foreach (var b in Model.Books)
+                            {
+                                <p><small>@b.Book.Title - Qty: @b.Count</small></p>
+                            }
+                        
+                    </div>
+                    <hr />
+                    <div class="modal-div">
+                        <p><strong>Delivery:</strong></p>
+                        <p><small>Date of delivery: @Html.DisplayFor(p => Model.DeliveryDate)</small></p>
+                        <p><small>Address: @Model.OwnerAddress</small></p>
+                        <p><small>Recipient: @Model.OwnerFirstName @Model.OwnerLastName</small></p>
+                        <p><small>Phone Number: @Model.OwnerPhoneNumber</small></p>
+                    </div>
+                    <hr />
+                    <div class="modal-div">
+                        <p><small>Current Price: @Html.DisplayFor(b => Model.TotalPrice)</small></p>
+                        <p><small>Discount: @Html.DisplayFor(b => Model.Discount)</small></p>
+                        <p class="you-will-save">You will save @Html.DisplayFor(b => Model.YouWillSave)</p>
+                        <p><small>Delivery price: @Html.DisplayFor(b => Model.DeliveryPrice)</small></p>
+                        <p>
+                            <strong>
+                                Total Price: @Html.DisplayFor(b => Model.LastPrice)
+                            </strong>
+                        </p>
+                        <p><small>Method of payment: Cash on Delivery</small></p>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    @using (Html.BeginForm("Buy", "Baskets", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-actions no-color text-center">
+                            <input type="submit" value="Buy" class="btn btn-danger" />
+                        </div>
+                    }
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

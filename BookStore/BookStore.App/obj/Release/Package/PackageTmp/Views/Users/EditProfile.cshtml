@@ -1,0 +1,80 @@
+﻿@model BookStore.Models.ViewModels.User.EditUserProfileViewModel
+
+@{
+    ViewBag.Title = "Edit Profile";
+}
+
+<div class="row text-center">
+    <div class="col-md-10 col-md-offset-1">
+        <p class="pull-right">
+            @Html.ActionLink("Change Password", "ChangePassword", "Manage", null, new { @class = "btn btn-default" })
+        </p>
+    </div>
+</div>
+<hr />
+<div class="row">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group col-md-6 col-md-offset-3">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(user => user.Id)
+
+            <div class="form-group">
+                @Html.LabelFor(user => user.FirstName, htmlAttributes: new { @class = "control-label" })
+                <div class="col-md-12">
+                    @Html.EditorFor(user => user.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(user => user.FirstName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(user => user.LastName, htmlAttributes: new { @class = "control-label" })
+                <div class="col-md-12">
+                    @Html.EditorFor(user => user.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(user => user.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(user => user.Address, htmlAttributes: new { @class = "control-label" })
+                <div class="col-md-12">
+                    @Html.EditorFor(user => user.Address, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(user => user.Address, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(user => user.Email, htmlAttributes: new { @class = "control-label" })
+                <div class="col-md-12">
+                    @Html.EditorFor(user => user.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(user => user.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(user => user.PhoneNumber, htmlAttributes: new { @class = "control-label" })
+                <div class="col-md-12">
+                    @Html.EditorFor(user => user.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(user => user.PhoneNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(user => user.UserName, htmlAttributes: new { @class = "control-label" })
+                <div class="col-md-12">
+                    @Html.EditorFor(user => user.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(user => user.UserName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-8 col-md-offset-2">
+                    <input type="submit" value="Save" class="btn btn-warning btn-block" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

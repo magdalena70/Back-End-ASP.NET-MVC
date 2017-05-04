@@ -1,0 +1,17 @@
+﻿@model BookStore.Models.ViewModels.Author.AuthorViewModel
+
+@{
+    ViewBag.Title = "Author's Details";
+}
+
+@if (@Model != null)
+{
+    <hr />
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 author-div">
+            <h3 class="text-center">@Html.DisplayFor(author => author.FullName)</h3>
+            <h4>Bio:</h4>
+            <p>@Html.DisplayFor(author => author.Bio)</p>
+        </div>
+    </div>
+}

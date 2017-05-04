@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNet.Identity
+@model BookStore.Models.ViewModels.Review.ReviewViewModel
+
+<div class="book-div col-md-12" id="review-id-@Model.Id">
+    <p>
+        by <span class="glyphicon glyphicon-user"></span> <strong>@Html.DisplayFor(r => r.Author.UserName)</strong>
+        <small> - posted on @Html.DisplayFor(r => r.DateCreate)</small>
+    </p>
+
+    <p class="text-danger">@Html.DisplayFor(r => r.Text)</p>
+
+    @if (Model.Author.UserName == this.User.Identity.GetUserName())
+    {
+        <div class="col-md-12">
+            @using (Ajax.BeginForm("Delete", "Reviews", new { id = Model.Id }, new AjaxOptions()
+            {
+                HttpMethod = "POST",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "review-id-" + Model.Id
+            }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <input type="submit" value="x" class="btn btn-danger pull-right" />
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    <hr />
+</div>

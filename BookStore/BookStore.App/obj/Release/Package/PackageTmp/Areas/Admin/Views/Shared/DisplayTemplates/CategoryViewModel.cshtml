@@ -1,0 +1,5 @@
+﻿@model BookStore.Models.ViewModels.Category.CategoryViewModel
+
+<p>
+    @Html.ActionLink(Model.Name, "Details", "Categories", new { area = "Admin", id = Model.Id }, null)
+</p>

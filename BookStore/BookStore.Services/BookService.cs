@@ -31,10 +31,11 @@ namespace BookStore.Services
         {
             var books = this.Context.Books
                 .Include("Authors")
+                .Include("Categories")
                 .OrderBy(b => b.Title)
                 .ThenByDescending(b => b.IssueDate)
                 .Skip(page - 1)
-                .Take(count);
+                .Take(count).ToList();
 
             IEnumerable<AllBooksViewModel> viewModel = Mapper.Map<IEnumerable<Book>, IEnumerable<AllBooksViewModel>>(books);
             return viewModel;

@@ -1,0 +1,154 @@
+﻿@model BookStore.Models.ViewModels.Basket.BasketViewModel
+
+@{
+    ViewBag.Title = "My Basket";
+}
+
+<div class="row text-center">
+    <hr />
+    <div id="basket-title" class="col-md-10 col-md-offset-1">
+        <h3>Current Price: @Html.DisplayFor(b => Model.TotalPrice)</h3>
+        <h4>Discount: @Html.DisplayFor(b => Model.Discount)</h4>
+        <h5 class="you-will-save">You will save @Html.DisplayFor(b => Model.YouWillSave)</h5>
+        <h3 id="basket-total-price">Total Price: @Html.DisplayFor(p => Model.LastPrice)</h3>
+     </div>
+</div>
+<hr />
+@if (Model != null)
+{
+    <div class="row">
+        @if (Model.TotalPrice > 0)
+        {
+            @Html.Partial("_ClearBasketPartial")
+        }
+    </div>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 book-div">
+            @foreach (var book in Model.Books)
+                {
+                <div class="col-md-4 books-list">
+                    <div class="row text-center books-list-title">
+                        <h4>@Html.DisplayFor(b => book.Book.Title)</h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <a href="/Books/Details/@book.Book.Id" title="See Book's Details">
+                                <img src="@book.Book.ImageUrl" alt="book-img" class="img-thumbnail" />
+                            </a>
+                        </div>
+                        <div class="col-md-8">
+                            <p>
+                                <small>by </small>
+                                @foreach (var author in book.Book.Authors)
+                                {
+                                    <span class="text-center">
+                                        @Html.ActionLink(author.FullName, "BooksByAuthor", "Authors", new { authorName = author.FullName }, null)
+                                    </span>
+                                }
+                            </p>
+                            <p><small>In Stock - more</small> @Html.DisplayFor(b => book.Book.Quantity)</p>
+                            <p><small>Lang</small> - <strong>@Html.DisplayFor(b => book.Book.Language)</strong></p>
+                       
+                            @if (book.PromotionDiscount > 0)
+                            {
+                                <p class="old-price"><small>Old Price</small> - <strong>@Html.DisplayFor(b => book.Book.Price)</strong></p>
+                                <p><small>Promo Discount</small> - <strong>@Html.DisplayFor(b => book.PromotionDiscount)</strong></p>
+                                <p class="you-will-save"><small>New Price</small> - <strong>@Html.DisplayFor(b => book.NewPrice)</strong></p>
+                            }
+                            else
+                            {
+                                <p><small>Price</small> - <strong>@Html.DisplayFor(b => book.Book.Price)</strong></p>
+
+                            }
+
+                            <p><small>Qty In Basket</small> - @book.Count</p>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                    Remove
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu book-div">
+                                    <li>
+                                        @using (Html.BeginForm("RemoveOneOfThisFromBasket", "Baskets", FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.HiddenFor(b => book.BookId)
+                                            <div class="form-actions no-color">
+                                                <input type="submit" value="Remove One Of This" class="btn btn-default btn-block" />
+                                            </div>
+                                        }
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        @using (Html.BeginForm("RemoveAllOfThisFromBasket", "Baskets", FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.HiddenFor(b => book.BookId)
+                                            @Html.HiddenFor(b => book.Count)
+                                            <div class="form-actions no-color">
+                                                <input type="submit" value="Remove All Of This" class="btn btn-default btn-block" />
+                                            </div>
+                                        }
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                    Edit Qty
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu book-div">     
+                                    <li>
+                                        @using (Html.BeginForm("EditBookQuantityInBasket", "Baskets", FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            <p>Current Qty is @book.Count</p>
+                                            @Html.LabelFor(b => book.NewCount, "Enter new quantity", new { @class = "control-label" })
+
+                                            @Html.EditorFor(b => book.NewCount, new { @class = "form-control" , @min = "1" , @max = book.Book.Quantity + book.NewCount })
+                                            @Html.ValidationMessageFor(b => book.NewCount, "", new { @class = "text-danger" })
+
+                                            @Html.HiddenFor(b => book.BookId)
+                                            @Html.HiddenFor(b => book.Count)                                           
+                                            <div class="form-actions no-color">
+                                                <input type="submit" value="Edit Book Quantity" class="btn btn-default btn-block" />
+                                            </div>
+                                        }
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="btn btn-default">
+                                @Html.ActionLink("More", "Details", "Books", new { id = book.Book.Id }, null)
+                                &raquo;
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+<hr />
+<div class="row">
+    @if (Model.TotalPrice > 0)
+    {
+        @Html.Partial("_BuyPartial")
+    }
+    else
+    {
+        <div id="promotion-in-basket" class="col-md-10 col-md-offset-1 text-center">
+            <p><strong>Your basket is empty.</strong></p>
+            <p><strong>See current promotions @Html.ActionLink("Learn more", "AllPromotions", "Promotions")</strong></p>
+        </div>
+    }
+</div>

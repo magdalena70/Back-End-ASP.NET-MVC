@@ -1,0 +1,36 @@
+﻿@model IEnumerable<BookStore.Models.ViewModels.Purchase.AllPurchasesViewModel>
+
+@{
+    ViewBag.Title = "All Purchases";
+}
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <h2>@ViewBag.Title</h2>
+    </div>
+</div>
+<hr />
+<div class="row">
+    @foreach (var purchase in Model)
+    {
+        <div class="col-md-10 col-md-offset-1 book-div">
+            <div class="col-md-3">
+                <p>@Html.DisplayNameFor(model => model.TotalPrice)</p>
+                <p>@Html.DisplayFor(modelItem => purchase.TotalPrice)</p>
+            </div>
+            <div class="col-md-3">
+                <p>@Html.DisplayNameFor(model => model.CompletedOndate)</p>
+                <p>@Html.DisplayFor(modelItem => purchase.CompletedOndate)</p>
+            </div>
+            <div class="col-md-3">
+                <p>@Html.DisplayNameFor(model => model.DeliveryDate)</p>
+                <p>@Html.DisplayFor(modelItem => purchase.DeliveryDate)</p>
+            </div>
+            <div class="col-md-3">
+                <p>@Html.ActionLink("Edit", "Edit", new { id = purchase.Id })</p>
+                <p>@Html.ActionLink("Details", "Details", new { id = purchase.Id })</p>
+                <p>@Html.ActionLink("Delete", "Delete", new { id = purchase.Id })</p>
+            </div>
+        </div>
+    }
+</div>

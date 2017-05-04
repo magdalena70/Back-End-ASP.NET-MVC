@@ -1,0 +1,101 @@
+﻿@model BookStore.Models.ViewModels.Book.BookDetailsViewModel
+
+@{
+    ViewBag.Title = "Book's Details";
+}
+
+<hr />
+<div class="row">
+    <div class="col-md-8 col-md-offset-2 book-details-div">
+        <div class="row text-center books-list-title">
+            <h3>@Html.DisplayFor(book => book.Title)</h3>
+            <p>
+                @using (Html.BeginForm("FavoriteBooks", "Users", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(book => book.Id)
+                    <div class="form-actions no-color">
+                <p>
+                    <button type="submit" value="Add to Favorite" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-heart"></span>
+                    </button>
+                </p>
+            </div>
+                }
+                </p>
+            </div>
+
+        <div class="row">
+            <div class="col-md-5 img-rounded">
+                <img src="@Model.ImageUrl" alt="book-img" class="img img-responsive" width="100%" />
+            </div>
+            <div class="col-md-7">
+                <h4>
+                    <span>by </span>
+                    @foreach (var author in Model.Authors)
+                    {
+                        <span class="text-center">
+                            @Html.ActionLink(author.FullName, "BooksByAuthor", "Authors", new { authorName = author.FullName }, null)
+                        </span>
+                    }
+                </h4>
+                <p>Lang - @Html.DisplayFor(book => book.Language)</p>
+                <p>ISBN - @Html.DisplayFor(book => book.ISBN)</p>
+                <p>Quantity - @Html.DisplayFor(book => book.Quantity)</p>
+                <p>Number Of Pages - @Html.DisplayFor(book => book.NumberOfPages)</p>
+                <p>Issue Date - @Html.DisplayFor(book => book.IssueDate)</p>
+                <p class="lead">Price: @Html.DisplayFor(book => book.Price)</p>
+                <div>@Html.DisplayFor(book => book.Categories)</div>
+                <hr />
+                @Html.Partial("_AddRatingPartial")
+            </div>
+        </div>
+        <hr />
+    <div class="row text-center">
+        @using (Html.BeginForm("AddToBasket", "Baskets", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(book => book.Id)
+            <div class="form-actions no-color">
+                <input type="submit" value="Add To Basket" class="btn btn-default" />
+            </div>
+        }
+    </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button type="button" class="btn btn-default btn-block" data-toggle="collapse" data-target="#description">
+                    <h4>@Html.DisplayNameFor(book => book.Description)</h4>
+                    <b class="caret"></b>
+                </button>
+            </div>
+            <div class="col-md-12 collapse" id="description">
+                <p>
+                    @Html.DisplayFor(book => book.Description)
+                </p>
+            </div>
+        </div>
+        <hr />
+        @if (User.Identity.IsAuthenticated)
+        {
+            @Html.Partial("_AddReviewPartial")
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        //ajax
+        function onSuccess() {
+            document.getElementById("text").value = '';
+        }
+
+        function OnSuccessDelete() {      
+            location.reload();
+        }
+
+        function onSuccessRate() {
+            $('#rate').hide(1000);
+        }
+    </script>
+}
