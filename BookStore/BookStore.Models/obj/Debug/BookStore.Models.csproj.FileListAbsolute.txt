@@ -27,3 +27,8 @@ C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.Models\o
 C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.Models\bin\Debug\System.Web.Mvc.dll
 C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.Models\bin\Debug\System.Web.Mvc.xml
 C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.Models\obj\Debug\BookStore.Models.csprojResolveAssemblyReference.cache
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.Models\bin\Debug\Microsoft.Owin.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.Models\bin\Debug\Microsoft.Owin.Security.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.Models\bin\Debug\Owin.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.Models\bin\Debug\Microsoft.Owin.xml
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\BookStore\BookStore.Models\bin\Debug\Microsoft.Owin.Security.xml

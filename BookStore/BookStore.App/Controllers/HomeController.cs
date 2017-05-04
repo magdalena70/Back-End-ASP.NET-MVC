@@ -16,7 +16,6 @@ namespace BookStore.App.Controllers
 
         public ActionResult Index()
         {
-            //this.context.Database.Initialize(true);
             HomePageViewModel viewModel = this.homeService.GetHomePageViewModel();
             return View(viewModel);
         }
