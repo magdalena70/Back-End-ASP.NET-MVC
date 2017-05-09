@@ -1,0 +1,25 @@
+﻿@model BookStore.Models.ViewModels.Category.CategoryViewModel
+
+@{
+    ViewBag.Title = "Search By Category";
+}
+
+<div class="row text-center">
+    <div class="col-lg-8 col-md-offset-2">
+        @Html.ActionLink("See All Categories", "All", "Categories", null, new { @class = "btn btn-default btn-block" })
+    </div>
+</div>
+<hr />
+@if (@Model != null)
+{
+    <div class="row text-center">
+        <div class="col-md-10 col-md-offset-1">
+            <h3><span>&quot;</span>@Html.DisplayFor(category => category.Name)<span>&quot;</span></h3>
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        @Html.Partial("_CategoryBooksViewPartial")
+    </div>
+    <hr />
+}

@@ -490,8 +490,8 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Books\_AddReviewPartial.cshtml" />
     <Content Include="Views\Books\_AddRatingPartial.cshtml" />
-    <None Include="Views\Categories\All.cshtml" />
-    <None Include="Views\Categories\BooksByCategory.cshtml" />
+    <Content Include="Views\Categories\All.cshtml" />
+    <Content Include="Views\Categories\BooksByCategory.cshtml" />
     <Content Include="Views\Categories\BestSellers.cshtml" />
     <Content Include="Views\Shared\_NavbarDropdawnSearchPartial.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />

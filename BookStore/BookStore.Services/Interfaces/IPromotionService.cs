@@ -24,5 +24,6 @@ namespace BookStore.Services.Interfaces
         EditPromotionViewModel GetPromotionById(int? id);
         Promotion GetPromotionByName(string promotionName);
         string GetPromotionName(int id);
+        AddPromotionViewModel GetAddPromotionViewModel();
     }
 }

@@ -54,7 +54,7 @@ namespace BookStore.App.Areas.Admin.Controllers
             return View(viewModel);
         }
 
-        //POST: Admin/Books/Deails/5
+        //POST: Admin/Books/Details/5
         [HttpPost, ActionName("AddAuthorToBook")]
         [ValidateAntiForgeryToken]
         public ActionResult AddAuthorToBook([Bind(Include = "Id,SelectAuthors")] AddAuthorToBookBindingModel bindingModel)
@@ -71,7 +71,7 @@ namespace BookStore.App.Areas.Admin.Controllers
 
         }
 
-        //POST: Admin/Books/Deails/5
+        //POST: Admin/Books/Details/5
         [HttpPost, ActionName("AddCategoryToBook")]
         [ValidateAntiForgeryToken]
         public ActionResult AddCategoryToBook([Bind(Include = "Id,SelectCategories")] AddCategoryToBookBindingModel bindingModel)

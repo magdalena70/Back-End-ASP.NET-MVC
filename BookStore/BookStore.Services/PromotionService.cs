@@ -8,6 +8,7 @@ using System.Net;
 using BookStore.Models.BindingModels.Promotion;
 using System.Data.Entity;
 using BookStore.Services.Interfaces;
+using System.Web.Mvc;
 
 namespace BookStore.Services
 {
@@ -46,9 +47,33 @@ namespace BookStore.Services
             return viewModel;
         }
 
+        public AddPromotionViewModel GetAddPromotionViewModel()
+        {
+            var categories = this.Context.Categories
+               .Select(c => new SelectListItem()
+               {
+                   Value = c.Id.ToString(),
+                   Text = c.Name
+               })
+               .ToList();
+
+            AddPromotionViewModel viewModel = new AddPromotionViewModel()
+            {
+                Categories = categories
+            };
+
+            return viewModel;
+        }
+
         public void AddPromotion(AddPromotionBindingModel bindingModel)
         {
+            Category category = this.Context.Categories
+               .First(c => c.Id.ToString() == bindingModel.Categories);
+            bindingModel.Categories = null;
+
             var newPromotion = Mapper.Map<AddPromotionBindingModel, Promotion>(bindingModel);
+            newPromotion.Categories.Add(category);
+
             this.Context.Promotions.Add(newPromotion);
             this.Context.SaveChanges();
         }

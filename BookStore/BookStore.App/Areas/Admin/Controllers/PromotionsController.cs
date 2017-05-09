@@ -125,13 +125,14 @@ namespace BookStore.App.Areas.Admin.Controllers
         // GET: Admin/Promotions/AddPromotion
         public ActionResult AddPromotion()
         {
-            return View();
+            AddPromotionViewModel viewModel = this.promotionService.GetAddPromotionViewModel();
+            return View(viewModel);
         }
 
         // POST: Admin/Promotions/AddPromotion
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddPromotion([Bind(Include = "Id,Name,Text,StartDate,EndDate,Discount")] AddPromotionBindingModel bindingModel)
+        public ActionResult AddPromotion([Bind(Include = "Id,Name,Text,StartDate,EndDate,Discount,Categories")] AddPromotionBindingModel bindingModel)
         {
             if (bindingModel.Discount < 1 || bindingModel.Discount > 100 )
             {

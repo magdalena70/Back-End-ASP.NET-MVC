@@ -132,6 +132,7 @@
     <Compile Include="ViewModels\Manage\ManageLoginsViewModel.cs" />
     <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModels\Promotion\AddPromotionViewModel.cs" />
     <Compile Include="ViewModels\Promotion\EditPromotionViewModel.cs" />
     <Compile Include="ViewModels\Promotion\PromotionViewModel.cs" />
     <Compile Include="ViewModels\Purchase\AllPurchasesViewModel.cs" />
@@ -158,9 +159,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Attributes\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -75,6 +75,7 @@ namespace BookStore.App.App_Start
 
                 ex.CreateMap<Promotion, PromotionsViewModel>();
                 ex.CreateMap<Promotion, PromotionViewModel>();
+                ex.CreateMap<Promotion, AddPromotionViewModel>();
                 ex.CreateMap<AddPromotionBindingModel, Promotion>();
                 ex.CreateMap<Promotion, EditPromotionViewModel>();
                 ex.CreateMap<EditPromotionBindingModel, Promotion>();

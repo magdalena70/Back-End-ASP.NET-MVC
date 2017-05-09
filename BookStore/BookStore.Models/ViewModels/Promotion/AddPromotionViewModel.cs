@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
-namespace BookStore.Models.BindingModels.Promotion
+namespace BookStore.Models.ViewModels.Promotion
 {
-    public class AddPromotionBindingModel
+    public class AddPromotionViewModel
     {
         [Required, MaxLength(200)]
         public string Name { get; set; }
@@ -20,6 +22,6 @@ namespace BookStore.Models.BindingModels.Promotion
         [Required]
         public decimal Discount { get; set; }
 
-        public string Categories { get; set; }
+        public ICollection<SelectListItem> Categories { get; set; }
     }
 }
