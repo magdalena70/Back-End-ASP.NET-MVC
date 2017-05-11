@@ -1,0 +1,4 @@
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Bookstore-WebAPI\Bookstore.Services\bin\Debug\Bookstore.Services.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Bookstore-WebAPI\Bookstore.Services\bin\Debug\Bookstore.Services.pdb
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Bookstore-WebAPI\Bookstore.Services\obj\Debug\Bookstore.Services.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Bookstore-WebAPI\Bookstore.Services\obj\Debug\Bookstore.Services.pdb
