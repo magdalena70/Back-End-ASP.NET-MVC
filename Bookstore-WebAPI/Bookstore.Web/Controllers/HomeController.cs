@@ -11,12 +11,6 @@ namespace Bookstore.Web.Controllers
             return View();
         }
 
-        //public ActionResult Index()
-        //{
-        //    HomePageViewModel viewModel = this.homeService.GetHomePageViewModel();
-        //    return View(viewModel);
-        //}
-
         public ActionResult TermsAndConditions()
         {
             return View();

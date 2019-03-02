@@ -93,3 +93,7 @@ C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Bookstore-WebAPI\Bookstore.W
 C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Bookstore-WebAPI\Bookstore.Web\bin\Bookstore.Data.dll
 C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Bookstore-WebAPI\Bookstore.Web\bin\Bookstore.Data.pdb
 C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Bookstore-WebAPI\Bookstore.Web\bin\XmlDocument.xml
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Bookstore-WebAPI\Bookstore.Web\bin\AutoMapper.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Bookstore-WebAPI\Bookstore.Web\bin\Bookstore.Services.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Bookstore-WebAPI\Bookstore.Web\bin\Bookstore.Services.pdb
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Bookstore-WebAPI\Bookstore.Web\bin\AutoMapper.xml

@@ -485,6 +485,35 @@
             <summary>
             Get all books from database
             </summary>
+            <returns>AllBooksViewModel</returns>
+        </member>
+        <member name="M:Bookstore.Web.Controllers.BooksController.Details(System.Int32)">
+            <summary>
+            Get book by id
+            </summary>
+            <param name="id"></param>
+            <returns>returns book's details</returns>
+        </member>
+        <member name="M:Bookstore.Web.Controllers.BooksController.PutBook(System.Int32,Bookstore.Models.BindingModels.Books.EditBookBindingModel)">
+            <summary>
+            Edit book
+            </summary>
+            <param name="id"></param>
+            <param name="bindingModel"></param>
+            <returns>content of edited book</returns>
+        </member>
+        <member name="M:Bookstore.Web.Controllers.BooksController.PostBook(Bookstore.Models.BindingModels.Books.AddBookBindingModel)">
+            <summary>
+            Add new book
+            </summary>
+            <param name="bindingModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bookstore.Web.Controllers.BooksController.DeleteBook(System.Nullable{System.Int32})">
+            <summary>
+            Delete book
+            </summary>
+            <param name="id"></param>
             <returns></returns>
         </member>
     </members>

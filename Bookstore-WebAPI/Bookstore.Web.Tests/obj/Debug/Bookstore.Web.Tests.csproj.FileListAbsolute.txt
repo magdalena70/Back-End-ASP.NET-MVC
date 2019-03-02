@@ -66,3 +66,7 @@ C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Bookstore-WebAPI\Bookstore.W
 C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Bookstore-WebAPI\Bookstore.Web.Tests\bin\Debug\Bookstore.Data.dll
 C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Bookstore-WebAPI\Bookstore.Web.Tests\bin\Debug\Bookstore.Models.pdb
 C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Bookstore-WebAPI\Bookstore.Web.Tests\bin\Debug\Bookstore.Data.pdb
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Bookstore-WebAPI\Bookstore.Web.Tests\bin\Debug\Bookstore.Services.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Bookstore-WebAPI\Bookstore.Web.Tests\bin\Debug\AutoMapper.dll
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Bookstore-WebAPI\Bookstore.Web.Tests\bin\Debug\Bookstore.Services.pdb
+C:\Users\acer\Documents\GitHub\Back-End-ASP.NET-MVC\Bookstore-WebAPI\Bookstore.Web.Tests\bin\Debug\AutoMapper.xml

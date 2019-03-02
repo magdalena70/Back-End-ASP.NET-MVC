@@ -77,6 +77,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -85,6 +86,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BindingModels\Books\AddAuthorToBookBindingModel.cs" />
+    <Compile Include="BindingModels\Books\AddBookBindingModel.cs" />
+    <Compile Include="BindingModels\Books\AddCategoryToBookBindingModel.cs" />
+    <Compile Include="BindingModels\Books\EditBookBindingModel.cs" />
+    <Compile Include="BindingModels\Books\EditUserProfileBindingModel.cs" />
+    <Compile Include="BindingModels\Books\FavoriteBookBindingModel.cs" />
     <Compile Include="EntityModels\Author.cs" />
     <Compile Include="EntityModels\Basket.cs" />
     <Compile Include="EntityModels\BasketBook.cs" />
@@ -96,11 +103,18 @@
     <Compile Include="EntityModels\Review.cs" />
     <Compile Include="EntityModels\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Books\AddBookViewModel.cs" />
+    <Compile Include="ViewModels\Books\AllBooksViewModel.cs" />
+    <Compile Include="ViewModels\Books\BookDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Books\BooksViewModel.cs" />
+    <Compile Include="ViewModels\Books\DeleteBookViewModel.cs" />
+    <Compile Include="ViewModels\Books\EditBookViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
